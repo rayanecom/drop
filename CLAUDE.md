@@ -1,0 +1,65 @@
+# AquaTerra — contexte projet
+
+Repo de travail pour la boutique Shopify **AquaTerra** (dropshipping, marché France).
+
+## Boutique
+
+| | |
+|---|---|
+| Nom | AquaTerra |
+| Domaine | `kznquq-5a.myshopify.com` |
+| Plan | Basic |
+| Devise / marché | EUR / France |
+
+Produit principal : **Chaussures Amphibies AquaTerra** — 39,99 €, 16 variantes.
+Options : `Couleur` (Noir, Bleu) en position 1, `Pointure` (37 → 44) en position 2.
+
+## Thème
+
+Base **Shrine** (thème payant dérivé de Dawn). Convention maison : une version par
+chantier, créée par duplication — `AquaTerra v3` → `v4` → … → `v8`. Le thème publié
+porte le rôle `MAIN`.
+
+Réglage utile : le sélecteur de variantes est piloté par **`picker_types`** sur le bloc
+sélecteur — une valeur par option, séparées par des virgules. Valeurs acceptées :
+`pills`, `dropdown`, `swatches`, `quantity-breaks`, `hidden`. Champ vide = `pills,pills,pills`.
+
+## Contraintes d'environnement — à lire avant de promettre quoi que ce soit
+
+1. **L'API Shopify refuse toute écriture sur le thème publié.** `themeFilesUpsert` ne
+   passe que sur un thème non publié, et la publication est bloquée côté API. Procédure :
+   `themeDuplicate` → écrire sur la copie → l'utilisateur prévisualise → l'utilisateur
+   publie.
+2. **Le réseau sortant est filtré.** La boutique elle-même renvoie un 403 au CONNECT du
+   proxy. Impossible de charger une page du storefront pour vérifier un rendu — c'est
+   l'utilisateur qui valide visuellement. Ne pas conclure d'un échec réseau que la
+   configuration ou une clé d'API est fautive : vérifier d'abord
+   `curl -sS "$HTTPS_PROXY/__agentproxy/status"`.
+3. **`templates/product.json` pèse ~68 Ko.** Le réécrire intégralement via l'API pour
+   changer un seul réglage est disproportionné et risque de le corrompre. Préférer
+   l'éditeur de code Shopify (recherche directe du réglage) ou une modification ciblée
+   d'un snippet.
+
+## Règles de travail
+
+- **Vérifier, ne pas croire.** Après toute modification annoncée, relire l'état réel :
+  `updatedAt` du thème, relecture du fichier écrit, taille cohérente avec le delta
+  attendu. Un « c'est fait » n'est pas une preuve.
+- **Français, tutoiement, direct.** Livrables prêts à coller, jamais de conseils vagues.
+- **Honnêteté commerciale non négociable** : délais de livraison réels, aucune allégation
+  santé, pas de fausses preuves sociales, pas de prix barré fictif. Détail dans le skill
+  `shopify-store-builder`.
+
+## Skills installés dans ce repo
+
+`.claude/skills/` contient le plugin **ui-ux-pro-max** (7 skills : `ui-ux-pro-max`,
+`design`, `design-system`, `ui-styling`, `brand`, `banner-design`, `slides`).
+Source : <https://github.com/nextlevelbuilder/ui-ux-pro-max-skill>
+
+Attention au doublon de nom : ce plugin fournit déjà un skill nommé `design`. Ne pas
+activer un second `design` venu d'ailleurs, ça dégrade le déclenchement des deux.
+
+## Agents
+
+`.claude/agents/` — `theme-shopify`, `audit-boutique`, `fiche-produit`, `creas-ads`.
+Voir chaque fichier pour le détail.
