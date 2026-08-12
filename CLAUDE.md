@@ -52,14 +52,32 @@ sélecteur — une valeur par option, séparées par des virgules. Valeurs accep
 
 ## Skills installés dans ce repo
 
-`.claude/skills/` contient le plugin **ui-ux-pro-max** (7 skills : `ui-ux-pro-max`,
-`design`, `design-system`, `ui-styling`, `brand`, `banner-design`, `slides`).
+**Plugin ui-ux-pro-max** — 7 skills de référence (`ui-ux-pro-max`, `design`,
+`design-system`, `ui-styling`, `brand`, `banner-design`, `slides`).
 Source : <https://github.com/nextlevelbuilder/ui-ux-pro-max-skill>
 
 Attention au doublon de nom : ce plugin fournit déjà un skill nommé `design`. Ne pas
 activer un second `design` venu d'ailleurs, ça dégrade le déclenchement des deux.
 
+**Skills maison** (écrits pour ce projet) :
+
+| Skill | Rôle |
+|---|---|
+| `direction-artistique` | Imposer une direction artistique distinctive. Contient la liste noire des clichés dropshipping et un menu de 8 directions. À déclencher **avant** tout code. |
+| `shopify-sections` | Coder des sections Liquid sur mesure. Contient un modèle de section validé dans `assets/section-modele.liquid`. |
+
+Ces deux-là comblent le trou laissé par les autres : `ui-ux-pro-max` est une base de
+données de styles, `shopify-store-builder` couvre la structure et la copy, mais rien ne
+traitait du **parti pris visuel** ni du **code de mise en page sur mesure**.
+
 ## Agents
 
-`.claude/agents/` — `theme-shopify`, `audit-boutique`, `fiche-produit`, `creas-ads`.
-Voir chaque fichier pour le détail.
+`.claude/agents/` :
+
+| Agent | Rôle |
+|---|---|
+| `designer-boutique` | Direction artistique **puis** implémentation. Le chef d'orchestre du design. |
+| `theme-shopify` | Modifier le thème en sécurité : dupliquer, écrire, vérifier, laisser publier. |
+| `audit-boutique` | Audit scoré et priorisé de la boutique. |
+| `fiche-produit` | Copywriting de page produit orienté conversion. |
+| `creas-ads` | Angles et briefs de créas Meta/TikTok. |

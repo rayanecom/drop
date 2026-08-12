@@ -1,0 +1,316 @@
+{% comment %}
+  Section modèle — éditorial deux colonnes, blocs répétables.
+
+  Point de départ à adapter, pas à copier tel quel. Ce qu'elle démontre :
+  - CSS scopé sur #shopify-section-{{ section.id }}
+  - réglages exposés dans l'éditeur (textes, image, couleurs, espacements)
+  - blocs répétables avec block.shopify_attributes
+  - image responsive avec srcset, width/height et lazy loading
+  - prefers-reduced-motion respecté
+  - presets, pour que la section apparaisse dans « Ajouter une section »
+
+  Déposer dans sections/ du thème, puis l'ajouter depuis l'éditeur.
+{% endcomment %}
+
+{%- liquid
+  assign s = section.settings
+  assign img = s.image
+-%}
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    --sec-bg: {{ s.bg_color }};
+    --sec-fg: {{ s.text_color }};
+    --sec-accent: {{ s.accent_color }};
+    --sec-pad: {{ s.padding_block }}px;
+    --sec-gap: {{ s.gap }}px;
+    --sec-max: {{ s.max_width }}px;
+
+    background-color: var(--sec-bg);
+    color: var(--sec-fg);
+  }
+
+  #shopify-section-{{ section.id }} .sec__inner {
+    max-width: var(--sec-max);
+    margin-inline: auto;
+    padding-block: var(--sec-pad);
+    padding-inline: 20px;
+    display: grid;
+    gap: var(--sec-gap);
+  }
+
+  @media (min-width: 750px) {
+    #shopify-section-{{ section.id }} .sec__inner {
+      grid-template-columns: {{ s.media_ratio }}fr {{ 100 | minus: s.media_ratio }}fr;
+      align-items: {{ s.vertical_align }};
+    }
+    #shopify-section-{{ section.id }} .sec__inner--media-right .sec__media {
+      order: 2;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .sec__eyebrow {
+    margin: 0 0 12px;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sec-accent);
+  }
+
+  #shopify-section-{{ section.id }} .sec__heading {
+    margin: 0 0 16px;
+    font-size: clamp(1.75rem, 4vw, {{ s.heading_size }}rem);
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+
+  #shopify-section-{{ section.id }} .sec__body {
+    margin: 0;
+    max-width: 60ch;
+  }
+
+  #shopify-section-{{ section.id }} .sec__media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: {{ s.image_radius }}px;
+  }
+
+  #shopify-section-{{ section.id }} .sec__list {
+    list-style: none;
+    margin: 24px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .sec__item {
+    padding-top: 16px;
+    border-top: 1px solid currentColor;
+    /* le filet reprend la couleur du texte, atténuée : une seule couleur à gérer */
+    border-top-color: color-mix(in srgb, currentColor 18%, transparent);
+  }
+
+  #shopify-section-{{ section.id }} .sec__item-title {
+    margin: 0 0 4px;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  #shopify-section-{{ section.id }} .sec__item-text {
+    margin: 0;
+    opacity: 0.75;
+  }
+
+  #shopify-section-{{ section.id }} .sec__cta {
+    display: inline-block;
+    margin-top: 28px;
+    padding: 14px 28px;
+    background: var(--sec-accent);
+    color: var(--sec-bg);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: {{ s.button_radius }}px;
+    transition: transform 160ms ease, opacity 160ms ease;
+  }
+
+  #shopify-section-{{ section.id }} .sec__cta:hover {
+    transform: translateY(-2px);
+    opacity: 0.92;
+  }
+
+  /* Un focus visible : sans lui la navigation au clavier est impossible. */
+  #shopify-section-{{ section.id }} .sec__cta:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #shopify-section-{{ section.id }} .sec__cta {
+      transition: none;
+    }
+    #shopify-section-{{ section.id }} .sec__cta:hover {
+      transform: none;
+    }
+  }
+{% endstyle %}
+
+<div class="sec__inner{% if s.media_position == 'right' %} sec__inner--media-right{% endif %}">
+  {%- if img != blank -%}
+    <div class="sec__media">
+      <img
+        src="{{ img | image_url: width: 900 }}"
+        srcset="{{ img | image_url: width: 450 }} 450w,
+                {{ img | image_url: width: 900 }} 900w,
+                {{ img | image_url: width: 1400 }} 1400w"
+        sizes="(min-width: 750px) 50vw, 100vw"
+        width="{{ img.width }}"
+        height="{{ img.height }}"
+        alt="{{ img.alt | escape }}"
+        loading="{% if s.image_eager %}eager{% else %}lazy{% endif %}"
+        decoding="async"
+      >
+    </div>
+  {%- endif -%}
+
+  <div class="sec__content">
+    {%- if s.eyebrow != blank -%}
+      <p class="sec__eyebrow">{{ s.eyebrow | escape }}</p>
+    {%- endif -%}
+
+    {%- if s.heading != blank -%}
+      <h2 class="sec__heading">{{ s.heading }}</h2>
+    {%- endif -%}
+
+    {%- if s.body != blank -%}
+      <div class="sec__body">{{ s.body }}</div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="sec__list">
+        {%- for block in section.blocks -%}
+          <li class="sec__item" {{ block.shopify_attributes }}>
+            {%- if block.settings.title != blank -%}
+              <p class="sec__item-title">{{ block.settings.title | escape }}</p>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <p class="sec__item-text">{{ block.settings.text | escape }}</p>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if s.cta_label != blank and s.cta_link != blank -%}
+      <a class="sec__cta" href="{{ s.cta_link }}">{{ s.cta_label | escape }}</a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Éditorial 2 colonnes",
+  "tag": "section",
+  "class": "sec sec--editorial",
+  "settings": [
+    { "type": "header", "content": "Contenu" },
+    { "type": "text", "id": "eyebrow", "label": "Sur-titre" },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titre",
+      "default": "Un titre qui dit quelque chose de précis"
+    },
+    { "type": "richtext", "id": "body", "label": "Texte" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    {
+      "type": "checkbox",
+      "id": "image_eager",
+      "label": "Charger l'image immédiatement",
+      "info": "À activer uniquement si cette section est visible sans défiler.",
+      "default": false
+    },
+    { "type": "header", "content": "Bouton" },
+    { "type": "text", "id": "cta_label", "label": "Libellé" },
+    { "type": "url", "id": "cta_link", "label": "Lien" },
+    { "type": "header", "content": "Mise en page" },
+    {
+      "type": "select",
+      "id": "media_position",
+      "label": "Position de l'image",
+      "options": [
+        { "value": "left", "label": "À gauche" },
+        { "value": "right", "label": "À droite" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "media_ratio",
+      "min": 30, "max": 70, "step": 5,
+      "unit": "%",
+      "label": "Largeur de l'image",
+      "default": 50
+    },
+    {
+      "type": "select",
+      "id": "vertical_align",
+      "label": "Alignement vertical",
+      "options": [
+        { "value": "start", "label": "Haut" },
+        { "value": "center", "label": "Centre" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 900, "max": 1600, "step": 20,
+      "unit": "px",
+      "label": "Largeur maximale",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "padding_block",
+      "min": 24, "max": 160, "step": 8,
+      "unit": "px",
+      "label": "Espacement vertical",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 16, "max": 96, "step": 8,
+      "unit": "px",
+      "label": "Écart entre colonnes",
+      "default": 48
+    },
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "bg_color", "label": "Fond", "default": "#FFFDF8" },
+    { "type": "color", "id": "text_color", "label": "Texte", "default": "#12100E" },
+    { "type": "color", "id": "accent_color", "label": "Accentuation", "default": "#0F4C5C" },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 2, "max": 5, "step": 0.25,
+      "unit": "rem",
+      "label": "Taille du titre",
+      "default": 3.25
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "min": 0, "max": 32, "step": 2,
+      "unit": "px",
+      "label": "Arrondi de l'image",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "min": 0, "max": 32, "step": 2,
+      "unit": "px",
+      "label": "Arrondi du bouton",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Point",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre" },
+        { "type": "text", "id": "text", "label": "Texte" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Éditorial 2 colonnes",
+      "blocks": [{ "type": "item" }, { "type": "item" }, { "type": "item" }]
+    }
+  ]
+}
+{% endschema %}
