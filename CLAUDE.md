@@ -65,6 +65,8 @@ activer un second `design` venu d'ailleurs, ça dégrade le déclenchement des d
 |---|---|
 | `direction-artistique` | Imposer une direction artistique distinctive. Contient la liste noire des clichés dropshipping et un menu de 8 directions. À déclencher **avant** tout code. |
 | `shopify-sections` | Coder des sections Liquid sur mesure. Contient un modèle de section validé dans `assets/section-modele.liquid`. |
+| `mobile-ecommerce` | Rendre la boutique vendeuse sur mobile : ligne de flottaison, cibles de 44 px, seuil des 16 px, poids et décalage des images. |
+| `composants-ui` | Générer un composant d'interface complet à partir d'une description, dans le bon langage cible et avec les jetons du projet. Équivalent local d'un générateur de composants en ligne. |
 
 Ces deux-là comblent le trou laissé par les autres : `ui-ux-pro-max` est une base de
 données de styles, `shopify-store-builder` couvre la structure et la copy, mais rien ne
