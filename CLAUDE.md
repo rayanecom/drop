@@ -24,23 +24,47 @@ Réglage utile : le sélecteur de variantes est piloté par **`picker_types`** s
 sélecteur — une valeur par option, séparées par des virgules. Valeurs acceptées :
 `pills`, `dropdown`, `swatches`, `quantity-breaks`, `hidden`. Champ vide = `pills,pills,pills`.
 
-### Palette — mer & terre
+### Palette — lagon & sable
 
-Le nom de la marque commande la palette. Toute couleur d'action doit venir de cette
-liste ; un rouge ou un orange de signalisation n'a rien à faire sur AquaTerra.
+**Une seule famille chromatique.** C'est la règle qui compte, plus que les valeurs.
+Une tentative précédente associait un teal saturé à un terracotta désaturé : deux
+couleurs de force égale s'annulent au lieu de se hiérarchiser, et leur voisinage vire
+au pêche. La terre s'exprime donc par des **neutres chauds** (sable, ivoire), jamais par
+une couleur d'accent.
 
 | Rôle | Valeur | Réglage de thème |
 |---|---|---|
-| Eau (accent principal) | `#0B5C6B` | `colors_accent_1`, `colors_outline_button_labels`, `scrollbar_thumb_color`, fond du pied de page |
-| Terre (accent d'action) | `#E07A4F` | `colors_accent_2`, `checkout_button_color`, bouton du pied de page |
-| Eau profonde (texte) | `#0F2E36` | `colors_text` |
-| Blanc cassé (fond) | `#FDFCFA` | `colors_background_1` |
-| Écume (fond secondaire) | `#EAF4F6` | `colors_background_2` |
-| Sable clair | `#FAF6F0` | fond de la fiche produit, dans `at-palette` |
+| Encre (texte) | `#0B2A31` | `colors_text` |
+| Mer profonde (accent 1) | `#0C4A56` | `colors_accent_1`, `colors_outline_button_labels`, `scrollbar_thumb_color`, `checkout_button_color`, fond du pied de page |
+| Lagon (accent 2) | `#00808A` | `colors_accent_2`, pastilles de remise, soulignages |
+| Turquoise vif | `#00C2A8` | **unique couleur vive** : « Acheter maintenant », bouton du pied de page |
+| Ivoire (fond) | `#FCFAF7` | `colors_background_1` |
+| Écume (fond secondaire) | `#DFEFF1` | `colors_background_2` |
+| Sable | `#F7F1E8` | fond de la fiche produit, dans `at-palette` |
+| Gris de mer (texte secondaire) | `#4A666F` | dans les snippets |
 
-Deux contrastes à ne pas oublier : le blanc sur la terre `#E07A4F` ne fait que **2,9:1**,
-donc toute pastille terracotta porte du texte foncé `#2A1206` (5,9:1). Le blanc sur l'eau
-`#0B5C6B` fait 7,1:1 et passe partout.
+Un seul élément saturé sur toute la page : le bouton d'achat. C'est ce qui le rend
+impossible à manquer sans recourir au rouge-orange d'urgence de tous les dropshipping.
+
+Contrastes à retenir : encre sur turquoise `#00C2A8` = **6,7:1** (du blanc n'y serait
+qu'à 2,5:1, d'où le libellé foncé). Blanc sur mer profonde = 9,9:1. Blanc sur lagon
+= 4,7:1, juste au-dessus du seuil. Gris de mer sur écume = 5,1:1.
+
+### Emblèmes et logos
+
+Seuls deux types de marques réelles ont leur place sur la fiche :
+
+- **Les logos de paiement**, rendus par Shopify via `payment_type_svg_tag` sur
+  `shop.enabled_payment_types`. La liste suit ce qui est réellement activé, donc elle
+  ne peut pas mentir. Si rien n'est activé, rien ne s'affiche.
+- **Le drapeau français** pour le SAV : bleu `#002395`, blanc, rouge `#ED2939`,
+  trois bandes égales.
+
+Pas de logo de transporteur : le transporteur réel n'est pas connu, et afficher
+Colissimo sur un colis qui part autrement est une fausse promesse.
+
+Les autres pictogrammes sont **pleins**, jamais en trait fin — un contour de 1,6 px
+se délave à 22 px sur un téléphone et fait bricolé.
 
 Répartition des fichiers : `aquaterra-mobile` tient la **géométrie**, `at-palette` tient
 la **couleur**. Une couleur définie aux deux endroits finit toujours par diverger.
