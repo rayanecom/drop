@@ -66,6 +66,27 @@ Colissimo sur un colis qui part autrement est une fausse promesse.
 Les autres pictogrammes sont **pleins**, jamais en trait fin — un contour de 1,6 px
 se délave à 22 px sur un téléphone et fait bricolé.
 
+**Les vrais logos de marque vivent dans `assets/`**, préfixés `at-pay-*` (Visa, Mastercard,
+American Express, PayPal, Maestro, Apple Pay, Google Pay) et `at-ship-*` (DHL, UPS, FedEx,
+DPD). Ce sont les fichiers officiels, pas des reproductions.
+
+Pour en ajouter un sans le retaper : `themeFilesUpsert` accepte un corps de type **`URL`**
+— Shopify télécharge le fichier lui-même, donc les octets sont identiques à la source.
+Le proxy sortant laisse passer `raw.githubusercontent.com` ; `upload.wikimedia.org` et
+`cdn.jsdelivr.net` sont bloqués. Colissimo, Mondial Relay et Chronopost n'ont de fichier
+officiel sur aucune source atteignable : il faut que l'utilisateur les dépose dans
+Contenu → Fichiers.
+
+### Format monétaire — le piège
+
+`moneyFormat` de la boutique vaut `€{{amount_with_comma_separator}}`, donc tout le site
+affiche « €39,99 » au lieu de « 39,99 € ». **L'API Admin n'expose pas ce réglage en
+écriture** : il se corrige dans Paramètres → Général → Devise → Modifier le format.
+
+Dans un snippet, ne pas compter sur `money_without_currency` (son séparateur décimal ne
+suit pas toujours le réglage). Écrire `{{ prix | money | remove: '€' | strip }}&nbsp;€` :
+le résultat est correct avec l'ancien comme avec le nouveau réglage.
+
 Répartition des fichiers : `aquaterra-mobile` tient la **géométrie**, `at-palette` tient
 la **couleur**. Une couleur définie aux deux endroits finit toujours par diverger.
 
