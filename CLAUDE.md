@@ -24,6 +24,27 @@ Réglage utile : le sélecteur de variantes est piloté par **`picker_types`** s
 sélecteur — une valeur par option, séparées par des virgules. Valeurs acceptées :
 `pills`, `dropdown`, `swatches`, `quantity-breaks`, `hidden`. Champ vide = `pills,pills,pills`.
 
+### Palette — mer & terre
+
+Le nom de la marque commande la palette. Toute couleur d'action doit venir de cette
+liste ; un rouge ou un orange de signalisation n'a rien à faire sur AquaTerra.
+
+| Rôle | Valeur | Réglage de thème |
+|---|---|---|
+| Eau (accent principal) | `#0B5C6B` | `colors_accent_1`, `colors_outline_button_labels`, `scrollbar_thumb_color`, fond du pied de page |
+| Terre (accent d'action) | `#E07A4F` | `colors_accent_2`, `checkout_button_color`, bouton du pied de page |
+| Eau profonde (texte) | `#0F2E36` | `colors_text` |
+| Blanc cassé (fond) | `#FDFCFA` | `colors_background_1` |
+| Écume (fond secondaire) | `#EAF4F6` | `colors_background_2` |
+| Sable clair | `#FAF6F0` | fond de la fiche produit, dans `at-palette` |
+
+Deux contrastes à ne pas oublier : le blanc sur la terre `#E07A4F` ne fait que **2,9:1**,
+donc toute pastille terracotta porte du texte foncé `#2A1206` (5,9:1). Le blanc sur l'eau
+`#0B5C6B` fait 7,1:1 et passe partout.
+
+Répartition des fichiers : `aquaterra-mobile` tient la **géométrie**, `at-palette` tient
+la **couleur**. Une couleur définie aux deux endroits finit toujours par diverger.
+
 ## Contraintes d'environnement — à lire avant de promettre quoi que ce soit
 
 1. **L'API Shopify refuse toute écriture sur le thème publié.** `themeFilesUpsert` ne
