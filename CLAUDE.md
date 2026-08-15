@@ -149,3 +149,18 @@ traitait du **parti pris visuel** ni du **code de mise en page sur mesure**.
 | `audit-boutique` | Audit scoré et priorisé de la boutique. |
 | `fiche-produit` | Copywriting de page produit orienté conversion. |
 | `creas-ads` | Angles et briefs de créas Meta/TikTok. |
+
+## Bannière d'offre — `at-promo`
+
+Reprend le visuel Canva « Plus vous prenez, plus vous économisez », placé comme chez
+Narelya : **toute la largeur de la colonne produit, 16:9, collée au-dessus du bouton
+d'achat**. Rendue depuis `at-buybox` (seul endroit où `product` est garanti), puis
+déplacée par son propre JS juste après `#atBuybox`.
+
+L'ancrage se fait sur `#atBuybox` et **attend son `data-ready="1"`**. Viser directement
+le bouton d'achat rendrait la position dépendante de l'ordre d'exécution des deux
+scripts, et la bannière resterait en arrière quand le bloc d'achat se déplace.
+
+Codée plutôt qu'en image : un PNG de 1000 × 1000 avec du texte dedans tombe sous 7 px
+de corps sur un écran de 375 px. Pour repasser au PNG, déposer le fichier dans
+Contenu → Fichiers et remplacer le contenu de `.atp__inner` par une seule balise `img`.
