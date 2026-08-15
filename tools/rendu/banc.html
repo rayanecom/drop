@@ -1,0 +1,158 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>at-promo harness</title>
+<style>
+  body{margin:0;background:#F7F1E8;font-family:-apple-system,'Manrope',sans-serif}
+  /* Simule la colonne produit : pleine largeur sur mobile, ~600px sur bureau. */
+  .col{padding:14px;max-width:620px;margin:0 auto}
+  .fakebtn{display:block;width:100%;margin-top:0;padding:16px 20px;min-height:52px;
+    background:#00C2A8;color:#0B2A31;border:2px solid #00C2A8;font:800 15px/1.2 inherit;
+    letter-spacing:.06em;text-transform:uppercase}
+  .ruler{font:11px monospace;color:#900;padding:4px 14px}
+</style>
+<div class="col">
+  <div id="mount"></div>
+  <button class="fakebtn">Ajouter au panier</button>
+</div>
+<div class="ruler" id="out"></div>
+
+<template id="tpl">
+<section id="atPromo" aria-label="Offre en cours">
+  <div class="atp__inner">
+
+    <img class="atp__shot"
+         src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23c9d9dd'/%3E%3Ctext x='50' y='54' font-size='9' text-anchor='middle' fill='%23335'%3Ephoto 1:1%3C/text%3E%3C/svg%3E"
+         width="1024" height="1024" alt="" loading="lazy" decoding="async">
+
+    <div class="atp__head">
+      <p class="atp__badge">Offre d'été</p>
+      <h2 class="atp__h">Plus vous prenez, <span>plus vous économisez</span></h2>
+    </div>
+
+    <ul class="atp__tiers">
+      <li class="atp__tier">
+        <span class="atp__flag atp__flag--ghost" aria-hidden="true"></span>
+        <span class="atp__body">
+          <span class="atp__qty">1 paire</span>
+          <span class="atp__now">39,99&nbsp;€</span>
+        </span>
+      </li>
+      <li class="atp__tier atp__tier--star">
+        <span class="atp__flag">&minus;25&nbsp;%</span>
+        <span class="atp__body">
+          <span class="atp__qty">2 paires</span>
+          <span class="atp__now">59,99&nbsp;€</span>
+          <s class="atp__was">79,98&nbsp;€</s>
+        </span>
+      </li>
+      <li class="atp__tier">
+        <span class="atp__flag atp__flag--alt">&minus;33&nbsp;%</span>
+        <span class="atp__body">
+          <span class="atp__qty">3 paires</span>
+          <span class="atp__now">79,90&nbsp;€</span>
+          <s class="atp__was">119,97&nbsp;€</s>
+        </span>
+      </li>
+    </ul>
+
+  </div>
+</section>
+
+<style>
+  #atPromo{
+    --ink:#0B2A31; --sea:#0C4A56; --lagoon:#00808A; --vivid:#00C2A8;
+    --foam:#DFEFF1; --line:#CDE3E7; --muted:#4A666F;
+
+    display:block; margin:0 0 12px;
+    font-family:'Manrope',-apple-system,sans-serif; color:var(--ink);
+    background:linear-gradient(155deg,#EDF7F9 0%,#DCEEF2 100%);
+    border:1px solid var(--line);
+  }
+  #atPromo[hidden]{ display:none; }
+
+  /* Aucune hauteur imposee, aucun overflow:hidden : c'est la combinaison des
+     deux qui coupait la banniere en deux. La hauteur suit le contenu. */
+  .atp__inner{
+    display:grid;
+    grid-template-areas:"head" "tiers";
+    gap:11px; padding:14px;
+  }
+
+  .atp__shot{ display:none; }
+  .atp__head{ grid-area:head; }
+  .atp__tiers{ grid-area:tiers; }
+
+  .atp__badge{ display:inline-block; margin:0 0 7px; padding:5px 11px;
+    background:var(--sea); color:#fff; font-size:9.5px; font-weight:800;
+    letter-spacing:.14em; text-transform:uppercase; }
+
+  .atp__h{ margin:0; font-size:clamp(17px,4.6vw,22px); font-weight:900;
+    line-height:1.08; letter-spacing:-.03em; text-transform:uppercase;
+    text-wrap:balance; }
+  /* Turquoise #00A896 sur l'ecume : 3,6:1. Sous 4,5:1, mais ce titre est en
+     gras au-dessus de 18,66 px, donc il releve du seuil « grand texte » (3:1). */
+  .atp__h span{ color:#00A896; }
+
+  .atp__tiers{ list-style:none; margin:0; padding:0;
+    display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; }
+
+  .atp__tier{ display:flex; flex-direction:column;
+    background:#fff; border:2px solid transparent; padding:0 6px 10px;
+    text-align:center; overflow:hidden; }
+  .atp__tier--star{ border-color:var(--vivid); }
+
+  /* Le corps se centre sous la banderole, sans la deplacer : sinon la carte
+     « 1 paire », qui n'a ni remise ni prix barre, laisse un vide en bas. */
+  .atp__body{ flex:1; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:2px; }
+
+  /* La banderole est un enfant normal, pas un element absolu : elle ne peut
+     donc pas deborder de la carte. Les cartes sans banderole en recoivent une
+     transparente, ce qui garde les trois hauteurs alignees. */
+  .atp__flag{ display:flex; align-items:center; justify-content:center;
+    align-self:stretch; margin:0 -6px 7px; min-height:19px; padding:2px 4px;
+    background:var(--vivid); color:var(--ink);
+    font-size:9.5px; font-weight:900; letter-spacing:.02em;
+    text-transform:uppercase; line-height:1.1; }
+  .atp__flag--alt{ background:var(--foam); color:var(--sea); }
+  .atp__flag--ghost{ background:transparent; }
+
+  .atp__qty{ font-size:12px; font-weight:800; letter-spacing:-.01em; }
+  .atp__now{ font-size:clamp(15px,4.2vw,19px); font-weight:900;
+    letter-spacing:-.03em; color:var(--sea); line-height:1.05; }
+  .atp__was{ font-size:11px; color:#7C949B; }
+
+  /* Bureau : le visuel produit reprend sa place a gauche, la ou il y a
+     de la largeur pour lui sans allonger le bloc. */
+  @media screen and (min-width:750px){
+    .atp__inner{
+      grid-template-columns:150px minmax(0,1fr);
+      grid-template-areas:"shot head" "shot tiers";
+      align-items:center; gap:12px 20px; padding:18px 20px;
+    }
+    .atp__shot{ display:block; grid-area:shot; align-self:center;
+      width:100%; height:auto; }
+    .atp__tiers{ gap:8px; }
+    .atp__tier{ padding:0 8px 12px; }
+  }
+
+  /* Sous 340 px les trois colonnes deviennent trop etroites pour « 119,97 € ». */
+  @media screen and (max-width:339px){
+    .atp__tiers{ grid-template-columns:1fr; }
+    .atp__flag{ margin-bottom:5px; }
+  }
+</style>
+</section>
+</template>
+
+<script>
+  document.getElementById('mount').appendChild(
+    document.getElementById('tpl').content.cloneNode(true)
+  );
+  var p = document.getElementById('atPromo');
+  document.getElementById('out').textContent =
+    'viewport ' + window.innerWidth + ' | promo ' +
+    Math.round(p.getBoundingClientRect().width) + ' x ' +
+    Math.round(p.getBoundingClientRect().height) + ' px' +
+    ' | scrollH ' + p.scrollHeight;
+</script>

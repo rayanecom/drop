@@ -97,10 +97,17 @@ la **couleur**. Une couleur définie aux deux endroits finit toujours par diverg
    `themeDuplicate` → écrire sur la copie → l'utilisateur prévisualise → l'utilisateur
    publie.
 2. **Le réseau sortant est filtré.** La boutique elle-même renvoie un 403 au CONNECT du
-   proxy. Impossible de charger une page du storefront pour vérifier un rendu — c'est
-   l'utilisateur qui valide visuellement. Ne pas conclure d'un échec réseau que la
+   proxy, `narelya.fr` et `cdn.shopify.com` aussi. Impossible de charger une page du
+   storefront pour vérifier un rendu. Ne pas conclure d'un échec réseau que la
    configuration ou une clé d'API est fautive : vérifier d'abord
    `curl -sS "$HTTPS_PROXY/__agentproxy/status"`.
+
+   **Mais ce n'est pas une excuse pour livrer sans regarder.** Chromium est installé
+   localement : `tools/rendu/` rend le bloc seul, le mesure à 320/375/414/1280 px et
+   sort des captures. C'est ce qui aurait attrapé la bannière rognée par
+   `aspect-ratio` + `overflow:hidden`. À utiliser avant toute livraison d'un bloc
+   visuel, et **resynchroniser le banc après chaque retouche** : ce qui est livré doit
+   être exactement ce qui a été mesuré.
 3. **`templates/product.json` pèse ~68 Ko.** Le réécrire intégralement via l'API pour
    changer un seul réglage est disproportionné et risque de le corrompre. Préférer
    l'éditeur de code Shopify (recherche directe du réglage) ou une modification ciblée
