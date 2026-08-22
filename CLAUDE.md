@@ -156,6 +156,10 @@ traitait du **parti pris visuel** ni du **code de mise en page sur mesure**.
 | `audit-boutique` | Audit scoré et priorisé de la boutique. |
 | `fiche-produit` | Copywriting de page produit orienté conversion. |
 | `creas-ads` | Angles et briefs de créas Meta/TikTok. |
+| `identite-visuelle` | Nom, logo, palette, typographie, ton. Le positionnement avant le dessin. |
+| `controle-rendu` | Contrôle qualité visuel au banc Chromium avant livraison. Le seul œil sur le rendu. |
+| `pages-annexes` | Pages de confiance : CGV, livraison, retours, RGPD, FAQ, à propos. |
+| `seo-boutique` | Référencement : balises, structure, données structurées, maillage. |
 
 ## Bannière d'offre — `at-promo`
 
