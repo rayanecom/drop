@@ -1,0 +1,68 @@
+<!doctype html><html lang="fr"><meta charset="utf-8"><title>Estran — planche de contrôle</title>
+<style>
+  :root{--encre:#0B2A31;--mer:#0C4A56;--ivoire:#FCFAF7;--ecume:#DFEFF1;--sable:#F7F1E8;--gris:#4A666F}
+  *{box-sizing:border-box}
+  body{margin:0;padding:32px;background:var(--ivoire);color:var(--encre);
+       font:15px/1.5 system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gris);
+     margin:34px 0 12px;border-bottom:1px solid rgba(11,42,49,.14);padding-bottom:6px}
+  h2:first-of-type{margin-top:0}
+  .row{display:flex;align-items:flex-end;gap:28px;flex-wrap:wrap}
+  .cell{text-align:center}
+  .cell span{display:block;margin-top:8px;font-size:10px;color:var(--gris);letter-spacing:.06em}
+  .dark{background:var(--mer);padding:22px 26px;border-radius:0}
+  .dark .cell span{color:#DFEFF1}
+  img{display:block;image-rendering:auto}
+  .rond{border-radius:50%;overflow:hidden}
+  .sable{background:var(--sable);padding:22px 26px}
+  .ecume{background:var(--ecume);padding:22px 26px}
+</style>
+
+<h2>Lettrage horizontal — descente en taille</h2>
+<div class="row">
+  <div class="cell"><img src="estran-logo-horizontal.svg" height="120"><span>120 px</span></div>
+  <div class="cell"><img src="estran-logo-horizontal.svg" height="48"><span>48 px</span></div>
+  <div class="cell"><img src="estran-logo-horizontal.svg" height="32"><span>32 px</span></div>
+  <div class="cell"><img src="estran-logo-horizontal.svg" height="24"><span>24 px — TEST</span></div>
+  <div class="cell"><img src="estran-logo-horizontal.svg" height="16"><span>16 px</span></div>
+</div>
+
+<h2>Symbole carré — descente en taille (fond mer profonde)</h2>
+<div class="row dark">
+  <div class="cell"><img src="estran-logo-compact.svg" width="128"><span>128 px</span></div>
+  <div class="cell"><img src="estran-logo-compact.svg" width="64"><span>64 px</span></div>
+  <div class="cell"><img src="estran-logo-compact.svg" width="48"><span>48 px</span></div>
+  <div class="cell"><img src="estran-logo-compact.svg" width="32"><span>32 px</span></div>
+  <div class="cell"><img src="estran-logo-compact.svg" width="24"><span>24 px — TEST</span></div>
+</div>
+
+<h2>Avatar rond — rognage Meta / TikTok</h2>
+<div class="row">
+  <div class="cell"><img class="rond" src="estran-logo-compact.svg" width="112"><span>112 px rond</span></div>
+  <div class="cell"><img class="rond" src="estran-logo-compact.svg" width="48"><span>48 px rond</span></div>
+  <div class="cell"><img class="rond" src="estran-logo-compact.svg" width="32"><span>32 px rond</span></div>
+  <div class="cell"><img class="rond" src="estran-logo-compact.svg" width="24"><span>24 px rond</span></div>
+</div>
+
+<h2>Favicon dédié (fût épaissi)</h2>
+<div class="row">
+  <div class="cell"><img src="estran-favicon.svg" width="64"><span>64 px</span></div>
+  <div class="cell"><img src="estran-favicon.svg" width="32"><span>32 px</span></div>
+  <div class="cell"><img src="estran-favicon.svg" width="24"><span>24 px</span></div>
+  <div class="cell"><img src="estran-favicon.svg" width="16"><span>16 px — onglet</span></div>
+</div>
+
+<h2>Monochrome — facture, colis, étiquette thermique</h2>
+<div class="row">
+  <div class="cell" style="color:#000"><img src="estran-logo-mono.svg" height="52"><span>noir plat 100 %</span></div>
+  <div class="cell" style="color:#000"><img src="estran-logo-mono.svg" height="24"><span>24 px</span></div>
+  <div class="cell" style="color:#000"><img src="estran-logo-compact-mono.svg" width="52"><span>symbole</span></div>
+</div>
+
+<h2>Tenue sur les fonds de la palette</h2>
+<div class="row">
+  <div class="cell sable"><img src="estran-logo-horizontal.svg" height="40"><span>sur sable #F7F1E8</span></div>
+  <div class="cell ecume"><img src="estran-logo-horizontal.svg" height="40"><span>sur écume #DFEFF1</span></div>
+  <div class="cell dark"><img src="estran-logo-horizontal-inverse.svg" height="40"><span>sur mer profonde</span></div>
+</div>
+</html>

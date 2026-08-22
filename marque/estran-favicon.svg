@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Estran">
+  <title>Estran</title>
+  <!-- Favicon. Marge reduite a 3/32 et fut porte a 24 : a 16 px les trois barres
+       doivent rester separees, un fut de 22 les refermerait. -->
+  <rect width="32" height="32" fill="#0C4A56"/>
+  <g transform="translate(3,3) scale(0.26)"><path d="M0,0 H86 V24 H24 V38 H64 V62 H24 V76 H100 V100 H0 Z" fill="#FCFAF7"/></g>
+</svg>
