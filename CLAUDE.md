@@ -1,23 +1,47 @@
-# AquaTerra — contexte projet
+# Estran — contexte projet
 
-Repo de travail pour la boutique Shopify **AquaTerra** (dropshipping, marché France).
+Repo de travail pour la boutique Shopify **Estran** (dropshipping, marché France).
+
+## Le nom : Estran remplace AquaTerra
+
+Décidé par l'utilisateur le 22/08/2026. **Estran** — la bande de côte découverte à marée
+basse, donc exactement la zone amphibie du produit. AquaTerra était générique et
+interchangeable ; le nouveau nom porte une image sans avoir à l'expliquer.
+
+La décision est prise, elle n'est pas à rouvrir. En revanche **la migration n'est pas
+faite** : côté Shopify, la boutique et le produit portent encore l'ancien nom. Ne jamais
+supposer que le renommage est appliqué quelque part — le vérifier.
+
+Ce que le renommage touche, et son état :
+
+| Emplacement | État |
+|---|---|
+| Nom de la boutique (Paramètres → Détails) | à faire, par l'utilisateur |
+| Titre du produit et son `handle` | à faire — changer un `handle` casse les liens existants |
+| Versions du thème (`AquaTerra v8` → `Estran v9`) | à faire à la prochaine duplication |
+| Préfixes de fichiers `at-*` dans le thème | **à conserver** — les renommer casserait tous les `render` pour un gain nul |
+| Logo, visuels, favicon | dépend de `identite-visuelle` |
+| Copy des pages et de la fiche produit | à faire après le logo |
+| Domaine | à décider par l'utilisateur |
 
 ## Boutique
 
 | | |
 |---|---|
-| Nom | AquaTerra |
+| Nom | Estran (encore « AquaTerra » côté Shopify) |
 | Domaine | `kznquq-5a.myshopify.com` |
 | Plan | Basic |
 | Devise / marché | EUR / France |
 
-Produit principal : **Chaussures Amphibies AquaTerra** — 39,99 €, 16 variantes.
+Produit principal : **Chaussures Amphibies Estran** — 39,99 €, 16 variantes.
+Titre encore « Chaussures Amphibies AquaTerra » dans l'admin Shopify.
 Options : `Couleur` (Noir, Bleu) en position 1, `Pointure` (37 → 44) en position 2.
 
 ## Thème
 
 Base **Shrine** (thème payant dérivé de Dawn). Convention maison : une version par
-chantier, créée par duplication — `AquaTerra v3` → `v4` → … → `v8`. Le thème publié
+chantier, créée par duplication — `AquaTerra v3` → `v4` → … → `v8`, puis `Estran v9`
+et suivants. Le thème publié
 porte le rôle `MAIN`.
 
 Réglage utile : le sélecteur de variantes est piloté par **`picker_types`** sur le bloc

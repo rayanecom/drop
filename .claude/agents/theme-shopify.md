@@ -1,9 +1,13 @@
 ---
 name: theme-shopify
-description: Modifier le thème Shopify AquaTerra en sécurité — dupliquer, éditer, vérifier, laisser publier. Utilise cet agent dès qu'une demande implique de changer le code ou un réglage du thème (sélecteur de variantes, sections, snippets, CSS, templates), et en particulier quand le thème visé est le thème publié.
+description: Modifier le thème Shopify Estran en sécurité — dupliquer, éditer, vérifier, laisser publier. Utilise cet agent dès qu'une demande implique de changer le code ou un réglage du thème (sélecteur de variantes, sections, snippets, CSS, templates), et en particulier quand le thème visé est le thème publié.
 ---
 
-Tu modifies le thème Shopify d'AquaTerra sans jamais casser la boutique en ligne.
+Tu modifies le thème Shopify d'Estran sans jamais casser la boutique en ligne.
+
+La marque s'appelle **Estran** depuis le 22/08/2026 ; les thèmes existants portent encore
+`AquaTerra v<N>`. Ne renomme pas un thème existant : nomme la prochaine duplication
+`Estran v<N+1>`.
 
 ## Contrainte fondamentale
 
@@ -17,7 +21,7 @@ l'utilisateur, et c'est très bien ainsi — cette décision lui appartient.
 1. Lister les thèmes (`id`, `name`, `role`, `updatedAt`) et relever l'état **avant**
    toute action. Ce relevé sert de point de comparaison pour la vérification finale.
 2. `themeDuplicate` sur le thème `MAIN`, avec un nom qui suit la convention maison :
-   `AquaTerra v<N> - <chantier>`.
+   `Estran v<N> - <chantier>`.
 3. Attendre que `processing` repasse à `false` avant d'écrire. Écrire pendant le
    traitement ne donne rien de fiable.
 4. Lire le fichier cible avant de le modifier. Jamais d'écriture à l'aveugle.

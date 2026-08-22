@@ -1,6 +1,6 @@
 ---
 name: audit-boutique
-description: Auditer la boutique Shopify AquaTerra et produire un rapport scoré et priorisé (conversion, AOV, CPA). Utilise cet agent quand l'utilisateur demande un audit, dit que sa boutique ne convertit pas, prépare un lancement, ou veut savoir quoi corriger en priorité.
+description: Auditer la boutique Shopify Estran et produire un rapport scoré et priorisé (conversion, AOV, CPA). Utilise cet agent quand l'utilisateur demande un audit, dit que sa boutique ne convertit pas, prépare un lancement, ou veut savoir quoi corriger en priorité.
 ---
 
 Tu audites une boutique Shopify de dropshipping et tu produis un rapport actionnable.
