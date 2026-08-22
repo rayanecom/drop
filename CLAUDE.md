@@ -156,6 +156,13 @@ Source : <https://github.com/nextlevelbuilder/ui-ux-pro-max-skill>
 Attention au doublon de nom : ce plugin fournit déjà un skill nommé `design`. Ne pas
 activer un second `design` venu d'ailleurs, ça dégrade le déclenchement des deux.
 
+**Socle vendorisé** — `shopify-store-builder` (structure, copy, légal France, SEO,
+fournisseur, ads, grille d'audit sur 100 points) et `dispatch-modele` (choix du modèle).
+Ils venaient de la synchronisation du compte claude.ai, donc ils n'existaient **pas** dans
+le repo alors que cinq agents les chargent explicitement. Une session lancée depuis un
+terminal sur une autre machine se serait retrouvée avec des agents cassés. Ils sont
+maintenant dans `.claude/skills/`.
+
 **Skills maison** (écrits pour ce projet) :
 
 | Skill | Rôle |
@@ -163,11 +170,23 @@ activer un second `design` venu d'ailleurs, ça dégrade le déclenchement des d
 | `direction-artistique` | Imposer une direction artistique distinctive. Contient la liste noire des clichés dropshipping et un menu de 8 directions. À déclencher **avant** tout code. |
 | `shopify-sections` | Coder des sections Liquid sur mesure. Contient un modèle de section validé dans `assets/section-modele.liquid`. |
 | `mobile-ecommerce` | Rendre la boutique vendeuse sur mobile : ligne de flottaison, cibles de 44 px, seuil des 16 px, poids et décalage des images. |
-| `composants-ui` | Générer un composant d'interface complet à partir d'une description, dans le bon langage cible et avec les jetons du projet. Équivalent local d'un générateur de composants en ligne. |
+| `composants-ui` | Générer un composant d'interface complet à partir d'une description, dans le bon langage cible et avec les jetons du projet. |
+| `tracking-conversions` | Poser et surtout **vérifier** la mesure : pixel, Événements clients, remontée serveur, déduplication, consentement. Contient la procédure de vérification événement par événement. |
+| `tunnel-paiement` | Du panier à la commande : paiements express, tiroir, franco de port, paliers de quantité, upsell, relance. |
+| `visuels-produit` | Normaliser et produire les images : ratio unique, ordre des 5 images, textes alternatifs, droits d'usage, ce qui se génère et ce qui ne se génère jamais. |
 
-Ces deux-là comblent le trou laissé par les autres : `ui-ux-pro-max` est une base de
-données de styles, `shopify-store-builder` couvre la structure et la copy, mais rien ne
-traitait du **parti pris visuel** ni du **code de mise en page sur mesure**.
+Ce que chacun comble : `ui-ux-pro-max` est une base de données de styles et
+`shopify-store-builder` couvre la structure, la copy et le légal — mais rien ne traitait
+du **parti pris visuel**, du **code de mise en page sur mesure**, de la **mesure des
+conversions**, du **tunnel de paiement** ni de la **production des visuels**.
+
+Trois limites de plan vérifiées dans la documentation Shopify, à ne pas réapprendre à
+chaque fois (plan Basic) :
+
+- **web pixel / pixel personnalisé** : disponible ;
+- **upsell dans les étapes du checkout** : Shopify **Plus uniquement** ;
+- **upsell post-achat** : disponible mais **en bêta, accès à demander** pour une boutique
+  en production. Les extensions de page de remerciement, elles, sont ouvertes.
 
 ## Agents
 
