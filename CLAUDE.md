@@ -57,16 +57,36 @@ l'estran est aussi le lieu où l'on élève les huîtres.
 | Images | 5, toutes avec un `altText` vide ; l'une ne fait que **480 × 480** |
 | Stock | 0 |
 
-### Ce qui bloque, par ordre
+### Ce qui a été fait le 23/08/2026, et vérifié par relecture API
 
-1. **Le thème publié pointe vers un produit qui n'existe pas.** `templates/index.json`
-   référence le `handle` `chaussures-amphibies-aquaterra-…` à deux endroits — le bloc
-   produit de la page d'accueil et le bouton principal du hero. Ce bouton mène donc à une
-   404. Tant que ce point tient, rien d'autre ne peut convertir.
-2. **`compareAtPrice` à 59,99 € n'a jamais été pratiqué** — le produit a été créé et le
-   prix barré posé 35 secondes plus tard. C'est interdit (directive Omnibus). À vider.
-3. **Les 6 collections sont vides** et quatre d'entre elles parlent de chaussures.
-4. La fiche est vide : ni description, ni SEO, ni `alt`, ni variantes de quantité.
+| | |
+|---|---|
+| Titre, description, SEO, type, étiquettes | réécrits pour l'ouvre-huîtres |
+| `compareAtPrice` 59,99 € | **vidé** — jamais pratiqué, directive Omnibus |
+| Produit rangé dans `frontpage` et `meilleures-ventes` | fait, les deux passent à 1 |
+| Remises de volume | **reconstruites et actives** : −25 % dès 2, −33 % dès 3. Elles étaient expirées *et* rattachées au produit chaussures supprimé |
+| `alt` de l'image principale | posé |
+| Thème `Estran v10 - ouvre-huitres` | créé par duplication de v9, page d'accueil réécrite, mesurée au banc |
+
+### Ce qui reste, et pourquoi je ne l'ai pas fait
+
+1. **Publier le thème** — l'API le refuse, et c'est très bien : la décision appartient à
+   l'utilisateur. Prévisualiser `Estran v10`, puis publier.
+2. **Les `alt` des images 2 à 5.** Le proxy bloque `cdn.shopify.com` : je ne peux pas
+   voir les images, donc je ne peux pas décrire ce qu'elles montrent. Les inventer serait
+   une fabrication. À faire par l'utilisateur, ou depuis un poste qui accède au CDN.
+3. **Les caractéristiques du produit** — matière, longueur, manche, garde, entretien,
+   pays de fabrication. Marquées `[À COMPLÉTER]` dans la fiche. Tant qu'elles manquent,
+   ni le tableau comparatif ni la section « détails techniques » ne peuvent être écrits
+   sans inventer.
+4. **Le délai de livraison réel du fournisseur.** Toute mention de délai a été retirée
+   de la page d'accueil plutôt que de reconduire le « 24 à 48 h » non vérifié.
+5. **L'image de 480 × 480**, floue au zoom. À remplacer par une version ≥ 1000 px.
+6. **Les 4 collections « chaussures »**, vides et hors sujet. Suppression volontairement
+   laissée à l'utilisateur — c'est irréversible.
+7. **Les pages légales** : ni CGV, ni remboursement, ni expédition, ni mentions légales.
+   `show_policy` est à `false` dans le pied de page. C'est le prochain gros chantier,
+   et il exige la raison sociale et le SIRET.
 
 ### Ce que le produit change par rapport aux chaussures
 

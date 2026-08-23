@@ -1,0 +1,94 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>*{box-sizing:border-box;}html,body{margin:0;padding:0;background:#FCFAF7;
+font-family:Archivo,'Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+img{max-width:100%;}</style></head><body>
+<section id="sec-hero_custom"><style>
+.eh{position:relative;width:100%;height:74vh;min-height:440px;max-height:720px;overflow:hidden;background:#0C4A56;}
+.eh-sl{position:absolute;inset:0;}
+.eh-sl img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:ehFade 21s infinite;}
+.eh-sl img:nth-child(1){animation-delay:0s;}
+.eh-sl img:nth-child(2){animation-delay:7s;}
+.eh-sl img:nth-child(3){animation-delay:14s;}
+@keyframes ehFade{0%{opacity:0;}5%{opacity:1;}28%{opacity:1;}34%{opacity:0;}100%{opacity:0;}}
+.eh::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,74,86,.30) 0%,rgba(11,42,49,.78) 100%);}
+.eh-in{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;text-align:left;padding:0 clamp(20px,6vw,88px);max-width:1240px;margin:0 auto;}
+.eh-kick{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#DFEFF1;margin:0 0 14px;}
+.eh-in h1{font-size:clamp(31px,5.4vw,58px);color:#FCFAF7;margin:0 0 14px;line-height:1.04;font-weight:800;max-width:15ch;}
+.eh-in p{font-size:clamp(16px,1.9vw,20px);color:#DFEFF1;margin:0 0 30px;max-width:46ch;line-height:1.5;}
+.eh-cta{display:inline-block;background:#00C2A8;color:#0B2A31;font-size:17px;font-weight:700;padding:17px 38px;border-radius:0;text-decoration:none;letter-spacing:.02em;transition:transform .14s ease-out,filter .14s ease-out;}
+.eh-cta:hover{filter:brightness(1.06);transform:translateY(-2px);}
+.eh-cta:active{transform:translateY(0);}
+@media(prefers-reduced-motion:reduce){.eh-sl img{animation:none;opacity:1;}.eh-sl img:not(:first-child){display:none;}.eh-cta{transition:none;}}
+@media(max-width:640px){.eh{height:66vh;}.eh-in{align-items:stretch;}.eh-cta{text-align:center;}}
+</style>
+<div class="eh">
+<div class="eh-sl">
+<img src="https://cdn.shopify.com/s/files/1/0843/2372/9628/files/photo1.jpg" alt="Ouvre-huîtres Estran">
+<img src="https://cdn.shopify.com/s/files/1/0843/2372/9628/files/photo_3.jpg" alt="">
+<img src="https://cdn.shopify.com/s/files/1/0843/2372/9628/files/photo_5.jpg" alt="">
+</div>
+<div class="eh-in">
+<p class="eh-kick">ESTRAN — OUVRE-HUÎTRES</p>
+<h1>La douzaine, sans lutter</h1>
+<p>Le couteau de cuisine n'est pas fait pour ça. Il ripe, et c'est la main qui encaisse.</p>
+<a class="eh-cta" href="/products/estran-ouvre-huitres">Voir l'ouvre-huîtres</a>
+</div>
+</div></section>
+<section id="sec-pourquoi"><style>
+.ep{max-width:1080px;margin:0 auto;padding:0 20px;}
+.ep h2{font-size:clamp(26px,3.6vw,34px);color:#0B2A31;margin:0 0 10px;line-height:1.1;}
+.ep .s{color:#4A666F;margin:0 0 34px;font-size:17px;max-width:56ch;line-height:1.55;}
+.ep-g{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(11,42,49,.12);border-top:1px solid rgba(11,42,49,.12);border-bottom:1px solid rgba(11,42,49,.12);}
+.ep-c{background:#FCFAF7;padding:26px 22px;}
+.ep-n{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.14em;color:#4A666F;display:block;margin-bottom:12px;}
+.ep-c h3{font-size:19px;color:#0B2A31;margin:0 0 8px;line-height:1.25;}
+.ep-c p{font-size:16.5px;color:#4A666F;margin:0;line-height:1.65;}
+@media(max-width:860px){.ep-g{grid-template-columns:1fr;}}
+</style>
+<div class="ep">
+<h2>Pourquoi ça dérape avec un couteau de cuisine</h2>
+<p class="s">Ouvrir une huître n'est pas une question de force. C'est une question d'angle et d'outil.</p>
+<div class="ep-g">
+<div class="ep-c"><span class="ep-n">01</span><h3>La lame est trop longue</h3><p>Elle fait levier au mauvais endroit. L'effort part vers le côté au lieu d'entrer dans la charnière.</p></div>
+<div class="ep-c"><span class="ep-n">02</span><h3>Elle est trop souple</h3><p>Une lame de cuisine plie sous la pression. Elle glisse au moment où la coquille cède.</p></div>
+<div class="ep-c"><span class="ep-n">03</span><h3>Alors on force</h3><p>Et c'est le geste qui blesse. La main gauche est juste derrière la lame, protégée par un torchon.</p></div>
+</div>
+</div></section>
+<section id="sec-geste"><style>
+.eg{max-width:1080px;margin:0 auto;padding:0 20px;}
+.eg h2{font-size:clamp(26px,3.6vw,34px);color:#0B2A31;margin:0 0 26px;line-height:1.1;}
+.eg ol{list-style:none;counter-reset:g;padding:0;margin:0;display:grid;gap:1px;background:rgba(11,42,49,.12);}
+.eg li{counter-increment:g;background:#F7F1E8;padding:20px 22px 20px 62px;position:relative;font-size:16px;color:#0B2A31;line-height:1.6;}
+.eg li::before{content:counter(g,decimal-leading-zero);position:absolute;left:22px;top:20px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12px;letter-spacing:.1em;color:#4A666F;}
+</style>
+<div class="eg">
+<h2>Le geste, en cinq temps</h2>
+<ol>
+<li>Pose l'huître à plat dans un torchon plié, côté creux en dessous.</li>
+<li>Repère la charnière, à la pointe. C'est le seul point d'entrée.</li>
+<li>Entre par la charnière, jamais par le côté. Appui court, puis tourne.</li>
+<li>Passe la lame sous le muscle pour détacher la chair.</li>
+<li>Rince à l'eau claire et sèche tout de suite. Le sel n'attend pas.</li>
+</ol>
+</div></section>
+<section id="sec-faq_home"><style>
+.ef{max-width:860px;margin:0 auto;padding:0 20px;}
+.ef h2{font-size:clamp(26px,3.6vw,34px);color:#0B2A31;margin:0 0 26px;line-height:1.1;}
+.ef details{border-top:1px solid rgba(11,42,49,.14);}
+.ef details:last-of-type{border-bottom:1px solid rgba(11,42,49,.14);}
+.ef summary{list-style:none;cursor:pointer;padding:18px 40px 18px 0;font-size:17px;font-weight:700;color:#0B2A31;position:relative;min-height:44px;display:flex;align-items:center;}
+.ef summary::-webkit-details-marker{display:none;}
+.ef summary::after{content:"+";position:absolute;right:6px;font-size:24px;font-weight:400;color:#00808A;}
+.ef details[open] summary::after{content:"–";}
+.ef .a{padding:0 0 20px;color:#4A666F;font-size:16px;line-height:1.7;}
+</style>
+<div class="ef">
+<h2>Questions fréquentes</h2>
+<details><summary>Faut-il de la force ?</summary><div class="a">Non, et c'est justement le point. La force est ce qui fait déraper la lame. Le geste juste, c'est un appui court dans la charnière, puis une rotation.</div></details>
+<details><summary>Ça marche sur toutes les huîtres ?</summary><div class="a">Les creuses de calibre 2 et 3 sont les plus faciles. Les plates demandent plus de doigté, quel que soit l'outil.</div></details>
+<details><summary>Je n'ai jamais ouvert d'huîtres, c'est pour moi ?</summary><div class="a">Oui. Le mode d'emploi ci-dessus est le geste complet. La difficulté n'est pas la technique, c'est de partir avec le mauvais outil.</div></details>
+<details><summary>Et si je change d'avis ?</summary><div class="a">Tu as 14 jours après réception pour nous le renvoyer, sans avoir à te justifier. C'est la loi, on ne fait pas semblant que ce soit un cadeau.</div></details>
+<details><summary>Le paiement est-il sécurisé ?</summary><div class="a">Oui, les transactions passent par une connexion chiffrée. Les moyens de paiement acceptés sont affichés en bas de page.</div></details>
+</div></section>
+</body></html>
