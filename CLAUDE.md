@@ -70,9 +70,61 @@ une couleur d'accent.
 Un seul élément saturé sur toute la page : le bouton d'achat. C'est ce qui le rend
 impossible à manquer sans recourir au rouge-orange d'urgence de tous les dropshipping.
 
-Contrastes à retenir : encre sur turquoise `#00C2A8` = **6,7:1** (du blanc n'y serait
-qu'à 2,5:1, d'où le libellé foncé). Blanc sur mer profonde = 9,9:1. Blanc sur lagon
-= 4,7:1, juste au-dessus du seuil. Gris de mer sur écume = 5,1:1.
+Contrastes recalculés et vérifiés deux fois (WCAG 2.x, seuil 4,5:1 en texte courant,
+3:1 pour un titre d'au moins 24 px) :
+
+| Combinaison | Ratio | |
+|---|---|---|
+| Encre sur ivoire / sable / écume | 14,50 · 13,46 · 12,78 | confortable partout |
+| Encre sur turquoise | **6,68** | d'où le libellé foncé — du blanc n'y serait qu'à 2,5:1 |
+| Blanc sur mer profonde | 9,86 | |
+| Ivoire sur mer profonde | 9,47 | |
+| Blanc sur lagon | 4,71 | juste au-dessus du seuil |
+| Gris de mer sur ivoire / sable / écume | 5,89 · 5,47 · 5,19 | |
+| Lagon sur ivoire | 4,52 | passe de justesse |
+
+**Trois combinaisons échouent, et ce sont des voisinages naturels — d'où le piège :**
+
+| Combinaison interdite en texte | Ratio | Pourquoi c'est piégeux |
+|---|---|---|
+| Lagon sur **sable** | **4,20** | le sable est le fond de la fiche produit |
+| Lagon sur **écume** | **3,99** | l'écume est `colors_background_2` |
+| Turquoise sur **mer profonde** | **4,36** | la mer profonde est le fond du pied de page |
+
+Dans ces trois cas : titres d'au moins 24 px et filets seulement (le seuil de 3:1 est
+atteint), jamais de texte courant. Pour du texte sur sable ou sur écume, prendre l'encre
+ou le gris de mer. Le bouton turquoise du pied de page reste valide — c'est un fond, avec
+un libellé encre à 6,68:1 ; c'est du **texte** turquoise sur mer profonde qui est exclu.
+
+### Typographie
+
+Deux familles, pas trois. Le contraste entre titre et texte se fait par l'**axe de
+largeur**, pas par une fonte supplémentaire.
+
+| Famille | Rôle | Licence |
+|---|---|---|
+| **Archivo** | affichage **et** texte courant (`wght 100→900`, `wdth 62→125`) | OFL |
+| **IBM Plex Mono** | données uniquement : pointures, dimensions, références, sur-titres | OFL |
+
+Ni Poppins, ni Montserrat, ni Inter. La hauteur d'x d'Archivo (526/1000) la rend lisible
+à 16 px sur mobile, ce qui est la contrainte réelle ici.
+
+**Héberger les deux fichiers dans `assets/`**, ne pas appeler `fonts.googleapis.com` :
+l'appel direct transmet l'IP du visiteur à Google sans consentement — risque RGPD réel sur
+le marché France, et une requête tierce de moins.
+
+**Le piège de l'espace fine.** Vérifié sur les fichiers de fonte : l'espace fine
+insécable `U+202F` est **absente des deux familles**. Ne jamais écrire `&#8239;` — le
+navigateur ferait un repli de fonte sur ce seul caractère et la largeur de l'espace
+sauterait. Utiliser `&nbsp;` (U+00A0), présent partout. Ça confirme la convention déjà en
+place : `{{ prix | money | remove: '€' | strip }}&nbsp;€`.
+
+### Préfixe des fichiers : `at-*` reste `at-*`
+
+Le préfixe vient d'AquaTerra, mais **il ne change pas**. Renommer en `es-*` casserait tous
+les `render` du thème pour un gain nul : personne ne voit un nom de snippet. La règle est
+donc : **un seul préfixe, `at-*`, y compris pour les nouveaux fichiers.** Un repo qui
+porterait les deux serait pire que celui qui garde l'ancien.
 
 ### Emblèmes et logos
 
