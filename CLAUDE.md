@@ -17,7 +17,7 @@ Ce que le renommage touche, et son état :
 | Emplacement | État |
 |---|---|
 | Nom de la boutique (Paramètres → Détails) | à faire, par l'utilisateur |
-| Titre du produit et son `handle` | à faire — changer un `handle` casse les liens existants |
+| Titre et `handle` du produit | **déjà fait** — `estran-ouvre-huitres` porte le nouveau nom |
 | Versions du thème (`AquaTerra v8` → `Estran v9`) | à faire à la prochaine duplication |
 | Préfixes de fichiers `at-*` dans le thème | **à conserver** — les renommer casserait tous les `render` pour un gain nul |
 | Logo, visuels, favicon | dépend de `identite-visuelle` |
@@ -28,14 +28,54 @@ Ce que le renommage touche, et son état :
 
 | | |
 |---|---|
-| Nom | Estran (encore « AquaTerra » côté Shopify) |
+| Nom | Estran (la boutique s'appelle encore « AquaTerra » côté Shopify) |
 | Domaine | `kznquq-5a.myshopify.com` |
 | Plan | Basic |
 | Devise / marché | EUR / France |
 
-Produit principal : **Chaussures Amphibies Estran** — 39,99 €, 16 variantes.
-Titre encore « Chaussures Amphibies AquaTerra » dans l'admin Shopify.
-Options : `Couleur` (Noir, Bleu) en position 1, `Pointure` (37 → 44) en position 2.
+## Le produit : un ouvre-huîtres
+
+Confirmé par l'utilisateur le 23/08/2026, et vérifié dans le catalogue. **Le produit vendu
+est un ouvre-huîtres**, pas une chaussure.
+
+Les « Chaussures Amphibies » que décrivaient les versions précédentes de ce fichier
+**n'existent pas dans le catalogue**. Ne pas les réintroduire. Le nom Estran reste juste :
+l'estran est aussi le lieu où l'on élève les huîtres.
+
+État réel du catalogue, lu par l'API le 23/08/2026 — un seul produit :
+
+| | |
+|---|---|
+| Titre | `Estran ouvre huitres` (à réécrire, c'est une référence, pas une promesse) |
+| `handle` | `estran-ouvre-huitres` |
+| Statut | `ACTIVE` |
+| Prix | 39,99 € — `compareAtPrice` 59,99 € |
+| Variantes | **une seule**, `Default Title` |
+| Description | **vide** |
+| SEO title / description | `null` / `null` |
+| `productType`, `tags` | vides |
+| Images | 5, toutes avec un `altText` vide ; l'une ne fait que **480 × 480** |
+| Stock | 0 |
+
+### Ce qui bloque, par ordre
+
+1. **Le thème publié pointe vers un produit qui n'existe pas.** `templates/index.json`
+   référence le `handle` `chaussures-amphibies-aquaterra-…` à deux endroits — le bloc
+   produit de la page d'accueil et le bouton principal du hero. Ce bouton mène donc à une
+   404. Tant que ce point tient, rien d'autre ne peut convertir.
+2. **`compareAtPrice` à 59,99 € n'a jamais été pratiqué** — le produit a été créé et le
+   prix barré posé 35 secondes plus tard. C'est interdit (directive Omnibus). À vider.
+3. **Les 6 collections sont vides** et quatre d'entre elles parlent de chaussures.
+4. La fiche est vide : ni description, ni SEO, ni `alt`, ni variantes de quantité.
+
+### Ce que le produit change par rapport aux chaussures
+
+- **Une seule option** aujourd'hui, donc `picker_types` n'a pas d'objet en l'état. Les
+  paliers de quantité (1 / 2 / 3) sont la façon naturelle d'ouvrir l'AOV ici, et la seule
+  qui justifie la bannière `at-promo`.
+- **Antériorité INPI à vérifier en classe 8** (coutellerie et ustensiles), pas en 25.
+- **Descripteur du lockup de marque : « OUVRE-HUÎTRES »**, jamais le nom seul en
+  acquisition.
 
 ## Thème
 
@@ -47,6 +87,8 @@ porte le rôle `MAIN`.
 Réglage utile : le sélecteur de variantes est piloté par **`picker_types`** sur le bloc
 sélecteur — une valeur par option, séparées par des virgules. Valeurs acceptées :
 `pills`, `dropdown`, `swatches`, `quantity-breaks`, `hidden`. Champ vide = `pills,pills,pills`.
+Sans objet tant que le produit n'a qu'une option — à garder pour le jour où des variantes
+de quantité seront créées, où `quantity-breaks` devient le bon réglage.
 
 ### Palette — lagon & sable
 
@@ -104,7 +146,7 @@ largeur**, pas par une fonte supplémentaire.
 | Famille | Rôle | Licence |
 |---|---|---|
 | **Archivo** | affichage **et** texte courant (`wght 100→900`, `wdth 62→125`) | OFL |
-| **IBM Plex Mono** | données uniquement : pointures, dimensions, références, sur-titres | OFL |
+| **IBM Plex Mono** | données uniquement : dimensions, quantités, références, sur-titres | OFL |
 
 Ni Poppins, ni Montserrat, ni Inter. La hauteur d'x d'Archivo (526/1000) la rend lisible
 à 16 px sur mobile, ce qui est la contrainte réelle ici.
