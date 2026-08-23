@@ -289,12 +289,32 @@ maintenant dans `.claude/skills/`.
 | `tunnel-paiement` | Du panier à la commande : paiements express, tiroir, franco de port, paliers de quantité, upsell, relance. |
 | `design-remarquable` | **Exécuter** le design pour qu'il frappe : échelle typo, rythme d'espacement, profondeur, mouvement, seuils de performance. L'aval de `direction-artistique`. Sourcé. |
 | `strategie-marketing` | Décider quoi dire et à qui **avant** d'écrire : niveau de conscience, offre, persuasion, croissance de marque. Sourcé. |
+| `economie-unitaire` | Savoir **avant** de dépenser si le produit peut être rentable : marge de contribution, ROAS d'équilibre, CPA maximal. |
+| `conformite-produit-import` | GPSR et personne responsable UE, filières REP et identifiant ADEME, TVA à l'import et IOSS. Le sujet le plus ignoré du dropshipping francophone. |
+| `litiges-paiement` | Garder son compte de paiement ouvert : seuils Visa et Mastercard, causes réelles des litiges, SAV qui désamorce. |
+| `fournisseur-logistique` | Marketplace pour tester, agent pour passer à l'échelle. Délais réels, contrôle qualité, marque blanche. |
 | `visuels-produit` | Normaliser et produire les images : ratio unique, ordre des 5 images, textes alternatifs, droits d'usage, ce qui se génère et ce qui ne se génère jamais. |
 
 Ce que chacun comble : `ui-ux-pro-max` est une base de données de styles et
 `shopify-store-builder` couvre la structure, la copy et le légal — mais rien ne traitait
 du **parti pris visuel**, du **code de mise en page sur mesure**, de la **mesure des
 conversions**, du **tunnel de paiement** ni de la **production des visuels**.
+
+### Faits durs à ne pas réapprendre
+
+Vérifiés à la source le 23/08/2026. Les principes sont stables, **les seuils et les
+barèmes bougent** : revérifier avant de citer un chiffre comme ferme à l'utilisateur.
+
+| Sujet | Fait |
+|---|---|
+| **GPSR** — règlement (UE) 2023/988 | applicable depuis le **13/12/2024**. Exige un opérateur responsable **établi dans l'UE**, dont le nom et l'adresse figurent sur le produit, l'emballage ou la notice. Sans fournisseur ayant un mandataire UE, c'est l'importateur qui endosse le rôle. |
+| **REP France** | quiconque met un produit sur le marché français **pour la première fois** est producteur, importation comprise. Inscription au registre SYDEREP de l'ADEME, identifiant unique (IDU), adhésion à un éco-organisme. **L'emballage seul suffit à déclencher l'obligation.** Les places de marché collectent l'IDU depuis le **01/01/2022**. |
+| **IOSS** | pour les biens importés de moins de **150 €**. TVA collectée à la vente, dédouanement sans TVA. **Sans IOSS, la douane réclame la TVA au client à la livraison** — refus de colis et litige. Déclaration **mensuelle**. |
+| **Visa VAMP** | seuil commerçant **1,5 %** depuis le **01/04/2026** (contre 2,2 % avant). Le ratio **combine fraude déclarée et litiges**. |
+| **Mastercard ECM** | **100 rétrofacturations** dans le mois **et** ratio de **1,5 %**. Dénominateur = ventes du **mois précédent**. |
+| **ROAS d'équilibre** | `1 ÷ marge de contribution`. 40 % de marge → 2,5. 25 % → 4,0. La règle du prix à 3× le coût rendu vient de là. |
+| **Conversion Shopify** | moyenne autour de **1,4 %** ; premier quintile > 3,2 % ; premier décile > 4,7 %. Le **social payant convertit le moins**, de l'ordre de 1 %. |
+| **Abandon de panier** | **70,22 %** en moyenne (méta-analyse Baymard de 50 études). Premier motif évitable : **les frais découverts au paiement**. |
 
 ### Le résultat de recherche qui commande le design
 
