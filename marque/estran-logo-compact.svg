@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="Estran">
+  <title>Estran</title>
+  <!-- Avatar Meta / TikTok. Symbole loge dans le carre inscrit au cercle de rognage :
+       rien n'est coupe, ni en carre ni en rond. -->
+  <rect width="256" height="256" fill="#0C4A56"/>
+  <g transform="translate(58,58) scale(1.4)"><path d="M0,0 H86 V22 H22 V39 H64 V61 H22 V78 H100 V100 H0 Z" fill="#FCFAF7"/></g>
+</svg>

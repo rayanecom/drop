@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="Estran">
+  <title>Estran</title>
+  <!-- Symbole monochrome, sans fond : tampon, colis, marquage. -->
+  <g transform="translate(58,58) scale(1.4)"><path d="M0,0 H86 V22 H22 V39 H64 V61 H22 V78 H100 V100 H0 Z" fill="currentColor"/></g>
+</svg>

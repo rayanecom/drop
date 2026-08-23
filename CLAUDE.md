@@ -1,28 +1,114 @@
-# AquaTerra — contexte projet
+# Estran — contexte projet
 
-Repo de travail pour la boutique Shopify **AquaTerra** (dropshipping, marché France).
+Repo de travail pour la boutique Shopify **Estran** (dropshipping, marché France).
+
+## Le nom : Estran remplace AquaTerra
+
+Décidé par l'utilisateur le 22/08/2026. **Estran** — la bande de côte découverte à marée
+basse, donc exactement la zone amphibie du produit. AquaTerra était générique et
+interchangeable ; le nouveau nom porte une image sans avoir à l'expliquer.
+
+La décision est prise, elle n'est pas à rouvrir. En revanche **la migration n'est pas
+faite** : côté Shopify, la boutique et le produit portent encore l'ancien nom. Ne jamais
+supposer que le renommage est appliqué quelque part — le vérifier.
+
+Ce que le renommage touche, et son état :
+
+| Emplacement | État |
+|---|---|
+| Nom de la boutique (Paramètres → Détails) | à faire, par l'utilisateur |
+| Titre et `handle` du produit | **déjà fait** — `estran-ouvre-huitres` porte le nouveau nom |
+| Versions du thème (`AquaTerra v8` → `Estran v9`) | à faire à la prochaine duplication |
+| Préfixes de fichiers `at-*` dans le thème | **à conserver** — les renommer casserait tous les `render` pour un gain nul |
+| Logo, visuels, favicon | dépend de `identite-visuelle` |
+| Copy des pages et de la fiche produit | à faire après le logo |
+| Domaine | à décider par l'utilisateur |
 
 ## Boutique
 
 | | |
 |---|---|
-| Nom | AquaTerra |
+| Nom | Estran (la boutique s'appelle encore « AquaTerra » côté Shopify) |
 | Domaine | `kznquq-5a.myshopify.com` |
 | Plan | Basic |
 | Devise / marché | EUR / France |
 
-Produit principal : **Chaussures Amphibies AquaTerra** — 39,99 €, 16 variantes.
-Options : `Couleur` (Noir, Bleu) en position 1, `Pointure` (37 → 44) en position 2.
+## Le produit : un ouvre-huîtres
+
+Confirmé par l'utilisateur le 23/08/2026, et vérifié dans le catalogue. **Le produit vendu
+est un ouvre-huîtres**, pas une chaussure.
+
+Les « Chaussures Amphibies » que décrivaient les versions précédentes de ce fichier
+**n'existent pas dans le catalogue**. Ne pas les réintroduire. Le nom Estran reste juste :
+l'estran est aussi le lieu où l'on élève les huîtres.
+
+État réel du catalogue, lu par l'API le 23/08/2026 — un seul produit :
+
+| | |
+|---|---|
+| Titre | `Estran ouvre huitres` (à réécrire, c'est une référence, pas une promesse) |
+| `handle` | `estran-ouvre-huitres` |
+| Statut | `ACTIVE` |
+| Prix | 39,99 € — `compareAtPrice` 59,99 € |
+| Variantes | **une seule**, `Default Title` |
+| Description | **vide** |
+| SEO title / description | `null` / `null` |
+| `productType`, `tags` | vides |
+| Images | 5, toutes avec un `altText` vide ; l'une ne fait que **480 × 480** |
+| Stock | 0 |
+
+### Ce qui a été fait le 23/08/2026, et vérifié par relecture API
+
+| | |
+|---|---|
+| Titre, description, SEO, type, étiquettes | réécrits pour l'ouvre-huîtres |
+| `compareAtPrice` 59,99 € | **vidé** — jamais pratiqué, directive Omnibus |
+| Produit rangé dans `frontpage` et `meilleures-ventes` | fait, les deux passent à 1 |
+| Remises de volume | **reconstruites et actives** : −25 % dès 2, −33 % dès 3. Elles étaient expirées *et* rattachées au produit chaussures supprimé |
+| `alt` de l'image principale | posé |
+| Thème `Estran v10 - ouvre-huitres` | créé par duplication de v9, page d'accueil réécrite, mesurée au banc |
+
+### Ce qui reste, et pourquoi je ne l'ai pas fait
+
+1. **Publier le thème** — l'API le refuse, et c'est très bien : la décision appartient à
+   l'utilisateur. Prévisualiser `Estran v10`, puis publier.
+2. **Les `alt` des images 2 à 5.** Le proxy bloque `cdn.shopify.com` : je ne peux pas
+   voir les images, donc je ne peux pas décrire ce qu'elles montrent. Les inventer serait
+   une fabrication. À faire par l'utilisateur, ou depuis un poste qui accède au CDN.
+3. **Les caractéristiques du produit** — matière, longueur, manche, garde, entretien,
+   pays de fabrication. Marquées `[À COMPLÉTER]` dans la fiche. Tant qu'elles manquent,
+   ni le tableau comparatif ni la section « détails techniques » ne peuvent être écrits
+   sans inventer.
+4. **Le délai de livraison réel du fournisseur.** Toute mention de délai a été retirée
+   de la page d'accueil plutôt que de reconduire le « 24 à 48 h » non vérifié.
+5. **L'image de 480 × 480**, floue au zoom. À remplacer par une version ≥ 1000 px.
+6. **Les 4 collections « chaussures »**, vides et hors sujet. Suppression volontairement
+   laissée à l'utilisateur — c'est irréversible.
+7. **Les pages légales** : ni CGV, ni remboursement, ni expédition, ni mentions légales.
+   `show_policy` est à `false` dans le pied de page. C'est le prochain gros chantier,
+   et il exige la raison sociale et le SIRET.
+
+### Ce que le produit change par rapport aux chaussures
+
+- **Une seule option** aujourd'hui, donc `picker_types` n'a pas d'objet en l'état. Les
+  paliers de quantité (1 / 2 / 3) sont la façon naturelle d'ouvrir l'AOV ici, et la seule
+  qui justifie la bannière `at-promo`.
+- **Antériorité INPI à vérifier en classe 8** (coutellerie et ustensiles), pas en 25.
+- **Descripteur du lockup de marque : « OUVRE-HUÎTRES »**, jamais le nom seul en
+  acquisition.
 
 ## Thème
 
 Base **Shrine** (thème payant dérivé de Dawn). Convention maison : une version par
-chantier, créée par duplication — `AquaTerra v3` → `v4` → … → `v8`. Le thème publié
+chantier, créée par duplication — `AquaTerra v3` → `v4` → … → `v8`, puis `Estran v9`
+et suivants. Le thème publié
 porte le rôle `MAIN`.
 
 Réglage utile : le sélecteur de variantes est piloté par **`picker_types`** sur le bloc
 sélecteur — une valeur par option, séparées par des virgules. Valeurs acceptées :
 `pills`, `dropdown`, `swatches`, `quantity-breaks`, `hidden`. Champ vide = `pills,pills,pills`.
+Sans objet tant que le produit n'a qu'une option — à garder pour le jour où des variantes
+de quantité seront créées, où `quantity-breaks` devient le bon réglage.
 
 ### Palette — lagon & sable
 
@@ -46,9 +132,61 @@ une couleur d'accent.
 Un seul élément saturé sur toute la page : le bouton d'achat. C'est ce qui le rend
 impossible à manquer sans recourir au rouge-orange d'urgence de tous les dropshipping.
 
-Contrastes à retenir : encre sur turquoise `#00C2A8` = **6,7:1** (du blanc n'y serait
-qu'à 2,5:1, d'où le libellé foncé). Blanc sur mer profonde = 9,9:1. Blanc sur lagon
-= 4,7:1, juste au-dessus du seuil. Gris de mer sur écume = 5,1:1.
+Contrastes recalculés et vérifiés deux fois (WCAG 2.x, seuil 4,5:1 en texte courant,
+3:1 pour un titre d'au moins 24 px) :
+
+| Combinaison | Ratio | |
+|---|---|---|
+| Encre sur ivoire / sable / écume | 14,50 · 13,46 · 12,78 | confortable partout |
+| Encre sur turquoise | **6,68** | d'où le libellé foncé — du blanc n'y serait qu'à 2,5:1 |
+| Blanc sur mer profonde | 9,86 | |
+| Ivoire sur mer profonde | 9,47 | |
+| Blanc sur lagon | 4,71 | juste au-dessus du seuil |
+| Gris de mer sur ivoire / sable / écume | 5,89 · 5,47 · 5,19 | |
+| Lagon sur ivoire | 4,52 | passe de justesse |
+
+**Trois combinaisons échouent, et ce sont des voisinages naturels — d'où le piège :**
+
+| Combinaison interdite en texte | Ratio | Pourquoi c'est piégeux |
+|---|---|---|
+| Lagon sur **sable** | **4,20** | le sable est le fond de la fiche produit |
+| Lagon sur **écume** | **3,99** | l'écume est `colors_background_2` |
+| Turquoise sur **mer profonde** | **4,36** | la mer profonde est le fond du pied de page |
+
+Dans ces trois cas : titres d'au moins 24 px et filets seulement (le seuil de 3:1 est
+atteint), jamais de texte courant. Pour du texte sur sable ou sur écume, prendre l'encre
+ou le gris de mer. Le bouton turquoise du pied de page reste valide — c'est un fond, avec
+un libellé encre à 6,68:1 ; c'est du **texte** turquoise sur mer profonde qui est exclu.
+
+### Typographie
+
+Deux familles, pas trois. Le contraste entre titre et texte se fait par l'**axe de
+largeur**, pas par une fonte supplémentaire.
+
+| Famille | Rôle | Licence |
+|---|---|---|
+| **Archivo** | affichage **et** texte courant (`wght 100→900`, `wdth 62→125`) | OFL |
+| **IBM Plex Mono** | données uniquement : dimensions, quantités, références, sur-titres | OFL |
+
+Ni Poppins, ni Montserrat, ni Inter. La hauteur d'x d'Archivo (526/1000) la rend lisible
+à 16 px sur mobile, ce qui est la contrainte réelle ici.
+
+**Héberger les deux fichiers dans `assets/`**, ne pas appeler `fonts.googleapis.com` :
+l'appel direct transmet l'IP du visiteur à Google sans consentement — risque RGPD réel sur
+le marché France, et une requête tierce de moins.
+
+**Le piège de l'espace fine.** Vérifié sur les fichiers de fonte : l'espace fine
+insécable `U+202F` est **absente des deux familles**. Ne jamais écrire `&#8239;` — le
+navigateur ferait un repli de fonte sur ce seul caractère et la largeur de l'espace
+sauterait. Utiliser `&nbsp;` (U+00A0), présent partout. Ça confirme la convention déjà en
+place : `{{ prix | money | remove: '€' | strip }}&nbsp;€`.
+
+### Préfixe des fichiers : `at-*` reste `at-*`
+
+Le préfixe vient d'AquaTerra, mais **il ne change pas**. Renommer en `es-*` casserait tous
+les `render` du thème pour un gain nul : personne ne voit un nom de snippet. La règle est
+donc : **un seul préfixe, `at-*`, y compris pour les nouveaux fichiers.** Un repo qui
+porterait les deux serait pire que celui qui garde l'ancien.
 
 ### Emblèmes et logos
 
@@ -132,6 +270,13 @@ Source : <https://github.com/nextlevelbuilder/ui-ux-pro-max-skill>
 Attention au doublon de nom : ce plugin fournit déjà un skill nommé `design`. Ne pas
 activer un second `design` venu d'ailleurs, ça dégrade le déclenchement des deux.
 
+**Socle vendorisé** — `shopify-store-builder` (structure, copy, légal France, SEO,
+fournisseur, ads, grille d'audit sur 100 points) et `dispatch-modele` (choix du modèle).
+Ils venaient de la synchronisation du compte claude.ai, donc ils n'existaient **pas** dans
+le repo alors que cinq agents les chargent explicitement. Une session lancée depuis un
+terminal sur une autre machine se serait retrouvée avec des agents cassés. Ils sont
+maintenant dans `.claude/skills/`.
+
 **Skills maison** (écrits pour ce projet) :
 
 | Skill | Rôle |
@@ -139,11 +284,60 @@ activer un second `design` venu d'ailleurs, ça dégrade le déclenchement des d
 | `direction-artistique` | Imposer une direction artistique distinctive. Contient la liste noire des clichés dropshipping et un menu de 8 directions. À déclencher **avant** tout code. |
 | `shopify-sections` | Coder des sections Liquid sur mesure. Contient un modèle de section validé dans `assets/section-modele.liquid`. |
 | `mobile-ecommerce` | Rendre la boutique vendeuse sur mobile : ligne de flottaison, cibles de 44 px, seuil des 16 px, poids et décalage des images. |
-| `composants-ui` | Générer un composant d'interface complet à partir d'une description, dans le bon langage cible et avec les jetons du projet. Équivalent local d'un générateur de composants en ligne. |
+| `composants-ui` | Générer un composant d'interface complet à partir d'une description, dans le bon langage cible et avec les jetons du projet. |
+| `tracking-conversions` | Poser et surtout **vérifier** la mesure : pixel, Événements clients, remontée serveur, déduplication, consentement. Contient la procédure de vérification événement par événement. |
+| `tunnel-paiement` | Du panier à la commande : paiements express, tiroir, franco de port, paliers de quantité, upsell, relance. |
+| `design-remarquable` | **Exécuter** le design pour qu'il frappe : échelle typo, rythme d'espacement, profondeur, mouvement, seuils de performance. L'aval de `direction-artistique`. Sourcé. |
+| `strategie-marketing` | Décider quoi dire et à qui **avant** d'écrire : niveau de conscience, offre, persuasion, croissance de marque. Sourcé. |
+| `economie-unitaire` | Savoir **avant** de dépenser si le produit peut être rentable : marge de contribution, ROAS d'équilibre, CPA maximal. |
+| `conformite-produit-import` | GPSR et personne responsable UE, filières REP et identifiant ADEME, TVA à l'import et IOSS. Le sujet le plus ignoré du dropshipping francophone. |
+| `litiges-paiement` | Garder son compte de paiement ouvert : seuils Visa et Mastercard, causes réelles des litiges, SAV qui désamorce. |
+| `fournisseur-logistique` | Marketplace pour tester, agent pour passer à l'échelle. Délais réels, contrôle qualité, marque blanche. |
+| `visuels-produit` | Normaliser et produire les images : ratio unique, ordre des 5 images, textes alternatifs, droits d'usage, ce qui se génère et ce qui ne se génère jamais. |
 
-Ces deux-là comblent le trou laissé par les autres : `ui-ux-pro-max` est une base de
-données de styles, `shopify-store-builder` couvre la structure et la copy, mais rien ne
-traitait du **parti pris visuel** ni du **code de mise en page sur mesure**.
+Ce que chacun comble : `ui-ux-pro-max` est une base de données de styles et
+`shopify-store-builder` couvre la structure, la copy et le légal — mais rien ne traitait
+du **parti pris visuel**, du **code de mise en page sur mesure**, de la **mesure des
+conversions**, du **tunnel de paiement** ni de la **production des visuels**.
+
+### Faits durs à ne pas réapprendre
+
+Vérifiés à la source le 23/08/2026. Les principes sont stables, **les seuils et les
+barèmes bougent** : revérifier avant de citer un chiffre comme ferme à l'utilisateur.
+
+| Sujet | Fait |
+|---|---|
+| **GPSR** — règlement (UE) 2023/988 | applicable depuis le **13/12/2024**. Exige un opérateur responsable **établi dans l'UE**, dont le nom et l'adresse figurent sur le produit, l'emballage ou la notice. Sans fournisseur ayant un mandataire UE, c'est l'importateur qui endosse le rôle. |
+| **REP France** | quiconque met un produit sur le marché français **pour la première fois** est producteur, importation comprise. Inscription au registre SYDEREP de l'ADEME, identifiant unique (IDU), adhésion à un éco-organisme. **L'emballage seul suffit à déclencher l'obligation.** Les places de marché collectent l'IDU depuis le **01/01/2022**. |
+| **IOSS** | pour les biens importés de moins de **150 €**. TVA collectée à la vente, dédouanement sans TVA. **Sans IOSS, la douane réclame la TVA au client à la livraison** — refus de colis et litige. Déclaration **mensuelle**. |
+| **Visa VAMP** | seuil commerçant **1,5 %** depuis le **01/04/2026** (contre 2,2 % avant). Le ratio **combine fraude déclarée et litiges**. |
+| **Mastercard ECM** | **100 rétrofacturations** dans le mois **et** ratio de **1,5 %**. Dénominateur = ventes du **mois précédent**. |
+| **ROAS d'équilibre** | `1 ÷ marge de contribution`. 40 % de marge → 2,5. 25 % → 4,0. La règle du prix à 3× le coût rendu vient de là. |
+| **Conversion Shopify** | moyenne autour de **1,4 %** ; premier quintile > 3,2 % ; premier décile > 4,7 %. Le **social payant convertit le moins**, de l'ordre de 1 %. |
+| **Abandon de panier** | **70,22 %** en moyenne (méta-analyse Baymard de 50 études). Premier motif évitable : **les frais découverts au paiement**. |
+
+### Le résultat de recherche qui commande le design
+
+Deux études, citées dans `design-remarquable/references/sources.md` :
+
+- le jugement esthétique d'une page se forme en **50 ms** et reste stable (Lindgaard et
+  coll., 2006) ;
+- dans cette fenêtre, les pages jugées les plus belles sont celles à **faible complexité
+  visuelle** et **forte prototypicalité** — c'est-à-dire qui ressemblent à ce qu'on attend
+  de leur catégorie (Tuch et coll., Google / Université de Bâle, 2012).
+
+**Conséquence, contre-intuitive et à ne jamais oublier : une mise en page inhabituelle ne
+produit pas l'effet waouh, elle produit de la friction.** La règle est donc **structure
+familière, exécution singulière** — emplacements et parcours conventionnels, typographie,
+couleur, images, rythme et finitions singuliers.
+
+Trois limites de plan vérifiées dans la documentation Shopify, à ne pas réapprendre à
+chaque fois (plan Basic) :
+
+- **web pixel / pixel personnalisé** : disponible ;
+- **upsell dans les étapes du checkout** : Shopify **Plus uniquement** ;
+- **upsell post-achat** : disponible mais **en bêta, accès à demander** pour une boutique
+  en production. Les extensions de page de remerciement, elles, sont ouvertes.
 
 ## Agents
 
@@ -156,6 +350,10 @@ traitait du **parti pris visuel** ni du **code de mise en page sur mesure**.
 | `audit-boutique` | Audit scoré et priorisé de la boutique. |
 | `fiche-produit` | Copywriting de page produit orienté conversion. |
 | `creas-ads` | Angles et briefs de créas Meta/TikTok. |
+| `identite-visuelle` | Nom, logo, palette, typographie, ton. Le positionnement avant le dessin. |
+| `controle-rendu` | Contrôle qualité visuel au banc Chromium avant livraison. Le seul œil sur le rendu. |
+| `pages-annexes` | Pages de confiance : CGV, livraison, retours, RGPD, FAQ, à propos. |
+| `seo-boutique` | Référencement : balises, structure, données structurées, maillage. |
 
 ## Bannière d'offre — `at-promo`
 

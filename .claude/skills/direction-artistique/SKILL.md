@@ -28,13 +28,26 @@ monde.
 Avant toute référence esthétique, décris ce que le produit *est* et le monde dans lequel
 il vit. Matière, texture, usage, environnement, gestes, contraintes, sensations.
 
-Une chaussure amphibie, ce n'est pas « une chaussure ». C'est de l'eau salée, du sable qui
-gratte, des rochers glissants, du néoprène qui sèche, un pied qui passe du bateau au
-ponton. Cette matière-là est ta source. Elle est spécifique à ce produit, donc elle produit
-une direction que personne d'autre n'aura.
+Un ouvre-huîtres, ce n'est pas « un ustensile ». C'est une coquille rugueuse et
+imprévisible, une lame courte qu'on force, un torchon plié dans la paume, le risque réel de
+se blesser, l'eau de mer qui gicle, et un geste qu'on répète douze fois d'affilée un soir
+de fête. Cette matière-là est ta source. Elle est spécifique à ce produit, donc elle
+produit une direction que personne d'autre n'aura.
+
+Le test : si ta description s'appliquerait aussi bien au produit d'un concurrent, tu n'es
+pas encore descendu au niveau qui compte.
 
 Une direction artistique tirée du produit est unique par construction. Une direction tirée
 d'un moodboard Pinterest est générique par construction.
+
+### 1 bis. Où s'arrête ce skill
+
+Ce skill choisit le **parti pris**. Il ne l'exécute pas. Une fois la direction arrêtée,
+enchaîner sur `design-remarquable`, qui tient l'échelle typographique, le rythme
+d'espacement, la profondeur, le mouvement et les seuils de performance.
+
+Une direction jamais exécutée ne vaut rien, et une exécution sans direction produit
+exactement le générique qu'on cherche à éviter.
 
 ### 2. Choisir UNE direction et l'assumer
 
