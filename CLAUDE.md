@@ -287,12 +287,29 @@ maintenant dans `.claude/skills/`.
 | `composants-ui` | Générer un composant d'interface complet à partir d'une description, dans le bon langage cible et avec les jetons du projet. |
 | `tracking-conversions` | Poser et surtout **vérifier** la mesure : pixel, Événements clients, remontée serveur, déduplication, consentement. Contient la procédure de vérification événement par événement. |
 | `tunnel-paiement` | Du panier à la commande : paiements express, tiroir, franco de port, paliers de quantité, upsell, relance. |
+| `design-remarquable` | **Exécuter** le design pour qu'il frappe : échelle typo, rythme d'espacement, profondeur, mouvement, seuils de performance. L'aval de `direction-artistique`. Sourcé. |
+| `strategie-marketing` | Décider quoi dire et à qui **avant** d'écrire : niveau de conscience, offre, persuasion, croissance de marque. Sourcé. |
 | `visuels-produit` | Normaliser et produire les images : ratio unique, ordre des 5 images, textes alternatifs, droits d'usage, ce qui se génère et ce qui ne se génère jamais. |
 
 Ce que chacun comble : `ui-ux-pro-max` est une base de données de styles et
 `shopify-store-builder` couvre la structure, la copy et le légal — mais rien ne traitait
 du **parti pris visuel**, du **code de mise en page sur mesure**, de la **mesure des
 conversions**, du **tunnel de paiement** ni de la **production des visuels**.
+
+### Le résultat de recherche qui commande le design
+
+Deux études, citées dans `design-remarquable/references/sources.md` :
+
+- le jugement esthétique d'une page se forme en **50 ms** et reste stable (Lindgaard et
+  coll., 2006) ;
+- dans cette fenêtre, les pages jugées les plus belles sont celles à **faible complexité
+  visuelle** et **forte prototypicalité** — c'est-à-dire qui ressemblent à ce qu'on attend
+  de leur catégorie (Tuch et coll., Google / Université de Bâle, 2012).
+
+**Conséquence, contre-intuitive et à ne jamais oublier : une mise en page inhabituelle ne
+produit pas l'effet waouh, elle produit de la friction.** La règle est donc **structure
+familière, exécution singulière** — emplacements et parcours conventionnels, typographie,
+couleur, images, rythme et finitions singuliers.
 
 Trois limites de plan vérifiées dans la documentation Shopify, à ne pas réapprendre à
 chaque fois (plan Basic) :

@@ -40,6 +40,15 @@ pas encore descendu au niveau qui compte.
 Une direction artistique tirée du produit est unique par construction. Une direction tirée
 d'un moodboard Pinterest est générique par construction.
 
+### 1 bis. Où s'arrête ce skill
+
+Ce skill choisit le **parti pris**. Il ne l'exécute pas. Une fois la direction arrêtée,
+enchaîner sur `design-remarquable`, qui tient l'échelle typographique, le rythme
+d'espacement, la profondeur, le mouvement et les seuils de performance.
+
+Une direction jamais exécutée ne vaut rien, et une exécution sans direction produit
+exactement le générique qu'on cherche à éviter.
+
 ### 2. Choisir UNE direction et l'assumer
 
 Lis `references/directions.md` et choisis-en une. Une seule.
