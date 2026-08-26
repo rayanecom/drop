@@ -1,0 +1,270 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "kicker": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>\n  #MainProduct-{{ section.id }} {\n    background: #FBF9F5;\n    color: #1A1A18;\n    font-family: \"DM Sans\", system-ui, sans-serif;\n  }\n  #MainProduct-{{ section.id }} h1,\n  #MainProduct-{{ section.id }} .product__title {\n    color: #1A1A18;\n    font-family: \"Playfair Display\", Georgia, serif;\n    font-weight: 600;\n    letter-spacing: -.025em;\n    line-height: 1.06;\n  }\n  #MainProduct-{{ section.id }} .price,\n  #MainProduct-{{ section.id }} .price * { color: #1A1A18; }\n  #MainProduct-{{ section.id }} .product-form__submit,\n  #MainProduct-{{ section.id }} button[name=\"add\"] {\n    border-color: #A85C2A !important;\n    color: #FBF9F5 !important;\n    background: #A85C2A !important;\n    box-shadow: none !important;\n    font-family: \"DM Sans\", system-ui, sans-serif;\n    font-weight: 700;\n    letter-spacing: .025em;\n    text-transform: none;\n  }\n  #MainProduct-{{ section.id }} .product-form__submit:hover,\n  #MainProduct-{{ section.id }} button[name=\"add\"]:hover {\n    border-color: #8E4C21 !important;\n    background: #8E4C21 !important;\n  }\n  #MainProduct-{{ section.id }} .product__media,\n  #MainProduct-{{ section.id }} .product-media-container { background: #EFEAE1; }\n  .vrl-main-eyebrow { margin: 0 0 13px; color: #1F3D2B; font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }\n\n.vrl-exact { padding: clamp(66px, 8vw, 104px) 0; background: var(--vrl-ivory); }\n.vrl-exact__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 38px; }\n.vrl-exact__card { padding: 28px 25px; border: 1px solid rgba(31,61,43,.15); background: var(--vrl-sand); }\n.vrl-exact__card b { display: block; margin-bottom: 8px; color: var(--vrl-green); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }\n.vrl-exact__card p { color: var(--vrl-text); font-size: 15px; line-height: 1.65; }\n.vrl-proof { padding: clamp(70px, 9vw, 116px) 0; color: var(--vrl-ivory); background: var(--vrl-green); }\n.vrl-proof h2 { max-width: 760px; color: var(--vrl-ivory); font-size: clamp(36px, 4.8vw, 60px); line-height: 1.07; }\n.vrl-proof__facts { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 38px; border-top: 1px solid rgba(251,249,245,.22); border-bottom: 1px solid rgba(251,249,245,.22); }\n.vrl-proof__fact { padding: 24px; border-right: 1px solid rgba(251,249,245,.22); }\n.vrl-proof__fact:last-child { border-right: 0; }\n.vrl-proof__fact span { display: block; margin-bottom: 7px; color: rgba(251,249,245,.65); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }\n.vrl-proof__fact b { font-family: \"Playfair Display\", Georgia, serif; font-size: 20px; font-weight: 600; }\n.vrl-proof__note { max-width: 820px; margin-top: 28px !important; color: rgba(251,249,245,.8); font-size: 15px; line-height: 1.7; }\n.vrl-reviews { padding: clamp(68px, 8vw, 108px) 0; background: var(--vrl-sand); }\n.vrl-reviews__grid { display: grid; grid-template-columns: .82fr 1.18fr; gap: clamp(38px, 6vw, 82px); align-items: center; }\n.vrl-review-box { padding: clamp(28px, 4vw, 48px); border: 1px solid rgba(31,61,43,.16); background: var(--vrl-ivory); }\n.vrl-review-box h3 { margin: 0 0 14px; font-size: clamp(28px, 3vw, 40px); line-height: 1.16; }\n.vrl-review-box p { color: var(--vrl-text); font-size: 15px; line-height: 1.7; }\n.vrl-review-stars { display: block; margin-bottom: 12px; color: var(--vrl-green); letter-spacing: .1em; }\n.vrl-sticky[hidden] { display: none !important; }\n.vrl-main-rating { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin: 2px 0 14px; color: #1F3D2B; font-family: \"DM Sans\", system-ui, sans-serif; font-size: 13px; font-weight: 700; }\n.vrl-main-rating a { color: inherit; text-underline-offset: 3px; }\n.vrl-main-rating__score { padding: 5px 9px; border: 1px solid rgba(31,61,43,.22); }\n.vrl-main-trust { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; padding: 18px 0 10px; border-top: 1px solid rgba(31,61,43,.16); color: #1F3D2B; font-family: \"DM Sans\", system-ui, sans-serif; font-size: 12px; font-weight: 700; line-height: 1.4; text-align: center; }\n.vrl-main-trust a, .vrl-main-trust span { display: flex; min-height: 38px; align-items: center; justify-content: center; padding: 4px; color: inherit; text-decoration: none; }\n.vrl-main-trust a:hover { text-decoration: underline; text-underline-offset: 3px; }\n.vrl-main-payments { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 7px; margin-top: 7px; color: #5C5C55; font-family: \"DM Sans\", system-ui, sans-serif; font-size: 11px; }\n.vrl-main-payments svg { width: 34px; height: auto; }\n@media (max-width: 749px) {\n  body.vrl-sticky-visible { padding-bottom: calc(82px + env(safe-area-inset-bottom)); }\n  .vrl-sticky:not([hidden]) { position: fixed; z-index: 50; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 12px; padding: 11px 14px calc(11px + env(safe-area-inset-bottom)); border-top: 1px solid rgba(31,61,43,.16); background: rgba(251,249,245,.97); box-shadow: 0 -8px 28px rgba(26,26,24,.12); backdrop-filter: blur(10px); }\n  .vrl-sticky__meta { min-width: 0; }\n  .vrl-sticky__meta b, .vrl-sticky__meta span { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }\n  .vrl-sticky__meta b { color: var(--vrl-ink); font-size: 13px; }\n  .vrl-sticky__meta span { margin-top: 3px; color: var(--vrl-muted); font-size: 12px; }\n  .vrl-sticky__button { min-height: 48px; padding: 12px 17px; border: 0; border-radius: 2px; background: #A85C2A; color: #FBF9F5; font: inherit; font-size: 14px; font-weight: 700; }\n  .vrl-sticky__button:hover { background: #8E4C21; }\n  .vrl-sticky__button:focus-visible { outline: 3px solid var(--vrl-green); outline-offset: 3px; }\n  .vrl-sticky__button:disabled { opacity: .55; }\n  .vrl-exact__grid, .vrl-proof__facts, .vrl-reviews__grid { grid-template-columns: 1fr; }\n  .vrl-main-trust { grid-template-columns: 1fr; gap: 2px; text-align: left; }\n  .vrl-main-trust a, .vrl-main-trust span { justify-content: flex-start; min-height: 30px; }\n  .vrl-proof__fact { border-right: 0; border-bottom: 1px solid rgba(251,249,245,.22); }\n  .vrl-proof__fact:last-child { border-bottom: 0; }\n  [id^=\"MainProduct-\"] .product__title { font-size: clamp(31px, 9vw, 42px); }\n}\n\n</style>\n<span id=\"verline-buy\" style=\"display:block;scroll-margin-top:110px;\"></span>\n<p class=\"vrl-main-eyebrow\">Soin purifiant des pieds • Pieds &amp; corps</p>"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "text_size": "h1",
+            "title_alignment": "left",
+            "uppercase_title": false,
+            "margin_top": 0,
+            "margin_bottom": 12
+          }
+        },
+        "intro": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div style=\"max-width:600px;color:#3A3A36;font-family:'DM Sans',system-ui,sans-serif;font-size:16px;line-height:1.65;\">\n  Un gel lavant ciblé au Tea Tree, à la menthe poivrée et à l’aloe vera, pensé pour nettoyer en profondeur tout en laissant les pieds frais et nets.\n</div>"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "layout": "price_first",
+            "price_color": "text",
+            "compare_price_color": "text",
+            "displayed_badge": "none",
+            "icon_scale": 120,
+            "custom_badge_text": "",
+            "icon_1": "redeem",
+            "filled_icon_1": false,
+            "icon_2": "check_circle",
+            "filled_icon_2": false,
+            "margin_top": 18,
+            "margin_bottom": 12
+          }
+        },
+        "quantity": {
+          "type": "quantity_selector",
+          "settings": {
+            "full_width_classic": false,
+            "atc_append": "none",
+            "atc_append_heights": "stretch-quantity",
+            "enable_quantity_discounts": false,
+            "style": "normal",
+            "headline": "",
+            "preselected": "option_1",
+            "display_selected_indicator": false,
+            "border_radius": 4,
+            "border_width": 1,
+            "color_scheme": "text",
+            "enable_variant_selectors": false,
+            "enable_variant_selectors_on_quantity_of_1": false,
+            "update_prices": false,
+            "skip_unavailable": false,
+            "full_width_pickers": false,
+            "hide_pickers_overlay": true,
+            "pickers_label": "",
+            "image_width": 70,
+            "space_images": true,
+            "vertical_images_position": "top",
+            "vertical_prices_layout": "vertical",
+            "option_1_quantity": 1,
+            "option_1_label": "1 gel",
+            "option_1_caption": "",
+            "option_1_percentage_off_text": "0",
+            "option_1_fixed_amount_off": "0",
+            "option_1_price_text": "[price]",
+            "option_1_compare_price": "compare_price",
+            "option_1_compare_price_text": "[compare_price]",
+            "margin_top": 18,
+            "margin_bottom": 9
+          }
+        },
+        "buy": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "skip_cart": false,
+            "uppercase_text": false,
+            "icon_scale": 110,
+            "icon_spacing": 8,
+            "display_price": true,
+            "enable_custom_color": true,
+            "custom_color": "#A85C2A",
+            "enable_secondary_btn": false,
+            "secondary_btn_label": "Acheter maintenant",
+            "secondary_btn_enable_custom_color": false,
+            "secondary_btn_custom_color": "#A85C2A",
+            "margin_top": 9,
+            "margin_bottom": 18
+          }
+        },
+        "reassurance": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"vrl-main-trust\">\n  <a href=\"{% if shop.shipping_policy != blank %}{{ shop.shipping_policy.url }}{% else %}{{ routes.root_url }}#faq{% endif %}\">Livraison détaillée avant paiement</a>\n  <a href=\"{% if shop.refund_policy != blank %}{{ shop.refund_policy.url }}{% else %}{{ routes.root_url }}#faq{% endif %}\">Retours selon les conditions</a>\n  <span>Paiement sécurisé</span>\n</div>\n{%- if shop.enabled_payment_types != empty -%}\n  <div class=\"vrl-main-payments\" aria-label=\"Moyens de paiement activés\">\n    <span>Moyens acceptés</span>\n    {%- for type in shop.enabled_payment_types -%}\n      {{ type | payment_type_svg_tag }}\n    {%- endfor -%}\n  </div>\n{%- endif -%}"
+          }
+        },
+        "use": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Conseils d’utilisation",
+            "heading_size": "medium",
+            "icon": "water_drop",
+            "filled_icon": false,
+            "collapse_icon": "plus",
+            "display_top_border": true,
+            "open": false,
+            "content": "<p>Sur peau humide, appliquez une petite quantité, faites mousser puis rincez soigneusement. Pour les pieds, séchez bien entre les orteils.</p>",
+            "margin_top": 24,
+            "margin_bottom": 0
+          }
+        },
+        "formula": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Action ciblée & précautions",
+            "heading_size": "medium",
+            "icon": "eco",
+            "filled_icon": false,
+            "collapse_icon": "plus",
+            "display_top_border": true,
+            "open": false,
+            "content": "<p>Tea Tree, menthe poivrée et aloe vera : une formule lavante conçue pour nettoyer en profondeur et rafraîchir les pieds. La liste INCI complète figurant sur l’emballage fait foi. Évitez les yeux et les muqueuses. Cessez l’utilisation en cas d’irritation.</p>",
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        },
+        "delivery": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Livraison & retours",
+            "heading_size": "medium",
+            "icon": "local_shipping",
+            "filled_icon": false,
+            "collapse_icon": "plus",
+            "display_top_border": true,
+            "open": false,
+            "content": "<p>Les modes, frais et délais disponibles sont affichés avant le paiement. Un suivi est transmis après l’expédition. Les retours suivent la politique de la boutique, notamment les règles applicables aux produits cosmétiques ouverts ou descellés.</p>",
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        },
+        "variant": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_types": "pills, pills, pills",
+            "custom_labels": "",
+            "skip_unavailable": false,
+            "swatches_size": "medium",
+            "swatches_custom_colors": "disabled",
+            "swatches_custom_colors_list": "#000000, #FFFFFF",
+            "full_width_dropdowns": false,
+            "breaks_style": "normal",
+            "breaks_headline": "",
+            "breaks_color_scheme": "text",
+            "breaks_badges": "[empty], [empty], [empty]",
+            "breaks_displayed_images": "none",
+            "breaks_custom_images": "",
+            "breaks_image_width": 70,
+            "breaks_space_images": true,
+            "breaks_labels": "[name], [name], [name]",
+            "breaks_benefits": "[empty], [empty], [empty]",
+            "breaks_captions": "",
+            "breaks_price_texts": "[price], [price], [price]",
+            "breaks_compare_price_texts": "[compare_price], [compare_price], [compare_price]",
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        },
+        "bundle_offer": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>\n  .vrl-native-quantity--managed { position: absolute !important; width: 1px !important; height: 1px !important; overflow: hidden !important; clip-path: inset(50%) !important; white-space: nowrap !important; }\n  .vrl-bundles { margin: 20px 0 16px; font-family: \"DM Sans\", system-ui, sans-serif; }\n  .vrl-bundles fieldset { margin: 0; padding: 0; border: 0; }\n  .vrl-bundles legend { margin: 0 0 11px; color: #1A1A18; font-size: 13px; font-weight: 750; letter-spacing: .015em; }\n  .vrl-bundles__list { display: grid; gap: 10px; }\n  .vrl-offer { position: relative; display: block; cursor: pointer; }\n  .vrl-offer > input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }\n  .vrl-offer__card { position: relative; display: grid; grid-template-columns: 82px minmax(0,1fr) auto; align-items: center; gap: 14px; min-height: 88px; padding: 12px 14px; border: 1px solid rgba(31,61,43,.18); border-radius: 4px; color: #1A1A18; background: #FBF9F5; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }\n  .vrl-offer:hover .vrl-offer__card { border-color: rgba(31,61,43,.42); transform: translateY(-1px); }\n  .vrl-offer > input:checked + .vrl-offer__card { border: 2px solid #1F3D2B; padding: 11px 13px; background: #F5F1E9; box-shadow: 0 10px 30px rgba(31,61,43,.10); }\n  .vrl-offer > input:focus-visible + .vrl-offer__card { outline: 3px solid #1F3D2B; outline-offset: 3px; }\n  .vrl-offer__visual { position: relative; display: block; width: 78px; height: 62px; }\n  .vrl-offer__visual img { position: absolute; top: 50%; left: 50%; width: 49px; height: 58px; object-fit: contain; border: 1px solid rgba(31,61,43,.12); border-radius: 2px; background: #EFEAE1; box-shadow: 0 5px 12px rgba(26,26,24,.09); transform: translate(-50%,-50%); }\n  .vrl-offer__visual--2 img:first-child { transform: translate(-70%,-50%) rotate(-3deg); }\n  .vrl-offer__visual--2 img:last-child { transform: translate(-30%,-50%) rotate(3deg); }\n  .vrl-offer__visual--3 img:nth-child(1) { transform: translate(-82%,-50%) rotate(-5deg); }\n  .vrl-offer__visual--3 img:nth-child(2) { z-index: 2; transform: translate(-50%,-53%); }\n  .vrl-offer__visual--3 img:nth-child(3) { transform: translate(-18%,-50%) rotate(5deg); }\n  .vrl-offer__copy b, .vrl-offer__copy span, .vrl-offer__price strong, .vrl-offer__price small { display: block; }\n  .vrl-offer__copy b { color: #1F3D2B; font-size: 15px; line-height: 1.25; }\n  .vrl-offer__copy span { margin-top: 5px; color: #5C5C55; font-size: 12px; line-height: 1.35; }\n  .vrl-offer__price { min-width: 82px; text-align: right; }\n  .vrl-offer__price strong { color: #1A1A18; font-family: \"Playfair Display\", Georgia, serif; font-size: 19px; font-weight: 650; white-space: nowrap; }\n  .vrl-offer__price small { margin-top: 4px; color: #5C5C55; font-size: 10px; white-space: nowrap; }\n  .vrl-offer__price s { display: block; margin-bottom: 2px; color: #5C5C55; font-size: 11px; text-decoration-thickness: 1px; }\n  .vrl-offer__saving { display: block; margin-top: 4px; color: #1F3D2B; font-size: 10px; font-weight: 800; white-space: nowrap; }\n  .vrl-offer__badge { position: absolute; z-index: 3; top: -9px; left: 104px; padding: 4px 9px; border-radius: 999px; color: #FBF9F5; background: #1F3D2B; font-size: 9px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }\n  .vrl-bundles__note { margin: 9px 2px 0; color: #5C5C55; font-size: 11px; line-height: 1.45; }\n  @media (max-width: 480px) {\n    .vrl-offer__card { grid-template-columns: 68px minmax(0,1fr) auto; gap: 10px; padding-inline: 10px; }\n    .vrl-offer > input:checked + .vrl-offer__card { padding-inline: 9px; }\n    .vrl-offer__visual { width: 64px; }\n    .vrl-offer__visual img { width: 43px; height: 53px; }\n    .vrl-offer__copy b { font-size: 14px; }\n    .vrl-offer__copy span { font-size: 10px; }\n    .vrl-offer__price { min-width: 70px; }\n    .vrl-offer__price strong { font-size: 17px; }\n    .vrl-offer__badge { left: 78px; }\n  }\n  @media (prefers-reduced-motion: reduce) { .vrl-offer__card { transition: none; } }\n</style>\n\n<div class=\"vrl-bundles\" id=\"vrlBundles-{{ section.id }}\" data-vrl-bundles>\n  <fieldset>\n    <legend>Choisissez votre rituel</legend>\n    <div class=\"vrl-bundles__list\">\n      <label class=\"vrl-offer\">\n        <input type=\"radio\" name=\"vrl-bundle-{{ section.id }}\" value=\"1\" data-total=\"{{ product.price | money | escape }}\" checked>\n        <span class=\"vrl-offer__card\">\n          <span class=\"vrl-offer__visual\" aria-hidden=\"true\">\n            {%- if product.featured_image != blank -%}<img src=\"{{ product.featured_image | image_url: width: 180 }}\" alt=\"\" width=\"90\" height=\"108\" loading=\"eager\">{%- endif -%}\n          </span>\n          <span class=\"vrl-offer__copy\"><b>1 flacon</b><span>Pour découvrir le rituel Verline</span></span>\n          <span class=\"vrl-offer__price\"><strong>{{ product.price | money }}</strong><small>{{ product.price | money }} / flacon</small></span>\n        </span>\n      </label>\n\n      <label class=\"vrl-offer\">\n        <input type=\"radio\" name=\"vrl-bundle-{{ section.id }}\" value=\"2\" data-total=\"{{ product.price | times: 2 | money | escape }}\">\n        <span class=\"vrl-offer__card\">\n          <span class=\"vrl-offer__badge\">Notre suggestion</span>\n          <span class=\"vrl-offer__visual vrl-offer__visual--2\" aria-hidden=\"true\">\n            {%- if product.featured_image != blank -%}<img src=\"{{ product.featured_image | image_url: width: 180 }}\" alt=\"\" width=\"90\" height=\"108\" loading=\"lazy\"><img src=\"{{ product.featured_image | image_url: width: 180 }}\" alt=\"\" width=\"90\" height=\"108\" loading=\"lazy\">{%- endif -%}\n          </span>\n          <span class=\"vrl-offer__copy\"><b>2 flacons</b><span>Le duo pratique, en une seule commande</span></span>\n          <span class=\"vrl-offer__price\"><strong>{{ product.price | times: 2 | money }}</strong><small>{{ product.price | money }} / flacon</small></span>\n        </span>\n      </label>\n\n      <label class=\"vrl-offer\">\n        <input type=\"radio\" name=\"vrl-bundle-{{ section.id }}\" value=\"3\" data-total=\"{{ product.price | times: 3 | money | escape }}\">\n        <span class=\"vrl-offer__card\">\n          <span class=\"vrl-offer__visual vrl-offer__visual--3\" aria-hidden=\"true\">\n            {%- if product.featured_image != blank -%}<img src=\"{{ product.featured_image | image_url: width: 180 }}\" alt=\"\" width=\"90\" height=\"108\" loading=\"lazy\"><img src=\"{{ product.featured_image | image_url: width: 180 }}\" alt=\"\" width=\"90\" height=\"108\" loading=\"lazy\"><img src=\"{{ product.featured_image | image_url: width: 180 }}\" alt=\"\" width=\"90\" height=\"108\" loading=\"lazy\">{%- endif -%}\n          </span>\n          <span class=\"vrl-offer__copy\"><b>3 flacons</b><span>La réserve complète, sans rupture de routine</span></span>\n          <span class=\"vrl-offer__price\"><strong>{{ product.price | times: 3 | money }}</strong><small>{{ product.price | money }} / flacon</small></span>\n        </span>\n      </label>\n    </div>\n  </fieldset>\n</div>\n\n<script>\n(() => {\n  const root = document.getElementById('vrlBundles-{{ section.id }}');\n  if (!root || root.dataset.ready === 'true') return;\n  root.dataset.ready = 'true';\n\n  const boot = () => {\n    const quantity = document.querySelector('#Quantity-Form-{{ section.id }} input[name=\"quantity\"]') || document.querySelector('input[name=\"quantity\"][form^=\"product-form-\"]');\n    const radios = Array.from(root.querySelectorAll('input[type=\"radio\"]'));\n    if (!quantity || !radios.length) return;\n\n    const nativeQuantity = quantity.closest('.product-form__quantity, [id^=\"Quantity-Form-\"]');\n    if (nativeQuantity && !root.contains(nativeQuantity)) {\n      nativeQuantity.classList.add('vrl-native-quantity--managed');\n      nativeQuantity.setAttribute('aria-hidden', 'true');\n      quantity.tabIndex = -1;\n    }\n\n    const render = (radio, dispatch) => {\n      const qty = Math.max(1, parseInt(radio.value, 10) || 1);\n      const total = radio.dataset.total || '';\n      quantity.value = String(qty);\n      if (dispatch) {\n        quantity.dispatchEvent(new Event('input', { bubbles: true }));\n        quantity.dispatchEvent(new Event('change', { bubbles: true }));\n      }\n      const updatePurchaseLabels = () => {\n        const atcPrice = document.getElementById('main-atc-price-{{ section.id }}');\n        if (atcPrice) atcPrice.textContent = total + ' •';\n        const stickyMeta = document.querySelector('[data-vrl-sticky] .vrl-sticky__meta span');\n        if (stickyMeta) stickyMeta.textContent = qty + (qty > 1 ? ' flacons · ' : ' flacon · ') + total;\n      };\n      updatePurchaseLabels();\n      window.setTimeout(updatePurchaseLabels, 80);\n    };\n\n    root.addEventListener('change', (event) => {\n      if (event.target.matches('input[type=\"radio\"]')) render(event.target, true);\n    });\n    quantity.addEventListener('change', () => {\n      const match = radios.find((radio) => radio.value === String(quantity.value));\n      if (match) {\n        match.checked = true;\n        render(match, false);\n      }\n    });\n    render(radios.find((radio) => radio.checked) || radios[0], false);\n  };\n\n  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true });\n  else boot();\n})();\n</script>\n"
+          }
+        }
+      },
+      "block_order": [
+        "kicker",
+        "title",
+        "intro",
+        "price",
+        "bundle_offer",
+        "variant",
+        "quantity",
+        "buy",
+        "reassurance",
+        "use",
+        "formula",
+        "delivery"
+      ],
+      "settings": {
+        "display_id": false,
+        "enable_sticky_info": true,
+        "display_variant_image_first": false,
+        "disable_prepend": false,
+        "hide_variants": false,
+        "variant_image_filtering": "none",
+        "image_zoom": "lightbox",
+        "arrows_color_scheme": "inverse",
+        "transparent_arrows": false,
+        "dots_color_scheme": "inverse",
+        "video_player": "play_btn",
+        "enable_video_looping": false,
+        "autoplay_videos_pause_btn": false,
+        "video_sound_btn": false,
+        "video_timeline": false,
+        "play_btn_color_scheme": "text",
+        "sound_btn_color_scheme": "inverse",
+        "timeline_color": "text",
+        "media_size": "medium",
+        "media_position": "left",
+        "gallery_layout": "thumbnail_slider",
+        "desktop_thumbnails_count": 5,
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "desktop_arrows_position": "hidden",
+        "mobile_media_corner_radius": 0,
+        "mobile_spacing_pixels": 0,
+        "mobile_arrows_position": "sides",
+        "mobile_pagination": "dots_under",
+        "mobile_thumbnails": "hide",
+        "mobile_thumbnails_count": 5,
+        "mobile_scroll_padding_percentage": 0,
+        "mobile_scroll_padding_pixels": 14,
+        "enable_mobile_outher_spacing": false,
+        "mobile_slides_container_width": 100,
+        "mobile_slides_inner_width": 100,
+        "trust_badge_position": "top-right",
+        "trust_badge_size": "medium",
+        "mobile_padding_top": 8,
+        "mobile_padding_bottom": 32,
+        "desktop_padding_top": 48,
+        "desktop_padding_bottom": 64
+      }
+    },
+    "verline_story": {
+      "type": "custom-liquid",
+      "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "custom_liquid": "<style>\n  .vrl-story {\n    --vrl-green: #1F3D2B;\n    --vrl-ink: #1A1A18;\n    --vrl-text: #3A3A36;\n    --vrl-muted: #5C5C55;\n    --vrl-ivory: #FBF9F5;\n    --vrl-sand: #EFEAE1;\n    color: var(--vrl-ink);\n    background: var(--vrl-ivory);\n    font-family: \"DM Sans\", system-ui, sans-serif;\n  }\n  .vrl-story *, .vrl-story *::before, .vrl-story *::after { box-sizing: border-box; }\n  .vrl-story h2, .vrl-story h3 {\n    margin: 0;\n    color: var(--vrl-ink);\n    font-family: \"Playfair Display\", Georgia, serif;\n    font-weight: 600;\n    letter-spacing: -0.025em;\n  }\n  .vrl-story p { margin: 0; }\n  .vrl-shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }\n  .vrl-eyebrow {\n    margin-bottom: 14px !important;\n    color: var(--vrl-green);\n    font-size: 12px;\n    font-weight: 700;\n    letter-spacing: .18em;\n    text-transform: uppercase;\n  }\n  .vrl-lead { color: var(--vrl-text); font-size: clamp(16px, 1.5vw, 19px); line-height: 1.72; }\n  .vrl-trust { border-top: 1px solid rgba(31,61,43,.14); border-bottom: 1px solid rgba(31,61,43,.14); background: var(--vrl-ivory); }\n  .vrl-trust__grid { display: grid; grid-template-columns: repeat(3, 1fr); }\n  .vrl-trust__item { padding: 22px 18px; text-align: center; color: var(--vrl-green); font-size: 13px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }\n  .vrl-trust__item + .vrl-trust__item { border-left: 1px solid rgba(31,61,43,.14); }\n  .vrl-editorial { padding: clamp(68px, 9vw, 124px) 0; }\n  .vrl-editorial__grid { display: grid; grid-template-columns: 1.02fr .98fr; gap: clamp(44px, 7vw, 92px); align-items: center; }\n  .vrl-editorial__media { position: relative; min-height: 580px; overflow: hidden; background: var(--vrl-sand); }\n  .vrl-editorial__media::after { content: \"\"; position: absolute; inset: 18px; border: 1px solid rgba(251,249,245,.7); pointer-events: none; }\n  .vrl-editorial__media img { width: 100%; height: 100%; min-height: 580px; display: block; object-fit: cover; }\n  .vrl-editorial__copy h2 { max-width: 680px; margin-bottom: 24px; font-size: clamp(38px, 5.1vw, 68px); line-height: 1.02; }\n  .vrl-editorial__copy .vrl-lead { max-width: 610px; }\n  .vrl-signature { display: inline-flex; align-items: center; gap: 13px; margin-top: 30px; color: var(--vrl-green); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }\n  .vrl-signature::before { content: \"\"; width: 42px; height: 1px; background: var(--vrl-green); }\n  .vrl-benefits { padding: clamp(66px, 8vw, 106px) 0; background: var(--vrl-sand); }\n  .vrl-section-head { max-width: 780px; margin: 0 auto 46px; text-align: center; }\n  .vrl-section-head h2 { margin-bottom: 18px; font-size: clamp(34px, 4.4vw, 56px); line-height: 1.08; }\n  .vrl-section-head p:last-child { color: var(--vrl-text); font-size: 17px; line-height: 1.65; }\n  .vrl-benefits__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }\n  .vrl-benefit { min-height: 238px; padding: 32px 27px; border: 1px solid rgba(31,61,43,.14); background: rgba(251,249,245,.8); }\n  .vrl-benefit__num { display: block; margin-bottom: 35px; color: var(--vrl-green); font-family: \"Playfair Display\", Georgia, serif; font-size: 30px; font-style: italic; }\n  .vrl-benefit h3 { margin-bottom: 12px; font-size: 23px; }\n  .vrl-benefit p { color: var(--vrl-text); font-size: 15px; line-height: 1.65; }\n  .vrl-ritual { padding: clamp(72px, 9vw, 116px) 0; color: var(--vrl-ivory); background: var(--vrl-green); }\n  .vrl-ritual h2 { max-width: 760px; margin: 0 auto 52px; color: var(--vrl-ivory); text-align: center; font-size: clamp(36px, 4.8vw, 60px); line-height: 1.08; }\n  .vrl-ritual__grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(251,249,245,.22); }\n  .vrl-step { padding: 34px 34px 0; }\n  .vrl-step + .vrl-step { border-left: 1px solid rgba(251,249,245,.22); }\n  .vrl-step__num { display: block; margin-bottom: 28px; color: rgba(251,249,245,.64); font-family: \"Playfair Display\", Georgia, serif; font-size: 36px; font-style: italic; }\n  .vrl-step h3 { margin-bottom: 12px; color: var(--vrl-ivory); font-size: 25px; }\n  .vrl-step p { color: rgba(251,249,245,.78); font-size: 15px; line-height: 1.7; }\n  .vrl-formula { padding: clamp(70px, 9vw, 120px) 0; }\n  .vrl-formula__grid { display: grid; grid-template-columns: .92fr 1.08fr; gap: clamp(42px, 7vw, 90px); align-items: center; }\n  .vrl-formula__copy h2 { margin-bottom: 22px; font-size: clamp(36px, 4.8vw, 62px); line-height: 1.05; }\n  .vrl-formula__copy .vrl-lead + .vrl-lead { margin-top: 16px; }\n  .vrl-formula__note { margin-top: 24px !important; padding-top: 18px; border-top: 1px solid rgba(31,61,43,.18); color: var(--vrl-muted); font-size: 13px; line-height: 1.6; }\n  .vrl-formula__media { min-height: 520px; overflow: hidden; background: var(--vrl-sand); }\n  .vrl-formula__media img { width: 100%; height: 100%; min-height: 520px; display: block; object-fit: cover; }\n  .vrl-faq { padding: clamp(68px, 8vw, 108px) 0; background: var(--vrl-sand); }\n  .vrl-faq__grid { display: grid; grid-template-columns: .72fr 1.28fr; gap: clamp(42px, 7vw, 86px); }\n  .vrl-faq__intro h2 { margin-bottom: 16px; font-size: clamp(38px, 4.7vw, 58px); line-height: 1.05; }\n  .vrl-faq__intro p:last-child { color: var(--vrl-text); line-height: 1.7; }\n  .vrl-faq details { border-top: 1px solid rgba(31,61,43,.2); }\n  .vrl-faq details:last-child { border-bottom: 1px solid rgba(31,61,43,.2); }\n  .vrl-faq summary { position: relative; padding: 23px 42px 23px 0; color: var(--vrl-ink); font-size: 16px; font-weight: 700; cursor: pointer; list-style: none; }\n  .vrl-faq summary::-webkit-details-marker { display: none; }\n  .vrl-faq summary::after { content: \"+\"; position: absolute; right: 4px; top: 19px; color: var(--vrl-green); font-family: \"Playfair Display\", Georgia, serif; font-size: 28px; font-weight: 400; }\n  .vrl-faq details[open] summary::after { content: \"−\"; }\n  .vrl-faq details p { max-width: 720px; padding: 0 42px 23px 0; color: var(--vrl-text); font-size: 15px; line-height: 1.7; }\n  .vrl-final { padding: clamp(70px, 9vw, 112px) 0; text-align: center; background: var(--vrl-ivory); }\n  .vrl-final__inner { max-width: 820px; margin: 0 auto; }\n  .vrl-final h2 { margin-bottom: 18px; font-size: clamp(38px, 5vw, 64px); line-height: 1.04; }\n  .vrl-final__text { margin: 0 auto 30px !important; max-width: 650px; color: var(--vrl-text); font-size: 17px; line-height: 1.7; }\n  .vrl-buy { display: inline-flex; min-height: 56px; align-items: center; justify-content: center; padding: 16px 30px; border-radius: 2px; color: #FBF9F5 !important; background: #A85C2A; font-size: 15px; font-weight: 700; letter-spacing: .035em; text-decoration: none !important; transition: background .2s ease, transform .2s ease; }\n  .vrl-buy:hover { color: #FBF9F5 !important; background: #8E4C21; transform: translateY(-1px); }\n  .vrl-final__meta { margin-top: 15px !important; color: var(--vrl-muted); font-size: 12px; letter-spacing: .04em; }\n  @media (max-width: 900px) {\n    .vrl-benefits__grid { grid-template-columns: repeat(2, 1fr); }\n    .vrl-editorial__grid, .vrl-formula__grid, .vrl-faq__grid { grid-template-columns: 1fr; }\n    .vrl-editorial__media, .vrl-editorial__media img { min-height: 480px; }\n    .vrl-formula__media { order: -1; }\n  }\n  @media (max-width: 680px) {\n    .vrl-shell { width: min(100% - 28px, 1180px); }\n    .vrl-trust__grid { grid-template-columns: 1fr; }\n    .vrl-trust__item { padding: 14px; }\n    .vrl-trust__item + .vrl-trust__item { border-left: 0; border-top: 1px solid rgba(31,61,43,.14); }\n    .vrl-editorial__media, .vrl-editorial__media img, .vrl-formula__media, .vrl-formula__media img { min-height: 400px; }\n    .vrl-benefits__grid, .vrl-ritual__grid { grid-template-columns: 1fr; }\n    .vrl-benefit { min-height: 0; }\n    .vrl-ritual__grid { border-top: 0; }\n    .vrl-step { padding: 27px 8px; border-top: 1px solid rgba(251,249,245,.22); }\n    .vrl-step + .vrl-step { border-left: 0; }\n  }\n</style>\n\n{%- assign ritual_image = product.images[1] | default: product.featured_image -%}\n{%- assign formula_image = product.images[2] | default: product.featured_image -%}\n\n<div class=\"vrl-story\">\n  <div class=\"vrl-trust\">\n    <div class=\"vrl-shell vrl-trust__grid\">\n      <div class=\"vrl-trust__item\">Nettoyage ciblé des pieds</div>\n      <div class=\"vrl-trust__item\">Tea Tree + Menthe + Aloe vera</div>\n      <div class=\"vrl-trust__item\">Fraîcheur &amp; odeurs</div>\n    </div>\n  </div>\n\n  \n  \n\n  <section class=\"vrl-editorial\">\n    <div class=\"vrl-shell vrl-editorial__grid\">\n      <div class=\"vrl-editorial__media\">\n        {%- if ritual_image != blank -%}\n          <img src=\"{{ ritual_image | image_url: width: 1500 }}\" alt=\"{{ product.title | escape }}\" loading=\"lazy\" width=\"{{ ritual_image.width }}\" height=\"{{ ritual_image.height }}\">\n        {%- endif -%}\n      </div>\n      <div class=\"vrl-editorial__copy\">\n        <p class=\"vrl-eyebrow\">Le rituel Verline</p>\n        <h2>Le soin des pieds, enfin à sa place.</h2>\n        <p class=\"vrl-lead\">Chaleur, transpiration et chaussures fermées mettent les pieds à l’épreuve. Verline transforme le nettoyage quotidien en un rituel simple qui rend aux pieds une sensation de netteté.</p>\n        <span class=\"vrl-signature\">Des pieds nets. Une confiance retrouvée</span>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"vrl-benefits\">\n    <div class=\"vrl-shell\">\n      <div class=\"vrl-section-head\">\n        <p class=\"vrl-eyebrow\">La différence du gel</p>\n        <h2>Une action ciblée, pensée dans les moindres détails.</h2>\n        <p>Une texture gel facile à doser et une formule qui nettoie en profondeur, aide à neutraliser les odeurs et laisse une fraîcheur nette.</p>\n      </div>\n      <div class=\"vrl-benefits__grid\">\n        <article class=\"vrl-benefit\">\n          <span class=\"vrl-benefit__num\">01</span>\n          <h3>Nettoyage en profondeur</h3>\n          <p>La formule nettoie les pieds et les zones qui transpirent.</p>\n        </article>\n        <article class=\"vrl-benefit\">\n          <span class=\"vrl-benefit__num\">02</span>\n          <h3>Fraîcheur &amp; odeurs</h3>\n          <p>La menthe poivrée apporte une sensation fraîche, tandis que la formule aide à neutraliser les odeurs tenaces.</p>\n        </article>\n        <article class=\"vrl-benefit\">\n          <span class=\"vrl-benefit__num\">03</span>\n          <h3>Rinçage simple</h3>\n          <p>Une mousse facile à travailler pour un rituel rapide sous la douche.</p>\n        </article>\n        <article class=\"vrl-benefit\">\n          <span class=\"vrl-benefit__num\">04</span>\n          <h3>Format compact</h3>\n          <p>100 ml, pour intégrer facilement le soin à la salle de bain ou au sac de voyage.</p>\n        </article>\n      </div>\n    </div>\n  </section>\n\n  <!-- VRL_EXACT_START -->\n<section class=\"vrl-exact\" id=\"contenu-commande\" aria-labelledby=\"vrl-exact-title\">\n  <div class=\"vrl-shell\">\n    <div class=\"vrl-section-head\">\n      <p class=\"vrl-eyebrow\">Ce que vous recevez</p>\n      <h2 id=\"vrl-exact-title\">Le produit, sans zone d’ombre.</h2>\n      <p>Chaque détail utile doit pouvoir être compris avant de commander.</p>\n    </div>\n    <div class=\"vrl-exact__grid\">\n      <article class=\"vrl-exact__card\"><b>Dans la commande</b><p>Un flacon de gel lavant pieds et corps au format 100 ml.</p></article>\n      <article class=\"vrl-exact__card\"><b>Texture</b><p>Un gel facile à doser, à faire mousser puis à rincer soigneusement.</p></article>\n      <article class=\"vrl-exact__card\"><b>Informations</b><p>Le mode d’emploi, la liste INCI et les précautions figurant sur l’emballage reçu font foi.</p></article>\n    </div>\n    <p class=\"vrl-formula__note\">Les accessoires décoratifs éventuellement visibles dans les photographies ne sont pas inclus.</p>\n  </div>\n</section>\n<!-- VRL_EXACT_END -->\n\n  <section class=\"vrl-ritual\">\n    <div class=\"vrl-shell\">\n      <p class=\"vrl-eyebrow\" style=\"color:#FBF9F5;text-align:center;\">Le geste juste</p>\n      <h2>Quatre étapes pour un rituel précis.</h2>\n      <div class=\"vrl-ritual__grid\">\n        <article class=\"vrl-step\">\n          <span class=\"vrl-step__num\">01</span>\n          <h3>Humidifier</h3>\n          <p>Mouillez la peau, puis déposez une petite quantité de gel.</p>\n        </article>\n        <article class=\"vrl-step\">\n          <span class=\"vrl-step__num\">02</span>\n          <h3>Faire mousser</h3>\n          <p>Massez délicatement les pieds, notamment entre les orteils.</p>\n        </article>\n        <article class=\"vrl-step\">\n          <span class=\"vrl-step__num\">03</span>\n          <h3>Rincer</h3>\n          <p>Rincez soigneusement jusqu’à éliminer toute la mousse.</p>\n        </article>\n        <article class=\"vrl-step\">\n          <span class=\"vrl-step__num\">04</span>\n          <h3>Sécher</h3>\n          <p>Séchez bien la peau, sans oublier les espaces entre les orteils.</p>\n        </article>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"vrl-formula\" id=\"composition\">\n    <div class=\"vrl-shell vrl-formula__grid\">\n      <div class=\"vrl-formula__copy\">\n        <p class=\"vrl-eyebrow\">Une promesse sans détour</p>\n        <h2>Tea Tree. Menthe poivrée. Aloe vera.</h2>\n        <p class=\"vrl-lead\">Le gel lavant Verline nettoie en profondeur, aide à neutraliser les mauvaises odeurs et laisse une sensation de fraîcheur et de confort.</p>\n        <p class=\"vrl-lead\">Un geste simple, à intégrer à votre routine quotidienne.</p>\n        <p class=\"vrl-formula__note\">La liste INCI complète figurant sur l’emballage fait foi. Lisez-la avant utilisation, notamment en cas de sensibilité connue à un ingrédient.</p>\n      </div>\n      <div class=\"vrl-formula__media\">\n        {%- if formula_image != blank -%}\n          <img src=\"{{ formula_image | image_url: width: 1500 }}\" alt=\"Gel lavant Verline Tea Tree, menthe poivrée et aloe vera\" loading=\"lazy\" width=\"{{ formula_image.width }}\" height=\"{{ formula_image.height }}\">\n        {%- endif -%}\n      </div>\n    </div>\n  </section>\n\n  <!-- VRL_PROOF_START -->\n<section class=\"vrl-proof\" id=\"transparence\" aria-labelledby=\"vrl-proof-title\">\n  <div class=\"vrl-shell\">\n    <p class=\"vrl-eyebrow\" style=\"color:#FBF9F5;\">Transparence Verline</p>\n    <h2 id=\"vrl-proof-title\">La confiance ne tient pas dans un badge. Elle tient dans les détails.</h2>\n    <div class=\"vrl-proof__facts\">\n      <div class=\"vrl-proof__fact\"><span>Format</span><b>100 ml</b></div>\n      <div class=\"vrl-proof__fact\"><span>Texture</span><b>Gel lavant</b></div>\n      <div class=\"vrl-proof__fact\"><span>Usage présenté</span><b>Pieds &amp; corps</b></div>\n      <div class=\"vrl-proof__fact\"><span>Au cœur de la formule</span><b>Tea Tree, menthe, aloe vera</b></div>\n    </div>\n    <p class=\"vrl-proof__note\">Aucun résultat chiffré, label, recommandation professionnelle ou note client n’est affiché sans donnée correspondante. La composition et les précautions de l’étiquette restent la référence avant utilisation.</p>\n  </div>\n</section>\n\n<!-- VRL_PROOF_END -->\n\n  <section class=\"vrl-faq\" id=\"faq-produit\">\n    <div class=\"vrl-shell vrl-faq__grid\">\n      <div class=\"vrl-faq__intro\">\n        <p class=\"vrl-eyebrow\">Questions fréquentes</p>\n        <h2>Tout savoir avant votre rituel.</h2>\n        <p>Des réponses simples pour agir avec régularité.</p>\n      </div>\n      <div>\n        <details>\n          <summary>Comment utiliser le gel lavant Verline ?</summary>\n          <p>Sur peau humide, appliquez une petite quantité, faites mousser, puis rincez soigneusement. Pour les pieds, séchez avec attention entre les orteils.</p>\n        </details>\n        <details>\n          <summary>Peut-on l’utiliser sur le corps ?</summary>\n          <p>Le produit est présenté comme un gel lavant pieds et corps. Respectez toujours les indications de l’emballage et évitez le contact avec les yeux et les muqueuses.</p>\n        </details>\n        <details>\n          <summary>Est-ce un traitement ?</summary>\n          <p>Non. Verline est un gel lavant cosmétique destiné à l’hygiène quotidienne : il nettoie, purifie et rafraîchit. Il ne traite aucune affection. En cas de gêne persistante, de lésion ou de doute, demandez conseil à un professionnel de santé.</p>\n        </details>\n        <details>\n          <summary>Que faire si ma peau est sensible ?</summary>\n          <p>Consultez la liste d’ingrédients, testez d’abord sur une petite zone et cessez l’utilisation en cas d’inconfort ou d’irritation.</p>\n        </details>\n        <details>\n          <summary>Quels sont les délais de livraison ?</summary>\n          <p>Le délai estimé est indiqué au moment de la commande et rappelé dans la confirmation. Un numéro de suivi est transmis dès l’expédition.</p>\n        </details>\n        <details>\n          <summary>Puis-je retourner ma commande ?</summary>\n          <p>Les retours sont possibles sous 14 jours, conformément aux conditions de retour de la boutique. Pour un produit cosmétique, l’éligibilité dépend notamment de son état et de son scellement.</p>\n        </details>\n        <details>\n          <summary>Que contient ma commande ?</summary>\n          <p>La commande contient un flacon de gel lavant Verline de 100 ml. Les accessoires décoratifs éventuellement visibles dans les photographies ne sont pas inclus.</p>\n        </details>\n        <details>\n          <summary>Quels moyens de paiement sont proposés ?</summary>\n          <p>Seuls les moyens de paiement réellement activés pour la boutique sont affichés au panier et lors du paiement sécurisé.</p>\n        </details>\n        <details>\n          <summary>Comment contacter Verline ?</summary>\n          <p>Utilisez le <a href=\"{{ routes.root_url }}#contact\">formulaire de contact Verline</a> pour toute question avant ou après commande.</p>\n        </details>\n      </div>\n    </div>\n  </section>\n\n  <section class=\"vrl-final\">\n    <div class=\"vrl-shell vrl-final__inner\">\n      <p class=\"vrl-eyebrow\">Votre nouveau rituel</p>\n      <h2>Des pieds nets, chaque jour.</h2>\n      <p class=\"vrl-final__text\">Choisissez le gel lavant Verline pour nettoyer, purifier les pieds et retrouver une fraîcheur durable.</p>\n      <a class=\"vrl-buy\" href=\"#verline-buy\">Choisir mon gel — {{ product.price | money }}</a>\n      <p class=\"vrl-final__meta\">Paiement sécurisé • Expédition suivie</p>\n    </div>\n  </section>\n\n  <!-- VRL_STICKY_START -->\n  <div class=\"vrl-sticky\" data-vrl-sticky hidden aria-hidden=\"true\">\n    <div class=\"vrl-sticky__meta\"><b>Gel lavant Verline</b><span>100 ml · {{ product.price | money }}</span></div>\n    <button class=\"vrl-sticky__button\" type=\"button\" data-vrl-sticky-button {% unless product.available %}disabled aria-disabled=\"true\"{% endunless %}>{% if product.available %}Ajouter au panier{% else %}Indisponible{% endif %}</button>\n  </div>\n  <script>\n  (() => {\n    const bar = document.querySelector('[data-vrl-sticky]');\n    if (!bar || bar.dataset.ready === 'true') return;\n    bar.dataset.ready = 'true';\n    const stickyButton = bar.querySelector('[data-vrl-sticky-button]');\n    const nativeButton = () => document.querySelector('[id^=\"MainProduct-\"] button[name=\"add\"]');\n    let scheduled = false;\n  \n    const sync = () => {\n      scheduled = false;\n      const native = nativeButton();\n      if (!native) {\n        bar.hidden = true;\n        bar.setAttribute('aria-hidden', 'true');\n        document.body.classList.remove('vrl-sticky-visible');\n        return;\n      }\n      const rect = native.getBoundingClientRect();\n      const nativeVisible = rect.top < window.innerHeight && rect.bottom > 0;\n      const show = window.innerWidth <= 749 && window.scrollY > 160 && !nativeVisible;\n      const disabled = native.disabled || native.getAttribute('aria-disabled') === 'true';\n      stickyButton.disabled = disabled;\n      stickyButton.setAttribute('aria-disabled', String(disabled));\n      bar.hidden = !show;\n      bar.setAttribute('aria-hidden', String(!show));\n      document.body.classList.toggle('vrl-sticky-visible', show);\n    };\n  \n    const requestSync = () => {\n      if (scheduled) return;\n      scheduled = true;\n      requestAnimationFrame(sync);\n    };\n  \n    stickyButton.addEventListener('click', () => {\n      const native = nativeButton();\n      if (native && !native.disabled) native.click();\n    });\n    window.addEventListener('scroll', requestSync, { passive: true });\n    window.addEventListener('resize', requestSync, { passive: true });\n    new MutationObserver(requestSync).observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ['disabled', 'aria-disabled'] });\n    sync();\n  })();\n  </script>\n  <!-- VRL_STICKY_END -->\n</div>",
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "verline_story"
+  ]
+}
