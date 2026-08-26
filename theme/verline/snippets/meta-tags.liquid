@@ -6,12 +6,12 @@
   assign og_description = page_description | default: shop.description | default: og_site_name
 
   if request.page_type == 'index'
-    assign og_title = 'Verline — Gel lavant purifiant pieds & corps'
-    assign og_description = 'Le gel lavant Verline au Tea Tree, à la menthe poivrée et à l’aloe vera nettoie, purifie et rafraîchit les pieds au quotidien.'
+    assign og_title = 'Verline — Élimine mycoses et champignons des pieds'
+    assign og_description = 'Éliminez les mycoses et les champignons des pieds avec le gel lavant Verline au Tea Tree, à la menthe poivrée et à l’aloe vera.'
   elsif request.page_type == 'product'
     assign og_type = 'product'
-    assign og_title = 'Gel lavant purifiant pieds & corps — 100 ml | Verline'
-    assign og_description = 'Le gel lavant Verline nettoie et purifie les pieds et le corps. Tea Tree, menthe poivrée et aloe vera, 100 ml.'
+    assign og_title = 'Gel antifongique pieds — Mycoses & champignons | Verline'
+    assign og_description = 'Le gel lavant antifongique Verline cible et élimine les champignons responsables des mycoses. Tea Tree, menthe poivrée et aloe vera, 100 ml.'
   elsif request.page_type == 'article'
     assign og_type = 'article'
   elsif request.page_type == 'password'
