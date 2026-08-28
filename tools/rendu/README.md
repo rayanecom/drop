@@ -37,3 +37,50 @@ téléphone, 620 px au maximum sur ordinateur.
 
 **La règle** : ce qui est livré doit être exactement ce qui a été mesuré. Après
 toute retouche dans le snippet, resynchroniser le banc et remesurer.
+
+## Banc « galerie fiche produit » — `banc-galerie.html`
+
+Deuxième banc, dédié à la colonne média de la fiche produit (thème Verline v3).
+Il reproduit le DOM exact rendu par `product-media-gallery.liquid` +
+`product-thumbnail.liquid`, charge le **vrai `base.css` du thème**, et compare
+l'état en ligne (`avant`) au bloc `VERLINE-V3-COMPACT-PRODUCT` livré (`après`).
+
+`base.css` n'est pas versionné — il pèse 364 Ko et appartient au thème. Le
+récupérer avant de lancer le banc : l'API Admin renvoie les gros fichiers sous
+forme d'URL signée (`OnlineStoreThemeFileBodyUrl`), servie depuis
+`shopify-shop-assets.storage.googleapis.com`, que le proxy sortant laisse passer.
+
+```graphql
+query($id: ID!) {
+  theme(id: $id) {
+    files(first: 1, filenames: ["assets/base.css"]) {
+      nodes { body { ... on OnlineStoreThemeFileBodyUrl { url } } }
+    }
+  }
+}
+```
+
+Puis `curl -o tools/rendu/base.css "<url>"` (l'URL expire en 5 minutes).
+
+```bash
+npm install playwright
+node tools/rendu/mesure-galerie.js
+```
+
+### Ce que ça mesure
+
+- `logo_image` — blanc entre le bas de l'en-tête et le haut de l'image
+- `image_texte` — blanc entre le bas de l'image et le premier texte
+- `slide1` / `colonne` / `debord_droite` — largeur de la vue : détecte le
+  « liseré » de la vue suivante qui dépasse à droite
+- `hauteurs_min_max` — hauteur de chaque vue. **Deux valeurs différentes = piège** :
+  le `<ul>` de la galerie est un flex, il prend la hauteur de la plus grande
+  image et laisse du vide sous les plus petites.
+- `overflowX`
+
+### Le piège attrapé ici
+
+Les 6 visuels du gel Verline ne sont pas au même format : 4 en 1254 × 1254,
+2 en 1125 × 1398. La piste faisait donc 431 px de haut pour une image de 347 px
+— 84 px de vide sous la première vue, avant même la rangée de puces. Aucun
+réglage de thème ne corrige ça : il faut imposer un ratio unique en CSS.

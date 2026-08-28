@@ -1,0 +1,261 @@
+<!doctype html>
+<html class="js" lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Banc — galerie fiche produit Verline v3</title>
+
+<!-- :root du theme (layout/theme.liquid) -->
+<style>
+:root{
+  --font-body-family:"DM Sans",system-ui,sans-serif; --font-body-scale:1;
+  --font-heading-family:"Playfair Display",Georgia,serif;
+  --color-base-text:26,26,24; --color-foreground:26,26,24;
+  --color-base-background-1:251,249,245; --color-background:251,249,245;
+  --page-width:120rem; --page-width-margin:0rem;
+  --media-radius:0px; --media-border-width:0px; --media-border-opacity:0;
+  --media-shadow-horizontal-offset:0px; --media-shadow-vertical-offset:0px;
+  --media-shadow-blur-radius:0px; --media-shadow-opacity:0; --media-shadow-visible:0;
+  --grid-desktop-vertical-spacing:20px; --grid-desktop-horizontal-spacing:20px;
+  --grid-mobile-vertical-spacing:10px; --grid-mobile-horizontal-spacing:10px;
+  --slider-arrow-size:3rem; --slider-arrow-border-radius:50%; --slider-arrow-icon-size:.4em;
+  --pagination-dot-width:6px; --pagination-dot-height:6px;
+  --pagination-dot-active-scale:1.3; --pagination-dot-spacing:12px; --pagination-dot-radius:30px;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{box-sizing:border-box;font-size:62.5%}
+body{margin:0;overflow-x:hidden;font-size:1.5rem;font-family:var(--font-body-family);
+     background:#FBF9F5;color:#1A1A18}
+/* placeholders images : ratio exact des vrais fichiers */
+.ph{background:repeating-linear-gradient(45deg,#cfd8d0,#cfd8d0 10px,#c3cdc5 10px,#c3cdc5 20px)}
+/* en-tete simulee : header-group.json -> padding_top 16, padding_bottom 16, separateur */
+.faux-header{padding:16px 15px var(--header-pb,16px);border-bottom:1px solid rgba(26,26,24,.12);background:#FBF9F5}
+.faux-logo{font-family:var(--font-heading-family);font-size:22px;font-weight:600;text-align:center}
+</style>
+
+<link rel="stylesheet" href="base.css">
+
+<!-- section-{id}-padding, genere par main-product.liquid -->
+<style id="sectionPadding">
+.section-main-padding{padding-top:4px;padding-bottom:20px}
+@media screen and (min-width:750px){.section-main-padding{padding-top:20px;padding-bottom:32px}}
+#MediaGallery-main{--desktop-thumbnails:5;--mobile-thumbnails:5}
+@media screen and (max-width:749px){
+  #MediaGallery-main{
+    --media-radius:0px;
+    --grid-mobile-horizontal-spacing:0px;
+    --mobile-scroll-padding:calc(0% + 14px);
+    --slide-container-percentage-width:100%;
+    --slide-inner-percentage-width:100%;
+  }
+}
+</style>
+
+<!-- bloc kicker (custom_liquid) : extraits qui touchent la geometrie -->
+<style>
+#MainProduct-main{background:#FBF9F5;color:#1A1A18}
+#MainProduct-main .product__title{color:#1A1A18;font-family:var(--font-heading-family);font-weight:600;letter-spacing:-.025em;line-height:1.06}
+#MainProduct-main .product__media,#MainProduct-main .product-media-container{background:#EFEAE1}
+.vrl-main-eyebrow{margin:0 0 13px;color:#1F3D2B;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+#MainProduct-main .thumbnail-slider{margin-top:12px !important}
+#MainProduct-main .product__info-wrapper{padding-left:0 !important}
+@media (max-width:749px){
+  #MainProduct-main .product.grid{row-gap:10px !important}
+  #MainProduct-main .product__media-wrapper + .product__info-wrapper{margin-top:4px !important}
+  [id^="MainProduct-"] .product__title{font-size:clamp(31px,9vw,42px)}
+}
+</style>
+
+<!-- ETAT ACTUEL : bloc VERLINE-V3-COMPACT-PRODUCT-2026-08-28 en ligne sur le theme -->
+<style id="avant">
+@media screen and (max-width: 749px) {
+  [id^='MainProduct-'] { padding-top: 8px !important; padding-bottom: 22px !important; }
+  [id^='MainProduct-'] .product { row-gap: 0 !important; }
+  [id^='MainProduct-'] .product__media-wrapper,
+  [id^='MainProduct-'] .slider-mobile-gutter,
+  [id^='MainProduct-'] .product__media-list,
+  [id^='MainProduct-'] .product__media-item,
+  [id^='MainProduct-'] .product__media,
+  [id^='MainProduct-'] .product-media-container { margin-bottom: 0 !important; padding-bottom: 0 !important; }
+  [id^='MainProduct-'] .slider-buttons--dots {
+    position: static !important; display: flex !important;
+    min-height: 34px !important; height: 34px !important;
+    margin: 4px 0 0 !important; padding: 0 !important; transform: none !important;
+  }
+  [id^='MainProduct-'] .slider-counter__link { padding: 5px !important; }
+  [id^='MainProduct-'] .thumbnail-slider { margin: 0 !important; }
+  [id^='MainProduct-'] .product__media-wrapper + .product__info-wrapper { margin-top: 0 !important; }
+  [id^='MainProduct-'] .product__info-wrapper { padding-top: 8px !important; }
+  [id^='MainProduct-'] .vrl-main-eyebrow { margin: 0 0 8px !important; }
+  [id^='MainProduct-'] .product__title { margin-top: 0 !important; margin-bottom: 6px !important; }
+}
+</style>
+
+<!-- APRES : bloc livre. Active par mesure-galerie.js pour la 2e passe. -->
+<style id="apres" media="not all">
+/* VERLINE-V3-COMPACT-PRODUCT-2026-08-28 */
+@media screen and (max-width: 749px) {
+  [id^='MainProduct-'] {
+    padding-top: 0 !important;
+    padding-bottom: 22px !important;
+  }
+  [id^='MainProduct-'] .product {
+    row-gap: 0 !important;
+  }
+
+  /* Image pleine largeur : la piste reservait 2 x 14 px de scroll-padding,
+     ce qui laissait depasser le debut de la vue suivante a droite. */
+  #MediaGallery-main {
+    --mobile-scroll-padding: 0px;
+  }
+
+  /* Hauteur de piste constante : toutes les vues au format carre. Sans ca le
+     <ul> flex prend la hauteur de la plus grande image (2 visuels sur 6 sont
+     en 1125x1398) et laisse un vide sous les visuels carres. */
+  [id^='MainProduct-'] .product-media-container {
+    --aspect-ratio: 1 !important;
+  }
+  /* Aucun recadrage : les 2 portraits sont contenus sur le fond sable. */
+  [id^='MainProduct-'] .product-media-container .media > img {
+    object-fit: contain !important;
+  }
+  [id^='MainProduct-'] .product__media-wrapper,
+  [id^='MainProduct-'] .slider-mobile-gutter,
+  [id^='MainProduct-'] .product__media-list,
+  [id^='MainProduct-'] .product__media-item,
+  [id^='MainProduct-'] .product__media,
+  [id^='MainProduct-'] .product-media-container {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  /* Puces supprimees. La rangee ne reserve plus aucune hauteur ; les fleches
+     restent, elles sont en position absolue sur le slider. */
+  [id^='MainProduct-'] .slider__dots {
+    display: none !important;
+  }
+  [id^='MainProduct-'] .slider-buttons {
+    min-height: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  [id^='MainProduct-'] .thumbnail-slider {
+    margin: 0 !important;
+  }
+  [id^='MainProduct-'] .product__media-wrapper + .product__info-wrapper {
+    margin-top: 0 !important;
+  }
+  [id^='MainProduct-'] .product__info-wrapper {
+    padding-top: 14px !important;
+  }
+  [id^='MainProduct-'] .vrl-main-eyebrow {
+    margin: 0 0 8px !important;
+  }
+  [id^='MainProduct-'] .product__title {
+    margin-top: 0 !important;
+    margin-bottom: 6px !important;
+  }
+  [id^='MainProduct-'] .product-page-price {
+    margin: 10px 0 8px !important;
+  }
+  [id^='MainProduct-'] .vrl-bundles {
+    margin: 8px 0 10px !important;
+  }
+  [id^='MainProduct-'] .product-form__quantity.vrl-native-quantity--managed {
+    margin: 0 !important;
+  }
+  [id^='MainProduct-'] .vrl-payment-panel {
+    margin-top: 8px !important;
+    padding: 10px !important;
+  }
+  [id^='MainProduct-'] .vrl-main-trust {
+    gap: 2px !important;
+    padding: 10px 0 6px !important;
+  }
+  [id^='MainProduct-'] .vrl-main-trust a,
+  [id^='MainProduct-'] .vrl-main-trust span {
+    min-height: 28px !important;
+    padding: 2px 4px !important;
+  }
+  [id^='MainProduct-'] .product__info-container > .product__accordion {
+    margin-top: 0 !important;
+  }
+}
+</style>
+</head>
+<body class="gradient">
+
+<div class="faux-header"><div class="faux-logo">Verline</div></div>
+
+<section id="MainProduct-main" class="page-width section-main-padding" data-section="main">
+  <div class="product product--medium product--left product--thumbnail_slider product--mobile-hide grid grid--1-col grid--2-col-tablet">
+
+    <div class="grid__item product__media-wrapper product__column-sticky">
+      <media-gallery id="MediaGallery-main" data-section="main" role="region" data-desktop-layout="thumbnail_slider">
+        <div class="visually-hidden" role="status"></div>
+        <slider-component id="GalleryViewer-main" class="slider-mobile-gutter" data-update-active="true">
+          <ul id="Slider-Gallery-main"
+              class="product__media-list contains-media grid grid--peek list-unstyled slider slider--mobile gallery-slider--desktop product__media-list--no-outer-spacing"
+              role="list"></ul>
+          <div id="sliderButtons" class="slider-buttons slider-buttons--dots slider--mobile-arrows-sides no-js-hidden quick-add-hidden">
+            <button type="button" class="slider-button--prev splide__arrow splide__arrow--prev desktop-hidden" name="previous">
+              <svg viewBox="0 0 40 40" width="40" height="40"><path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path></svg>
+            </button>
+            <div id="galleryDots" class="slider__dots flex-center desktop-hidden"></div>
+            <button type="button" class="slider-button--next splide__arrow splide__arrow--next desktop-hidden" name="next">
+              <svg viewBox="0 0 40 40" width="40" height="40"><path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path></svg>
+            </button>
+          </div>
+        </slider-component>
+        <slider-component id="GalleryThumbnails-main" class="thumbnail-slider slider-mobile-gutter quick-add-hidden small-hide">
+          <ul id="Slider-Thumbnails-main" class="thumbnail-list list-unstyled slider slider--mobile slider--tablet-up"></ul>
+        </slider-component>
+      </media-gallery>
+    </div>
+
+    <div class="product__info-wrapper grid__item product__column-sticky">
+      <div id="ProductInfo-main" class="product__info-container main-product__info-container">
+        <p class="vrl-main-eyebrow">Rituel antifongique ciblé • Pieds &amp; corps</p>
+        <h1 class="product__title">Gel Lavant Purifiant Pieds &amp; Corps</h1>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+// Dimensions reelles des 6 medias du produit (Admin API)
+window.MEDIAS = [
+  {w:1254,h:1254},{w:1254,h:1254},{w:1254,h:1254},
+  {w:1125,h:1398},{w:1126,h:1397},{w:1254,h:1254}
+];
+(function(){
+  var ul = document.getElementById('Slider-Gallery-main');
+  var dots = document.getElementById('galleryDots');
+  window.MEDIAS.forEach(function(m,i){
+    var ratio = (m.w/m.h).toFixed(4);
+    var li = document.createElement('li');
+    li.className = 'product__media-item grid__item slider__slide' + (i===0 ? ' is-active' : '');
+    li.id = 'Slide-main-' + i;
+    li.innerHTML =
+      '<div class="product-media-container media-type-image media-fit-contain global-media-settings gradient constrain-height"' +
+      ' style="--ratio:' + ratio + ';--preview-ratio:' + ratio + '">' +
+        '<modal-opener class="product__modal-opener product__modal-opener--image no-js-hidden">' +
+          '<span class="product__media-icon motion-reduce quick-add-hidden product__media-icon--lightbox" aria-hidden="true"></span>' +
+          '<div class="product__media media media--transparent">' +
+            '<img class="ph image-magnify-lightbox" width="' + m.w + '" height="' + m.h + '" alt="">' +
+          '</div>' +
+          '<button class="product__media-toggle quick-add-hidden product__media-zoom-lightbox" type="button"></button>' +
+        '</modal-opener>' +
+      '</div>';
+    ul.appendChild(li);
+
+    var b = document.createElement('button');
+    b.className = 'slider-counter__link slider-counter__link--dots link' + (i===0 ? ' slider-counter__link--active' : '');
+    b.innerHTML = '<span class="dot"></span>';
+    dots.appendChild(b);
+  });
+})();
+</script>
+</body>
+</html>
