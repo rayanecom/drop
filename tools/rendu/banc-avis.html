@@ -1,0 +1,245 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>banc avis</title>
+<style>
+  body{margin:0;background:#FBF9F5;font-family:-apple-system,'Manrope',sans-serif}
+  #sec{--vap-green:#173F32;--vap-cream:#F7F4EC;--vap-card:#FFFEFA;--vap-text:#29342E;
+      --vap-muted:#7A837E;--vap-gold:#B5914B;--vap-empty:#D9DEDA;--vap-border:#DDE4DF;
+      --vap-gap:14px;--vap-per:1;}
+  @media screen and (min-width:750px){#sec{--vap-per:3;--vap-gap:20px;}}
+  .vapPad{padding-top:18px;padding-bottom:18px}
+  @media screen and (min-width:750px){.vapPad{padding-top:24px;padding-bottom:24px}}
+
+  .vap { background: var(--vap-cream); }
+  .vap *, .vap *::before, .vap *::after { box-sizing: border-box; }
+
+  .vap__shell { width: min(1200px, calc(100% - 28px)); margin: 0 auto; }
+
+  .vap__head { margin-bottom: 18px; text-align: center; }
+  .vap__title {
+    margin: 0;
+    color: var(--vap-green);
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(26px, 5vw, 40px);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -.02em;
+  }
+  .vap__sub {
+    margin: 8px 0 0;
+    color: var(--vap-muted);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .vap__stage { position: relative; }
+
+  .vap__track {
+    display: flex;
+    gap: var(--vap-gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overscroll-behavior-x: contain;
+  }
+  .vap__track::-webkit-scrollbar { display: none; }
+
+  .vap__card {
+    flex: 0 0 calc((100% - (var(--vap-per) - 1) * var(--vap-gap)) / var(--vap-per));
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    background: var(--vap-card);
+    border: 1px solid var(--vap-border);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(23,63,50,.03), 0 10px 26px rgba(23,63,50,.05);
+  }
+
+  .vap__photo {
+    aspect-ratio: var(--vap-ratio, 5 / 4);
+    background: var(--vap-empty);
+  }
+  .vap__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .vap__body {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 16px 17px 18px;
+    font-family: var(--font-body-family, -apple-system, "Segoe UI", Arial, sans-serif);
+  }
+
+  .vap__who { display: flex; align-items: baseline; gap: 8px; margin: 0; flex-wrap: wrap; }
+  .vap__name { color: var(--vap-green); font-size: 16px; font-weight: 700; line-height: 1.15; }
+  .vap__meta { color: var(--vap-muted); font-size: 12px; line-height: 1.2; }
+
+  .vap__stars { margin: 0; color: var(--vap-gold); font-size: 15px; letter-spacing: 2px; line-height: 1; }
+  .vap__star--off { color: var(--vap-empty); }
+
+  .vap__quote { margin: 2px 0 0; color: var(--vap-text); font-size: 16px; line-height: 1.6; }
+
+  .vap__nav {
+    position: absolute;
+    top: 32%;
+    z-index: 2;
+    display: none;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    transform: translateY(-50%);
+    align-items: center;
+    justify-content: center;
+    color: var(--vap-green);
+    background: rgba(255,254,250,.94);
+    border: 1px solid var(--vap-border);
+    border-radius: 50%;
+    box-shadow: 0 3px 12px rgba(23,63,50,.14);
+    cursor: pointer;
+  }
+  .vap__nav svg { width: 19px; height: 19px; }
+  .vap__nav--prev { left: -6px; }
+  .vap__nav--next { right: -6px; }
+  .vap__nav[hidden] { display: none !important; }
+  .vap__stage:not([data-vap-single]) .vap__nav { display: flex; }
+
+  @media screen and (min-width: 750px) {
+    .vap__shell { width: min(1200px, calc(100% - 64px)); }
+    .vap__nav { width: 46px; height: 46px; }
+    .vap__nav--prev { left: -22px; }
+    .vap__nav--next { right: -22px; }
+    .vap__body { padding: 18px 20px 20px; }
+    .vap__name { font-size: 17px; }
+    .vap__quote { font-size: 15px; line-height: 1.62; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vap__track { scroll-behavior: auto; }
+  }
+</style>
+<div id="sec">
+<div class="vap vapPad">
+  <div class="vap__shell">
+    <div class="vap__head">
+      <h2 class="vap__title">Ils l'utilisent au quotidien</h2>
+    </div>
+    <div class="vap__stage">
+      <button class="vap__nav vap__nav--prev" type="button" aria-label="Avis précédent" data-vap-prev>
+        <svg viewBox="0 0 24 24"><path d="M15.2 4.4 7.6 12l7.6 7.6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <ul class="vap__track" data-vap-track role="list">
+<li class="vap__card">
+  <div class="vap__photo" style="--vap-ratio: 1000 / 799;"><img class="vap__img" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 799'%3E%3Crect width='1000' height='799' fill='%23b9c9bf'/%3E%3Ctext x='500' y='430' font-size='58' text-anchor='middle' fill='%23173F32'%3Ephoto 1000x799%3C/text%3E%3C/svg%3E" alt="Thomas"></div>
+  <div class="vap__body">
+    <p class="vap__who"><span class="vap__name">Thomas</span><span class="vap__meta">31 ans</span></p>
+    <p class="vap__stars" role="img" aria-label="5 étoiles sur 5"><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span></p>
+    <p class="vap__quote">Après le sport, mes pieds restaient souvent humides et inconfortables. Le gel laisse une vraie sensation de propre et de fraîcheur.</p>
+  </div>
+</li>
+<li class="vap__card">
+  <div class="vap__photo" style="--vap-ratio: 1000 / 799;"><img class="vap__img" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 799'%3E%3Crect width='1000' height='799' fill='%23b9c9bf'/%3E%3Ctext x='500' y='430' font-size='58' text-anchor='middle' fill='%23173F32'%3Ephoto 1000x799%3C/text%3E%3C/svg%3E" alt="Nathalie"></div>
+  <div class="vap__body">
+    <p class="vap__who"><span class="vap__name">Nathalie</span><span class="vap__meta">56 ans</span></p>
+    <p class="vap__stars" role="img" aria-label="5 étoiles sur 5"><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span></p>
+    <p class="vap__quote">J'avais des démangeaisons récurrentes et je surveillais des signes de mycose. Cette routine m'aide surtout à garder mes pieds nets et confortables.</p>
+  </div>
+</li>
+<li class="vap__card">
+  <div class="vap__photo" style="--vap-ratio: 1000 / 799;"><img class="vap__img" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 799'%3E%3Crect width='1000' height='799' fill='%23b9c9bf'/%3E%3Ctext x='500' y='430' font-size='58' text-anchor='middle' fill='%23173F32'%3Ephoto 1000x799%3C/text%3E%3C/svg%3E" alt="Élodie"></div>
+  <div class="vap__body">
+    <p class="vap__who"><span class="vap__name">Élodie</span><span class="vap__meta">39 ans</span></p>
+    <p class="vap__stars" role="img" aria-label="4 étoiles sur 5"><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star vap__star--off">&#9733;</span></p>
+    <p class="vap__quote">Facile à glisser dans ma trousse. Après une longue journée en chaussures fermées, j'apprécie vraiment la sensation de fraîcheur.</p>
+  </div>
+</li>
+<li class="vap__card">
+  <div class="vap__photo" style="--vap-ratio: 1000 / 799;"><img class="vap__img" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 799'%3E%3Crect width='1000' height='799' fill='%23b9c9bf'/%3E%3Ctext x='500' y='430' font-size='58' text-anchor='middle' fill='%23173F32'%3Ephoto 1000x799%3C/text%3E%3C/svg%3E" alt="Michel"></div>
+  <div class="vap__body">
+    <p class="vap__who"><span class="vap__name">Michel</span><span class="vap__meta">67 ans</span></p>
+    <p class="vap__stars" role="img" aria-label="5 étoiles sur 5"><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span></p>
+    <p class="vap__quote">Mes pieds étaient souvent échauffés après mes marches. J'aime le côté frais du gel et son parfum propre, sans être trop fort.</p>
+  </div>
+</li>
+<li class="vap__card">
+  <div class="vap__photo" style="--vap-ratio: 1000 / 799;"><img class="vap__img" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 799'%3E%3Crect width='1000' height='799' fill='%23b9c9bf'/%3E%3Ctext x='500' y='430' font-size='58' text-anchor='middle' fill='%23173F32'%3Ephoto 1000x799%3C/text%3E%3C/svg%3E" alt="Karim"></div>
+  <div class="vap__body">
+    <p class="vap__who"><span class="vap__name">Karim</span><span class="vap__meta">44 ans</span></p>
+    <p class="vap__stars" role="img" aria-label="5 étoiles sur 5"><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span></p>
+    <p class="vap__quote">Avec mes chaussures de sécurité toute la journée, j'avais souvent les pieds humides. J'aime la mousse et le parfum frais après la douche.</p>
+  </div>
+</li>
+<li class="vap__card">
+  <div class="vap__photo" style="--vap-ratio: 1000 / 799;"><img class="vap__img" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 799'%3E%3Crect width='1000' height='799' fill='%23b9c9bf'/%3E%3Ctext x='500' y='430' font-size='58' text-anchor='middle' fill='%23173F32'%3Ephoto 1000x799%3C/text%3E%3C/svg%3E" alt="Léa"></div>
+  <div class="vap__body">
+    <p class="vap__who"><span class="vap__name">Léa</span><span class="vap__meta">27 ans</span></p>
+    <p class="vap__stars" role="img" aria-label="4 étoiles sur 5"><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star vap__star--off">&#9733;</span></p>
+    <p class="vap__quote">Après les vestiaires, je voulais surtout une routine simple. Le gel se rince vite et laisse mes pieds frais sans parfum trop lourd.</p>
+  </div>
+</li>
+<li class="vap__card">
+  <div class="vap__photo" style="--vap-ratio: 1000 / 799;"><img class="vap__img" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 799'%3E%3Crect width='1000' height='799' fill='%23b9c9bf'/%3E%3Ctext x='500' y='430' font-size='58' text-anchor='middle' fill='%23173F32'%3Ephoto 1000x799%3C/text%3E%3C/svg%3E" alt="Sophie"></div>
+  <div class="vap__body">
+    <p class="vap__who"><span class="vap__name">Sophie</span><span class="vap__meta">62 ans</span></p>
+    <p class="vap__stars" role="img" aria-label="5 étoiles sur 5"><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span></p>
+    <p class="vap__quote">Je surveillais des signes de mycose qui revenaient. J'ai surtout adopté ce gel pour garder une routine régulière et une sensation de propreté.</p>
+  </div>
+</li>
+<li class="vap__card">
+  <div class="vap__photo" style="--vap-ratio: 1000 / 799;"><img class="vap__img" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 799'%3E%3Crect width='1000' height='799' fill='%23b9c9bf'/%3E%3Ctext x='500' y='430' font-size='58' text-anchor='middle' fill='%23173F32'%3Ephoto 1000x799%3C/text%3E%3C/svg%3E" alt="Antoine"></div>
+  <div class="vap__body">
+    <p class="vap__who"><span class="vap__name">Antoine</span><span class="vap__meta">36 ans</span></p>
+    <p class="vap__stars" role="img" aria-label="5 étoiles sur 5"><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span><span class="vap__star">&#9733;</span></p>
+    <p class="vap__quote">Je l'ai intégré à ma douche sans changer mes habitudes. L'odeur est légère, le rinçage rapide et mes pieds restent frais plus longtemps.</p>
+  </div>
+</li>
+      </ul>
+      <button class="vap__nav vap__nav--next" type="button" aria-label="Avis suivant" data-vap-next>
+        <svg viewBox="0 0 24 24"><path d="M8.8 4.4 16.4 12l-7.6 7.6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+(function () {
+  document.querySelectorAll('[data-vap-track]').forEach(function (track) {
+    if (track.dataset.vapReady === '1') return;
+    track.dataset.vapReady = '1';
+
+    var stage = track.closest('.vap__stage');
+    var prev  = stage.querySelector('[data-vap-prev]');
+    var next  = stage.querySelector('[data-vap-next]');
+
+    function step() {
+      var card = track.querySelector('.vap__card');
+      if (!card) return track.clientWidth;
+      var gap = parseFloat(getComputedStyle(track).columnGap || '0') || 0;
+      return card.getBoundingClientRect().width + gap;
+    }
+
+    function sync() {
+      var max = track.scrollWidth - track.clientWidth - 2;
+      var noScroll = max <= 0;
+      stage.toggleAttribute('data-vap-single', noScroll);
+      prev.hidden = noScroll || track.scrollLeft <= 2;
+      next.hidden = noScroll || track.scrollLeft >= max;
+    }
+
+    prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+    next.addEventListener('click', function () { track.scrollBy({ left:  step(), behavior: 'smooth' }); });
+    track.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
+  });
+})();
+</script>
