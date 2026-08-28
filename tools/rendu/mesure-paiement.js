@@ -10,7 +10,10 @@ const { chromium } = require('playwright');
       const lis = [...panel.querySelectorAll('li')];
       const tops = new Set(lis.map(li => Math.round(li.getBoundingClientRect().top)));
       const r = panel.getBoundingClientRect();
+      const btn = document.querySelector('.vrl-buy-now').getBoundingClientRect();
+      const rule = r.top;
       return {
+        blanc_bouton_vers_filet: Math.round(rule - btn.bottom),
         hauteur_panneau: Math.round(r.height),
         largeur_logo: Math.round(lis[0].getBoundingClientRect().width),
         hauteur_logo: Math.round(lis[0].getBoundingClientRect().height),
