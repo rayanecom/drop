@@ -82,12 +82,19 @@
             {%- endif -%}
 
             <div class="vap__body">
-              <p class="vap__who">
-                <span class="vap__name">{{ block.settings.name }}</span>
-                {%- if block.settings.meta != blank -%}
-                  <span class="vap__meta">{{ block.settings.meta }}</span>
+              <div class="vap__ident">
+                <p class="vap__who">
+                  <span class="vap__name">{{ block.settings.name }}</span>
+                  {%- if block.settings.meta != blank -%}
+                    <span class="vap__meta">{{ block.settings.meta }}</span>
+                  {%- endif -%}
+                </p>
+                {%- if section.settings.show_badge and section.settings.badge_text != blank -%}
+                  <span class="vap__badge">
+                    <span class="vap__check" aria-hidden="true">&#10003;</span>{{ section.settings.badge_text }}
+                  </span>
                 {%- endif -%}
-              </p>
+              </div>
 
               {%- assign r = block.settings.rating -%}
               <p class="vap__stars" role="img" aria-label="{{ r }} étoiles sur 5">
@@ -184,9 +191,37 @@
     font-family: var(--font-body-family, -apple-system, "Segoe UI", Arial, sans-serif);
   }
 
-  .vap__who { display: flex; align-items: baseline; gap: 8px; margin: 0; flex-wrap: wrap; }
+  .vap__ident { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+  .vap__who { display: flex; align-items: baseline; gap: 8px; margin: 0; flex-wrap: wrap; min-width: 0; }
   .vap__name { color: var(--vap-green); font-size: 16px; font-weight: 700; line-height: 1.15; }
   .vap__meta { color: var(--vap-muted); font-size: 12px; line-height: 1.2; }
+
+  .vap__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+    padding: 5px 9px;
+    color: var(--vap-green);
+    background: #EDF3EF;
+    border: 1px solid #D9E4DC;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+  .vap__check {
+    display: inline-flex;
+    width: 15px;
+    height: 15px;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    background: var(--vap-green);
+    border-radius: 50%;
+    font-size: 9px;
+  }
 
   .vap__stars { margin: 0; color: var(--vap-gold); font-size: 15px; letter-spacing: 2px; line-height: 1; }
   .vap__star--off { color: var(--vap-empty); }
@@ -305,6 +340,18 @@
       "default": 3
     },
     {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Afficher la pastille de vérification",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Texte de la pastille",
+      "default": "Avis vérifié"
+    },
+    {
       "type": "header",
       "content": "Marges de section"
     },
@@ -326,7 +373,7 @@
       "step": 4,
       "unit": "px",
       "label": "Marge basse",
-      "default": 24
+      "default": 0
     }
   ],
   "blocks": [
