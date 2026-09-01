@@ -1,0 +1,115 @@
+{%- liquid
+  assign og_site_name = 'Verline'
+  assign og_title = page_title | default: og_site_name
+  assign og_url = canonical_url | default: request.origin
+  assign og_type = 'website'
+  assign og_description = page_description | default: shop.description | default: og_site_name
+
+  if request.page_type == 'index'
+    assign og_title = 'Verline | Soin lavant pieds au Tea Tree et à la menthe'
+    assign og_description = 'Découvrez Verline, le rituel lavant pour des pieds propres et frais, au Tea Tree, à la menthe et à l’aloe vera. Livraison suivie en France.'
+  elsif request.page_type == 'product'
+    assign og_type = 'product'
+    assign og_title = 'Gel lavant pieds Tea Tree, menthe & aloe vera | Verline'
+    assign og_description = 'Gel lavant pieds Verline au Tea Tree, à la menthe et à l’aloe vera. Nettoie et rafraîchit au quotidien. Traitement 1 à 3 jours, transport estimé 8 à 16 jours.'
+  elsif request.page_type == 'article'
+    assign og_type = 'article'
+  elsif request.page_type == 'password'
+    assign og_url = request.origin
+  endif
+
+  # Identite de la carte partagee (WhatsApp, Messenger, Facebook).
+  #
+  # Le robot Meta ne relit pas une adresse qu'il a deja vue : il ressort la
+  # fiche enregistree la premiere fois, meme si la page a change depuis. Un
+  # site corrige continue donc d'afficher son ancienne carte pendant des
+  # semaines.
+  #
+  # og:url est l'identifiant sous lequel Meta range la carte. En lui donnant
+  # une adresse versionnee, la page d'accueil se presente sous une identite
+  # que le robot n'a jamais indexee : il est oblige d'aller la lire pour de
+  # vrai. Le visiteur, lui, reste sur l'adresse nue qu'on lui a envoyee.
+  #
+  # Pour forcer une nouvelle lecture apres un changement : incrementer.
+  assign og_card_version = '2'
+  if request.page_type == 'index'
+    assign og_url = request.origin | append: '/?og=' | append: og_card_version
+  endif
+
+  # Visuel de la carte. page_image est vide sur l'accueil tant qu'aucune image
+  # de partage n'est renseignee dans les preferences : on retombe alors sur le
+  # visuel du produit, pour ne jamais partager une carte sans image.
+  assign og_image = page_image
+  if og_image == blank
+    assign og_image = collections.all.products.first.featured_image
+  endif
+%}
+
+<meta property="og:site_name" content="{{ og_site_name }}">
+<meta property="og:url" content="{{ og_url }}">
+<meta property="og:title" content="{{ og_title | escape }}">
+<meta property="og:type" content="{{ og_type }}">
+<meta property="og:description" content="{{ og_description | escape }}">
+
+{%- if og_image != blank -%}
+  <meta property="og:image" content="https:{{ og_image | image_url }}">
+  <meta property="og:image:secure_url" content="https:{{ og_image | image_url }}">
+  <meta property="og:image:width" content="{{ og_image.width }}">
+  <meta property="og:image:height" content="{{ og_image.height }}">
+  <meta name="twitter:image" content="https:{{ og_image | image_url }}">
+{%- endif -%}
+
+{%- comment -%}
+  Fiche produit pour les robots Meta — c'est cette carte que WhatsApp, Messenger
+  et Instagram affichent quand on partage le lien.
+
+  Deux pièges corrigés ici :
+
+  1. product:availability doit être émise. Sans elle, une page qui déclare
+     og:type=product ne donne aucun signal de disponibilité au robot Meta, qui
+     affiche alors la carte en « en rupture de stock ». C'est ce qui se passait.
+
+  2. Le prix OpenGraph exige un POINT décimal. money_without_currency suit le
+     réglage de la boutique, qui utilise la virgule (« 29,90 ») : Meta n'arrive
+     pas à lire ce prix. On recompose donc le montant à partir des centimes, ce
+     qui reste juste quel que soit le réglage monétaire de la boutique.
+{%- endcomment -%}
+{%- if request.page_type == 'product' and product != blank -%}
+  {%- liquid
+    assign og_units = product.price | divided_by: 100
+    assign og_cents = product.price | modulo: 100 | prepend: '0' | slice: -2, 2
+    assign og_amount = og_units | append: '.' | append: og_cents
+    if product.available
+      assign og_stock = 'in stock'
+      assign og_stock_legacy = 'instock'
+    else
+      assign og_stock = 'out of stock'
+      assign og_stock_legacy = 'oos'
+    endif
+  -%}
+  <meta property="og:price:amount" content="{{ og_amount }}">
+  <meta property="og:price:currency" content="{{ cart.currency.iso_code }}">
+  <meta property="og:availability" content="{{ og_stock_legacy }}">
+  <meta property="product:price:amount" content="{{ og_amount }}">
+  <meta property="product:price:currency" content="{{ cart.currency.iso_code }}">
+  <meta property="product:availability" content="{{ og_stock }}">
+  <meta property="product:condition" content="new">
+  <meta property="product:brand" content="{{ og_site_name }}">
+  {%- assign og_sku = product.selected_or_first_available_variant.sku -%}
+  {%- if og_sku != blank -%}
+    <meta property="product:retailer_item_id" content="{{ og_sku | escape }}">
+  {%- endif -%}
+{%- endif -%}
+
+{%- if settings.social_twitter_link != blank -%}
+  <meta name="twitter:site" content="{{ settings.social_twitter_link | split: 'twitter.com/' | last | prepend: '@' }}">
+{%- endif -%}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ og_title | escape }}">
+<meta name="twitter:description" content="{{ og_description | escape }}">
+
+{%- comment -%}
+  Cadrage uniforme des visuels produit. Chargé ici parce que meta-tags est le
+  seul point du <head> rendu sur toutes les pages sans toucher à theme.liquid.
+{%- endcomment -%}
+{%- render 'verline-visuels' -%}
