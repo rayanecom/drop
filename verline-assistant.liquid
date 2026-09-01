@@ -1,0 +1,565 @@
+{%- comment -%}
+  Verline — assistant de vente, rendu sur toutes les pages depuis layout/theme.liquid.
+
+  POURQUOI CODÉ ET PAS UNE APP
+  Une app de chat (Tidio, Gorgias…) coûte un abonnement mensuel et charge un
+  script tiers qui pèse sur la vitesse mobile. Un vrai modèle de langage
+  exigerait une clé d'API : dans un thème Shopify, cette clé serait publique
+  dans le code source, donc utilisable par n'importe qui aux frais de la
+  boutique. Cet assistant est donc local : aucune requête sortante, aucune
+  latence, aucun coût.
+
+  CE QU'IL SAIT
+  Uniquement des faits tirés de la fiche produit et des réglages réels de la
+  boutique. Les prix des lots sont lus dans la page au moment où on les
+  demande, donc ils ne peuvent pas se désynchroniser du bloc d'offre. Les
+  moyens de paiement viennent de shop.enabled_payment_types, donc de ce qui est
+  réellement activé.
+
+  CE QU'IL NE DIRA JAMAIS
+  Aucune allégation de soin. Le produit est un cosmétique lavant : il ne traite
+  ni ne soigne aucune affection. Toute question qui touche à une pathologie est
+  renvoyée vers un professionnel de santé, jamais vers une promesse.
+{%- endcomment -%}
+
+{%- liquid
+  assign prix_unitaire = product.price | default: 2990
+  if product == blank
+    assign prix_unitaire = 2990
+  endif
+  assign prix_affiche = prix_unitaire | money | remove: '€' | strip
+  assign page_contact = '/pages/contact'
+  assign page_suivi = '/pages/track-order'
+-%}
+
+{%- capture moyens_paiement -%}
+  {%- assign noms = '' -%}
+  {%- for type in shop.enabled_payment_types -%}
+    {%- case type -%}
+      {%- when 'visa' -%}{%- assign n = 'Visa' -%}
+      {%- when 'master' -%}{%- assign n = 'Mastercard' -%}
+      {%- when 'american_express' -%}{%- assign n = 'American Express' -%}
+      {%- when 'maestro' -%}{%- assign n = 'Maestro' -%}
+      {%- when 'paypal' -%}{%- assign n = 'PayPal' -%}
+      {%- when 'apple_pay' -%}{%- assign n = 'Apple&nbsp;Pay' -%}
+      {%- when 'google_pay' -%}{%- assign n = 'Google&nbsp;Pay' -%}
+      {%- when 'shopify_pay' -%}{%- assign n = 'Shop&nbsp;Pay' -%}
+      {%- when 'bancontact' -%}{%- assign n = 'Bancontact' -%}
+      {%- else -%}{%- assign n = '' -%}
+    {%- endcase -%}
+    {%- if n != blank -%}
+      {%- if noms == blank -%}{%- assign noms = n -%}
+      {%- else -%}{%- assign noms = noms | append: ', ' | append: n -%}{%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {{- noms -}}
+{%- endcapture -%}
+
+<div id="vrlChat" class="vrl-chat" data-etat="ferme">
+  <button
+    type="button"
+    class="vrl-chat__bulle"
+    id="vrlChatOuvrir"
+    aria-expanded="false"
+    aria-controls="vrlChatPanneau"
+    aria-label="Ouvrir l'assistant Verline"
+  >
+    <span class="vrl-chat__bulle-icone" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+        <path d="M12 2C6.5 2 2 5.9 2 10.7c0 2.7 1.4 5.1 3.7 6.7-.1 1-.6 2.4-1.6 3.5-.2.2 0 .6.3.5 2.2-.4 3.9-1.4 4.9-2.2.9.2 1.8.3 2.7.3 5.5 0 10-3.9 10-8.8S17.5 2 12 2z"/>
+      </svg>
+    </span>
+    <span class="vrl-chat__bulle-texte">Une question&nbsp;?</span>
+    <span class="vrl-chat__pastille" id="vrlChatPastille" aria-hidden="true">1</span>
+  </button>
+
+  <section
+    class="vrl-chat__panneau"
+    id="vrlChatPanneau"
+    role="dialog"
+    aria-modal="false"
+    aria-labelledby="vrlChatTitre"
+    hidden
+  >
+    <header class="vrl-chat__entete">
+      <div>
+        <p class="vrl-chat__titre" id="vrlChatTitre">Verline</p>
+        <p class="vrl-chat__sous-titre">
+          <span class="vrl-chat__point" aria-hidden="true"></span>
+          Réponses immédiates
+        </p>
+      </div>
+      <button type="button" class="vrl-chat__fermer" id="vrlChatFermer" aria-label="Fermer l'assistant">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M6 6l12 12M18 6L6 18"/>
+        </svg>
+      </button>
+    </header>
+
+    <div class="vrl-chat__fil" id="vrlChatFil" role="log" aria-live="polite" aria-atomic="false"></div>
+
+    <div class="vrl-chat__suggestions" id="vrlChatSuggestions"></div>
+
+    <form class="vrl-chat__saisie" id="vrlChatForm" autocomplete="off">
+      <label class="vrl-chat__label" for="vrlChatInput">Votre question</label>
+      <input
+        type="text"
+        id="vrlChatInput"
+        name="question"
+        placeholder="Écrivez votre question…"
+        maxlength="200"
+      >
+      <button type="submit" class="vrl-chat__envoyer" aria-label="Envoyer">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+          <path d="M2.5 21l19-9-19-9v7l13.5 2-13.5 2z"/>
+        </svg>
+      </button>
+    </form>
+  </section>
+</div>
+
+<style id="verline-assistant-styles">
+  .vrl-chat{
+    --vrl-vert:#1F3D2B; --vrl-vert-clair:#2C5540; --vrl-ivoire:#FBF9F5;
+    --vrl-sable:#EFEAE1; --vrl-encre:#1A1A18; --vrl-gris:#5A5A54;
+    --vrl-bord:rgba(31,61,43,.14);
+    position:fixed; left:16px; bottom:16px; z-index:2147483000;
+    font-family:"DM Sans",system-ui,-apple-system,sans-serif;
+  }
+  @media(min-width:900px){ .vrl-chat{ left:24px; bottom:24px; } }
+
+  .vrl-chat__bulle{
+    display:inline-flex; align-items:center; gap:9px;
+    min-height:52px; padding:0 20px 0 16px;
+    border:0; border-radius:999px; cursor:pointer;
+    background:var(--vrl-vert); color:var(--vrl-ivoire);
+    font-family:inherit; font-size:15px; font-weight:600; letter-spacing:.01em;
+    box-shadow:0 6px 22px rgba(31,61,43,.28);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .vrl-chat__bulle:hover{ transform:translateY(-2px); box-shadow:0 10px 28px rgba(31,61,43,.34); }
+  .vrl-chat__bulle:active{ transform:translateY(0); }
+  .vrl-chat__bulle-icone{ display:inline-flex; }
+  .vrl-chat[data-etat="ouvert"] .vrl-chat__bulle{ display:none; }
+  @media(max-width:400px){ .vrl-chat__bulle-texte{ display:none; } .vrl-chat__bulle{ padding:0 16px; } }
+
+  .vrl-chat__pastille{
+    position:absolute; top:-3px; right:-3px;
+    min-width:20px; height:20px; padding:0 5px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:999px; background:#C7603F; color:#fff;
+    font-size:12px; font-weight:700; line-height:1;
+  }
+  .vrl-chat__pastille[hidden]{ display:none; }
+
+  .vrl-chat__panneau{
+    position:fixed; left:12px; right:12px; bottom:12px;
+    display:flex; flex-direction:column;
+    max-height:min(78vh,620px);
+    background:var(--vrl-ivoire); border:1px solid var(--vrl-bord);
+    border-radius:16px; overflow:hidden;
+    box-shadow:0 18px 50px rgba(26,26,24,.26);
+    animation:vrlChatEntree .22s ease-out;
+  }
+  /* L'attribut hidden pose display:none avec une specificite de (0,1,0), que
+     la regle de classe ci-dessus egale et emporte par l'ordre : le panneau
+     restait donc affiche et interceptait les clics de toute la page. Le
+     selecteur d'attribut monte a (0,2,0) et reprend la main. */
+  .vrl-chat__panneau[hidden]{ display:none; }
+
+  @media(min-width:560px){
+    .vrl-chat__panneau{ left:auto; right:auto; width:380px; }
+  }
+  @media(min-width:900px){ .vrl-chat__panneau{ bottom:24px; } }
+  @keyframes vrlChatEntree{ from{ opacity:0; transform:translateY(12px); } to{ opacity:1; transform:none; } }
+  @media(prefers-reduced-motion:reduce){ .vrl-chat__panneau{ animation:none; } }
+
+  .vrl-chat__entete{
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    padding:15px 14px 15px 18px; background:var(--vrl-vert); color:var(--vrl-ivoire);
+  }
+  .vrl-chat__titre{
+    margin:0; font-family:"Playfair Display",Georgia,serif;
+    font-size:21px; font-weight:600; letter-spacing:.01em;
+  }
+  .vrl-chat__sous-titre{
+    margin:3px 0 0; display:flex; align-items:center; gap:6px;
+    font-size:12.5px; opacity:.86; font-weight:500;
+  }
+  .vrl-chat__point{ width:7px; height:7px; border-radius:999px; background:#7FD1A8; }
+  .vrl-chat__fermer{
+    flex:0 0 auto; width:44px; height:44px; display:grid; place-items:center;
+    border:0; border-radius:999px; cursor:pointer;
+    background:rgba(251,249,245,.14); color:var(--vrl-ivoire);
+  }
+  .vrl-chat__fermer:hover{ background:rgba(251,249,245,.24); }
+
+  .vrl-chat__fil{
+    flex:1 1 auto; overflow-y:auto; -webkit-overflow-scrolling:touch;
+    padding:16px 14px 6px; display:flex; flex-direction:column; gap:10px;
+    background:var(--vrl-ivoire);
+  }
+  .vrl-chat__msg{
+    max-width:88%; padding:11px 14px; border-radius:14px;
+    font-size:15px; line-height:1.55; color:var(--vrl-encre);
+    animation:vrlMsg .18s ease-out;
+  }
+  @keyframes vrlMsg{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:none;} }
+  @media(prefers-reduced-motion:reduce){ .vrl-chat__msg{ animation:none; } }
+  .vrl-chat__msg--bot{ align-self:flex-start; background:var(--vrl-sable); border-bottom-left-radius:5px; }
+  .vrl-chat__msg--moi{ align-self:flex-end; background:var(--vrl-vert); color:var(--vrl-ivoire); border-bottom-right-radius:5px; }
+  .vrl-chat__msg strong{ font-weight:700; }
+  .vrl-chat__msg a{ color:var(--vrl-vert); font-weight:600; text-underline-offset:3px; }
+  .vrl-chat__msg--moi a{ color:var(--vrl-ivoire); }
+  .vrl-chat__msg ul{ margin:7px 0 0; padding-left:18px; }
+  .vrl-chat__msg li{ margin:3px 0; }
+
+  .vrl-chat__ecrit{ display:inline-flex; gap:4px; align-items:center; }
+  .vrl-chat__ecrit i{
+    width:6px; height:6px; border-radius:999px; background:var(--vrl-gris);
+    animation:vrlPouls 1.1s infinite ease-in-out;
+  }
+  .vrl-chat__ecrit i:nth-child(2){ animation-delay:.15s; }
+  .vrl-chat__ecrit i:nth-child(3){ animation-delay:.3s; }
+  @keyframes vrlPouls{ 0%,100%{ opacity:.28; transform:translateY(0);} 50%{ opacity:1; transform:translateY(-3px);} }
+
+  .vrl-chat__suggestions{
+    display:flex; flex-wrap:wrap; gap:7px;
+    padding:10px 14px 4px; background:var(--vrl-ivoire);
+  }
+  .vrl-chat__puce{
+    min-height:44px; padding:8px 14px; cursor:pointer;
+    border:1px solid var(--vrl-bord); border-radius:999px;
+    background:transparent; color:var(--vrl-vert);
+    font-family:inherit; font-size:13.5px; font-weight:600; line-height:1.2;
+  }
+  .vrl-chat__puce:hover{ background:var(--vrl-sable); }
+
+  .vrl-chat__saisie{
+    display:flex; align-items:center; gap:8px;
+    padding:11px 12px calc(11px + env(safe-area-inset-bottom,0px));
+    border-top:1px solid var(--vrl-bord); background:var(--vrl-ivoire);
+  }
+  .vrl-chat__label{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+  .vrl-chat__saisie input{
+    flex:1 1 auto; min-width:0; min-height:44px;
+    padding:0 14px; border:1px solid var(--vrl-bord); border-radius:999px;
+    background:#fff; color:var(--vrl-encre);
+    font-family:inherit; font-size:16px;
+  }
+  .vrl-chat__saisie input:focus{ outline:2px solid var(--vrl-vert); outline-offset:1px; }
+  .vrl-chat__envoyer{
+    flex:0 0 auto; width:44px; height:44px; display:grid; place-items:center;
+    border:0; border-radius:999px; cursor:pointer;
+    background:var(--vrl-vert); color:var(--vrl-ivoire);
+  }
+  .vrl-chat__envoyer:hover{ background:var(--vrl-vert-clair); }
+
+  /* Le bouton « remonter » du thème vit en bas à droite : aucun chevauchement. */
+</style>
+
+<script id="verline-assistant-script">
+(function () {
+  var racine = document.getElementById('vrlChat');
+  if (!racine || racine.dataset.pret === '1') { return; }
+  racine.dataset.pret = '1';
+
+  var PRIX = {{ prix_affiche | json }};
+  var PAIEMENTS = {{ moyens_paiement | strip | json }};
+  var URL_CONTACT = {{ page_contact | json }};
+  var URL_SUIVI = {{ page_suivi | json }};
+
+  var lienContact = '<a href="' + URL_CONTACT + '">nous écrire</a>';
+
+  // --- Prix des lots : lus dans la page, jamais recopiés -------------------
+  // Le bloc d'offre porte la quantité et le total sur chaque option. On les
+  // relit à chaque réponse, donc l'assistant ne peut pas annoncer un tarif
+  // périmé si l'offre change.
+  function lireLots() {
+    var radios = document.querySelectorAll('[id^="vrlBundles-"] input[type="radio"][data-total]');
+    var lots = [];
+    for (var i = 0; i < radios.length; i++) {
+      var q = parseInt(radios[i].value, 10);
+      var total = (radios[i].getAttribute('data-total') || '').trim();
+      if (q > 0 && total) { lots.push({ q: q, total: total }); }
+    }
+    return lots;
+  }
+
+  function reponsePrix() {
+    var lots = lireLots();
+    if (!lots.length) {
+      return 'Le flacon de 100&nbsp;ml est à <strong>' + PRIX + '&nbsp;€</strong>, livraison offerte. '
+           + 'Des lots à prix dégressif sont proposés sur la fiche produit.';
+    }
+    var li = '';
+    for (var i = 0; i < lots.length; i++) {
+      var l = lots[i];
+      li += '<li><strong>' + l.q + ' flacon' + (l.q > 1 ? 's' : '') + '</strong> — ' + l.total + '</li>';
+    }
+    return 'Voici les tarifs, livraison offerte&nbsp;:<ul>' + li + '</ul>'
+         + 'Plus vous en prenez, plus le prix au flacon baisse. La remise s\'applique automatiquement au panier, sans code.';
+  }
+
+  // --- Base de connaissances ----------------------------------------------
+  // Chaque entrée : des mots-déclencheurs, et une réponse tirée uniquement de
+  // la fiche produit ou des réglages réels de la boutique.
+  var BASE = [
+    { id:'prix', mots:['prix','tarif','coute','couter','cout','combien','cher','euro','montant','payer combien','lot','flacon combien','pack','reduction','remise','promo','economie'],
+      reponse: reponsePrix },
+
+    { id:'livraison', mots:['livraison','livrer','delai','delais','expedition','expedier','recevoir','quand','arrive','colis','envoi','poste','jours','temps'],
+      reponse: function () {
+        return 'La <strong>livraison est offerte</strong>.<ul>'
+          + '<li>Préparation de la commande&nbsp;: <strong>1 à 3 jours ouvrés</strong></li>'
+          + '<li>Transport&nbsp;: <strong>8 à 16 jours</strong> estimés</li></ul>'
+          + 'Un numéro de suivi vous est envoyé par e-mail dès l\'expédition. '
+          + 'Vous pouvez suivre votre colis sur la page <a href="' + URL_SUIVI + '">Suivi de commande</a>.';
+      } },
+
+    { id:'suivi', mots:['suivi','tracking','suivre ma commande','ou est ma commande','numero de suivi','track'],
+      reponse: function () {
+        return 'Le numéro de suivi part par e-mail dès l\'expédition. '
+          + 'Entrez-le sur la page <a href="' + URL_SUIVI + '">Suivi de commande</a> pour voir où en est votre colis. '
+          + 'Rien reçu au bout de 3 jours ouvrés&nbsp;? Vérifiez vos indésirables, puis venez ' + lienContact + '.';
+      } },
+
+    { id:'retour', mots:['retour','rembours','satisfait','garantie','renvoyer','changer d avis','pas content','annuler'],
+      reponse: function () {
+        return 'Vous avez <strong>14 jours pour changer d\'avis</strong>, satisfait ou remboursé, '
+          + '<strong>sans avoir à vous justifier</strong>. Écrivez-nous via la page '
+          + '<a href="' + URL_CONTACT + '">Contact</a> et on s\'occupe du reste.';
+      } },
+
+    { id:'composition', mots:['composition','ingredient','ingredients','compose','contient','formule','actif','actifs','inci','naturel','tea tree','arbre a the','menthe','aloe','aloe vera','chimique','vegan','animaux','teste'],
+      reponse: function () {
+        return 'Trois actifs, choisis pour les pieds&nbsp;:<ul>'
+          + '<li><strong>Tea Tree</strong> <em>(Melaleuca alternifolia)</em> — purifiant, l\'actif principal contre les odeurs</li>'
+          + '<li><strong>Menthe poivrée</strong> <em>(Mentha piperita)</em> — la fraîcheur au rinçage</li>'
+          + '<li><strong>Aloe vera</strong> <em>(Aloe barbadensis)</em> — adoucit et hydrate</li></ul>'
+          + '<strong>100&nbsp;% d\'ingrédients d\'origine naturelle</strong>, formulé en France, '
+          + 'non testé sur les animaux. La liste INCI complète figure sur l\'emballage.';
+      } },
+
+    { id:'utilisation', mots:['utiliser','utilisation','appliquer','comment ca marche','mode d emploi','combien de fois','frequence','tous les jours','quotidien','douche','masser'],
+      reponse: function () {
+        return 'Trois étapes, sous la douche&nbsp;:<ul>'
+          + '<li><strong>Mouiller</strong> — à l\'eau chaude</li>'
+          + '<li><strong>Appliquer</strong> — une noisette, entre les orteils, masser 30&nbsp;secondes</li>'
+          + '<li><strong>Rincer et sécher</strong> — soigneusement entre les orteils</li></ul>'
+          + 'Utilisable quotidiennement, sur les pieds comme sur le corps entier.';
+      } },
+
+    { id:'duree', mots:['dure','duree','tient combien','combien de temps un flacon','autonomie','contenance','ml','taille','quantite','stock chez moi'],
+      reponse: function () {
+        return 'Le flacon de <strong>100&nbsp;ml</strong> (format pompe) tient <strong>4 à 6 semaines</strong> '
+          + 'selon la fréquence. En usage quotidien, comptez environ un mois.';
+      } },
+
+    { id:'odeur', mots:['odeur','sent','parfum','senteur','fort','ca pue','mentholé','fraicheur'],
+      reponse: function () {
+        return 'La menthe poivrée donne une fraîcheur nette au rinçage, légèrement mentholée. '
+          + 'Le parfum reste <strong>discret</strong>, il n\'envahit pas.';
+      } },
+
+    { id:'corps', mots:['corps','ailleurs','mains','aisselles','visage','partout','seulement les pieds','que les pieds'],
+      reponse: function () {
+        return 'Il est pensé pour les pieds, mais il s\'utilise sur le <strong>corps entier</strong>. '
+          + 'À éviter sur le visage et le contour des yeux.';
+      } },
+
+    { id:'sante', mots:['mycose','champignon','fongique','maladie','medicament','soigne','traite','guerit','infection','ongle','eczema','psoriasis','verrue','docteur','pharmacie','ordonnance'],
+      reponse: function () {
+        return 'Soyons clairs&nbsp;: Verline est un <strong>produit cosmétique lavant</strong>. '
+          + 'Il ne diagnostique, ne traite ni ne soigne aucune affection, et je ne vous promettrai pas le contraire. '
+          + 'Il nettoie, rafraîchit et limite les odeurs.<br><br>'
+          + 'Si vous avez un symptôme qui persiste, <strong>consultez un médecin ou un pharmacien</strong> — '
+          + 'c\'est la seule bonne réponse.';
+      } },
+
+    { id:'precaution', mots:['precaution','danger','risque','enceinte','grossesse','allaite','allaitement','enfant','bebe','peau sensible','allergie','irritation','contre indication'],
+      reponse: function () {
+        return 'Usage externe uniquement. Éviter le contact avec les yeux, ne pas appliquer sur une peau lésée, '
+          + 'tenir hors de portée des enfants.<br><br>'
+          + '<strong>Déconseillé aux femmes enceintes et allaitantes.</strong> '
+          + 'Peau sensible&nbsp;? Testez d\'abord sur une petite zone et arrêtez en cas d\'inconfort. '
+          + 'En cas de doute, demandez l\'avis d\'un professionnel de santé.';
+      } },
+
+    { id:'paiement', mots:['paiement','payer','carte','cb','visa','mastercard','paypal','apple pay','google pay','securise','securite','3d secure','plusieurs fois'],
+      reponse: function () {
+        var l = PAIEMENTS ? 'Moyens acceptés&nbsp;: <strong>' + PAIEMENTS + '</strong>.' :
+          'Les moyens acceptés sont affichés en bas de page.';
+        return l + '<br><br>Le paiement passe par le tunnel sécurisé de Shopify&nbsp;: '
+          + 'vos coordonnées bancaires ne transitent jamais par la boutique.';
+      } },
+
+    { id:'origine', mots:['fabrique','fabrication','origine','made in','provenance','ou est fait','france','laboratoire','usine'],
+      reponse: function () {
+        return 'Verline est conçu avec des <strong>laboratoires européens</strong> spécialisés en cosmétique botanique, '
+          + 'et <strong>formulé en France</strong>. L\'expédition se fait depuis la France.';
+      } },
+
+    { id:'contact', mots:['contact','joindre','parler','humain','sav','service client','telephone','mail','email','ecrire','reclamation'],
+      reponse: function () {
+        return 'Un humain vous répond via la page <a href="' + URL_CONTACT + '">Contact</a>. '
+          + 'Décrivez votre situation et, s\'il s\'agit d\'une commande, indiquez son numéro&nbsp;: ça ira plus vite.';
+      } },
+
+    { id:'commande', mots:['commander','acheter','panier','ajouter','comment commander','passer commande'],
+      reponse: function () {
+        return 'Choisissez votre format sur la fiche produit, cliquez sur <strong>Ajouter au panier</strong>, '
+          + 'puis validez. La remise des lots s\'applique toute seule, sans code à saisir.';
+      } }
+  ];
+
+  var SUGGESTIONS = [
+    { t:'Les prix', q:'Quels sont les prix ?' },
+    { t:'Délai de livraison', q:'Quand vais-je recevoir ma commande ?' },
+    { t:'Composition', q:'Quels sont les ingrédients ?' },
+    { t:'Comment l\'utiliser', q:'Comment utiliser le produit ?' },
+    { t:'Retours', q:'Et si ça ne me convient pas ?' },
+    { t:'Peau sensible', q:'J\'ai la peau sensible, précautions ?' }
+  ];
+
+  // --- Moteur de correspondance -------------------------------------------
+  // On retire les accents et la ponctuation pour qu'une faute de frappe ou un
+  // accent oublié ne fasse pas rater la réponse.
+  function normaliser(t) {
+    return String(t || '')
+      .toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/['’`]/g, ' ')
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function trouver(question) {
+    var q = normaliser(question);
+    if (!q) { return null; }
+    var meilleur = null, meilleurScore = 0;
+    for (var i = 0; i < BASE.length; i++) {
+      var score = 0;
+      for (var j = 0; j < BASE[i].mots.length; j++) {
+        var mot = normaliser(BASE[i].mots[j]);
+        if (!mot) { continue; }
+        if (q.indexOf(mot) !== -1) {
+          // Un mot long est plus discriminant qu'un mot court.
+          score += mot.length >= 6 ? 3 : (mot.length >= 4 ? 2 : 1);
+        }
+      }
+      if (score > meilleurScore) { meilleurScore = score; meilleur = BASE[i]; }
+    }
+    return meilleurScore >= 2 ? meilleur : null;
+  }
+
+  // --- Interface -----------------------------------------------------------
+  var fil = document.getElementById('vrlChatFil');
+  var zoneSug = document.getElementById('vrlChatSuggestions');
+  var panneau = document.getElementById('vrlChatPanneau');
+  var boutonOuvrir = document.getElementById('vrlChatOuvrir');
+  var boutonFermer = document.getElementById('vrlChatFermer');
+  var pastille = document.getElementById('vrlChatPastille');
+  var formulaire = document.getElementById('vrlChatForm');
+  var champ = document.getElementById('vrlChatInput');
+
+  function ajouter(contenu, qui, brut) {
+    var d = document.createElement('div');
+    d.className = 'vrl-chat__msg vrl-chat__msg--' + qui;
+    // brut === true : contenu de la boutique, écrit par nous, rendu en HTML.
+    // Sinon : texte saisi par le visiteur, inséré en texte pur — jamais en
+    // HTML, sinon une balise tapée dans le champ s'exécuterait dans la page.
+    if (brut) { d.innerHTML = contenu; } else { d.textContent = contenu; }
+    fil.appendChild(d);
+    fil.scrollTop = fil.scrollHeight;
+    return d;
+  }
+
+  function ecrit() {
+    var d = ajouter('<span class="vrl-chat__ecrit"><i></i><i></i><i></i></span>', 'bot', true);
+    return d;
+  }
+
+  function repondre(question) {
+    ajouter(question, 'moi');
+    var attente = ecrit();
+    var entree = trouver(question);
+    window.setTimeout(function () {
+      attente.remove();
+      if (entree) {
+        ajouter(entree.reponse(), 'bot', true);
+      } else {
+        ajouter(
+          'Je n\'ai pas la réponse à celle-là, et je préfère vous le dire plutôt que d\'inventer.<br><br>'
+          + 'Reformulez avec un mot-clé (prix, livraison, ingrédients, retours…), ou allez '
+          + lienContact + '&nbsp;: quelqu\'un vous répondra directement.',
+          'bot',
+          true
+        );
+      }
+    }, 420);
+  }
+
+  function poserSuggestions() {
+    zoneSug.innerHTML = '';
+    for (var i = 0; i < SUGGESTIONS.length; i++) {
+      (function (s) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'vrl-chat__puce';
+        b.textContent = s.t;
+        b.addEventListener('click', function () { repondre(s.q); });
+        zoneSug.appendChild(b);
+      })(SUGGESTIONS[i]);
+    }
+  }
+
+  var demarre = false;
+  function demarrer() {
+    if (demarre) { return; }
+    demarre = true;
+    ajouter('Bonjour&nbsp;! Je réponds tout de suite sur le produit, les prix, la livraison et les retours.', 'bot', true);
+    window.setTimeout(function () {
+      ajouter('Choisissez un sujet, ou écrivez votre question.', 'bot', true);
+      poserSuggestions();
+    }, 380);
+  }
+
+  function ouvrir() {
+    racine.dataset.etat = 'ouvert';
+    panneau.hidden = false;
+    boutonOuvrir.setAttribute('aria-expanded', 'true');
+    pastille.hidden = true;
+    try { localStorage.setItem('vrlChatVu', '1'); } catch (e) {}
+    demarrer();
+    window.setTimeout(function () { champ.focus(); }, 120);
+  }
+
+  function fermer() {
+    racine.dataset.etat = 'ferme';
+    panneau.hidden = true;
+    boutonOuvrir.setAttribute('aria-expanded', 'false');
+    boutonOuvrir.focus();
+  }
+
+  boutonOuvrir.addEventListener('click', ouvrir);
+  boutonFermer.addEventListener('click', fermer);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && racine.dataset.etat === 'ouvert') { fermer(); }
+  });
+
+  formulaire.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var q = champ.value.trim();
+    if (!q) { return; }
+    champ.value = '';
+    repondre(q);
+  });
+
+  // La pastille ne s'affiche qu'à la première visite : au-delà, elle mentirait.
+  try {
+    if (localStorage.getItem('vrlChatVu') === '1') { pastille.hidden = true; }
+  } catch (e) { pastille.hidden = true; }
+})();
+</script>
