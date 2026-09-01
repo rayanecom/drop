@@ -252,7 +252,38 @@
       var VRAI = {{ 'products.product.add_to_cart' | t | json }};
       if (!FAUX || !VRAI) return;
 
+      // --- Identifiant de variante ---------------------------------------
+      // Le formulaire part parfois avec un champ « id » vide. Shopify repond
+      // alors que l'article est epuise, alors que le stock est plein : sans
+      // identifiant, il ne peut rien trouver a mettre au panier. On remet la
+      // valeur de reference des que le champ est vide ou non numerique.
+      var VARIANTE = {{ product.selected_or_first_available_variant.id | json }};
+      var FORM_ID = {{ product_form_id | json }};
+
+      function reparerFormulaire() {
+        var f = FORM_ID ? document.getElementById(FORM_ID) : null;
+        if (!f) { return; }
+
+        var champ = f.querySelector('input[name="id"], input.product-variant-id');
+        if (champ) {
+          var v = String(champ.value == null ? '' : champ.value).trim();
+          if (!/^[0-9]+$/.test(v) || v === '0') {
+            champ.value = String(VARIANTE);
+          }
+        }
+
+        // Une quantite vide ou nulle produit la meme erreur cote Shopify.
+        var qte = f.querySelector('input[name="quantity"]');
+        if (qte) {
+          var q = String(qte.value == null ? '' : qte.value).trim();
+          if (!/^[0-9]+$/.test(q) || q === '0') {
+            qte.value = '1';
+          }
+        }
+      }
+
       function corriger() {
+        reparerFormulaire();
         var boutons = document.querySelectorAll(
           '.main-product-atc, [id^="ProductSubmitButton-"], [id^="SectionAtcBtn-"], .product-form__submit'
         );
@@ -279,6 +310,19 @@
           if (prix) { prix.classList.remove('hidden'); }
         }
       }
+
+      // Filet ultime : on repare au moment meme du clic et de l'envoi, en
+      // phase de capture, donc avant que le script du theme ne lise le champ.
+      document.addEventListener('click', function (e) {
+        var c = e.target && e.target.closest;
+        if (!c) { return; }
+        if (e.target.closest('.main-product-atc, [id^="ProductSubmitButton-"], [id^="SectionAtcBtn-"], .product-form__submit')) {
+          reparerFormulaire();
+        }
+      }, true);
+      document.addEventListener('submit', function (e) {
+        if (e.target && e.target.id === FORM_ID) { reparerFormulaire(); }
+      }, true);
 
       corriger();
       if (document.readyState === 'loading') {
