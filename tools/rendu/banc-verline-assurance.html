@@ -1,0 +1,197 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>banc — verline-assurance</title>
+<style>
+  body{margin:0;background:#FBF9F5}
+  /* Le bandeau est pleine largeur : pas de colonne produit ici. */
+</style>
+
+<!-- ===== markup rendu par snippets/verline-assurance.liquid, variante incident ===== -->
+<aside class="vrg vrg--incident" data-vrg-banner aria-labelledby="vrg-t-a-incident">
+  <div class="vrg__shell">
+    <div class="vrg__head">
+      <p class="vrg__eyebrow">Nos engagements</p>
+      <h2 class="vrg__title" id="vrg-t-a-incident">Si quelque chose se passe mal</h2>
+      <p class="vrg__lead">Le vrai test d'une boutique, ce n'est pas quand tout va bien. Voici ce qu'on fait, cas par cas.</p>
+    </div>
+    <ol class="vrg__grid" role="list">
+      <li class="vrg__item">
+        <span class="vrg__num" aria-hidden="true">01</span>
+        <strong class="vrg__k">Le colis n'arrive pas</strong>
+        <span class="vrg__d">Pas de livraison 25&nbsp;jours ouvrés après la commande&nbsp;? On réexpédie ou on rembourse.</span>
+      </li>
+      <li class="vrg__item">
+        <span class="vrg__num" aria-hidden="true">02</span>
+        <strong class="vrg__k">Il arrive abîmé, ou ce n'est pas le bon</strong>
+        <span class="vrg__d">Une photo suffit. Réexpédition ou remboursement intégral, frais de retour à notre charge.</span>
+      </li>
+      <li class="vrg__item">
+        <span class="vrg__num" aria-hidden="true">03</span>
+        <strong class="vrg__k">Vous changez d'avis</strong>
+        <span class="vrg__d">14&nbsp;jours pour vous rétracter. Flacon scellé&nbsp;: repris. Flacon ouvert&nbsp;: non, la loi l'interdit pour raisons d'hygiène. On préfère vous le dire avant.</span>
+      </li>
+      <li class="vrg__item">
+        <span class="vrg__num" aria-hidden="true">04</span>
+        <strong class="vrg__k">Le remboursement</strong>
+        <span class="vrg__d">Au plus tard 14&nbsp;jours après réception du retour, sur le moyen de paiement d'origine.</span>
+      </li>
+    </ol>
+    <p class="vrg__foot">
+      Garantie légale de conformité et garantie contre les vices cachés applicables de plein droit.
+      <a class="vrg__link" href="/pages/politique-de-remboursement">Lire la politique complète</a>
+    </p>
+  </div>
+</aside>
+
+<!-- ===== variante transparence ===== -->
+<aside class="vrg vrg--transparence" data-vrg-banner aria-labelledby="vrg-t-a-transparence">
+  <div class="vrg__shell">
+    <div class="vrg__head">
+      <p class="vrg__eyebrow">Transparence</p>
+      <h2 class="vrg__title" id="vrg-t-a-transparence">Ce qu'on vous dit avant que vous le demandiez</h2>
+      <p class="vrg__lead">Pas de promesse qu'on ne tiendrait pas. Les faits, y compris ceux qui n'arrangent pas.</p>
+    </div>
+    <ol class="vrg__grid" role="list">
+      <li class="vrg__item">
+        <span class="vrg__num" aria-hidden="true">01</span>
+        <strong class="vrg__k">La composition, en entier</strong>
+        <span class="vrg__d">Les onze ingrédients sont publiés sur cette page, sans tri. L'étiquette du flacon fait foi.</span>
+      </li>
+      <li class="vrg__item">
+        <span class="vrg__num" aria-hidden="true">02</span>
+        <strong class="vrg__k">Un cosmétique, pas un médicament</strong>
+        <span class="vrg__d">Produit cosmétique au sens du règlement (CE) n°&nbsp;1223/2009. Il ne se substitue pas à un avis médical.</span>
+      </li>
+      <li class="vrg__item">
+        <span class="vrg__num" aria-hidden="true">03</span>
+        <strong class="vrg__k">Les délais réels</strong>
+        <span class="vrg__d">Préparation 1 à 3&nbsp;jours ouvrés pour 90&nbsp;% des commandes, transport estimé 8 à 16&nbsp;jours. Pas de «&nbsp;livré en 48&nbsp;h&nbsp;».</span>
+      </li>
+      <li class="vrg__item">
+        <span class="vrg__num" aria-hidden="true">04</span>
+        <strong class="vrg__k">Une réponse, par un humain</strong>
+        <span class="vrg__d">Toute demande traitée sous 48&nbsp;heures ouvrées, en français.</span>
+      </li>
+    </ol>
+    <p class="vrg__foot">
+      Délais et conditions détaillés sur la page
+      <a class="vrg__link" href="/pages/livraison-retours">Livraison &amp; retours</a>.
+    </p>
+  </div>
+</aside>
+
+<!-- ===== CSS copié tel quel depuis snippets/verline-assurance.liquid ===== -->
+<style>
+  .vrg {
+    --vrg-green: #1F3D2B;
+    --vrg-ivory: #FBF9F5;
+    --vrg-sand:  #EFEAE1;
+    --vrg-ink:   #1A1A18;
+    --vrg-gold:  #B5914B;
+    --vrg-muted-on-green: #C6D3C9;
+    --vrg-muted-on-sand:  #5C5C55;
+    display: block;
+    font-family: "DM Sans", var(--font-body-family, system-ui), sans-serif;
+  }
+  .vrg *, .vrg *::before, .vrg *::after { box-sizing: border-box; }
+
+  .vrg--incident     { color: var(--vrg-ivory); background: var(--vrg-green); }
+  .vrg--transparence { color: var(--vrg-ink);   background: var(--vrg-sand); }
+
+  .vrg__shell { width: min(1200px, calc(100% - 28px)); margin: 0 auto; padding: 32px 0 30px; }
+
+  .vrg__head { max-width: 720px; margin: 0 0 6px; }
+  .vrg__eyebrow {
+    margin: 0 0 9px;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: .17em;
+    text-transform: uppercase;
+  }
+  .vrg--incident     .vrg__eyebrow { color: var(--vrg-gold); }
+  .vrg--transparence .vrg__eyebrow { color: var(--vrg-green); }
+
+  .vrg__title {
+    margin: 0;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(25px, 3.7vw, 36px);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -.022em;
+  }
+  .vrg--incident     .vrg__title { color: var(--vrg-ivory); }
+  .vrg--transparence .vrg__title { color: var(--vrg-green); }
+
+  .vrg__lead { margin: 11px 0 0; font-size: 14px; line-height: 1.55; }
+  .vrg--incident     .vrg__lead { color: var(--vrg-muted-on-green); }
+  .vrg--transparence .vrg__lead { color: var(--vrg-muted-on-sand); }
+
+  .vrg__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 14px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .vrg__item {
+    display: grid;
+    grid-template-columns: auto minmax(0,1fr);
+    column-gap: 11px;
+    padding: 14px 0;
+    border-top: 1px solid;
+  }
+  .vrg--incident     .vrg__item { border-top-color: rgba(251,249,245,.16); }
+  .vrg--transparence .vrg__item { border-top-color: rgba(31,61,43,.16); }
+
+  .vrg__num {
+    display: block;
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+    color: var(--vrg-gold);
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.28;
+    letter-spacing: .06em;
+  }
+  .vrg__k {
+    display: block;
+    grid-column: 2;
+    grid-row: 1;
+    margin-bottom: 4px;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.28;
+  }
+  .vrg--incident     .vrg__k { color: var(--vrg-ivory); }
+  .vrg--transparence .vrg__k { color: var(--vrg-green); }
+
+  .vrg__d { display: block; grid-column: 2; grid-row: 2; font-size: 13.5px; line-height: 1.55; }
+  .vrg--incident     .vrg__d { color: var(--vrg-muted-on-green); }
+  .vrg--transparence .vrg__d { color: var(--vrg-muted-on-sand); }
+
+  .vrg__foot {
+    margin: 20px 0 0;
+    padding-top: 16px;
+    border-top: 1px solid;
+    font-size: 12px;
+    line-height: 1.55;
+  }
+  .vrg--incident     .vrg__foot { color: var(--vrg-muted-on-green); border-top-color: rgba(181,145,75,.36); }
+  .vrg--transparence .vrg__foot { color: var(--vrg-muted-on-sand); border-top-color: rgba(181,145,75,.5); }
+
+  .vrg__link { font-weight: 700; text-underline-offset: 3px; }
+  .vrg--incident     .vrg__link { color: var(--vrg-ivory); }
+  .vrg--transparence .vrg__link { color: var(--vrg-green); }
+
+  @media screen and (min-width: 750px) {
+    .vrg__shell { width: min(1200px, calc(100% - 64px)); padding: 52px 0 46px; }
+    .vrg__grid { grid-template-columns: repeat(4, minmax(0,1fr)); gap: 0 30px; margin-top: 30px; }
+    .vrg__item { display: block; padding: 26px 0 0; }
+    .vrg__num { margin-bottom: 10px; font-size: 16px; line-height: 1; }
+    .vrg__k { font-size: 16px; }
+    .vrg__foot { margin-top: 30px; padding-top: 18px; }
+  }
+</style>
