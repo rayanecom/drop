@@ -12,106 +12,55 @@ jobs:
         with:
           node-version: '20'
       - run: npm init -y && npm i playwright@1.48.0
-      - run: npx playwright install --with-deps chromium
-      - name: Chercher le texte reellement affiche
+      - run: npx playwright install --with-deps chromium webkit
+      - name: Comparer Safari (webkit) et Chrome (chromium)
         run: |
           cat > check.js <<'JS'
-          const { chromium } = require('playwright');
-          const MOT = /épuis|Épuis|rupture|sold\s*out|indisponible/i;
+          const pw = require('playwright');
+          const URL = 'https://kznquq-5a.myshopify.com/products/gel-lavant-purifiant-pieds-tea-tree';
           (async () => {
-            const b = await chromium.launch();
-            const ctx = await b.newContext({
-              userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
-              viewport: { width: 390, height: 844 },
-              isMobile: true, hasTouch: true,
-              locale: 'fr-FR', timezoneId: 'Europe/Paris',
-              extraHTTPHeaders: { 'Accept-Language': 'fr-FR,fr;q=0.9' },
-            });
-            for (const url of [
-              'https://kznquq-5a.myshopify.com/',
-              'https://kznquq-5a.myshopify.com/products/gel-lavant-purifiant-pieds-tea-tree',
-            ]) {
-              const p = await ctx.newPage();
-              try { await p.goto(url, { waitUntil: 'load', timeout: 60000 }); }
-              catch (e) { console.log('GOTO:', e.message); }
-              // derouler toute la page pour declencher le contenu differe
-              await p.evaluate(async () => {
-                for (let y = 0; y < document.body.scrollHeight; y += 600) {
-                  window.scrollTo(0, y); await new Promise(r => setTimeout(r, 120));
-                }
-                window.scrollTo(0, 0);
+            for (const nom of ['webkit', 'chromium']) {
+              console.log('\n' + '='.repeat(64));
+              console.log('MOTEUR :', nom, nom === 'webkit' ? '(celui de Safari / iPhone)' : '(celui de Chrome)');
+              const b = await pw[nom].launch();
+              const ctx = await b.newContext({
+                userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
+                viewport: { width: 390, height: 844 },
+                isMobile: nom === 'chromium', hasTouch: true,
+                locale: 'fr-FR', timezoneId: 'Europe/Paris',
               });
-              await p.waitForTimeout(9000);
-              console.log('='.repeat(64));
-              console.log('URL:', url);
+              const p = await ctx.newPage();
+              const erreurs = [];
+              p.on('pageerror', e => erreurs.push('PAGEERROR: ' + e.message));
+              p.on('console', m => { if (m.type() === 'error') erreurs.push('CONSOLE: ' + m.text().slice(0, 160)); });
 
-              const r = await p.evaluate((src) => {
-                const RE = new RegExp(src, 'i');
-                const res = { texteAffiche: [], noeuds: [], boutons: [], iframes: [] };
+              try { await p.goto(URL, { waitUntil: 'load', timeout: 60000 }); }
+              catch (e) { console.log('GOTO:', e.message); }
 
-                // 1) le texte tel qu'il s'affiche a l'ecran
-                const vu = document.body.innerText || '';
-                let i = -1;
-                while ((i = vu.search(RE)) !== -1 && res.texteAffiche.length < 15) {
-                  const abs = vu.length - vu.length; // garde-fou
-                  res.texteAffiche.push(vu.slice(Math.max(0, i - 70), i + 70).replace(/\s+/g, ' '));
-                  vu2 = vu.slice(i + 5);
-                  if (vu2 === vu) break;
-                  Object.defineProperty; // no-op
-                  break;
-                }
-                // recherche exhaustive sur innerText
-                res.texteAffiche = [];
-                const g = new RegExp(src, 'gi');
-                let m;
-                while ((m = g.exec(vu)) !== null && res.texteAffiche.length < 20) {
-                  res.texteAffiche.push(vu.slice(Math.max(0, m.index - 70), m.index + 70).replace(/\s+/g, ' '));
-                }
-
-                // 2) chaque noeud de texte, y compris dans les shadow roots
-                const scan = (racine) => {
-                  const w = document.createTreeWalker(racine, NodeFilter.SHOW_TEXT);
-                  let n;
-                  while ((n = w.nextNode())) {
-                    const t = (n.nodeValue || '').trim();
-                    if (!t || !RE.test(t)) continue;
-                    const el = n.parentElement;
-                    if (!el || el.tagName === 'SCRIPT' || el.tagName === 'STYLE') continue;
-                    const cs = getComputedStyle(el);
-                    const bb = el.getBoundingClientRect();
-                    res.noeuds.push({
-                      texte: t.slice(0, 70),
-                      parent: el.tagName + '.' + String(el.className || '').slice(0, 60),
-                      visible: bb.width > 0 && bb.height > 0 && cs.display !== 'none' && cs.visibility !== 'hidden' && cs.opacity !== '0',
-                    });
-                  }
-                  racine.querySelectorAll && racine.querySelectorAll('*').forEach(e => { if (e.shadowRoot) scan(e.shadowRoot); });
-                };
-                scan(document.body);
-
-                // 3) tous les boutons et liens d'achat
-                document.querySelectorAll('button, [role="button"], input[type="submit"]').forEach(el => {
-                  const t = (el.innerText || el.value || '').trim();
-                  if (!t) return;
-                  const bb = el.getBoundingClientRect();
-                  if (bb.width === 0) return;
-                  res.boutons.push({ t: t.slice(0, 50), off: el.disabled === true });
+              const lire = async (t) => {
+                const r = await p.evaluate(() => {
+                  const btn = document.querySelector('[id^="ProductSubmitButton-"], .main-product-atc');
+                  const lbl = btn && btn.querySelector('.main-atc__label__text');
+                  const prix = btn && btn.querySelector('[id^="main-atc-price-"]');
+                  const sec = document.querySelector('[id^="SectionAtcBtn-"]');
+                  return {
+                    label: lbl ? lbl.textContent.trim() : '(pas de label)',
+                    prixMasque: prix ? prix.classList.contains('hidden') : null,
+                    off: btn ? btn.disabled : null,
+                    secondaireOff: sec ? sec.disabled : null,
+                    gardePresent: !!document.body.innerHTML.match(/var FAUX/),
+                  };
                 });
+                console.log(`  t=${t}s  label="${r.label}"  bouton_desactive=${r.off}  achat_maintenant_desactive=${r.secondaireOff}  prix_masque=${r.prixMasque}  garde_present=${r.gardePresent}`);
+              };
 
-                res.iframes = [...document.querySelectorAll('iframe')].map(f => f.src || '(sans src)');
-                return res;
-              }, MOT.source);
-
-              console.log('TEXTE AFFICHE contenant le mot :', r.texteAffiche.length);
-              r.texteAffiche.forEach(t => console.log('   >', t));
-              console.log('NOEUDS DE TEXTE :', r.noeuds.length);
-              r.noeuds.forEach(n => console.log('   >', JSON.stringify(n)));
-              console.log('BOUTONS VISIBLES :');
-              r.boutons.slice(0, 25).forEach(x => console.log('   >', JSON.stringify(x)));
-              console.log('IFRAMES :', JSON.stringify(r.iframes));
-              await p.close();
+              for (const t of [0.5, 1, 2, 4, 7, 11, 15]) {
+                await p.waitForTimeout(t === 0.5 ? 500 : 1000 * (t - (t === 1 ? 0.5 : [0.5,1,2,4,7,11,15][[0.5,1,2,4,7,11,15].indexOf(t)-1])));
+                await lire(t);
+              }
+              console.log('  ERREURS JS :', erreurs.length ? JSON.stringify(erreurs.slice(0, 8), null, 1) : 'aucune');
+              await b.close();
             }
-            await b.close();
           })();
           JS
           node check.js
