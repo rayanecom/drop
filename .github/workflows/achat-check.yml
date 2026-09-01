@@ -1,5 +1,7 @@
 name: achat-check
 on:
+  push:
+    paths: ['.github/workflows/achat-check.yml']
   workflow_dispatch:
 
 jobs:
