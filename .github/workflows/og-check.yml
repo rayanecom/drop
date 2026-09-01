@@ -1,0 +1,27 @@
+name: og-check
+on:
+  push:
+    paths: ['.github/workflows/og-check.yml']
+  workflow_dispatch:
+
+jobs:
+  lire:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lire les balises vues par les robots
+        run: |
+          UA='facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)'
+          for U in "https://kznquq-5a.myshopify.com/" "https://kznquq-5a.myshopify.com/products/gel-lavant-purifiant-pieds-tea-tree"; do
+            echo "=================================================="
+            echo "URL: $U"
+            code=$(curl -sS -L -A "$UA" -o page.html -w '%{http_code} -> %{url_effective}' "$U" || echo ERREUR)
+            echo "HTTP: $code"
+            echo "TAILLE: $(wc -c < page.html) octets"
+            echo "--- <title> ---"
+            grep -o '<title>[^<]*</title>' page.html | head -3
+            echo "--- balises og: / product: ---"
+            grep -o '<meta[^>]*\(og:\|product:\|twitter:\)[^>]*>' page.html | head -40
+            echo "--- occurrences de puis / stock / rupture ---"
+            grep -o -i '.\{90\}\(épuis\|epuis\|out of stock\|oos\|rupture\|sold_out\|sold out\).\{90\}' page.html | head -12
+            echo
+          done
