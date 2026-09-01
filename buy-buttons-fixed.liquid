@@ -231,13 +231,19 @@
   Verline — garde-fou contre un « Épuisé » mensonger sur le bouton d'achat.
 
   Le rendu serveur est correct : Liquid sait que la variante est achetable, et
-  écrit « Ajouter au panier ». Mais un script tiers (app embed) réécrit ensuite
-  le libellé en « Épuisé » et désactive le bouton, alors que le stock est réel.
+  écrit « Ajouter au panier » avec le prix visible. Un script tiers réécrit
+  ensuite le libellé en « Épuisé » et désactive le bouton, alors que le stock
+  est réel.
 
   Ce bloc ne sort du serveur QUE si Liquid confirme la disponibilité. Si le
   produit passe un jour réellement en rupture, la condition est fausse, le
   script n'est pas émis, et le bouton redevient honnête tout seul. On ne cache
   donc jamais une vraie rupture — on corrige seulement une fausse.
+
+  La correction repasse à intervalle fixe pendant 30 secondes plutôt que de
+  s'en remettre au seul MutationObserver : sur le moteur de Safari celui-ci
+  s'est montré insuffisant, et le libellé restait fautif sur iPhone alors qu'il
+  était corrigé sur Chrome.
 {%- endcomment -%}
 {%- if product != blank and product.selected_or_first_available_variant.available -%}
   <script>
@@ -248,44 +254,53 @@
 
       function corriger() {
         var boutons = document.querySelectorAll(
-          '.main-product-atc, [id^="ProductSubmitButton-"], [id^="SectionAtcBtn-"]'
+          '.main-product-atc, [id^="ProductSubmitButton-"], [id^="SectionAtcBtn-"], .product-form__submit'
         );
         for (var i = 0; i < boutons.length; i++) {
           var bouton = boutons[i];
+
           var cible =
             bouton.querySelector('.main-atc__label__text') ||
             bouton.querySelector('.sticky-atc__label__text') ||
             bouton.querySelector('.button__label');
-          if (!cible) continue;
-          if (cible.textContent.indexOf(FAUX) === -1) continue;
+          if (cible && cible.textContent.indexOf(FAUX) !== -1) {
+            cible.textContent = VRAI;
+          }
 
-          cible.textContent = VRAI;
+          // On reactive meme si le libelle est introuvable : le serveur a
+          // affirme que la variante est achetable, rien ne justifie un bouton
+          // mort.
+          if (bouton.disabled) { bouton.disabled = false; }
           bouton.removeAttribute('disabled');
           bouton.removeAttribute('data-unavailable');
           bouton.removeAttribute('aria-disabled');
 
           var prix = bouton.querySelector('[id^="main-atc-price-"], [id^="sticky-atc-price-"]');
-          if (prix) prix.classList.remove('hidden');
+          if (prix) { prix.classList.remove('hidden'); }
         }
       }
 
       corriger();
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', corriger, { once: true });
+        document.addEventListener('DOMContentLoaded', corriger);
       }
+      window.addEventListener('load', corriger);
       document.addEventListener('shopify:section:load', corriger);
 
-      // Un script tiers peut repasser plus tard : on garde l'oeil sans boucler,
-      // corriger() ne fait rien tant que le libelle n'est pas fautif.
+      // Filet principal : un passage regulier, independant de tout observateur.
+      var tours = 0;
+      var minuteur = window.setInterval(function () {
+        corriger();
+        if (++tours > 120) { window.clearInterval(minuteur); }
+      }, 250);
+
+      // Filet secondaire : reaction immediate a une reecriture tardive.
       if (window.MutationObserver) {
         var enAttente = false;
         new MutationObserver(function () {
-          if (enAttente) return;
+          if (enAttente) { return; }
           enAttente = true;
-          window.setTimeout(function () {
-            enAttente = false;
-            corriger();
-          }, 60);
+          window.setTimeout(function () { enAttente = false; corriger(); }, 60);
         }).observe(document.documentElement, {
           childList: true,
           subtree: true,
