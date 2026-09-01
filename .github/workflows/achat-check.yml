@@ -62,18 +62,27 @@ jobs:
             await btn.click({ force: true });
             await p.waitForTimeout(7000);
 
-            const apres = await p.evaluate(async () => {
-              const w = document.querySelector('.product-form__error-message-wrapper');
-              const e = document.querySelector('.product-form__error-message');
-              const r = await fetch('/cart.js', { headers: { Accept: 'application/json' } });
-              const j = await r.json();
-              return {
-                erreurVisible: w ? !w.hasAttribute('hidden') : null,
-                erreurTexte: e ? e.textContent.trim() : '',
-                panierArticles: j.item_count,
-                panierLignes: (j.items || []).map(i => i.quantity + ' x ' + i.title.slice(0, 40)),
-              };
-            });
+            let apres = { erreurVisible: null, erreurTexte: '(page non lisible)' };
+            try {
+              apres = await p.evaluate(() => {
+                const w = document.querySelector('.product-form__error-message-wrapper');
+                const e = document.querySelector('.product-form__error-message');
+                return {
+                  erreurVisible: w ? !w.hasAttribute('hidden') : null,
+                  erreurTexte: e ? e.textContent.trim() : '',
+                };
+              });
+            } catch (err) { console.log('  (lecture page impossible :', err.message.slice(0, 80), ')'); }
+
+            // Le panier est lu hors de la page : insensible a une navigation.
+            let j = { item_count: 0, items: [] };
+            try {
+              const rep = await ctx.request.get('https://kznquq-5a.myshopify.com/cart.js', { headers: { Accept: 'application/json' } });
+              j = await rep.json();
+            } catch (err) { console.log('  (lecture panier impossible :', err.message.slice(0, 80), ')'); }
+            apres.panierArticles = j.item_count;
+            apres.panierLignes = (j.items || []).map(i => i.quantity + ' x ' + String(i.title).slice(0, 40));
+            apres.url = p.url();
             console.log('  REQUETE  :', reqs.join(' | ') || '(aucune)');
             console.log('  REPONSE  :', reps.join(' | ') || '(aucune)');
             console.log('  APRES    :', JSON.stringify(apres));
