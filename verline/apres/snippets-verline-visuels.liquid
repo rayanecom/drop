@@ -48,6 +48,45 @@
     object-position: center !important;
   }
 
+
+  /* ---- Normalisation de la section « Avis clients en photo » -------------
+     sections/verline-avis-photos.liquid definit huit teintes qui lui sont
+     propres : #173F32 (un 2e vert), #F7F4EC (un 4e blanc casse), #FFFEFA (un
+     5e), #29342E, #7A837E, #D9DEDA, #DDE4DF, plus #EDF3EF et #D9E4DC sur sa
+     pastille. Cote a cote avec le reste de la page, ces blancs a 1 % d'ecart
+     ne se lisent pas comme un choix : ils se lisent comme de la salissure.
+
+     On redefinit les variables sur .vap plutot que de reecrire la section :
+     .vap est un descendant du conteneur qui porte les variables d'origine,
+     donc sa propre declaration gagne pour tout son sous-arbre, sans lutte de
+     specificite et sans !important.
+
+     Le fond passe en ivoire et les cartes en sable, comme les tuiles de
+     benefices sous l'image produit : deux composants, une seule grammaire.
+     L'or #B5914B des etoiles est conserve — c'est une couleur assumee de la
+     marque, reprise sur les bandeaux d'assurance. */
+  html body .vap{
+    --vap-green:#1F3D2B;
+    --vap-cream:#FBF9F5;
+    --vap-card:#EFEAE1;
+    --vap-text:#1A1A18;
+    --vap-muted:#5C5C55;
+    --vap-empty:rgba(31,61,43,.14);
+    --vap-border:rgba(31,61,43,.16);
+  }
+  html body .vap .vap__badge{
+    background:#FBF9F5;
+    border-color:rgba(31,61,43,.18);
+  }
+  html body .vap .vap__check{ color:#FBF9F5; }
+  html body .vap .vap__card{
+    box-shadow:0 2px 8px rgba(31,61,43,.04), 0 10px 26px rgba(31,61,43,.06);
+  }
+  html body .vap .vap__nav{
+    background:rgba(251,249,245,.94);
+    box-shadow:0 3px 12px rgba(31,61,43,.14);
+  }
+
   html body .product-media-modal__content img,
   html body .product-media-modal__content .media img {
     object-fit: contain !important;
