@@ -1,0 +1,107 @@
+name: audit
+on:
+  push:
+    paths: ['.github/workflows/audit.yml']
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm init -y && npm i playwright@1.48.0
+      - run: npx playwright install --with-deps webkit
+      - name: Audit complet
+        run: |
+          cat > audit.js <<'JS'
+          const { webkit } = require('playwright');
+          const B = 'https://kznquq-5a.myshopify.com';
+          const PAGES = [
+            ['Accueil', '/'],
+            ['Fiche produit', '/products/gel-lavant-purifiant-pieds-tea-tree'],
+            ['Panier', '/cart'],
+            ['Questions frequentes', '/pages/questions-frequentes-verline'],
+            ['Livraison & retours', '/pages/livraison-retours'],
+            ['Mentions legales', '/pages/mentions-legales'],
+            ['CGV', '/pages/conditions-generales-de-vente'],
+            ['Retours & remboursement', '/pages/politique-de-remboursement'],
+            ['A propos', '/pages/a-propos'],
+            ['Nous contacter', '/pages/nous-contacter'],
+          ];
+
+          (async () => {
+            const b = await webkit.launch();
+            const ctx = await b.newContext({
+              userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
+              viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: false,
+              locale: 'fr-FR', timezoneId: 'Europe/Paris',
+            });
+
+            for (const [nom, chemin] of PAGES) {
+              const p = await ctx.newPage();
+              let poids = 0, requetes = 0, images = [];
+              p.on('response', async r => {
+                requetes++;
+                const l = Number(r.headers()['content-length'] || 0);
+                poids += l;
+                const t = (r.headers()['content-type'] || '');
+                if (t.startsWith('image/') && l > 150000) images.push({ ko: Math.round(l/1024), url: r.url().split('/').pop().slice(0,42) });
+              });
+              const t0 = Date.now();
+              let statut = 0;
+              try { const rep = await p.goto(B + chemin, { waitUntil: 'load', timeout: 60000 }); statut = rep ? rep.status() : 0; }
+              catch (e) { console.log('ERREUR', chemin, e.message.slice(0,80)); }
+              const ms = Date.now() - t0;
+              await p.waitForTimeout(2500);
+
+              const d = await p.evaluate(() => {
+                const txt = document.body.innerText || '';
+                const h1 = [...document.querySelectorAll('h1')].map(h => h.innerText.trim()).filter(Boolean);
+                const cs = e => getComputedStyle(e);
+                const vis = e => { const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0 && cs(e).display !== 'none' && cs(e).visibility !== 'hidden'; };
+                const petitesCibles = [...document.querySelectorAll('a,button,input[type=submit],[role=button]')]
+                  .filter(vis).map(e => { const r = e.getBoundingClientRect(); return { t: (e.innerText||'').trim().slice(0,26), h: Math.round(Math.min(r.width, r.height)) }; })
+                  .filter(x => x.h > 0 && x.h < 44);
+                const petitTexte = [...document.querySelectorAll('p,li,span,td,label')].filter(vis)
+                  .map(e => parseFloat(cs(e).fontSize)).filter(v => v && v < 13).length;
+                const sansAlt = [...document.querySelectorAll('img')].filter(i => !i.alt || !i.alt.trim()).length;
+                const imgs = document.querySelectorAll('img').length;
+                const meta = document.querySelector('meta[name="description"]');
+                const liensPied = [...document.querySelectorAll('footer a, .footer a')].map(a => (a.innerText||'').trim()).filter(Boolean);
+                return {
+                  titre: document.title,
+                  metaDesc: meta ? meta.content : '(absente)',
+                  metaDescLong: meta ? meta.content.length : 0,
+                  h1: h1,
+                  nbH1: h1.length,
+                  mots: txt.split(/\s+/).filter(Boolean).length,
+                  debordement: document.documentElement.scrollWidth > window.innerWidth,
+                  hauteurPage: Math.round(document.body.scrollHeight),
+                  cibles44: petitesCibles.slice(0, 6),
+                  nbCibles44: petitesCibles.length,
+                  texteMoins13px: petitTexte,
+                  images: imgs, imagesSansAlt: sansAlt,
+                  liensPied: [...new Set(liensPied)].slice(0, 24),
+                  aCookies: /cookie/i.test(txt),
+                };
+              });
+
+              console.log('\n' + '='.repeat(70));
+              console.log('PAGE :', nom, '|', chemin, '| HTTP', statut, '|', ms + 'ms |', requetes, 'requetes |', Math.round(poids/1024) + ' Ko annonces');
+              console.log('  titre        :', d.titre);
+              console.log('  meta desc    :', d.metaDescLong, 'car. —', String(d.metaDesc).slice(0, 110));
+              console.log('  H1 (' + d.nbH1 + ')      :', JSON.stringify(d.h1).slice(0, 200));
+              console.log('  mots visibles:', d.mots, '| hauteur', d.hauteurPage + 'px');
+              console.log('  debordement H:', d.debordement);
+              console.log('  cibles <44px :', d.nbCibles44, JSON.stringify(d.cibles44).slice(0, 240));
+              console.log('  texte <13px  :', d.texteMoins13px, 'elements');
+              console.log('  images       :', d.images, '| sans alt :', d.imagesSansAlt);
+              if (images.length) console.log('  images >150Ko:', JSON.stringify(images.slice(0,6)));
+              if (nom === 'Accueil') console.log('  liens pied   :', JSON.stringify(d.liensPied));
+              await p.close();
+            }
+            await b.close();
+          })();
+          JS
+          node audit.js
