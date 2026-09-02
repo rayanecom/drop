@@ -1,74 +1,113 @@
 {%- comment -%}
-  Verline — plancher de lisibilité et de confort tactile.
+  Verline — échelle de tailles et confort tactile.
 
-  L'audit a relevé sur la boutique en ligne :
-    fiche produit  93 éléments de texte sous 13 px, 14 cibles sous 44 px
-    accueil        59 éléments de texte sous 13 px, 14 cibles sous 44 px
+  LE DÉFAUT PRINCIPAL
+  Sept sections de la page d'accueil (.vl-premium : formule, rituel, preuves,
+  avis, manifeste, appel final, contact) sont écrites en rem en supposant une
+  base de 16 px. Le thème fixe la base à 10 px. Tout ce système s'affiche donc
+  à 62,5 % de la taille voulue par son auteur. Mesuré sur la boutique :
 
-  Sous 13 px, un texte devient pénible à lire sur un téléphone tenu à bout de
-  bras, et c'est précisément le texte qui rassure — délais, précautions,
-  composition — qui était le plus petit. Sous 44 px, un lien se rate au pouce ;
-  c'est le seuil recommandé par Apple comme par Google.
+      .vl-premium__buy    bouton d'achat      35 px   au lieu de 56 px
+      .vl-premium__send   envoi du formulaire 32,5 px au lieu de 52 px
+      .vl-premium__intro  tous les paragraphes 10 px  au lieu de 16 px
+      .vl-premium__title  tous les titres      21 px  au lieu de 33,6 px
+      .vl-premium__eyebrow  étiquettes          7,6 px au lieu de 12,2 px
+      label du formulaire                       8,4 px au lieu de 13,4 px
 
-  On ne touche à aucun contenu : uniquement des tailles et des zones de clic.
-  Les étiquettes en capitales espacées (.vl-eyebrow, .vl-premium__eyebrow)
-  restent petites : à cette taille et avec cet interlettrage, elles se lisent,
-  et les grossir casserait la mise en page sans rien gagner.
+  Le bouton d'achat de l'accueil passait ainsi sous le seuil tactile de 44 px,
+  et le corps de texte de sept sections était à 10 px.
+
+  On rétablit l'intention de l'auteur en valeurs absolues, immunisées contre la
+  base du thème. Aucun contenu n'est touché : uniquement des tailles, des
+  espacements et des zones de clic.
 {%- endcomment -%}
 <style id="verline-lisibilite">
-  /* ---- Plancher de lisibilité, mobile d'abord ------------------------- */
-  html body .vl-hero li{ font-size:14px; line-height:1.5; }
-  html body .vl-price span{ font-size:13.5px; line-height:1.45; }
-  html body .vl-tr span{ font-size:13.5px; line-height:1.5; }
-  html body .vl-tr b{ font-size:13.5px; }
-  html body .vl-cp__sub{ font-size:15.5px; }
-  html body .vl-premium__microcopy{ font-size:13.5px; line-height:1.55; }
-  html body .vl-premium__note{ font-size:14px; line-height:1.6; }
-  html body .vl-fq__more{ font-size:15px; }
-  html body .vrl-bundles__note,
-  html body .vrl-sticky__meta span{ font-size:13.5px; }
+  /* ============ 1. Rétablir l'échelle des sections d'accueil ============ */
+  html body .vl-premium__section{ padding:clamp(43px,5vw,77px) 20px; }
+  html body .vl-premium__eyebrow{ font-size:12px; margin-bottom:16px; }
+  html body .vl-premium__title{ font-size:clamp(34px,4.7vw,70px); }
+  html body .vl-premium__intro{ font-size:clamp(16px,1.5vw,18.5px); margin-top:22px; }
+  html body .vl-premium__grid{ gap:16px; margin-top:44px; }
+  html body .vl-premium__card{ padding:clamp(22px,2.5vw,32px); }
+  html body .vl-premium__card h3{ font-size:clamp(22px,2vw,27px); margin-bottom:11px; }
+  html body .vl-premium__index{ width:40px; height:40px; font-size:12px; margin-bottom:26px; }
+  html body .vl-premium__note{ font-size:14px; margin-top:24px; }
+  html body .vl-premium__fact{ padding:24px; }
+  html body .vl-premium__fact dt{ font-size:11.5px; margin-bottom:7px; }
+  html body .vl-premium__fact dd{ font-size:20px; }
+  html body .vl-premium__facts{ margin-top:44px; }
+  html body .vl-premium__principles{ gap:24px; margin-top:36px; }
+  html body .vl-premium__principle{ padding-top:19px; }
+  html body .vl-premium__reviews{ gap:clamp(32px,6vw,96px); }
+  html body .vl-premium__review-panel{ padding:clamp(27px,4vw,51px); }
+  html body .vl-premium__review-kicker{ font-size:12.5px; margin-bottom:16px; }
+  html body .vl-premium__review-panel h3{ font-size:clamp(26px,3vw,40px); }
+  html body .vl-premium__review-panel p{ font-size:16px; margin-top:16px; }
+  html body .vl-premium__quote{ font-size:clamp(22px,3vw,40px); margin-top:48px; padding-top:32px; }
+  html body .vl-premium__microcopy{ font-size:13.5px; margin-top:14px; }
+  html body .vl-premium__formula-split{ gap:clamp(19px,3vw,38px); margin-top:32px; }
+  html body .vl-premium__contact{ gap:clamp(32px,7vw,88px); }
 
-  @media (max-width:680px){
-    html body .vl-cp tbody td{ font-size:13.5px; }
+  /* Le bouton d'achat de l'accueil tombait à 35 px : sous le seuil tactile. */
+  html body .vl-premium__buy{ min-height:56px; padding:15px 26px; margin-top:32px; }
+  html body .vl-premium__send{ min-height:52px; padding:14px 22px; }
+  html body .vl-premium__form{ gap:16px; }
+  html body .vl-premium__form label{ font-size:13.5px; margin-bottom:6px; }
+  html body .vl-premium__form input,
+  html body .vl-premium__form textarea{ padding:14px; font-size:16px; }
+  html body .vl-premium__form textarea{ min-height:144px; }
+  html body .vl-premium__status{ padding:16px; }
+
+  /* ============ 2. Plancher de lisibilité, fiche produit ============== */
+  /* Mesuré : 28 cellules de tableau à 12 px, et une série d'étiquettes
+     descendant jusqu'à 8 px. En dessous de 13 px un texte devient pénible
+     à lire sur un téléphone tenu à bout de bras. */
+  html body .vap__meta{ font-size:13.5px; }
+  html body .vap__badge{ font-size:11.5px; }
+  html body .vap__check{ font-size:11.5px; }
+  html body .vrl-offer__badge{ font-size:11px; }
+  html body .vrl-offer__saving{ font-size:13px; }
+  html body .vrg__eyebrow{ font-size:11.5px; }
+  html body .vrg__foot{ font-size:13.5px; }
+  html body .vrl-secure__label{ font-size:12.5px; }
+  html body .price__badge-sale,
+  html body .price__badge-sale .nowrap{ font-size:11px; }
+  html body .announcement-bar__message{ font-size:13px; }
+
+  /* Tableaux comparatifs : le texte des cellules, pas les en-têtes. */
+  html body .vl-cp tbody td,
+  html body .vrg table td,
+  html body [class*="comparatif"] td{ font-size:13.5px; }
+  @media(max-width:680px){
     html body .vl-cp tbody td:first-child{ font-size:11.5px; }
-    html body .vl-cp tbody td:nth-child(2)::before,
-    html body .vl-cp tbody td:nth-child(3)::before{ font-size:10.5px; }
   }
 
-  /* Filet général : tout texte courant du thème repasse au-dessus du seuil,
-     sans toucher aux étiquettes en capitales qui vivent bien plus petites. */
-  html body :is(.rte, .product__description, .vl-premium__card, .vl-fq__a) :is(p, li, td){
+  /* Textes courants du thème et des blocs sur mesure. */
+  html body :is(.rte, .product__description, .vl-fq__a) :is(p, li, td){
     font-size:15px; line-height:1.65;
   }
+  html body .vl-hero li{ font-size:14px; line-height:1.5; }
+  html body .vl-price span{ font-size:13.5px; line-height:1.45; }
+  html body .vl-tr span,
+  html body .vl-tr b{ font-size:13.5px; line-height:1.5; }
+  html body .vl-cp__sub{ font-size:15.5px; }
+  html body .vl-fq__more{ font-size:15px; }
 
-  /* ---- Confort tactile : 44 px minimum -------------------------------- */
-  /* Le pied de page tenait ses liens à 40 px, les liens de rappel du corps
-     de page descendaient jusqu'à 12 px de hauteur cliquable. */
+  /* ============ 3. Confort tactile : 44 px minimum ==================== */
   html body .footer a,
   html body .footer__list-social a,
-  html body .list-menu__item{
-    min-height:44px; display:inline-flex; align-items:center;
-  }
+  html body .list-menu__item{ min-height:44px; display:inline-flex; align-items:center; }
   html body .vl-hero__link,
   html body .vl-premium__text-link,
   html body .vl-fq__more a,
-  html body .vl-cp__cta a{
-    display:inline-flex; align-items:center; min-height:44px;
-  }
+  html body .vl-cp__cta a{ display:inline-flex; align-items:center; min-height:44px; }
   html body .header__heading-link{ min-height:44px; display:inline-flex; align-items:center; }
   html body .quantity__button{ min-width:44px; min-height:44px; }
 
-  /* Les liens à l'intérieur d'un paragraphe ne peuvent pas grandir sans
-     déformer la ligne : on leur donne la surface par le padding vertical,
-     qui déborde sans pousser le texte. */
+  /* Un lien au fil d'un paragraphe ne peut pas grandir sans déformer la ligne :
+     il reçoit sa surface par un rembourrage vertical qui déborde sans pousser
+     le texte autour. */
   html body .vl-premium__note a,
-  html body .vl-fq__a a{
-    padding-block:11px; margin-block:-11px;
-  }
-
-  /* ---- Page panier : un seul titre principal -------------------------- */
-  /* Le thème sort deux H1 concurrents, « Votre panier » et « Votre panier est
-     vide ». Le second devient un titre de second rang : même apparence,
-     hiérarchie correcte pour les moteurs et les lecteurs d'écran. */
-  html body .cart__empty-text{ font-size:inherit; }
+  html body .vl-fq__a a,
+  html body .rte a{ padding-block:11px; margin-block:-11px; }
 </style>
