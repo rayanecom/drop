@@ -17,7 +17,7 @@ jobs:
         run: |
           cat > achat.js <<'JS'
           const { webkit } = require('playwright');
-          const PRODUIT = 'https://kznquq-5a.myshopify.com/products/gel-lavant-purifiant-pieds-tea-tree';
+          const PRODUIT = 'https://kznquq-5a.myshopify.com/products/gel-lavant-purifiant-pieds-tea-tree?preview_theme_id=166029000924';
 
           async function scenario(ctx, flacons) {
             console.log('\n' + '='.repeat(64));
