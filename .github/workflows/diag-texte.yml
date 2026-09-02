@@ -1,0 +1,58 @@
+name: diag-texte
+on:
+  push:
+    paths: ['.github/workflows/diag-texte.yml']
+  workflow_dispatch:
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm init -y && npm i playwright@1.48.0
+      - run: npx playwright install --with-deps webkit
+      - name: Identifier les textes trop petits et les images sans alt
+        run: |
+          cat > d.js <<'JS'
+          const { webkit } = require('playwright');
+          (async () => {
+            const b = await webkit.launch();
+            const ctx = await b.newContext({
+              userAgent:'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
+              viewport:{width:390,height:844}, hasTouch:true, locale:'fr-FR' });
+            for (const [nom,u] of [['Fiche produit','https://kznquq-5a.myshopify.com/products/gel-lavant-purifiant-pieds-tea-tree'],['Accueil','https://kznquq-5a.myshopify.com/']]) {
+              const p = await ctx.newPage();
+              await p.goto(u, { waitUntil:'load', timeout:60000 });
+              await p.waitForTimeout(4000);
+              const r = await p.evaluate(() => {
+                const cs = e => getComputedStyle(e);
+                const vis = e => { const r=e.getBoundingClientRect(); return r.width>0&&r.height>0&&cs(e).display!=='none'&&cs(e).visibility!=='hidden'; };
+                const compte = {};
+                for (const e of document.querySelectorAll('p,li,span,td,label')) {
+                  if (!vis(e)) continue;
+                  const t = parseFloat(cs(e).fontSize);
+                  if (!t || t >= 13) continue;
+                  const cle = e.tagName.toLowerCase() + '.' + (String(e.className||'(sans classe)').trim().split(/\s+/).slice(0,2).join('.')) + ' @' + t.toFixed(1) + 'px';
+                  compte[cle] = (compte[cle]||0) + 1;
+                }
+                const sansAlt = [...document.querySelectorAll('img')].filter(i=>!i.alt||!i.alt.trim())
+                  .map(i => (i.currentSrc||i.src||'').split('/').pop().split('?')[0].slice(0,46));
+                const sticky = document.querySelector('.sticky-atc, [class*="sticky-atc"]');
+                return {
+                  petits: Object.entries(compte).sort((a,b)=>b[1]-a[1]).slice(0,18),
+                  sansAlt,
+                  stickyPresent: !!sticky,
+                  stickyClasse: sticky ? String(sticky.className).slice(0,80) : null,
+                };
+              });
+              console.log('\n===== ' + nom + ' =====');
+              console.log('TEXTES SOUS 13px, par type :');
+              r.petits.forEach(([k,n]) => console.log('   ' + String(n).padStart(3) + '  ' + k));
+              console.log('IMAGES SANS ALT :', JSON.stringify(r.sansAlt));
+              console.log('BARRE COLLANTE  :', r.stickyPresent, r.stickyClasse);
+              await p.close();
+            }
+            await b.close();
+          })();
+          JS
+          node d.js
