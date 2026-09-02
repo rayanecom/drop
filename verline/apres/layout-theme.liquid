@@ -944,73 +944,18 @@
 })();
 </script>
 {% if template.name == 'product' %}
-  <template id="VerlinePressTemplate">
-    <section class="vrl-press-demo" aria-labelledby="VerlinePressTitle">
-      <div class="vrl-press-demo__head page-width">
-        <p class="vrl-press-demo__eyebrow">ÉDITION VERLINE</p>
-        <h2 id="VerlinePressTitle">La presse parle de nous</h2>
-
-      </div>
-      <div class="vrl-press-demo__viewport" role="region" aria-label="Logos de presse fictivement associés à Verline" tabindex="0">
-        <div class="vrl-press-demo__track">
-          <div class="vrl-press-demo__group">
-            <span class="vrl-press-demo__logo vrl-press-demo__logo--vogue">VOGUE</span><i></i>
-            <span class="vrl-press-demo__logo vrl-press-demo__logo--elle">ELLE</span><i></i>
-            <span class="vrl-press-demo__logo vrl-press-demo__logo--gq">GQ</span><i></i>
-            <span class="vrl-press-demo__logo vrl-press-demo__logo--marie">Marie Claire</span><i></i>
-            <span class="vrl-press-demo__logo vrl-press-demo__logo--health">MEN’S HEALTH</span><i></i>
-            <span class="vrl-press-demo__logo vrl-press-demo__logo--cosmo">COSMOPOLITAN</span><i></i>
-          </div>
-          <div class="vrl-press-demo__group" aria-hidden="true">
-            <span class="vrl-press-demo__logo vrl-press-demo__logo--vogue">VOGUE</span><i></i>
-            <span class="vrl-press-demo__logo vrl-press-demo__logo--elle">ELLE</span><i></i>
-            <span class="vrl-press-demo__logo vrl-press-demo__logo--gq">GQ</span><i></i>
-            <span class="vrl-press-demo__logo vrl-press-demo__logo--marie">Marie Claire</span><i></i>
-            <span class="vrl-press-demo__logo vrl-press-demo__logo--health">MEN’S HEALTH</span><i></i>
-            <span class="vrl-press-demo__logo vrl-press-demo__logo--cosmo">COSMOPOLITAN</span><i></i>
-          </div>
-        </div>
-      </div>
-    </section>
-  </template>
-
-  <style id="VerlinePressStyles">
-    .vrl-press-demo{--green:#1F3D2B;--sand:#EFEAE1;--ivory:#FBF9F5;--ink:#1A1A18;position:relative;overflow:hidden;padding:clamp(38px,6vw,68px) 0 clamp(32px,5vw,56px);color:var(--ink);background:radial-gradient(circle at 50% -35%,rgba(255,255,255,.95),transparent 52%),var(--sand);border-block:1px solid rgba(31,61,43,.13)}
-    .vrl-press-demo:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.2;background:linear-gradient(115deg,transparent 0 48%,rgba(31,61,43,.05) 49% 51%,transparent 52% 100%);background-size:320px 320px}
-    .vrl-press-demo__head{position:relative;z-index:1;display:grid;justify-items:center;text-align:center;margin-bottom:clamp(24px,4vw,38px)}
-    .vrl-press-demo__eyebrow{margin:0 0 8px;color:var(--green);font:700 11px/1.2 "DM Sans",sans-serif;letter-spacing:.23em}
-    .vrl-press-demo h2{max-width:780px;margin:0;color:var(--green);font:500 clamp(34px,5.2vw,56px)/1.02 "Playfair Display",Georgia,serif;letter-spacing:-.035em}
-    
-    
-    .vrl-press-demo__viewport{position:relative;z-index:1;overflow:hidden;padding:14px 0;outline:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-    .vrl-press-demo__viewport:focus-visible{box-shadow:inset 0 0 0 2px var(--green)}
-    .vrl-press-demo__track{display:flex;width:max-content;will-change:transform;animation:vrlPressScroll 34s linear infinite}
-    .vrl-press-demo__group{display:flex;align-items:center;flex-shrink:0}
-    .vrl-press-demo__logo{display:inline-flex;align-items:center;justify-content:center;min-width:clamp(160px,19vw,235px);min-height:62px;padding:0 clamp(24px,4vw,48px);color:var(--ink);white-space:nowrap;opacity:.78;filter:grayscale(1);transition:opacity .18s ease,transform .18s ease}
-    .vrl-press-demo__logo:hover{opacity:1;transform:translateY(-2px)}
-    .vrl-press-demo__group i{width:5px;height:5px;flex:0 0 auto;background:var(--green);border-radius:50%;opacity:.42}
-    .vrl-press-demo__logo--vogue,.vrl-press-demo__logo--elle{font:500 clamp(34px,4.6vw,54px)/1 "Playfair Display",Didot,serif;letter-spacing:.08em}
-    .vrl-press-demo__logo--gq{font:900 clamp(38px,5vw,58px)/.9 "DM Sans",Arial,sans-serif;letter-spacing:-.09em}
-    .vrl-press-demo__logo--marie{font:italic 500 clamp(28px,3.7vw,44px)/1 "Playfair Display",Georgia,serif;letter-spacing:-.035em}
-    .vrl-press-demo__logo--health,.vrl-press-demo__logo--cosmo{font:900 clamp(23px,3.2vw,38px)/1 "DM Sans",Arial,sans-serif;letter-spacing:-.04em}
-    .vrl-press-demo__logo--cosmo{font-size:clamp(21px,3vw,35px);letter-spacing:.02em}
-    .vrl-press-demo__viewport:hover .vrl-press-demo__track,.vrl-press-demo__viewport:focus-within .vrl-press-demo__track{animation-play-state:paused}
-    @keyframes vrlPressScroll{to{transform:translate3d(-50%,0,0)}}
-    @media(max-width:749px){.vrl-press-demo{padding:34px 0 30px}.vrl-press-demo__head{padding-inline:20px;margin-bottom:22px}.vrl-press-demo h2{font-size:clamp(34px,10.5vw,44px)}.vrl-press-demo__notice{max-width:320px;justify-content:center;font-size:9px;letter-spacing:.07em}.vrl-press-demo__viewport{-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}.vrl-press-demo__logo{min-width:160px;padding-inline:25px}}
-    @media(prefers-reduced-motion:reduce){.vrl-press-demo__viewport{overflow-x:auto;-webkit-mask-image:none;mask-image:none;scrollbar-width:thin}.vrl-press-demo__track{animation:none}.vrl-press-demo__group[aria-hidden="true"]{display:none}.vrl-press-demo__logo{transition:none}}
-  </style>
+  {%- comment -%}
+    Le bandeau presse vivait ici dans un <template> injecte par JS apres le
+    rendu. Il est devenu sections/verline-press-marquee.liquid, place dans
+    templates/product.json : meme contenu, position editable, plus aucune
+    mutation du DOM apres l'affichage.
+  {%- endcomment -%}
 
   <script id="VerlinePressInstaller">
     (function(){
       function installVerlinePressAndFlow(){
         var main=document.getElementById('MainContent');
-        var template=document.getElementById('VerlinePressTemplate');
-        if(!main||!template)return;
-
-        var reviewsEnd=main.querySelector('[id$="__custom_liquid_UbLV4a"]')||main.querySelector('[id$="__verline_avis"]');
-        if(reviewsEnd&&!main.querySelector('.vrl-press-demo')){
-          reviewsEnd.insertAdjacentElement('afterend',template.content.firstElementChild.cloneNode(true));
-        }
+        if(!main)return;
 
         var story=main.querySelector('[id$="__verline_story"]');
         var incident=main.querySelector('.vrg--incident');
@@ -1034,10 +979,9 @@
       function vrlFini(){
         var main=document.getElementById('MainContent');
         if(!main)return false;
-        var presseOk=!document.getElementById('VerlinePressTemplate')||!!main.querySelector('.vrl-press-demo');
         var story=main.querySelector('[id$="__verline_story"]');
         var incidentOk=!main.querySelector('.vrg--incident')||!story||story.nextElementSibling===main.querySelector('.vrg--incident');
-        return presseOk&&incidentOk;
+        return incidentOk;
       }
       function vrlDebrancher(){
         if(vrlObs){vrlObs.disconnect();vrlObs=null;}

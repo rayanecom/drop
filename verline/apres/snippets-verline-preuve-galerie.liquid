@@ -140,22 +140,20 @@
   const bloc = document.querySelector('[data-vrl-proof]');
   if (!bloc || bloc.dataset.place === 'ok') return;
 
-  // Ancres possibles selon la version du thème. On s'arrête à la première trouvée.
-  const ancres = ['.product__media-wrapper', '.product__media-list', '.product-media-container'];
-
   const placer = () => {
-    // Sous 750 px la galerie est déjà au-dessus du bloc d'achat : rien à faire.
+    // Sous 750 px la galerie est deja au-dessus du bloc d'achat : rien a faire.
     if (window.matchMedia('(max-width: 749px)').matches) return;
-    for (const selecteur of ancres) {
-      const cible = document.querySelector(selecteur);
-      if (!cible) continue;
-      const conteneur = cible.closest('.product__media-wrapper') || cible;
-      if (conteneur.contains(bloc)) return;
-      conteneur.appendChild(bloc);
-      bloc.dataset.place = 'ok';
-      return;
-    }
-    // Aucune ancre : le bandeau reste en haut du bloc d'achat, ce qui reste juste.
+
+    // Le theme rend la galerie dans un element <media-gallery>. On se place
+    // JUSTE APRES lui, jamais dedans : .product__media-list est un <ul>, et y
+    // injecter un <div> produirait du HTML invalide et poserait le bandeau a
+    // l'interieur du carrousel, ou il defilerait avec les images.
+    const galerie = document.querySelector('media-gallery')
+      || document.querySelector('.product__media-wrapper');
+    if (!galerie || galerie.nextElementSibling === bloc) return;
+
+    galerie.insertAdjacentElement('afterend', bloc);
+    bloc.dataset.place = 'ok';
   };
 
   if (document.readyState === 'loading') {

@@ -298,7 +298,7 @@
         "mobile_media_corner_radius": 0,
         "mobile_spacing_pixels": 0,
         "mobile_arrows_position": "sides",
-        "mobile_pagination": "dots_under",
+        "mobile_pagination": "numeric",
         "mobile_thumbnails": "show",
         "mobile_thumbnails_count": 5,
         "mobile_scroll_padding_percentage": 0,
@@ -473,10 +473,14 @@
     "vrl_close": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<style>\n  .vrl-close{background:#EFEAE1;padding:clamp(34px,5vw,56px) 20px}\n  .vrl-close__in{max-width:720px;margin:0 auto;text-align:center;font-family:\"DM Sans\",system-ui,sans-serif}\n  .vrl-close__eyebrow{margin:0 0 12px;color:#1F3D2B;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}\n  .vrl-close h2{margin:0 0 14px;color:#1A1A18;font-family:\"Playfair Display\",Georgia,serif;font-size:clamp(30px,4vw,46px);font-weight:600;letter-spacing:-.025em;line-height:1.08}\n  .vrl-close p{margin:0 0 22px;color:#3A3A36;font-size:15.5px;line-height:1.65}\n  .vrl-close__btn{display:inline-flex;min-height:54px;width:100%;max-width:380px;align-items:center;justify-content:center;padding:15px 28px;border:1px solid #A85C2A;border-radius:4px;background:#A85C2A;color:#FBF9F5!important;text-decoration:none!important;font-size:15.5px;font-weight:800;cursor:pointer;transition:background .18s ease,border-color .18s ease}\n  .vrl-close__btn:hover{background:#8E4C21;border-color:#8E4C21}\n  .vrl-close__btn:focus-visible{outline:3px solid #1F3D2B;outline-offset:3px}\n  .vrl-close__micro{margin:12px 0 0;color:#5C5C55;font-size:13px;line-height:1.5}\n  @media(prefers-reduced-motion:reduce){.vrl-close__btn{transition:none}}\n</style>\n<section class=\"vrl-close\" aria-labelledby=\"vrl-close-title\">\n  <div class=\"vrl-close__in\">\n    <p class=\"vrl-close__eyebrow\">Derniere etape</p>\n    <h2 id=\"vrl-close-title\">Pret a essayer le rituel&nbsp;?</h2>\n    <p>Un flacon de 100&nbsp;ml, 4 a 6 semaines d'usage quotidien. Le duo et le trio font baisser le prix par flacon.</p>\n    <a class=\"vrl-close__btn\" href=\"#atBuybox\" data-vrl-close-btn>Choisir mon offre — a partir de {{ product.price | money }}</a>\n    <p class=\"vrl-close__micro\">Paiement securise &middot; Traitement 1&ndash;3 jours &middot; transport estime 8&ndash;16 jours &middot; 14 jours pour changer d'avis</p>\n  </div>\n</section>\n<script>\n(() => {\n  const btn = document.querySelector('[data-vrl-close-btn]');\n  if (!btn) return;\n  btn.addEventListener('click', (e) => {\n    // On remonte au bloc d'achat plutot que de recharger la page sur elle-meme.\n    const cible = document.querySelector('#atBuybox, .product__info-wrapper, .product__info-container');\n    if (!cible) return;\n    e.preventDefault();\n    cible.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });\n  });\n})();\n</script>",
+        "custom_liquid": "<style>\n  .vrl-close{background:#FBF9F5;padding:clamp(34px,5vw,56px) 20px}\n  .vrl-close__in{max-width:720px;margin:0 auto;text-align:center;font-family:\"DM Sans\",system-ui,sans-serif}\n  .vrl-close__eyebrow{margin:0 0 12px;color:#1F3D2B;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}\n  .vrl-close h2{margin:0 0 14px;color:#1A1A18;font-family:\"Playfair Display\",Georgia,serif;font-size:clamp(30px,4vw,46px);font-weight:600;letter-spacing:-.025em;line-height:1.08}\n  .vrl-close p{margin:0 0 22px;color:#3A3A36;font-size:15.5px;line-height:1.65}\n  .vrl-close__btn{display:inline-flex;min-height:54px;width:100%;max-width:380px;align-items:center;justify-content:center;padding:15px 28px;border:1px solid #A85C2A;border-radius:4px;background:#A85C2A;color:#FBF9F5!important;text-decoration:none!important;font-size:15.5px;font-weight:800;cursor:pointer;transition:background .18s ease,border-color .18s ease}\n  .vrl-close__btn:hover{background:#8E4C21;border-color:#8E4C21}\n  .vrl-close__btn:focus-visible{outline:3px solid #1F3D2B;outline-offset:3px}\n  .vrl-close__micro{margin:12px 0 0;color:#5C5C55;font-size:13px;line-height:1.5}\n  @media(prefers-reduced-motion:reduce){.vrl-close__btn{transition:none}}\n</style>\n<section class=\"vrl-close\" aria-labelledby=\"vrl-close-title\">\n  <div class=\"vrl-close__in\">\n    <p class=\"vrl-close__eyebrow\">Derniere etape</p>\n    <h2 id=\"vrl-close-title\">Pret a essayer le rituel&nbsp;?</h2>\n    <p>Un flacon de 100&nbsp;ml, 4 a 6 semaines d'usage quotidien. Le duo et le trio font baisser le prix par flacon.</p>\n    <a class=\"vrl-close__btn\" href=\"#atBuybox\" data-vrl-close-btn>Choisir mon offre — a partir de {{ product.price | money }}</a>\n    <p class=\"vrl-close__micro\">Paiement securise &middot; Traitement 1&ndash;3 jours &middot; transport estime 8&ndash;16 jours &middot; 14 jours pour changer d'avis</p>\n  </div>\n</section>\n<script>\n(() => {\n  const btn = document.querySelector('[data-vrl-close-btn]');\n  if (!btn) return;\n  btn.addEventListener('click', (e) => {\n    // On remonte au bloc d'achat plutot que de recharger la page sur elle-meme.\n    const cible = document.querySelector('#atBuybox, .product__info-wrapper, .product__info-container');\n    if (!cible) return;\n    e.preventDefault();\n    cible.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });\n  });\n})();\n</script>",
         "padding_top": 0,
         "padding_bottom": 0
       }
+    },
+    "vrl_presse": {
+      "type": "verline-press-marquee",
+      "settings": {}
     }
   },
   "order": [
@@ -486,6 +490,7 @@
     "custom_liquid_ekgtYq",
     "verline_avis",
     "custom_liquid_UbLV4a",
+    "vrl_presse",
     "vrl_close"
   ]
 }
