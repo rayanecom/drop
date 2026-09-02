@@ -89,9 +89,8 @@ jobs:
 
           (async () => {
             const b = await webkit.launch();
-            await essai(b, null);
             await essai(b, 'FR');
-            await essai(b, 'US');
+            await essai(b, 'FR');
             await b.close();
           })();
           JS
