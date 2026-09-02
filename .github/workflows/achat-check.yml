@@ -85,7 +85,7 @@ jobs:
             apres.panierArticles = j.item_count;
             apres.panierLignes = (j.items || []).map(i => i.quantity + ' x ' + String(i.title).slice(0, 40));
             apres.url = p.url();
-            console.log('  ERREURS JS :', erreurs.length ? erreurs.slice(0,6).join('\n              ') : 'aucune');
+            console.log('  ERREURS JS  :', erreurs.length ? erreurs.slice(0,6).join('\n              ') : 'aucune');
             console.log('  REQUETE  :', reqs.join(' | ') || '(aucune)');
             console.log('  REPONSE  :', reps.join(' | ') || '(aucune)');
             console.log('  APRES    :', JSON.stringify(apres));
