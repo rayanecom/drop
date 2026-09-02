@@ -99,6 +99,31 @@ jobs:
               console.log('  images       :', d.images, '| sans alt :', d.imagesSansAlt);
               if (images.length) console.log('  images >150Ko:', JSON.stringify(images.slice(0,6)));
               if (nom === 'Accueil') console.log('  liens pied   :', JSON.stringify(d.liensPied));
+
+              if (nom === 'Fiche produit') {
+                await p.evaluate(() => window.scrollTo(0, 3000));
+                await p.waitForTimeout(1500);
+                const st = await p.evaluate(() => {
+                  const b = document.querySelector('[id^="SectionAtcBtn-"]');
+                  if (!b) return '(aucune barre collante)';
+                  const r = b.getBoundingClientRect();
+                  const visible = r.height > 0 && r.top < window.innerHeight && getComputedStyle(b).display !== 'none';
+                  return { libelle: b.innerText.trim().replace(/\s+/g,' ').slice(0,40), visible, hauteur: Math.round(r.height) };
+                });
+                console.log('  barre collante:', JSON.stringify(st));
+              }
+              if (nom === 'Panier') {
+                const t = await p.evaluate(() => {
+                  const s = document.querySelector('.vrl-cart-trust');
+                  const txt = document.body.innerText || '';
+                  return {
+                    reassurance: !!s,
+                    logosPaiement: document.querySelectorAll('.vrl-cart-trust__pay li').length,
+                    anglaisRestant: /You may also like|Join our email list/i.test(txt),
+                  };
+                });
+                console.log('  panier       :', JSON.stringify(t));
+              }
               await p.close();
             }
             await b.close();
