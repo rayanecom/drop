@@ -303,7 +303,7 @@
           "0935e47c-9604-4faa-b47a-d61ca49c0c16": {
             "type": "checkout_btn",
             "settings": {
-              "show_additional_checkout_buttons": false,
+              "show_additional_checkout_buttons": true,
               "display_price": true,
               "enable_custom_color": true,
               "custom_color": "#a85c2a",
