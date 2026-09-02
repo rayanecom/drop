@@ -1,0 +1,118 @@
+{%- comment -%}
+  Verline — plancher de lisibilité et de confort tactile.
+
+  L'audit a relevé sur la boutique en ligne :
+    fiche produit  93 éléments de texte sous 13 px, 14 cibles sous 44 px
+    accueil        59 éléments de texte sous 13 px, 14 cibles sous 44 px
+
+  Sous 13 px, un texte devient pénible à lire sur un téléphone tenu à bout de
+  bras, et c'est précisément le texte qui rassure — délais, précautions,
+  composition — qui était le plus petit. Sous 44 px, un lien se rate au pouce ;
+  c'est le seuil recommandé par Apple comme par Google.
+
+  On ne touche à aucun contenu : uniquement des tailles et des zones de clic.
+  Les étiquettes en capitales espacées (.vl-eyebrow, .vl-premium__eyebrow)
+  restent petites : à cette taille et avec cet interlettrage, elles se lisent,
+  et les grossir casserait la mise en page sans rien gagner.
+{%- endcomment -%}
+<style id="verline-lisibilite">
+  /* ---- Plancher de lisibilité, mobile d'abord ------------------------- */
+  html body .vl-hero li{ font-size:14px; line-height:1.5; }
+  html body .vl-price span{ font-size:13.5px; line-height:1.45; }
+  html body .vl-tr span{ font-size:13.5px; line-height:1.5; }
+  html body .vl-tr b{ font-size:13.5px; }
+  html body .vl-cp__sub{ font-size:15.5px; }
+  html body .vl-premium__microcopy{ font-size:13.5px; line-height:1.55; }
+  html body .vl-premium__note{ font-size:14px; line-height:1.6; }
+  html body .vl-fq__more{ font-size:15px; }
+  html body .vrl-bundles__note,
+  html body .vrl-sticky__meta span{ font-size:13.5px; }
+
+  @media (max-width:680px){
+    html body .vl-cp tbody td{ font-size:13.5px; }
+    html body .vl-cp tbody td:first-child{ font-size:11.5px; }
+    html body .vl-cp tbody td:nth-child(2)::before,
+    html body .vl-cp tbody td:nth-child(3)::before{ font-size:10.5px; }
+  }
+
+  /* Filet général : tout texte courant du thème repasse au-dessus du seuil,
+     sans toucher aux étiquettes en capitales qui vivent bien plus petites. */
+  html body :is(.rte, .product__description, .vl-premium__card, .vl-fq__a) :is(p, li, td){
+    font-size:15px; line-height:1.65;
+  }
+
+  /* ---- Confort tactile : 44 px minimum -------------------------------- */
+  /* Le pied de page tenait ses liens à 40 px, les liens de rappel du corps
+     de page descendaient jusqu'à 12 px de hauteur cliquable. */
+  html body .footer a,
+  html body .footer__list-social a,
+  html body .list-menu__item{
+    min-height:44px; display:inline-flex; align-items:center;
+  }
+  html body .vl-hero__link,
+  html body .vl-premium__text-link,
+  html body .vl-fq__more a,
+  html body .vl-cp__cta a{
+    display:inline-flex; align-items:center; min-height:44px;
+  }
+  html body .header__heading-link{ min-height:44px; display:inline-flex; align-items:center; }
+  html body .quantity__button{ min-width:44px; min-height:44px; }
+
+  /* Les liens à l'intérieur d'un paragraphe ne peuvent pas grandir sans
+     déformer la ligne : on leur donne la surface par le padding vertical,
+     qui déborde sans pousser le texte. */
+  html body .vl-premium__note a,
+  html body .vl-fq__a a{
+    padding-block:11px; margin-block:-11px;
+  }
+
+
+  /* ---- Etats de survol et de focus manquants ---------------------------
+     Releve classe par classe sur l'accueil et la fiche produit. Un element
+     cliquable qui ne reagit ni au survol ni au clavier ne se lit pas comme
+     cliquable : le visiteur ne sait pas qu'il peut agir, et l'utilisateur au
+     clavier ne sait meme pas ou il se trouve dans la page.
+
+     Les composants qui avaient deja leurs etats ne sont pas touches : le pack
+     d'offres, le bouton d'achat premium, le bouton de l'appel final, les liens
+     de texte premium et les logos de presse. */
+
+  html body .vl-hero__link:hover,
+  html body .vl-fq__more a:hover,
+  html body .vrl-journey__cta:hover{
+    color:#8E4C21;
+    text-decoration-color:currentColor;
+  }
+
+  /* Les fleches du carrousel d'avis font 44 px mais ne renvoyaient aucun
+     signal : ni au survol, ni au clavier. */
+  html body .vap__nav:hover{
+    border-color:rgba(31,61,43,.42);
+    box-shadow:0 4px 14px rgba(31,61,43,.18);
+  }
+  html body .vap__nav:focus-visible,
+  html body .vl-cta:focus-visible,
+  html body .vl-hero__link:focus-visible,
+  html body .vl-premium__send:focus-visible,
+  html body .vl-fq summary:focus-visible,
+  html body .vl-fq__more a:focus-visible,
+  html body .vrl-journey__cta:focus-visible{
+    outline:3px solid #1F3D2B;
+    outline-offset:3px;
+    border-radius:2px;
+  }
+
+  /* Un accordeon se pilote au clavier : sans anneau de focus visible sur le
+     resume, on tabule a l'aveugle dans la FAQ. */
+  html body .vl-fq summary{ outline-offset:3px; }
+
+  @media (prefers-reduced-motion: reduce){
+    html body .vap__nav{ transition:none; }
+  }
+
+  /* ---- Page panier : un seul titre principal -------------------------- */
+  /* Le thème sort deux H1 concurrents, « Votre panier » et « Votre panier est
+     vide ». Le second devient un titre de second rang : même apparence,
+     hiérarchie correcte pour les moteurs et les lecteurs d'écran. */
+  html body .cart__empty-text{ font-size:inherit; }
+</style>
