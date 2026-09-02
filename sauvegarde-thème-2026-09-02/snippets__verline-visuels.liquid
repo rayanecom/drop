@@ -1,0 +1,74 @@
+{%- comment -%}
+  Verline — cadrage des visuels produit + ordre de deux blocs de bas de page.
+
+  1. CADRAGE : les vues de la galerie gardent le format de la première image,
+     sans recadrage. Chargé dans <head> depuis snippets/meta-tags.liquid.
+
+  2. ORDRE : le bloc vert « Ce que nos clients ressentent » (.aqt-inspir) doit
+     passer AVANT le bandeau « La presse parle de nous » (.vrl-press-demo).
+     Le script VerlinePressInstaller de layout/theme.liquid insère le bandeau
+     presse après custom_liquid_UbLV4a — or ce conteneur est vide (12 px) et se
+     trouve au-dessus du bloc vert, donc la presse atterrit avant le vert.
+     On remonte simplement le vert juste avant la presse. Idempotent.
+{%- endcomment -%}
+<style id="verline-visuels">
+  :root { --vrl-visuel-fond: #EFEAE1; }
+
+  html body .product__media-list .product-media-container,
+  html body .product__media-list .product__media {
+    background: var(--vrl-visuel-fond) !important;
+  }
+  html body .product__media-list .product__media img,
+  html body .product__media-list .product-media-container img {
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+
+  html body .thumbnail-list__item .thumbnail {
+    background: var(--vrl-visuel-fond) !important;
+  }
+  html body .thumbnail-list__item .thumbnail img {
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+
+  html body .product-media-modal__content img,
+  html body .product-media-modal__content .media img {
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+</style>
+
+<script id="verline-ordre-sections">
+(function () {
+  function ordonner() {
+    var main = document.getElementById('MainContent');
+    if (!main) return;
+
+    var presse = main.querySelector('.vrl-press-demo');
+    var vert   = main.querySelector('#aqt-inspir, .aqt-inspir');
+    if (!presse || !vert) return;
+
+    // Si le bloc vert se trouve APRES le bandeau presse, on le remonte juste avant.
+    if (presse.compareDocumentPosition(vert) & Node.DOCUMENT_POSITION_FOLLOWING) {
+      presse.insertAdjacentElement('beforebegin', vert);
+    }
+  }
+
+  function planifier() {
+    ordonner();
+    // Le script de theme.liquid repasse a 450 ms et 1400 ms : on repasse apres lui.
+    setTimeout(ordonner, 600);
+    setTimeout(ordonner, 1600);
+    setTimeout(ordonner, 2600);
+    setTimeout(ordonner, 4000);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', planifier);
+  } else {
+    planifier();
+  }
+  document.addEventListener('shopify:section:load', planifier);
+})();
+</script>

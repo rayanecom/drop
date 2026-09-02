@@ -1,0 +1,69 @@
+{
+  "thème": "✅ VERLINE V5 — LE BON — PUBLIER CELUI-CI",
+  "rôle": "MAIN",
+  "updatedAt_shopify": "2026-09-02T04:07:27Z",
+  "sauvegardé_le": "2026-09-02T04:31:21.565919Z",
+  "id": "gid://shopify/OnlineStoreTheme/166029000924",
+  "fichiers": [
+    {
+      "fichier": "layout/theme.liquid",
+      "octets_shopify": "55103",
+      "caracteres": 55035,
+      "empreinte": "57ba6d6f86b5f48c"
+    },
+    {
+      "fichier": "snippets/buy-buttons.liquid",
+      "octets_shopify": "16394",
+      "caracteres": 16360,
+      "empreinte": "467f139abaaf0ebb"
+    },
+    {
+      "fichier": "snippets/meta-tags.liquid",
+      "octets_shopify": "5855",
+      "caracteres": 5817,
+      "empreinte": "1a2666738d9d4463"
+    },
+    {
+      "fichier": "snippets/price.liquid",
+      "octets_shopify": "6618",
+      "caracteres": 6618,
+      "empreinte": "aa93f46788eb2cea"
+    },
+    {
+      "fichier": "snippets/verline-assistant.liquid",
+      "octets_shopify": "26118",
+      "caracteres": 25938,
+      "empreinte": "73f10171e120c602"
+    },
+    {
+      "fichier": "snippets/verline-lisibilite.liquid",
+      "octets_shopify": "3513",
+      "caracteres": 3467,
+      "empreinte": "73d2d5775874458e"
+    },
+    {
+      "fichier": "snippets/verline-visuels.liquid",
+      "octets_shopify": "2619",
+      "caracteres": 2607,
+      "empreinte": "5cae88fbb4447d34"
+    },
+    {
+      "fichier": "templates/cart.json",
+      "octets_shopify": "5108",
+      "caracteres": 5086,
+      "empreinte": "4f369ca6b576b203"
+    },
+    {
+      "fichier": "templates/index.json",
+      "octets_shopify": "40539",
+      "caracteres": 40263,
+      "empreinte": "b1914c21a6c8117e"
+    },
+    {
+      "fichier": "templates/product.json",
+      "octets_shopify": "51682",
+      "caracteres": 51358,
+      "empreinte": "ce14f8b5dd0c90ab"
+    }
+  ]
+}
