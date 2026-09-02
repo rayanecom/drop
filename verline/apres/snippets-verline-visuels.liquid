@@ -1,0 +1,112 @@
+{%- comment -%}
+  Verline — cadrage des visuels produit + ordre de deux blocs de bas de page.
+
+  1. CADRAGE : les vues de la galerie gardent le format de la première image,
+     sans recadrage. Chargé dans <head> depuis snippets/meta-tags.liquid.
+
+  2. ORDRE : le bloc vert « Ce que nos clients ressentent » (.aqt-inspir) doit
+     passer AVANT le bandeau « La presse parle de nous » (.vrl-press-demo).
+     Le script VerlinePressInstaller de layout/theme.liquid insère le bandeau
+     presse après custom_liquid_UbLV4a — or ce conteneur est vide et se trouve
+     au-dessus du bloc vert, donc la presse atterrit avant le vert.
+
+     AVANT : ce fichier repassait à 600, 1600, 2600 et 4000 ms pour remettre le
+     vert devant, pendant que theme.liquid réinstallait la presse à 450 et
+     1400 ms. Deux scripts se battaient sur le même noeud, et la page continuait
+     de bouger sous le pouce du visiteur pendant quatre secondes après le
+     chargement — c'est du décalage de mise en page visible, et sur mobile ça
+     donne l'impression d'un site cassé.
+
+     APRÈS : un MutationObserver réagit à l'instant où le bandeau presse est
+     inséré, remet le vert devant une seule fois, puis se débranche dès que la
+     page est stable. Aucun délai fixe, donc aucun saut tardif. Le repli à
+     3 secondes ne sert qu'à couper l'observateur si la presse n'arrive jamais.
+{%- endcomment -%}
+<style id="verline-visuels">
+  :root { --vrl-visuel-fond: #EFEAE1; }
+
+  /* Les visuels produit sont carrés (1254 × 1254) et le conteneur est en 1/1 :
+     « contain » ne rogne donc rien aujourd'hui, et protège un futur visuel non
+     carré d'un recadrage sauvage. C'est aussi la règle qui gagne face à celle
+     de layout/theme.liquid, plus faible en spécificité — les deux disent
+     désormais la même chose au lieu de se contredire en silence. */
+  html body .product__media-list .product-media-container,
+  html body .product__media-list .product__media {
+    background: var(--vrl-visuel-fond) !important;
+  }
+  html body .product__media-list .product__media img,
+  html body .product__media-list .product-media-container img {
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+
+  html body .thumbnail-list__item .thumbnail {
+    background: var(--vrl-visuel-fond) !important;
+  }
+  html body .thumbnail-list__item .thumbnail img {
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+
+  html body .product-media-modal__content img,
+  html body .product-media-modal__content .media img {
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+</style>
+
+<script id="verline-ordre-sections">
+(function () {
+  var observateur = null;
+  var repli = null;
+
+  function ordonner() {
+    var main = document.getElementById('MainContent');
+    if (!main) return false;
+
+    var presse = main.querySelector('.vrl-press-demo');
+    var vert = main.querySelector('#aqt-inspir, .aqt-inspir');
+    if (!presse || !vert) return false;
+
+    // Si le bloc vert se trouve APRÈS le bandeau presse, on le remonte juste avant.
+    if (presse.compareDocumentPosition(vert) & Node.DOCUMENT_POSITION_FOLLOWING) {
+      presse.insertAdjacentElement('beforebegin', vert);
+    }
+    return true;
+  }
+
+  function debrancher() {
+    if (observateur) { observateur.disconnect(); observateur = null; }
+    if (repli) { clearTimeout(repli); repli = null; }
+  }
+
+  function surveiller() {
+    var main = document.getElementById('MainContent');
+    if (!main || observateur) return;
+
+    // On agit à l'instant où la presse est insérée, au lieu de repasser à
+    // l'aveugle pendant quatre secondes.
+    observateur = new MutationObserver(function () {
+      if (ordonner()) debrancher();
+    });
+    observateur.observe(main, { childList: true, subtree: true });
+
+    // Si la presse n'arrive jamais, on ne laisse pas un observateur tourner.
+    repli = setTimeout(debrancher, 3000);
+  }
+
+  function demarrer() {
+    if (!ordonner()) surveiller();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', demarrer, { once: true });
+  } else {
+    demarrer();
+  }
+  document.addEventListener('shopify:section:load', function () {
+    debrancher();
+    demarrer();
+  });
+})();
+</script>
