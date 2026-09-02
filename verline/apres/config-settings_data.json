@@ -251,7 +251,7 @@
               "quantity_container_padding": 0,
               "quantity_corner_radius": 4,
               "quantity_border_width": 1,
-              "quantity_border_color": "#787878",
+              "quantity_border_color": "#B9B2A6",
               "quantity_container_color_scheme": "background-2",
               "quantity_input_padding": 0.7,
               "quantity_separators_opacity": 20,
@@ -368,12 +368,12 @@
               "corner_radius": 8,
               "show_box_shadow": false,
               "show_border": false,
-              "regular_border_color": "#e6e6e6",
+              "regular_border_color": "#EFEAE1",
               "selected_border_color": "#a85c2a",
               "border_width": "0.2",
               "show_custom_bg": false,
-              "regular_bg_color": "#f2f2f2",
-              "selected_bg_color": "#f2f2f2",
+              "regular_bg_color": "#FBF9F5",
+              "selected_bg_color": "#FBF9F5",
               "margin_top": 15,
               "margin_bottom": 15
             }
@@ -397,11 +397,11 @@
           "desktop_width": "normal",
           "mobile_width": "full",
           "enable_header_bg": false,
-          "header_bg_color": "#f3f3f3",
+          "header_bg_color": "#FBF9F5",
           "enable_body_bg": false,
-          "body_bg_color": "#f3f3f3",
+          "body_bg_color": "#FBF9F5",
           "enable_footer_bg": false,
-          "footer_bg_color": "#f3f3f3"
+          "footer_bg_color": "#FBF9F5"
         }
       },
       "header": {
