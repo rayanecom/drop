@@ -1,0 +1,116 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "cart-items": {
+      "type": "main-cart-items",
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 24
+      }
+    },
+    "cart-footer": {
+      "type": "main-cart-footer",
+      "blocks": {
+        "dec6ac13-eef3-4b4c-900a-e550eb977500": {
+          "type": "discount_field",
+          "disabled": true,
+          "settings": {}
+        },
+        "subtotal": {
+          "type": "subtotal",
+          "settings": {}
+        },
+        "buttons": {
+          "type": "buttons",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "dec6ac13-eef3-4b4c-900a-e550eb977500",
+        "subtotal",
+        "buttons"
+      ],
+      "settings": {}
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "You may also like",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "color_scheme": "background-1",
+        "collection": "all",
+        "products_to_show": 4,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "image_ratio": "square",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": false,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "padding_top": 100,
+        "padding_bottom": 100
+      },
+      "disabled": true
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading_size": "h1"
+          }
+        },
+        "paragraph": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Recevez nos conseils d'entretien des pieds et nos nouveautés. Un e-mail de temps en temps, jamais de spam, désinscription en un clic.</p>"
+          }
+        },
+        "email-form": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "paragraph",
+        "email-form"
+      ],
+      "settings": {
+        "color_scheme": "background-2",
+        "full_width": true,
+        "padding_top": 68,
+        "padding_bottom": 52
+      }
+    },
+    "vrl_cart_trust": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "{%- comment -%}\n  Verline — réassurance de la page panier.\n\n  L'audit a relevé une page panier de 149 mots, sans aucun élément de\n  réassurance : ni moyens de paiement, ni mention de sécurité. Le client passe\n  d'une fiche produit très rassurante à une page vide, juste avant de payer.\n  C'est le moment exact où l'on abandonne.\n\n  Les logos affichés viennent de shop.enabled_payment_types, donc de ce qui est\n  réellement activé sur la boutique : cette liste ne peut pas mentir.\n{%- endcomment -%}\n<section class=\"vrl-cart-trust\" aria-label=\"Paiement\">\n  <div class=\"vrl-cart-trust__in\">\n    <p class=\"vrl-cart-trust__lead\">\n      <svg viewBox=\"0 0 24 24\" width=\"17\" height=\"17\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"4\" y=\"10\" width=\"16\" height=\"10\" rx=\"2\"/><path d=\"M8 10V7a4 4 0 0 1 8 0v3\"/></svg>\n      Paiement sécurisé — vos coordonnées bancaires ne transitent jamais par la boutique.\n    </p>\n    {%- if shop.enabled_payment_types.size > 0 -%}\n      <ul class=\"vrl-cart-trust__pay\">\n        {%- for type in shop.enabled_payment_types -%}\n          <li>{{ type | payment_type_svg_tag: class: 'vrl-cart-trust__icon' }}</li>\n        {%- endfor -%}\n      </ul>\n    {%- endif -%}\n  </div>\n</section>\n<style>\n  .vrl-cart-trust{background:#EFEAE1;padding:22px 20px;margin:0}\n  .vrl-cart-trust__in{max-width:820px;margin:0 auto;text-align:center}\n  .vrl-cart-trust__lead{\n    display:flex;align-items:center;justify-content:center;gap:8px;\n    margin:0 0 14px;color:#1F3D2B;\n    font-family:\"DM Sans\",system-ui,sans-serif;font-size:14.5px;line-height:1.5;font-weight:600}\n  .vrl-cart-trust__lead svg{flex:0 0 auto}\n  .vrl-cart-trust__pay{\n    display:flex;flex-wrap:wrap;gap:8px;justify-content:center;\n    margin:0;padding:0;list-style:none}\n  .vrl-cart-trust__pay li{line-height:0}\n  .vrl-cart-trust__icon{height:26px;width:auto;display:block}\n  @media(max-width:520px){\n    .vrl-cart-trust__lead{font-size:13.5px;text-align:left}\n    .vrl-cart-trust__icon{height:22px}\n  }\n</style>",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "cart-items",
+    "cart-footer",
+    "vrl_cart_trust",
+    "featured-collection",
+    "newsletter"
+  ]
+}

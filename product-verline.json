@@ -242,6 +242,16 @@
             "margin_top": 0,
             "margin_bottom": 0
           }
+        },
+        "sticky": {
+          "type": "sticky_atc",
+          "settings": {
+            "function": "add_to_cart",
+            "display_when": "after_scroll",
+            "button_label": "Ajouter au panier",
+            "mobile_show_price_in_button": true,
+            "desktop_show_price_in_button": true
+          }
         }
       },
       "block_order": [
@@ -256,7 +266,8 @@
         "reassurance",
         "use",
         "formula",
-        "delivery"
+        "delivery",
+        "sticky"
       ],
       "settings": {
         "display_id": false,
