@@ -1,0 +1,95 @@
+name: valide-css
+on:
+  push:
+    paths: ['.github/workflows/valide-css.yml', 'verline-lisibilite.liquid']
+  workflow_dispatch:
+jobs:
+  valide:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm init -y && npm i playwright@1.48.0
+      - run: npx playwright install --with-deps webkit
+      - name: Simuler le correctif sans l installer
+        run: |
+          cat > v.js <<'JS'
+          const { webkit } = require('playwright');
+          const fs = require('fs');
+
+          // On extrait le CSS du snippet Liquid : ce qui est entre <style> et </style>.
+          const src = fs.readFileSync('verline-lisibilite.liquid', 'utf8');
+          const CSS = src.slice(src.indexOf('>', src.indexOf('<style')) + 1, src.lastIndexOf('</style>'));
+          console.log('CSS injecté :', CSS.length, 'caractères\n');
+
+          const PAGES = [
+            ['Accueil', 'https://kznquq-5a.myshopify.com/'],
+            ['Fiche produit', 'https://kznquq-5a.myshopify.com/products/gel-lavant-purifiant-pieds-tea-tree'],
+          ];
+          const LARGEURS = [320, 375, 414, 1280];
+
+          const mesure = () => {
+            const cs = e => getComputedStyle(e);
+            const vis = e => { const r = e.getBoundingClientRect(); return r.width>0 && r.height>0 && cs(e).display!=='none' && cs(e).visibility!=='hidden'; };
+            let petits = 0;
+            for (const e of document.querySelectorAll('p,li,span,td,label')) {
+              if (!vis(e)) continue;
+              const t = parseFloat(cs(e).fontSize);
+              if (t && t < 13) petits++;
+            }
+            const cibles = [...document.querySelectorAll('a,button,input[type=submit],[role=button]')]
+              .filter(vis).map(e => { const r = e.getBoundingClientRect(); return Math.round(Math.min(r.width, r.height)); })
+              .filter(h => h > 0 && h < 44);
+            const buy = document.querySelector('.vl-premium__buy');
+            const send = document.querySelector('.vl-premium__send');
+            const intro = document.querySelector('.vl-premium__intro');
+            const px = e => e ? Math.round(e.getBoundingClientRect().height) : null;
+            return {
+              petits,
+              cibles: cibles.length,
+              debordement: document.documentElement.scrollWidth > window.innerWidth,
+              largeurDoc: document.documentElement.scrollWidth,
+              boutonAchat: px(buy),
+              boutonEnvoi: px(send),
+              tailleIntro: intro ? parseFloat(cs(intro).fontSize).toFixed(1) : null,
+            };
+          };
+
+          (async () => {
+            const b = await webkit.launch();
+            let echec = false;
+            for (const [nom, url] of PAGES) {
+              console.log('='.repeat(66));
+              console.log('PAGE :', nom);
+              for (const w of LARGEURS) {
+                const ctx = await b.newContext({
+                  userAgent:'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
+                  viewport:{width:w,height:900}, hasTouch:true, locale:'fr-FR' });
+                const p = await ctx.newPage();
+                await p.goto(url, { waitUntil:'load', timeout:60000 });
+                await p.waitForTimeout(3500);
+                const avant = await p.evaluate(mesure);
+                await p.addStyleTag({ content: CSS });
+                await p.waitForTimeout(1200);
+                const apres = await p.evaluate(mesure);
+                const casse = apres.debordement && !avant.debordement;
+                if (casse) echec = true;
+                console.log(`  ${String(w).padStart(4)}px  texte<13px ${String(avant.petits).padStart(3)} → ${String(apres.petits).padStart(3)}` +
+                            `   cibles<44px ${String(avant.cibles).padStart(3)} → ${String(apres.cibles).padStart(3)}` +
+                            `   débordement ${avant.debordement} → ${apres.debordement}${casse ? '  ⚠ RÉGRESSION' : ''}`);
+                if (nom === 'Accueil' && w === 375) {
+                  console.log(`         bouton achat ${avant.boutonAchat}px → ${apres.boutonAchat}px` +
+                              ` | envoi ${avant.boutonEnvoi}px → ${apres.boutonEnvoi}px` +
+                              ` | intro ${avant.tailleIntro}px → ${apres.tailleIntro}px`);
+                }
+                await ctx.close();
+              }
+            }
+            console.log('\n' + (echec ? 'VERDICT : le correctif introduit un débordement — NE PAS INSTALLER'
+                                      : 'VERDICT : aucun débordement introduit — installation sûre'));
+            await b.close();
+            if (echec) process.exit(1);
+          })();
+          JS
+          node v.js
