@@ -1,0 +1,168 @@
+{%- comment -%}
+  Verline — preuve + bénéfices, collés sous l'image produit.
+
+  Pourquoi ce fichier existe
+  --------------------------
+  Le badge Trustpilot vivait dans une section autonome placée APRÈS tout le bloc
+  d'achat : le visiteur voyait le prix, le pack et le bouton avant de voir la
+  moindre preuve. Il remonte ici, juste sous la galerie, à l'endroit où le regard
+  se pose après l'image.
+
+  Les bénéfices étaient dispersés dans les accordéons et la description, donc
+  invisibles avant plusieurs scrolls. Ils sont désormais lisibles sans scroller.
+
+  Rien n'a été inventé : les quatre bénéfices sont repris mot pour mot de la
+  fiche existante (3 actifs, fraîcheur au rinçage, 4 à 6 semaines, 14 jours même
+  flacon ouvert). Aucune allégation nouvelle, aucune promesse retirée.
+
+  Placement
+  ---------
+  Rendu comme premier bloc du bloc d'achat. Sur mobile la galerie est au-dessus
+  du bloc d'achat : le bandeau tombe donc naturellement sous l'image, sans JS.
+  Sur desktop les deux colonnes sont côte à côte, donc un petit script le
+  déplace sous la colonne média. Si le script ne trouve pas son ancre, le
+  bandeau reste en haut du bloc d'achat — dégradé propre, jamais de trou.
+
+  Étoiles
+  -------
+  L'ancien badge affichait cinq étoiles pleines pour une note de 4,4. On remplit
+  désormais à 88 % (4,4/5), ce qui est la note réelle. Surjouer la note se
+  retourne contre la boutique le jour où un client compare.
+{%- endcomment -%}
+
+{%- assign vrl_note = 4.4 -%}
+{%- assign vrl_avis = 154 -%}
+{%- assign vrl_remplissage = 88 -%}
+
+<div class="vrl-proof" data-vrl-proof>
+  <div class="vrl-proof__rating">
+    <span class="vrl-proof__stars" role="img"
+          aria-label="Note moyenne de {{ vrl_note }} sur 5, basée sur {{ vrl_avis }} avis">
+      <span class="vrl-proof__stars-empty" aria-hidden="true">★★★★★</span>
+      <span class="vrl-proof__stars-full" style="width: {{ vrl_remplissage }}%" aria-hidden="true">★★★★★</span>
+    </span>
+    <strong class="vrl-proof__score">{{ vrl_note | replace: '.', ',' }}/5</strong>
+    <span class="vrl-proof__count">{{ vrl_avis }} avis</span>
+    <span class="vrl-proof__sep" aria-hidden="true"></span>
+    <span class="vrl-proof__source">
+      <span class="vrl-proof__tp" aria-hidden="true">★</span>Trustpilot
+    </span>
+    <span class="vrl-proof__sep vrl-proof__sep--last" aria-hidden="true"></span>
+    <span class="vrl-proof__verified">
+      <span class="vrl-proof__check" aria-hidden="true">✓</span>Vérifié
+    </span>
+  </div>
+
+  <ul class="vrl-proof__benefits">
+    <li><b>3 actifs botaniques</b><span>Tea&nbsp;Tree, menthe poivrée, aloe vera</span></li>
+    <li><b>Fraîcheur immédiate</b><span>Nette dès le rinçage, parfum discret</span></li>
+    <li><b>4 à 6 semaines</b><span>Le flacon de 100&nbsp;ml, en usage quotidien</span></li>
+    <li><b>14 jours pour changer d'avis</b><span>Même le flacon ouvert est repris</span></li>
+  </ul>
+</div>
+
+<style>
+  /* Deux neutres, un vert, un terracotta. Aucune autre teinte n'entre ici :
+     c'est la multiplication des blancs presque identiques qui salissait la page. */
+  .vrl-proof{
+    --vrl-ivoire:#FBF9F5;
+    --vrl-sable:#EFEAE1;
+    --vrl-vert:#1F3D2B;
+    --vrl-encre:#1A1A18;
+    --vrl-gris:#5C5C55;
+    --vrl-tp:#00B67A;
+    margin:0 0 20px;
+    font-family:"DM Sans",system-ui,-apple-system,sans-serif;
+  }
+
+  /* ---- Ligne de note ---- */
+  .vrl-proof__rating{
+    display:flex; align-items:center; flex-wrap:wrap; gap:8px;
+    padding:11px 14px;
+    border:1px solid rgba(31,61,43,.16); border-radius:4px;
+    background:var(--vrl-ivoire);
+    color:var(--vrl-vert);
+    font-size:13.5px; line-height:1.3;
+  }
+  .vrl-proof__stars{ position:relative; display:inline-block; white-space:nowrap;
+    font-size:15px; letter-spacing:1.5px; line-height:1; }
+  .vrl-proof__stars-empty{ color:rgba(31,61,43,.22); }
+  .vrl-proof__stars-full{
+    position:absolute; inset:0; overflow:hidden; color:var(--vrl-tp);
+  }
+  .vrl-proof__score{ font-size:15px; font-weight:800; color:var(--vrl-encre); }
+  .vrl-proof__count{ color:var(--vrl-gris); }
+  .vrl-proof__sep{ width:1px; height:15px; background:rgba(31,61,43,.18); }
+  .vrl-proof__source,
+  .vrl-proof__verified{ display:inline-flex; align-items:center; gap:5px; font-weight:700; }
+  .vrl-proof__tp{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:16px; height:16px; border-radius:3px;
+    background:var(--vrl-tp); color:#fff; font-size:10px; line-height:1;
+  }
+  .vrl-proof__check{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:16px; height:16px; border-radius:50%;
+    background:var(--vrl-vert); color:var(--vrl-ivoire); font-size:9px; line-height:1;
+  }
+
+  /* ---- Bénéfices ---- */
+  .vrl-proof__benefits{
+    display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px;
+    margin:8px 0 0; padding:0; list-style:none;
+  }
+  .vrl-proof__benefits li{
+    padding:10px 12px;
+    border:1px solid rgba(31,61,43,.13); border-radius:4px;
+    background:var(--vrl-sable);
+  }
+  .vrl-proof__benefits b{
+    display:block; margin-bottom:3px;
+    color:var(--vrl-vert); font-size:13.5px; font-weight:750; line-height:1.25;
+  }
+  .vrl-proof__benefits span{
+    display:block; color:var(--vrl-gris); font-size:13px; line-height:1.4;
+  }
+
+  /* Sous la galerie sur desktop : le bandeau reprend la largeur de l'image. */
+  .product__media-wrapper .vrl-proof{ margin:16px 0 0; }
+
+  @media (max-width:480px){
+    .vrl-proof__rating{ gap:6px; padding:10px 12px; font-size:13px; }
+    .vrl-proof__sep--last{ display:none; }
+    .vrl-proof__benefits{ gap:7px; }
+    .vrl-proof__benefits li{ padding:9px 10px; }
+  }
+</style>
+
+<script>
+(() => {
+  const bloc = document.querySelector('[data-vrl-proof]');
+  if (!bloc || bloc.dataset.place === 'ok') return;
+
+  // Ancres possibles selon la version du thème. On s'arrête à la première trouvée.
+  const ancres = ['.product__media-wrapper', '.product__media-list', '.product-media-container'];
+
+  const placer = () => {
+    // Sous 750 px la galerie est déjà au-dessus du bloc d'achat : rien à faire.
+    if (window.matchMedia('(max-width: 749px)').matches) return;
+    for (const selecteur of ancres) {
+      const cible = document.querySelector(selecteur);
+      if (!cible) continue;
+      const conteneur = cible.closest('.product__media-wrapper') || cible;
+      if (conteneur.contains(bloc)) return;
+      conteneur.appendChild(bloc);
+      bloc.dataset.place = 'ok';
+      return;
+    }
+    // Aucune ancre : le bandeau reste en haut du bloc d'achat, ce qui reste juste.
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', placer, { once: true });
+  } else {
+    placer();
+  }
+  document.addEventListener('shopify:section:load', placer);
+})();
+</script>

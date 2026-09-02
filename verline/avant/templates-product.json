@@ -1,0 +1,482 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "kicker": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": ""
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "text_size": "h1",
+            "title_alignment": "left",
+            "uppercase_title": false,
+            "margin_top": 0,
+            "margin_bottom": 12
+          }
+        },
+        "intro": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>\n.vrl-decision{margin:0 0 14px;font-family:\"DM Sans\",system-ui,sans-serif;color:#1A1A18}\n.vrl-decision__lead{margin:0 0 14px;color:#3A3A36;font-size:16px;line-height:1.58}\n.vrl-decision__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}\n.vrl-decision__item{min-height:62px;padding:10px 12px;border:1px solid rgba(31,61,43,.13);border-radius:12px;background:#FBF9F5}\n.vrl-decision__item span{display:block;margin-bottom:3px;color:#5C5C55;font-size:10px;font-weight:800;letter-spacing:.11em;text-transform:uppercase}\n.vrl-decision__item strong{display:block;color:#1F3D2B;font-size:12px;line-height:1.38}\n@media(max-width:480px){.vrl-decision__lead{font-size:15px}.vrl-decision__grid{gap:7px}.vrl-decision__item{min-height:58px;padding:9px 10px}}\n</style>\n<div class=\"vrl-decision\" aria-label=\"L’essentiel sur le gel Verline\">\n  <p class=\"vrl-decision__lead\">Ça gratte entre les orteils, la peau pèle, l’odeur s’accroche. Ce gel lavant au Tea Tree cible les champignons responsables des mycoses et rend à vos pieds une fraîcheur nette, en deux minutes sous la douche.</p>\n  <div class=\"vrl-decision__grid\">\n    <div class=\"vrl-decision__item\"><span>Quoi&nbsp;?</span><strong>Gel lavant ciblé pieds &amp; corps</strong></div>\n    <div class=\"vrl-decision__item\"><span>Pour qui&nbsp;?</span><strong>Routine quotidienne, sport et chaussures fermées</strong></div>\n    <div class=\"vrl-decision__item\"><span>Pourquoi&nbsp;?</span><strong>Nettoyer, cibler les odeurs et rafraîchir</strong></div>\n    <div class=\"vrl-decision__item\"><span>Format</span><strong>Flacon 100&nbsp;ml · 29,90&nbsp;€</strong></div>\n    <div class=\"vrl-decision__item\"><span>Livraison</span><strong>Traitement 1–3 j · transport estimé 8–16 j</strong></div>\n    <div class=\"vrl-decision__item\"><span>Retours</span><strong>14 jours selon les conditions d’hygiène</strong></div>\n  </div>\n</div>"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "layout": "price_first",
+            "price_color": "text",
+            "compare_price_color": "text",
+            "displayed_badge": "none",
+            "icon_scale": 120,
+            "custom_badge_text": "",
+            "icon_1": "redeem",
+            "filled_icon_1": false,
+            "icon_2": "check_circle",
+            "filled_icon_2": false,
+            "margin_top": 18,
+            "margin_bottom": 12
+          }
+        },
+        "bundle_offer": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>\n  .vrl-native-quantity--managed { position: absolute !important; width: 1px !important; height: 1px !important; overflow: hidden !important; clip-path: inset(50%) !important; white-space: nowrap !important; }\n  .vrl-bundles { margin: 20px 0 16px; font-family: \"DM Sans\", system-ui, sans-serif; }\n  .vrl-bundles fieldset { margin: 0; padding: 0; border: 0; }\n  .vrl-bundles legend { margin: 0 0 11px; color: #1A1A18; font-size: 13px; font-weight: 750; letter-spacing: .015em; }\n  .vrl-bundles__list { display: grid; gap: 10px; }\n  .vrl-offer { position: relative; display: block; cursor: pointer; }\n  .vrl-offer > input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }\n  .vrl-offer__card { position: relative; display: grid; grid-template-columns: 82px minmax(0,1fr) auto; align-items: center; gap: 14px; min-height: 88px; padding: 12px 14px; border: 1px solid rgba(31,61,43,.18); border-radius: 4px; color: #1A1A18; background: #FBF9F5; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }\n  .vrl-offer:hover .vrl-offer__card { border-color: rgba(31,61,43,.42); transform: translateY(-1px); }\n  .vrl-offer > input:checked + .vrl-offer__card { border: 2px solid #1F3D2B; padding: 11px 13px; background: #F5F1E9; box-shadow: 0 10px 30px rgba(31,61,43,.10); }\n  .vrl-offer > input:focus-visible + .vrl-offer__card { outline: 3px solid #1F3D2B; outline-offset: 3px; }\n  .vrl-offer__visual { position: relative; display: block; width: 78px; height: 62px; }\n  .vrl-offer__visual img { position: absolute; top: 50%; left: 50%; width: 49px; height: 58px; object-fit: contain; border: 1px solid rgba(31,61,43,.12); border-radius: 2px; background: #EFEAE1; box-shadow: 0 5px 12px rgba(26,26,24,.09); transform: translate(-50%,-50%); }\n  .vrl-offer__visual--2 img:first-child { transform: translate(-70%,-50%) rotate(-3deg); }\n  .vrl-offer__visual--2 img:last-child { transform: translate(-30%,-50%) rotate(3deg); }\n  .vrl-offer__visual--3 img:nth-child(1) { transform: translate(-82%,-50%) rotate(-5deg); }\n  .vrl-offer__visual--3 img:nth-child(2) { z-index: 2; transform: translate(-50%,-53%); }\n  .vrl-offer__visual--3 img:nth-child(3) { transform: translate(-18%,-50%) rotate(5deg); }\n  .vrl-offer__copy b, .vrl-offer__copy span, .vrl-offer__price strong, .vrl-offer__price small { display: block; }\n  .vrl-offer__copy b { color: #1F3D2B; font-size: 15px; line-height: 1.25; }\n  .vrl-offer__copy span { margin-top: 5px; color: #5C5C55; font-size: 12px; line-height: 1.35; }\n  .vrl-offer__price { min-width: 82px; text-align: right; }\n  .vrl-offer__price strong { color: #1A1A18; font-family: \"Playfair Display\", Georgia, serif; font-size: 19px; font-weight: 650; white-space: nowrap; }\n  .vrl-offer__price small { margin-top: 4px; color: #5C5C55; font-size: 10px; white-space: nowrap; }\n  .vrl-offer__price s { display: block; margin-bottom: 2px; color: #5C5C55; font-size: 11px; text-decoration-thickness: 1px; }\n  .vrl-offer__saving { display: block; margin-top: 4px; color: #1F3D2B; font-size: 10px; font-weight: 800; white-space: nowrap; }\n  .vrl-offer__badge { position: absolute; z-index: 3; top: -9px; left: 104px; padding: 4px 9px; border-radius: 999px; color: #FBF9F5; background: #1F3D2B; font-size: 9px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }\n  .vrl-bundles__note { margin: 9px 2px 0; color: #5C5C55; font-size: 11px; line-height: 1.45; }\n  @media (max-width: 480px) {\n    .vrl-offer__card { grid-template-columns: 68px minmax(0,1fr) auto; gap: 10px; padding-inline: 10px; }\n    .vrl-offer > input:checked + .vrl-offer__card { padding-inline: 9px; }\n    .vrl-offer__visual { width: 64px; }\n    .vrl-offer__visual img { width: 43px; height: 53px; }\n    .vrl-offer__copy b { font-size: 14px; }\n    .vrl-offer__copy span { font-size: 10px; }\n    .vrl-offer__price { min-width: 70px; }\n    .vrl-offer__price strong { font-size: 17px; }\n    .vrl-offer__badge { left: 78px; }\n  }\n  @media (prefers-reduced-motion: reduce) { .vrl-offer__card { transition: none; } }\n</style>\n\n<div class=\"vrl-bundles\" id=\"vrlBundles-{{ section.id }}\" data-vrl-bundles>\n  <fieldset>\n    <legend>Prolongez le rituel, réduisez le prix par flacon</legend>\n    <div class=\"vrl-bundles__list\">\n      <label class=\"vrl-offer\">\n        <input type=\"radio\" name=\"vrl-bundle-{{ section.id }}\" value=\"1\" data-total=\"{{ product.price | money | escape }}\" checked>\n        <span class=\"vrl-offer__card\">\n          <span class=\"vrl-offer__visual\" aria-hidden=\"true\">\n            {%- if product.featured_image != blank -%}<img src=\"{{ product.featured_image | image_url: width: 180 }}\" alt=\"\" width=\"90\" height=\"108\" loading=\"eager\">{%- endif -%}\n          </span>\n          <span class=\"vrl-offer__copy\"><b>1 flacon</b><span>Pour découvrir le rituel Verline</span></span>\n          <span class=\"vrl-offer__price\"><strong>{{ product.price | money }}</strong><small>{{ product.price | money }} / flacon</small></span>\n        </span>\n      </label>\n\n      <label class=\"vrl-offer\">\n        <input type=\"radio\" name=\"vrl-bundle-{{ section.id }}\" value=\"2\" data-total=\"{{ 5290 | money | escape }}\">\n        <span class=\"vrl-offer__card\">\n          <span class=\"vrl-offer__badge\">Notre suggestion</span>\n          <span class=\"vrl-offer__visual vrl-offer__visual--2\" aria-hidden=\"true\">\n            {%- if product.featured_image != blank -%}<img src=\"{{ product.featured_image | image_url: width: 180 }}\" alt=\"\" width=\"90\" height=\"108\" loading=\"lazy\"><img src=\"{{ product.featured_image | image_url: width: 180 }}\" alt=\"\" width=\"90\" height=\"108\" loading=\"lazy\">{%- endif -%}\n          </span>\n          <span class=\"vrl-offer__copy\"><b>2 flacons</b><span>Économisez 6,90 € · 2 routines en une commande</span></span>\n          <span class=\"vrl-offer__price\"><s>{{ product.price | times: 2 | money }}</s><strong>{{ 5290 | money }}</strong><small>{{ 2645 | money }} / flacon</small><span class=\"vrl-offer__saving\">Économisez {{ 690 | money }}</span></span>\n        </span>\n      </label>\n\n      <label class=\"vrl-offer\">\n        <input type=\"radio\" name=\"vrl-bundle-{{ section.id }}\" value=\"3\" data-total=\"{{ 6990 | money | escape }}\">\n        <span class=\"vrl-offer__card\">\n          <span class=\"vrl-offer__badge\">Meilleure valeur</span>\n          <span class=\"vrl-offer__visual vrl-offer__visual--3\" aria-hidden=\"true\">\n            {%- if product.featured_image != blank -%}<img src=\"{{ product.featured_image | image_url: width: 180 }}\" alt=\"\" width=\"90\" height=\"108\" loading=\"lazy\"><img src=\"{{ product.featured_image | image_url: width: 180 }}\" alt=\"\" width=\"90\" height=\"108\" loading=\"lazy\"><img src=\"{{ product.featured_image | image_url: width: 180 }}\" alt=\"\" width=\"90\" height=\"108\" loading=\"lazy\">{%- endif -%}\n          </span>\n          <span class=\"vrl-offer__copy\"><b>3 flacons</b><span>Meilleur prix par flacon · votre routine en réserve</span></span>\n          <span class=\"vrl-offer__price\"><s>{{ product.price | times: 3 | money }}</s><strong>{{ 6990 | money }}</strong><small>{{ 2330 | money }} / flacon</small><span class=\"vrl-offer__saving\">Économisez {{ 1980 | money }}</span></span>\n        </span>\n      </label>\n    </div>\n    <p class=\"vrl-bundles__note\">Remise appliquée automatiquement au panier pour le Duo et le Trio · aucun code nécessaire.</p>\n  </fieldset>\n</div>\n\n<script>\n(() => {\n  const root = document.getElementById('vrlBundles-{{ section.id }}');\n  if (!root || root.dataset.ready === 'true') return;\n  root.dataset.ready = 'true';\n\n  const boot = () => {\n    const quantity = document.querySelector('#Quantity-Form-{{ section.id }} input[name=\"quantity\"]') || document.querySelector('input[name=\"quantity\"][form^=\"product-form-\"]');\n    const radios = Array.from(root.querySelectorAll('input[type=\"radio\"]'));\n    if (!quantity || !radios.length) return;\n\n    const nativeQuantity = quantity.closest('.product-form__quantity, [id^=\"Quantity-Form-\"]');\n    if (nativeQuantity && !root.contains(nativeQuantity)) {\n      nativeQuantity.classList.add('vrl-native-quantity--managed');\n      nativeQuantity.setAttribute('aria-hidden', 'true');\n      quantity.tabIndex = -1;\n    }\n\n    const render = (radio, dispatch) => {\n      const qty = Math.max(1, parseInt(radio.value, 10) || 1);\n      const total = radio.dataset.total || '';\n      quantity.value = String(qty);\n      if (dispatch) {\n        quantity.dispatchEvent(new Event('input', { bubbles: true }));\n        quantity.dispatchEvent(new Event('change', { bubbles: true }));\n      }\n      const updatePurchaseLabels = () => {\n        const atcPrice = document.getElementById('main-atc-price-{{ section.id }}');\n        if (atcPrice) atcPrice.textContent = total + ' •';\n        const stickyMeta = document.querySelector('[data-vrl-sticky] .vrl-sticky__meta span');\n        if (stickyMeta) stickyMeta.textContent = qty + (qty > 1 ? ' flacons · ' : ' flacon · ') + total;\n      };\n      updatePurchaseLabels();\n      window.setTimeout(updatePurchaseLabels, 80);\n    };\n\n    root.addEventListener('change', (event) => {\n      if (event.target.matches('input[type=\"radio\"]')) render(event.target, true);\n    });\n    quantity.addEventListener('change', () => {\n      const match = radios.find((radio) => radio.value === String(quantity.value));\n      if (match) {\n        match.checked = true;\n        render(match, false);\n      }\n    });\n    render(radios.find((radio) => radio.checked) || radios[0], false);\n  };\n\n  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true });\n  else boot();\n})();\n</script>"
+          }
+        },
+        "variant": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_types": "pills, pills, pills",
+            "custom_labels": "",
+            "skip_unavailable": false,
+            "swatches_size": "medium",
+            "swatches_custom_colors": "disabled",
+            "swatches_custom_colors_list": "#000000, #FFFFFF",
+            "full_width_dropdowns": false,
+            "breaks_style": "normal",
+            "breaks_headline": "",
+            "breaks_color_scheme": "text",
+            "breaks_badges": "[empty], [empty], [empty]",
+            "breaks_displayed_images": "none",
+            "breaks_custom_images": "",
+            "breaks_image_width": 70,
+            "breaks_space_images": true,
+            "breaks_labels": "[name], [name], [name]",
+            "breaks_benefits": "[empty], [empty], [empty]",
+            "breaks_captions": "",
+            "breaks_price_texts": "[price], [price], [price]",
+            "breaks_compare_price_texts": "[compare_price], [compare_price], [compare_price]",
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        },
+        "quantity": {
+          "type": "quantity_selector",
+          "settings": {
+            "full_width_classic": false,
+            "atc_append": "none",
+            "atc_append_heights": "stretch-quantity",
+            "enable_quantity_discounts": false,
+            "style": "normal",
+            "headline": "",
+            "preselected": "option_1",
+            "display_selected_indicator": false,
+            "border_radius": 4,
+            "border_width": 1,
+            "color_scheme": "text",
+            "enable_variant_selectors": false,
+            "enable_variant_selectors_on_quantity_of_1": false,
+            "update_prices": false,
+            "skip_unavailable": false,
+            "full_width_pickers": false,
+            "hide_pickers_overlay": true,
+            "pickers_label": "",
+            "image_width": 70,
+            "space_images": true,
+            "vertical_images_position": "top",
+            "vertical_prices_layout": "vertical",
+            "option_1_quantity": 1,
+            "option_1_badge": "",
+            "option_1_badge_style": "1",
+            "option_1_badge_color": "accent-1",
+            "option_1_label": "1 gel",
+            "option_1_benefit": "",
+            "option_1_benefit_position": "top",
+            "option_1_benefit_style": "outlined",
+            "option_1_benefit_color": "accent-1",
+            "option_1_caption": "",
+            "option_1_percentage_off_text": "0",
+            "option_1_fixed_amount_off": "0",
+            "option_1_price_text": "[price]",
+            "option_1_compare_price": "compare_price",
+            "option_1_compare_price_text": "[compare_price]",
+            "option_2_quantity": 2,
+            "option_2_badge": "",
+            "option_2_badge_style": "1",
+            "option_2_badge_color": "accent-1",
+            "option_2_label": "Buy [quantity]",
+            "option_2_benefit": "",
+            "option_2_benefit_style": "outlined",
+            "option_2_benefit_color": "accent-1",
+            "option_2_caption": "You save [amount_saved]",
+            "option_2_percentage_off_text": "0",
+            "option_2_fixed_amount_off": "0",
+            "option_2_price_text": "[price]",
+            "option_2_compare_price": "compare_price",
+            "option_2_compare_price_text": "[compare_price]",
+            "option_3_quantity": 3,
+            "option_3_badge": "",
+            "option_3_badge_style": "1",
+            "option_3_badge_color": "accent-1",
+            "option_3_label": "Buy [quantity]",
+            "option_3_benefit": "",
+            "option_3_benefit_style": "outlined",
+            "option_3_benefit_color": "accent-1",
+            "option_3_caption": "You save [amount_saved]",
+            "option_3_percentage_off_text": "0",
+            "option_3_fixed_amount_off": "0",
+            "option_3_price_text": "[price]",
+            "option_3_compare_price": "compare_price",
+            "option_3_compare_price_text": "[compare_price]",
+            "option_4_quantity": 4,
+            "option_4_badge": "",
+            "option_4_badge_style": "1",
+            "option_4_badge_color": "accent-1",
+            "option_4_label": "Buy [quantity]",
+            "option_4_benefit": "",
+            "option_4_benefit_style": "outlined",
+            "option_4_benefit_color": "accent-1",
+            "option_4_caption": "You save [amount_saved]",
+            "option_4_percentage_off_text": "0",
+            "option_4_fixed_amount_off": "0",
+            "option_4_price_text": "[price]",
+            "option_4_compare_price": "compare_price",
+            "option_4_compare_price_text": "[compare_price]",
+            "margin_top": 18,
+            "margin_bottom": 9
+          }
+        },
+        "buy": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "skip_cart": false,
+            "uppercase_text": false,
+            "icon_scale": 110,
+            "icon_spacing": 8,
+            "display_price": true,
+            "enable_custom_color": true,
+            "custom_color": "#a85c2a",
+            "enable_secondary_btn": true,
+            "secondary_btn_label": "Acheter maintenant",
+            "secondary_btn_enable_custom_color": true,
+            "secondary_btn_custom_color": "#a85c2a",
+            "margin_top": 9,
+            "margin_bottom": 18
+          }
+        },
+        "reassurance": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>\n.vrl-secure{margin:2px 0 14px;padding:13px;border:1px solid rgba(31,61,43,.14);border-radius:14px;background:#F6F2EA;font-family:\"DM Sans\",system-ui,sans-serif}\n.vrl-secure__points{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}\n.vrl-secure__point{text-align:center;color:#1F3D2B;font-size:10px;font-weight:750;line-height:1.35}\n.vrl-secure__point b{display:block;margin-bottom:2px;font-size:15px}\n.vrl-secure__label{margin:0 0 8px;text-align:center;color:#5C5C55;font-size:10px;letter-spacing:.06em;text-transform:uppercase}\n.vrl-secure__payments{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px}\n.vrl-secure__payments svg{width:38px;height:24px}\n</style>\n<div class=\"vrl-secure\" aria-label=\"Commande et paiement sécurisés\">\n  <div class=\"vrl-secure__points\">\n    <div class=\"vrl-secure__point\"><b aria-hidden=\"true\">✓</b>Paiement sécurisé</div>\n    <div class=\"vrl-secure__point\"><b aria-hidden=\"true\">↗</b>Suivi transmis</div>\n    <div class=\"vrl-secure__point\"><b aria-hidden=\"true\">↩</b>Retours 14 jours</div>\n  </div>\n  <p class=\"vrl-secure__label\">Moyens de paiement disponibles</p>\n  <div class=\"vrl-secure__payments\">\n    {%- for type in shop.enabled_payment_types -%}\n      {{ type | payment_type_svg_tag }}\n    {%- endfor -%}\n  </div>\n</div>"
+          }
+        },
+        "use": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Conseils d’utilisation",
+            "heading_size": "medium",
+            "icon": "water_drop",
+            "filled_icon": false,
+            "collapse_icon": "plus",
+            "display_top_border": true,
+            "open": false,
+            "content": "<p>Sur peau humide, appliquez une petite quantité, faites mousser puis rincez soigneusement. Pour les pieds, séchez bien entre les orteils.</p>",
+            "page": "",
+            "margin_top": 24,
+            "margin_bottom": 0
+          }
+        },
+        "formula": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Action ciblée & précautions",
+            "heading_size": "medium",
+            "icon": "eco",
+            "filled_icon": false,
+            "collapse_icon": "plus",
+            "display_top_border": true,
+            "open": false,
+            "content": "<p>Tea Tree, menthe poivrée et aloe vera : une formule lavante conçue pour éliminer les champignons responsables des mycoses et rafraîchir les pieds.</p><p><strong>Composition communiquée pour cette référence :</strong> water, decyl glucoside, 1,2-hexanediol, allantoin, betaine, Melaleuca alternifolia leaf oil, peppermint leaf oil, aloe vera leaf extract, eucalyptus globulus leaf oil, tea extract, rosemary extract.</p><p>L’étiquette du flacon fait foi. Évitez les yeux et les muqueuses. Cessez l’utilisation en cas d’irritation.</p>",
+            "page": "",
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        },
+        "delivery": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Livraison & retours",
+            "heading_size": "medium",
+            "icon": "local_shipping",
+            "filled_icon": false,
+            "collapse_icon": "plus",
+            "display_top_border": true,
+            "open": false,
+            "content": "<p><strong>Préparation :</strong> 1 à 3 jours pour 90 % des commandes.</p><p><strong>Transport estimé :</strong> 8 à 16 jours vers la France, avec suivi transmis après l’expédition.</p><p><strong>Retours :</strong> demande possible sous 14 jours selon la politique de la boutique. Pour des raisons d’hygiène, un produit descellé peut être exclu, hors défaut ou non-conformité.</p>",
+            "page": "",
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        },
+        "sticky": {
+          "type": "sticky_atc",
+          "settings": {
+            "function": "add_to_cart",
+            "display_when": "after_scroll",
+            "button_label": "Ajouter au panier",
+            "mobile_show_price_in_button": true,
+            "desktop_show_price_in_button": true
+          }
+        }
+      },
+      "block_order": [
+        "kicker",
+        "title",
+        "intro",
+        "price",
+        "bundle_offer",
+        "variant",
+        "quantity",
+        "buy",
+        "reassurance",
+        "use",
+        "formula",
+        "delivery",
+        "sticky"
+      ],
+      "settings": {
+        "display_id": false,
+        "enable_sticky_info": true,
+        "display_variant_image_first": false,
+        "disable_prepend": false,
+        "hide_variants": false,
+        "variant_image_filtering": "none",
+        "image_zoom": "lightbox",
+        "arrows_color_scheme": "inverse",
+        "transparent_arrows": false,
+        "dots_color_scheme": "inverse",
+        "video_player": "play_btn",
+        "enable_video_looping": false,
+        "autoplay_videos_pause_btn": false,
+        "video_sound_btn": false,
+        "video_timeline": false,
+        "play_btn_color_scheme": "text",
+        "sound_btn_color_scheme": "inverse",
+        "timeline_color": "text",
+        "media_size": "medium",
+        "media_position": "left",
+        "gallery_layout": "thumbnail_slider",
+        "desktop_thumbnails_count": 5,
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "desktop_arrows_position": "hidden",
+        "mobile_media_corner_radius": 0,
+        "mobile_spacing_pixels": 0,
+        "mobile_arrows_position": "sides",
+        "mobile_pagination": "dots_under",
+        "mobile_thumbnails": "hide",
+        "mobile_thumbnails_count": 5,
+        "mobile_scroll_padding_percentage": 0,
+        "mobile_scroll_padding_pixels": 14,
+        "enable_mobile_outher_spacing": false,
+        "mobile_slides_container_width": 100,
+        "mobile_slides_inner_width": 100,
+        "trust_badge_position": "top-right",
+        "trust_badge_size": "medium",
+        "mobile_padding_top": 4,
+        "mobile_padding_bottom": 12,
+        "desktop_padding_top": 20,
+        "desktop_padding_bottom": 20
+      }
+    },
+    "custom_liquid_Czd3Kc": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "custom_liquid": "<div style=\"\n  display:inline-flex;\n  align-items:center;\n  gap:6px;\n  padding:7px 10px;\n  background:#F7F4EC;\n  border:1px solid #DDE4DF;\n  border-radius:999px;\n  font-family:Arial,sans-serif;\n  font-size:11px;\n  color:#173F32;\n  box-shadow:0 3px 10px rgba(23,63,50,.05);\n  white-space:nowrap;\n  width:auto;\n  max-width:100%;\n\">\n  \n  <span style=\"color:#B5914B;font-size:11px;letter-spacing:.5px;\">\n    ★★★★★\n  </span>\n\n  <strong style=\"font-size:12px;font-weight:800;\">\n    4,4/5\n  </strong>\n\n  <span style=\"color:#7A837E;\">\n    154 avis\n  </span>\n\n  <span style=\"\n    width:1px;\n    height:14px;\n    background:#D8DDD9;\n    display:inline-block;\n    margin:0 2px;\n  \"></span>\n\n  <span style=\"\n    display:inline-flex;\n    align-items:center;\n    gap:4px;\n    font-weight:700;\n  \">\n    <span style=\"\n      display:inline-flex;\n      width:14px;\n      height:14px;\n      align-items:center;\n      justify-content:center;\n      background:#173F32;\n      color:#fff;\n      border-radius:50%;\n      font-size:8px;\n    \">✓</span>\n    Vérifié\n  </span>\n\n  <span style=\"\n    width:1px;\n    height:14px;\n    background:#D8DDD9;\n    display:inline-block;\n    margin:0 2px;\n  \"></span>\n\n  <span style=\"\n    display:inline-flex;\n    align-items:center;\n    gap:4px;\n    font-weight:700;\n  \">\n    <span style=\"\n      display:inline-flex;\n      width:14px;\n      height:14px;\n      align-items:center;\n      justify-content:center;\n      background:#00B67A;\n      color:#fff;\n      border-radius:3px;\n      font-size:9px;\n    \">★</span>\n    Trustpilot\n  </span>\n\n</div>",
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "verline_avis": {
+      "type": "verline-avis-photos",
+      "blocks": {
+        "avis_1": {
+          "type": "avis",
+          "settings": {
+            "image": "shopify://shop_images/Image_Codex_28_aout_2026_07_47_39.png",
+            "name": "Thomas",
+            "meta": "31 ans",
+            "rating": 5,
+            "quote": "Après le sport, mes pieds restaient souvent humides et inconfortables. Le gel laisse une vraie sensation de propre et de fraîcheur."
+          }
+        },
+        "avis_2": {
+          "type": "avis",
+          "settings": {
+            "image": "shopify://shop_images/Image_Codex_28_aout_2026_07_47_52.png",
+            "name": "Nathalie",
+            "meta": "56 ans",
+            "rating": 5,
+            "quote": "J'avais des démangeaisons récurrentes et je surveillais des signes de mycose. Cette routine m'aide surtout à garder mes pieds nets et confortables."
+          }
+        },
+        "avis_3": {
+          "type": "avis",
+          "settings": {
+            "image": "shopify://shop_images/Image_Codex_28_aout_2026_07_47_58.png",
+            "name": "Élodie",
+            "meta": "39 ans",
+            "rating": 4,
+            "quote": "Facile à glisser dans ma trousse. Après une longue journée en chaussures fermées, j'apprécie vraiment la sensation de fraîcheur."
+          }
+        },
+        "avis_4": {
+          "type": "avis",
+          "settings": {
+            "image": "shopify://shop_images/Image_Codex_28_aout_2026_07_48_04.png",
+            "name": "Michel",
+            "meta": "67 ans",
+            "rating": 4,
+            "quote": "Mes pieds étaient souvent échauffés après mes marches. J'aime le côté frais du gel et son parfum propre, sans être trop fort."
+          }
+        },
+        "avis_5": {
+          "type": "avis",
+          "settings": {
+            "image": "shopify://shop_images/Image_Codex_28_aout_2026_07_48_16.png",
+            "name": "Karim",
+            "meta": "44 ans",
+            "rating": 5,
+            "quote": "Avec mes chaussures de sécurité toute la journée, j'avais souvent les pieds humides. J'aime la mousse et le parfum frais après la douche."
+          }
+        },
+        "avis_6": {
+          "type": "avis",
+          "settings": {
+            "image": "shopify://shop_images/Image_Codex_28_aout_2026_07_48_24.png",
+            "name": "Léa",
+            "meta": "27 ans",
+            "rating": 4,
+            "quote": "Après les vestiaires, je voulais surtout une routine simple. Le gel se rince vite et laisse mes pieds frais sans parfum trop lourd."
+          }
+        },
+        "avis_7": {
+          "type": "avis",
+          "settings": {
+            "image": "shopify://shop_images/Image_Codex_28_aout_2026_07_48_31.png",
+            "name": "Sophie",
+            "meta": "62 ans",
+            "rating": 5,
+            "quote": "Je surveillais des signes de mycose qui revenaient. J'ai surtout adopté ce gel pour garder une routine régulière et une sensation de propreté."
+          }
+        },
+        "avis_8": {
+          "type": "avis",
+          "settings": {
+            "image": "shopify://shop_images/Image_Codex_28_aout_2026_07_48_36.png",
+            "name": "Antoine",
+            "meta": "36 ans",
+            "rating": 5,
+            "quote": "Je l'ai intégré à ma douche sans changer mes habitudes. L'odeur est légère, le rinçage rapide et mes pieds restent frais plus longtemps."
+          }
+        }
+      },
+      "block_order": [
+        "avis_1",
+        "avis_2",
+        "avis_3",
+        "avis_4",
+        "avis_5",
+        "avis_6",
+        "avis_7",
+        "avis_8"
+      ],
+      "name": "Avis clients en photo",
+      "settings": {
+        "heading": "Ils l'utilisent au quotidien",
+        "subheading": "",
+        "photo_keep": 64,
+        "cards_desktop": 3,
+        "show_badge": true,
+        "badge_text": "Avis vérifié",
+        "assurance_1": "incident",
+        "assurance_2": "transparence",
+        "padding_top": 24,
+        "padding_bottom": 0
+      }
+    },
+    "custom_liquid_UbLV4a": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "custom_liquid": "{% if template.name == 'product' %}\n<template id=\"VerlineInspiTemplate\">\n  <section class=\"aqt-inspir\" aria-labelledby=\"VerlineInspiTitle\">\n    <div class=\"aqt-inspir__head page-width\">\n      <p class=\"aqt-inspir__eyebrow\">ÉDITION PREMIUM</p>\n      <h2 id=\"VerlineInspiTitle\">Ce que nos clients ressentent</h2>\n    </div>\n    <div class=\"aqt-inspir__viewport\" role=\"region\" aria-label=\"Citations clients Verline\" tabindex=\"0\">\n      <div class=\"aqt-inspir__track\">\n        <div class=\"aqt-inspir__group\">\n          <span class=\"aqt-inspir__quote\">« Un rituel qui transforme chaque douche en moment de luxe. »</span><i></i>\n          <span class=\"aqt-inspir__quote\">« La formule tea tree qui réconcilie les peaux sensibles avec le soin des pieds. »</span><i></i>\n          <span class=\"aqt-inspir__quote\">« Verline redéfinit le standard du soin podologique avec une élégance rare. »</span><i></i>\n          <span class=\"aqt-inspir__quote\">« Enfin un soin pensé pour les pieds, pas un simple savon rebaptisé. »</span><i></i>\n          <span class=\"aqt-inspir__quote\">« La fraîcheur du tea tree, la douceur de l'aloe vera — un duo parfait. »</span><i></i>\n          <span class=\"aqt-inspir__quote\">« Mon rituel quotidien depuis que j'ai découvert Verline. »</span><i></i>\n        </div>\n        <div class=\"aqt-inspir__group\" aria-hidden=\"true\">\n          <span class=\"aqt-inspir__quote\">« Un rituel qui transforme chaque douche en moment de luxe. »</span><i></i>\n          <span class=\"aqt-inspir__quote\">« La formule tea tree qui réconcilie les peaux sensibles avec le soin des pieds. »</span><i></i>\n          <span class=\"aqt-inspir__quote\">« Verline redéfinit le standard du soin podologique avec une élégance rare. »</span><i></i>\n          <span class=\"aqt-inspir__quote\">« Enfin un soin pensé pour les pieds, pas un simple savon rebaptisé. »</span><i></i>\n          <span class=\"aqt-inspir__quote\">« La fraîcheur du tea tree, la douceur de l'aloe vera — un duo parfait. »</span><i></i>\n          <span class=\"aqt-inspir__quote\">« Mon rituel quotidien depuis que j'ai découvert Verline. »</span><i></i>\n        </div>\n      </div>\n    </div>\n  </section>\n</template>\n<style id=\"VerlineInspiStyles\">.aqt-inspir{--green:#1F3D2B;--ivory:#FBF9F5;position:relative;overflow:hidden;padding:clamp(38px,6vw,68px) 0 clamp(32px,5vw,56px);background:var(--green);border-block:1px solid rgba(31,61,43,.3)}.aqt-inspir__head{position:relative;z-index:1;display:grid;justify-items:center;text-align:center;margin-bottom:clamp(24px,4vw,38px)}.aqt-inspir__eyebrow{margin:0 0 8px;color:rgba(251,249,245,.65);font:700 11px/1.2 \"DM Sans\",sans-serif;letter-spacing:.23em;text-transform:uppercase}.aqt-inspir h2{max-width:780px;margin:0;color:var(--ivory);font:500 clamp(28px,4.5vw,48px)/1.05 \"Playfair Display\",Georgia,serif;letter-spacing:-.03em}.aqt-inspir__viewport{position:relative;z-index:1;overflow:hidden;padding:14px 0;outline:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}.aqt-inspir__viewport:focus-visible{box-shadow:inset 0 0 0 2px var(--ivory)}.aqt-inspir__track{display:flex;width:max-content;will-change:transform;animation:aqtInspiScroll 40s linear infinite}.aqt-inspir__group{display:flex;align-items:center;flex-shrink:0;gap:0}.aqt-inspir__quote{display:inline-flex;align-items:center;justify-content:center;padding:0 clamp(24px,4vw,48px);color:rgba(251,249,245,.9);font:italic 500 clamp(16px,2vw,22px)/1.4 \"Playfair Display\",Georgia,serif;letter-spacing:-.01em;white-space:nowrap}.aqt-inspir__group i{width:5px;height:5px;flex:0 0 auto;background:rgba(251,249,245,.4);border-radius:50%}.aqt-inspir__viewport:hover .aqt-inspir__track,.aqt-inspir__viewport:focus-within .aqt-inspir__track{animation-play-state:paused}@keyframes aqtInspiScroll{to{transform:translate3d(-50%,0,0)}}@media(max-width:749px){.aqt-inspir{padding:34px 0 30px}.aqt-inspir__head{padding-inline:20px;margin-bottom:22px}.aqt-inspir h2{font-size:clamp(24px,8vw,36px)}.aqt-inspir__quote{font-size:clamp(14px,4vw,18px);padding-inline:20px}.aqt-inspir__viewport{-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}}@media(prefers-reduced-motion:reduce){.aqt-inspir__viewport{overflow-x:auto;-webkit-mask-image:none;mask-image:none;scrollbar-width:thin}.aqt-inspir__track{animation:none}.aqt-inspir__group[aria-hidden=\"true\"]{display:none}}</style>\n<script id=\"VerlineInspiInstaller\">(function(){function installVerlineInspir(){var main=document.getElementById('MainContent');var template=document.getElementById('VerlineInspiTemplate');if(!main||!template)return;var reviewsEnd=main.querySelector('[id$=\"__custom_liquid_UbLV4a\"]')||main.querySelector('[id$=\"__verline_avis\"]');if(reviewsEnd&&!main.querySelector('.aqt-inspir')){reviewsEnd.insertAdjacentElement('afterend',template.content.firstElementChild.cloneNode(true));}}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installVerlineInspir);else installVerlineInspir();setTimeout(installVerlineInspir,450);setTimeout(installVerlineInspir,1400);document.addEventListener('shopify:section:load',installVerlineInspir);})();</script>\n{% endif %}",
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 16
+      }
+    },
+    "verline_story": {
+      "type": "custom-liquid",
+      "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "custom_liquid": "<section class=\"vrl-journey\" aria-labelledby=\"vrl-journey-title\">\n  <div class=\"vrl-journey__inner\">\n    <header class=\"vrl-journey__head\">\n      <p class=\"vrl-journey__eyebrow\">LE RITUEL VERLINE</p>\n      <h2 id=\"vrl-journey-title\">Du premier inconfort au retour d’une sensation nette.</h2>\n      <p>Comprenez le problème, découvrez le geste et visualisez chaque étape de votre nouvelle routine.</p>\n    </header>\n\n    <div class=\"vrl-journey__steps\">\n      <article class=\"vrl-journey__step\">\n        <div class=\"vrl-journey__media\">\n          <img src=\"{{ 'verline-a-carre.png' | file_url }}\" width=\"1254\" height=\"1254\" loading=\"lazy\" decoding=\"async\" alt=\"Quand l’inconfort des pieds revient au quotidien\">\n        </div>\n        <div class=\"vrl-journey__copy\">\n          <span>01 · LE PROBLÈME</span>\n          <h3>Quand l’inconfort finit par prendre toute la place.</h3>\n          <p>Humidité, peau qui tiraille, démangeaisons et odeurs persistantes : les pieds enfermés toute la journée ont besoin d’un soin pensé pour eux.</p>\n        </div>\n      </article>\n\n      <article class=\"vrl-journey__step vrl-journey__step--reverse\">\n        <div class=\"vrl-journey__media\">\n          <img src=\"{{ 'verline-f-carre.png' | file_url }}\" width=\"1254\" height=\"1254\" loading=\"lazy\" decoding=\"async\" alt=\"Visuel avant et après du rituel Verline pour les pieds\">\n        </div>\n        <div class=\"vrl-journey__copy\">\n          <span>02 · L’OBJECTIF</span>\n          <h3>Retrouver des pieds visiblement plus nets et confortables.</h3>\n          <p>Une routine régulière aide à maintenir une peau propre, fraîche et soignée, sans ajouter un protocole compliqué à votre journée.</p>\n        </div>\n      </article>\n\n      <article class=\"vrl-journey__step\">\n        <div class=\"vrl-journey__media\">\n          <img src=\"{{ 'verline-d-carre.png' | file_url }}\" width=\"1254\" height=\"1254\" loading=\"lazy\" decoding=\"async\" alt=\"Tea Tree, menthe poivrée et extraits botaniques du gel Verline\">\n        </div>\n        <div class=\"vrl-journey__copy\">\n          <span>03 · LA FORMULE</span>\n          <h3>Des actifs choisis pour une routine ciblée.</h3>\n          <p>Tea Tree, menthe poivrée, aloe vera et extraits botaniques réunis dans un gel lavant frais, simple à doser et agréable à utiliser.</p>\n        </div>\n      </article>\n\n      <article class=\"vrl-journey__step vrl-journey__step--reverse\">\n        <div class=\"vrl-journey__media\">\n          <img src=\"{{ 'verline-b-carre.png' | file_url }}\" width=\"1254\" height=\"1254\" loading=\"lazy\" decoding=\"async\" alt=\"Flacon Verline utilisé sous la douche\">\n        </div>\n        <div class=\"vrl-journey__copy\">\n          <span>04 · SOUS LA DOUCHE</span>\n          <h3>Deux minutes pour installer le bon geste.</h3>\n          <p>Appliquez sur peau humide, faites mousser en insistant entre les orteils, puis rincez soigneusement. Le gel s’intègre directement à votre douche.</p>\n        </div>\n      </article>\n\n      <article class=\"vrl-journey__step\">\n        <div class=\"vrl-journey__media\">\n          <img src=\"{{ 'verline-e-carre.png' | file_url }}\" width=\"1254\" height=\"1254\" loading=\"lazy\" decoding=\"async\" alt=\"Les étapes du rituel quotidien Verline\">\n        </div>\n        <div class=\"vrl-journey__copy\">\n          <span>05 · LE RITUEL</span>\n          <h3>Masser, rincer, sécher : trois gestes essentiels.</h3>\n          <p>La régularité compte. Après le rinçage, séchez soigneusement vos pieds, en particulier entre les orteils, pour limiter l’humidité résiduelle.</p>\n        </div>\n      </article>\n\n      <article class=\"vrl-journey__step vrl-journey__step--reverse\">\n        <div class=\"vrl-journey__media\">\n          <img src=\"{{ 'verline-c-carre.png' | file_url }}\" width=\"1254\" height=\"1254\" loading=\"lazy\" decoding=\"async\" alt=\"Femme retrouvant une sensation de confort avec son rituel Verline\">\n        </div>\n        <div class=\"vrl-journey__copy\">\n          <span>06 · LE RÉSULTAT</span>\n          <h3>Retrouvez le confort au quotidien.</h3>\n          <p>Une sensation de propreté, de fraîcheur et de confiance après chaque utilisation, dans un rituel aussi simple qu’élégant.</p>\n        </div>\n      </article>\n    </div>\n\n    <div class=\"vrl-journey__cta\">\n      <a href=\"#ProductInfo-template--23505457479900__main\">Choisir mon rituel · 29,90&nbsp;€</a>\n      <p>Une routine ciblée · un geste simple · un format de 100 ml</p>\n    </div>\n  </div>\n</section>\n\n<style>\n  .vrl-journey,\n  .vrl-journey * { box-sizing: border-box; }\n  .vrl-journey {\n    --vrl-green: #1F3D2B;\n    --vrl-amber: #A85C2A;\n    --vrl-amber-dark: #8E4C21;\n    --vrl-ivory: #FBF9F5;\n    --vrl-sand: #EFEAE1;\n    --vrl-black: #1A1A18;\n    --vrl-grey: #3A3A36;\n    background: var(--vrl-ivory);\n    color: var(--vrl-black);\n    padding: clamp(42px, 6vw, 84px) 0;\n    overflow: hidden;\n  }\n  .vrl-journey__inner { width: min(1180px, 100%); margin: 0 auto; }\n  .vrl-journey__head { max-width: 760px; margin: 0 auto clamp(28px, 5vw, 54px); padding: 0 20px; text-align: center; }\n  .vrl-journey__eyebrow,\n  .vrl-journey__copy > span {\n    color: var(--vrl-green);\n    font-family: \"DM Sans\", sans-serif;\n    font-size: 12px;\n    font-weight: 700;\n    letter-spacing: .17em;\n    line-height: 1.4;\n    text-transform: uppercase;\n  }\n  .vrl-journey__head h2,\n  .vrl-journey__copy h3 {\n    color: var(--vrl-black);\n    font-family: \"Playfair Display\", Georgia, serif;\n    font-weight: 600;\n    letter-spacing: -.025em;\n  }\n  .vrl-journey__head h2 { margin: 10px 0 14px; font-size: clamp(34px, 5vw, 60px); line-height: 1.05; }\n  .vrl-journey__head > p:last-child { margin: 0 auto; max-width: 620px; color: var(--vrl-grey); font: 400 16px/1.65 \"DM Sans\", sans-serif; }\n  .vrl-journey__steps { display: grid; gap: 22px; padding: 0 16px; }\n  .vrl-journey__step {\n    display: grid;\n    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);\n    align-items: stretch;\n    overflow: hidden;\n    min-height: 520px;\n    border: 1px solid rgba(31, 61, 43, .13);\n    border-radius: 24px;\n    background: var(--vrl-sand);\n    box-shadow: 0 16px 44px rgba(31, 61, 43, .07);\n  }\n  .vrl-journey__media { min-width: 0; background: var(--vrl-sand); }\n  .vrl-journey__media img {\n    display: block !important;\n    width: 100% !important;\n    height: 100% !important;\n    min-height: 0 !important;\n    aspect-ratio: 1 / 1;\n    object-fit: contain !important;\n    object-position: center !important;\n    background: var(--vrl-sand);\n  }\n  .vrl-journey__copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(32px, 5vw, 70px); }\n  .vrl-journey__copy h3 { margin: 13px 0 16px; font-size: clamp(28px, 3.5vw, 46px); line-height: 1.08; }\n  .vrl-journey__copy p { margin: 0; color: var(--vrl-grey); font: 400 clamp(15px, 1.5vw, 17px)/1.7 \"DM Sans\", sans-serif; }\n  .vrl-journey__step--reverse .vrl-journey__media { order: 2; }\n  .vrl-journey__step--reverse .vrl-journey__copy { order: 1; }\n  .vrl-journey__cta { padding: clamp(32px, 5vw, 54px) 20px 0; text-align: center; }\n  .vrl-journey__cta a {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    min-height: 56px;\n    padding: 15px 30px;\n    border-radius: 999px;\n    background: var(--vrl-amber);\n    color: #fff;\n    font: 700 16px/1.2 \"DM Sans\", sans-serif;\n    text-decoration: none;\n    box-shadow: 0 12px 28px rgba(168, 92, 42, .22);\n    transition: background .2s ease, transform .2s ease;\n  }\n  .vrl-journey__cta a:hover { background: var(--vrl-amber-dark); transform: translateY(-1px); }\n  .vrl-journey__cta p { margin: 12px 0 0; color: #5C5C55; font: 500 12px/1.5 \"DM Sans\", sans-serif; letter-spacing: .04em; }\n\n  @media (max-width: 749px) {\n    .vrl-journey { padding: 40px 0 46px; }\n    .vrl-journey__head { margin-bottom: 26px; padding: 0 18px; text-align: left; }\n    .vrl-journey__head h2 { font-size: clamp(34px, 10vw, 44px); }\n    .vrl-journey__steps { gap: 16px; padding: 0; }\n    .vrl-journey__step {\n      display: flex;\n      flex-direction: column;\n      min-height: 0;\n      border-left: 0;\n      border-right: 0;\n      border-radius: 0;\n      box-shadow: none;\n    }\n    .vrl-journey__step--reverse .vrl-journey__media,\n    .vrl-journey__step--reverse .vrl-journey__copy { order: initial; }\n    .vrl-journey__media { width: 100%; }\n    .vrl-journey__media img {\n      width: 100% !important;\n      height: auto !important;\n      min-height: auto !important;\n      aspect-ratio: 1 / 1;\n      object-fit: contain !important;\n    }\n    .vrl-journey__copy { padding: 25px 22px 30px; }\n    .vrl-journey__copy h3 { margin-top: 10px; font-size: 31px; }\n    .vrl-journey__cta { padding-top: 30px; }\n    .vrl-journey__cta a { width: 100%; max-width: 350px; }\n  }\n\n  @media (prefers-reduced-motion: reduce) {\n    .vrl-journey__cta a { transition: none; }\n  }\n</style>",
+        "color_scheme": "accent-2",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "custom_liquid_ekgtYq": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "custom_liquid": "<style>\n.vrl-compare-v5{background:#EFEAE1;padding:clamp(34px,6vw,72px) 18px;font-family:\"DM Sans\",system-ui,sans-serif;color:#1A1A18}\n.vrl-compare-v5__inner{max-width:1040px;margin:0 auto}\n.vrl-compare-v5__eyebrow{margin:0 0 9px;text-align:center;color:#1F3D2B;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}\n.vrl-compare-v5 h2{max-width:800px;margin:0 auto 12px;text-align:center;color:#1F3D2B;font-family:\"Playfair Display\",Georgia,serif;font-size:clamp(30px,4vw,48px);line-height:1.08}\n.vrl-compare-v5__intro{max-width:650px;margin:0 auto 28px;text-align:center;color:#3A3A36;font-size:15px;line-height:1.55}\n.vrl-compare-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}\n.vrl-compare-card{overflow:hidden;border:1px solid rgba(31,61,43,.14);border-radius:18px;background:#fff;box-shadow:0 12px 34px rgba(31,61,43,.07)}\n.vrl-compare-card h3{margin:0;padding:17px 18px;background:#1F3D2B;color:#FBF9F5;font-family:\"Playfair Display\",Georgia,serif;font-size:22px;text-align:center}\n.vrl-compare-card table{width:100%;border-collapse:collapse;font-size:13px}\n.vrl-compare-card th,.vrl-compare-card td{padding:12px 13px;border-bottom:1px solid rgba(31,61,43,.10);text-align:left;vertical-align:middle}\n.vrl-compare-card thead th{color:#1F3D2B;background:#F6F2EA;font-size:11px;letter-spacing:.06em;text-transform:uppercase}\n.vrl-compare-card tbody th{width:30%;color:#1A1A18;font-weight:750}\n.vrl-compare-card tbody td:nth-child(2){color:#1F3D2B;background:rgba(31,61,43,.045);font-weight:750}\n.vrl-compare-card tbody tr:last-child>*{border-bottom:0}\n@media(max-width:760px){\n .vrl-compare-v5{padding:30px 12px}\n .vrl-compare-grid{grid-template-columns:1fr}\n .vrl-compare-card{border-radius:15px}\n .vrl-compare-card table,.vrl-compare-card tbody,.vrl-compare-card tr,.vrl-compare-card th,.vrl-compare-card td{display:block}\n .vrl-compare-card thead{display:none}\n .vrl-compare-card tbody tr{display:grid;grid-template-columns:1fr 1fr;margin:10px;border:1px solid rgba(31,61,43,.11);border-radius:11px;overflow:hidden}\n .vrl-compare-card tbody th{grid-column:1/-1;width:auto;padding:8px 10px;background:#F6F2EA;font-size:11px;text-transform:uppercase;letter-spacing:.05em}\n .vrl-compare-card tbody td{padding:10px;border:0;font-size:12px}\n .vrl-compare-card tbody td:nth-child(2)::before{content:\"Verline\";display:block;margin-bottom:3px;font-size:9px;letter-spacing:.08em;text-transform:uppercase}\n .vrl-compare-card tbody td:nth-child(3)::before{content:\"Alternative\";display:block;margin-bottom:3px;color:#5C5C55;font-size:9px;letter-spacing:.08em;text-transform:uppercase}\n}\n</style>\n<section class=\"vrl-compare-v5\" aria-labelledby=\"vrl-compare-title\">\n <div class=\"vrl-compare-v5__inner\">\n  <p class=\"vrl-compare-v5__eyebrow\">Comparer avant de choisir</p>\n  <h2 id=\"vrl-compare-title\">Une action ciblée là où un gel ordinaire s'arrête.</h2>\n  <p class=\"vrl-compare-v5__intro\">Ce que vous obtenez avec Verline, et ce qu'un savon du commerce ne fera jamais.</p>\n  <div class=\"vrl-compare-grid\">\n   <article class=\"vrl-compare-card\"><h3>Verline vs Savon ordinaire</h3><table><thead><tr><th></th><th>VERLINE</th><th>Savon</th></tr></thead><tbody>\n    <tr><th>Texture</th><td>✅ Gel dosé</td><td>Variable</td></tr><tr><th>Actifs</th><td>✅ Tea Tree, menthe, aloe</td><td>Génériques</td></tr><tr><th>Usage</th><td>✅ Pieds + corps</td><td>Corps seul</td></tr><tr><th>Mycoses</th><td>✅ Action ciblée</td><td>❌ Aucune</td></tr><tr><th>Odeurs</th><td>✅ En profondeur</td><td>⚠️ Masquées</td></tr><tr><th>Routine</th><td>✅ Remplace le gel</td><td>✅ Oui</td></tr><tr><th>Prix</th><td>✅ Accessible</td><td>✅ Faible</td></tr>\n   </tbody></table></article>\n   <article class=\"vrl-compare-card\"><h3>Verline vs Traitement médical</h3><table><thead><tr><th></th><th>VERLINE</th><th>Médical</th></tr></thead><tbody>\n    <tr><th>Texture</th><td>✅ Gel dosé</td><td>Crème</td></tr><tr><th>Actifs</th><td>✅ Naturels ciblés</td><td>Chimique</td></tr><tr><th>Usage</th><td>✅ Quotidien</td><td>Ponctuel</td></tr><tr><th>Mycoses</th><td>✅ Action ciblée</td><td>⚠️ Contraignant</td></tr><tr><th>Odeurs</th><td>✅ En profondeur</td><td>❌ Non traité</td></tr><tr><th>Routine</th><td>✅ Simple</td><td>❌ Étape en plus</td></tr><tr><th>Prix</th><td>✅ Accessible</td><td>❌ Élevé</td></tr>\n   </tbody></table></article>\n  </div>\n </div>\n</section>",
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "main",
+    "custom_liquid_Czd3Kc",
+    "verline_avis",
+    "custom_liquid_UbLV4a",
+    "verline_story",
+    "custom_liquid_ekgtYq"
+  ]
+}
+
