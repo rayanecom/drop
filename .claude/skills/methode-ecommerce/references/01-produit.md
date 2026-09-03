@@ -87,11 +87,18 @@ mais plus tard et plus cher.
 ### La chaîne de coûts, dans l'ordre
 
 ```
-Prix de vente TTC
- − TVA                          (France : 20 % → CA net = TTC / 1,20)
+COÛT D'ACHAT DÉBARQUÉ
+   prix fournisseur
+ + fret
+ + droits de douane             (sur marchandise + fret)
+ + TVA à l'import               (voir le point sur le régime, ci-dessous)
+ = coût d'achat débarqué        ← c'est CE montant qui sert de base au ×4
+
+COMPTE D'EXPLOITATION
+   Prix de vente TTC
+ − TVA collectée                (régime réel : CA net = TTC / 1,20)
  = Chiffre d'affaires net
- − coût produit
- − livraison entrante (vers le client)
+ − coût d'achat débarqué
  − frais de paiement            [À CONFIRMER selon le plan et le PSP]
  − frais d'applications ramenés à la commande
  − coût du SAV
@@ -101,6 +108,17 @@ Prix de vente TTC
  = PROFIT PAR COMMANDE
 ```
 
+### Le régime de TVA change les nombres, pas un peu
+
+| | Régime réel (assujetti) | Franchise en base |
+|---|---|---|
+| TVA sur les ventes | Collectée puis reversée → **20 % du prix ne t'appartient pas** | Non facturée → tu gardes tout le prix |
+| TVA à l'import | **Déductible** → simple avance de trésorerie, pas un coût | **Non déductible** → coût sec, +20 % sur l'achat |
+
+Les deux régimes donnent des marges et des plafonds d'achat différents. Le script prend
+`--regime reel` ou `--regime franchise`. **Le choix du régime relève d'un comptable** — la
+méthode se contente d'exiger qu'il soit connu avant de calculer.
+
 ### Les deux nombres à connaître par cœur
 
 **CPA d'équilibre** = marge de contribution avant publicité.
@@ -109,6 +127,24 @@ Au-delà, chaque commande fait perdre de l'argent.
 **ROAS d'équilibre** = prix de vente TTC ÷ marge de contribution.
 C'est le ROAS affiché dans le gestionnaire de publicités en dessous duquel on perd. Il ne
 se devine pas : `python3 scripts/economie.py` le calcule.
+
+### ×4 sur quoi, exactement
+
+C'est là que la plupart des calculs mentent, sans que personne ne le fasse exprès.
+
+| Lecture | Formule | Ce qu'elle vaut |
+|---|---|---|
+| ×4 sur le prix affiché | `PV TTC / coût débarqué` | La lecture courante du métier. **Flatteuse** : elle compare un prix dont 20 % ira à l'État à un coût qui, lui, est bien réel. |
+| ×4 sur ce qui te revient | `CA net / coût débarqué` | La lecture honnête au régime réel. Elle exige un coût d'achat **17 % plus bas** que la première. |
+| Bénéfice = 4 × le coût | `MC = 4 × coût débarqué` | La lecture littérale de « faire du ×4 de bénéfice ». La plus exigeante : coût d'achat encore ~22 % plus bas. |
+
+Le script affiche les trois, et surtout **le coût d'achat maximum à ne pas dépasser** pour
+chacune — c'est le seul chiffre exploitable face à un fournisseur.
+
+Exemple, produit à 79,99 € au régime réel : `20,00 €` de coût débarqué pour un ×4 sur le
+TTC, `16,66 €` pour un ×4 sur le CA net, `12,92 €` pour un bénéfice quadruple. Entre la
+lecture flatteuse et la lecture littérale, l'écart est de **7 € par unité** — soit, sur
+1 000 commandes, 7 000 €.
 
 ### Pourquoi « ×4 » et pas « ×2 »
 
@@ -131,9 +167,11 @@ bundle soit désirable, pas seulement rentable.
 
 ```
 python3 .claude/skills/methode-ecommerce/scripts/economie.py \
-  --prix-ttc 39.99 --cout-produit 6.50 --livraison 3.20 \
-  --tva 20 --frais-paiement-pct 1.4 --frais-paiement-fixe 0.25 \
-  --apps-par-commande 0.30 --sav-par-commande 0.40 --taux-retour 8
+  --prix-ttc 79.99 --cout-produit 13.00 --livraison 7.00 \
+  --regime reel --tva 20 --droits-douane 0 \
+  --frais-paiement-pct 1.4 --frais-paiement-fixe 0.25 \
+  --apps-par-commande 0.30 --sav-par-commande 0.40 --taux-retour 3 \
+  --multiple-cible 4
 ```
 
 Le script sort la marge de contribution, le CPA d'équilibre, le ROAS d'équilibre, et le
@@ -145,22 +183,45 @@ sens optimiste.
 
 ## Grille de score — Porte 1
 
-Note chaque ligne de 0 à 5. Multiplie par le poids. Total sur 100.
+Note chaque ligne de 0 à 5, multiplie par le poids. **Les poids somment à 20, donc le
+maximum est exactement 100.**
 
-| Critère | Poids | 0 | 5 |
-|---|---|---|---|
-| Intensité de la douleur | ×4 | Confort | Bloque une activité |
-| Récurrence | ×3 | Une fois dans la vie | Chaque semaine |
-| Recherche active existante | ×3 | Personne ne cherche | Volume net et constant |
-| Précision de la cible | ×3 | « Tout le monde » | Identité nette |
-| Compréhension en 3 s | ×3 | Il faut expliquer | Évident, son coupé |
-| Valeur perçue vs prix | ×2 | Paraît cher | Paraît donné |
-| ROAS d'équilibre | ×3 | > 3,0 | < 1,8 |
-| Logistique et retours | ×2 | Fragile ou pointures | Léger, robuste, taille unique |
-| Risque réglementaire | ×1 | Santé / électrique | Aucun |
+| Critère | Poids | Max | 0 | 5 |
+|---|---|---|---|---|
+| Intensité de la douleur | ×4 | 20 | Confort | Bloque une activité |
+| Récurrence | ×3 | 15 | Une fois dans la vie | Chaque semaine |
+| Précision de la cible | ×3 | 15 | « Tout le monde » | Identité nette |
+| Compréhension en 3 s | ×3 | 15 | Il faut expliquer | Évident, son coupé |
+| Économie | ×3 | 15 | ×4 impossible, ROAS d'équilibre > 3,0 | ×4 tenu sur le CA net, ROAS d'équilibre < 1,8 |
+| Recherche active existante | ×2 | 10 | Personne ne cherche | Volume net et constant |
+| Valeur perçue vs prix | ×1 | 5 | Paraît cher | Paraît donné |
+| Logistique et retours | ×1 | 5 | Fragile, lourd, à pointures | Léger, robuste, taille unique |
+| **TOTAL** | **20** | **100** | | |
 
-**≥ 70** : GO. **55-69** : GO conditionnel, la faiblesse doit être nommée et compensée
-explicitement. **< 55** : NO-GO, on change de produit.
+### Le risque réglementaire n'est pas une note, c'est un veto
 
-Un score n'est pas une décision automatique — mais un produit sous 55 qu'on lance quand même
-doit avoir une raison écrite, datée, et une condition de sortie.
+On ne met pas « 2 points sur 5 » à une obligation légale : soit on peut vendre, soit on ne
+peut pas. Trois issues, et aucune autre :
+
+| Situation | Décision |
+|---|---|
+| Aucune obligation particulière | On continue |
+| Obligation identifiée **et** moyen de la remplir chiffré (document fournisseur, prestataire, coût) | On continue, en portant ce coût dans le calcul économique |
+| Obligation identifiée sans moyen de la remplir | **NO-GO**, quel que soit le score |
+
+Catégories qui déclenchent le veto tant que le moyen n'est pas chiffré : cosmétique
+(Personne Responsable dans l'UE, dossier produit, notification), complément alimentaire,
+dispositif médical, biocide et antiparasitaire, électrique et électronique (marquage CE,
+DEEE, notice en français), contact alimentaire, jouet, puériculture porteuse d'un enfant,
+équipement radio.
+
+### Seuils
+
+| Score | Décision |
+|---|---|
+| **≥ 70** | GO |
+| **55 à 69** | GO conditionnel — la faiblesse doit être nommée, et compensée explicitement |
+| **< 55** | NO-GO, on change de produit |
+
+Un score n'est pas une décision automatique. Mais un produit sous 55 qu'on lance quand même
+doit avoir une raison écrite, datée, et une condition de sortie fixée à l'avance.
