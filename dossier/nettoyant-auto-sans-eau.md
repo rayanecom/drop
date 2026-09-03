@@ -163,6 +163,93 @@ intérieur efficace des cabines d'engins ». `[À CONFIRMER]` par une recherche 
 système ou la formule est protégé, sourcer une copie expose à une contrefaçon. **À vérifier
 avant tout devis.**
 
+### Les 5 angles encore libres
+
+Les deux occupants segmentent de deux façons seulement. **Vulcanet segmente par véhicule**
+(auto, moto, vélo, TP, avion). **Cleaners Motors segmente par résultat** (aucune trace
+d'eau). Personne ne segmente par **situation** — le moment où le client ne *peut pas* laver
+sa voiture. C'est là qu'est la place.
+
+#### Angle 1 — L'interdiction `FAIT, sourcé`
+
+> « Votre préfecture interdit le lavage. Votre voiture, elle, est toujours sale. »
+
+| | |
+|---|---|
+| Ce qui le fonde | En 2026, **presque tous les départements métropolitains** ont connu des restrictions. Au niveau *crise*, le lavage est interdit **même en station**. Amende jusqu'à **1 500 €**, 3 000 € en récidive (contravention de 5e classe). |
+| Contexte | Printemps 2026 le plus chaud jamais enregistré : **+1,7 °C**, **−30 % de pluie**, canicule record en juin. Les stations de lavage rapportent jusqu'à **−90 % de chiffre d'affaires** en zone de crise. |
+| Pourquoi il est libre | Aucun des deux concurrents ne l'utilise. Vulcanet parle au motard et à l'agriculteur, jamais à l'habitant d'un département en restriction. |
+| Ce qu'il exige | Une carte des départements tenue à jour. Rien d'inventé : l'urgence est un arrêté préfectoral, pas un compte à rebours. |
+| Limite | **Saisonnier, et à contre-temps en septembre.** À réactiver en mai. |
+
+#### Angle 2 — Le sans-garage `FAIT, sourcé`
+
+> « Pas de garage. Pas de robinet. Un règlement de copropriété qui interdit tout. »
+
+Dans la plupart des grands ensembles, le règlement intérieur **interdit le lavage** en
+parking souterrain **et** sur les places extérieures — pollution, glissade, dégradation des
+parties communes. Le règlement sanitaire départemental interdit par ailleurs le lavage sur
+la voie publique.
+
+Cible identitaire nette et **valable toute l'année** : locataire ou copropriétaire en
+immeuble, qui n'a jamais eu le droit de laver sa voiture chez lui.
+
+#### Angle 3 — L'anti-rouleau `FAIT, verbatim`
+
+> « Le rouleau raye. Vous payez pour abîmer votre peinture. »
+
+Verbatim client, transcription d'une vidéo UGC, mot pour mot :
+
+> « moi qui ai ce problème là aussi de laver la voiture au karcher et parce que je vais
+> éviter les micro rayures j'aime pas les rouleaux »
+
+**Attention — c'est aussi l'objection principale du produit.** Sur les forums :
+
+> « une fausse bonne idée, vu l'action mécanique tu auras de toute façon des micro-rayures »
+
+> « Vulcanet est un bon produit de nettoyage si la voiture est normalement sale, mais si
+> elle est bien crade, il faut un lavage classique »
+
+L'angle ne tient donc que s'il est associé à l'angle 5. Le promettre seul, c'est se faire
+démonter en commentaires.
+
+#### Angle 4 — Le coût réel par lavage `à chiffrer honnêtement`
+
+Un passage au rouleau coûte de l'ordre de 8 €. À deux lavages par mois, cela fait environ
+**192 € par an** `ESTIMATION` — à confirmer par un relevé de prix réel.
+
+Vulcanet occupe déjà partiellement cet angle avec « moins de 0,50 € par nettoyage », mais le
+chiffre ne retombe pas : 47,90 € ÷ 80 lingettes = **0,60 €**. **Reprendre l'angle avec un
+calcul exact est un différenciateur en soi.**
+
+#### Angle 5 — L'honnêteté sur les limites `personne ne l'occupe`
+
+> « Ça ne remplace pas un lavage quand la voiture est couverte de boue. Voici exactement
+> quand ça marche, et quand ça ne marche pas. »
+
+Les trois marques observées survendent : remise permanente présentée comme temporaire
+pendant 235 jours, « la n°1 en France », « il n'existe aucune serviette aussi absorbante »,
+un coût par usage qui ne retombe pas sur le prix affiché.
+
+Dire franchement la limite que les forums reprochent déjà au produit **transforme
+l'objection principale en preuve de sérieux**. C'est le seul angle des cinq qui ne peut pas
+être copié sans se renier.
+
+### Le calendrier des angles
+
+L'angle 1 est le plus fort mais il est saisonnier, et nous sommes en septembre — à
+contre-temps. Rotation proposée sur l'année :
+
+| Période | Angle | Ce qui le déclenche |
+|---|---|---|
+| Sept — Nov | 2 (sans-garage) + 3 (anti-rouleau) | Pluie, boue, il fait trop froid pour sortir le tuyau |
+| Déc — Fév | 3 + 5 | Sel de déneigement, tuyau gelé |
+| Mars — Juin | 4 (coût) + pollen | Le pollen est déjà exploité par un UGC Vulcanet |
+| Juin — Sept | **1 (interdiction)** | Arrêtés préfectoraux |
+
+L'angle 2 et l'angle 5 tiennent toute l'année : ce sont eux qui portent la marque, les
+autres portent les campagnes.
+
 **DÉCISION PORTE 2 : NON FRANCHIE.** Le critère « publicité de plus de 30 jours » est
 largement rempli — 377 jours chez Vulcanet, 244 chez Cleaners Motors. Mais le critère
 « marché attaquable » ne l'est pas : un incumbent français avec un brevet revendiqué d'un
