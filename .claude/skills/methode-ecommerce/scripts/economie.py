@@ -1,0 +1,317 @@
+#!/usr/bin/env python3
+"""Calculateur d'économie unitaire pour un produit e-commerce (marché France).
+
+Sort la marge de contribution, le CPA d'équilibre et le ROAS d'équilibre — les trois
+nombres qui décident si un produit peut être rentable. Aucune dépendance externe.
+
+Exemple :
+    python3 economie.py --prix-ttc 39.99 --cout-produit 6.50 --livraison 3.20
+
+Comparer trois prix :
+    python3 economie.py --prix-ttc 39.99 --cout-produit 6.50 --livraison 3.20 \
+        --scenarios 29.99,39.99,49.99
+
+Auto-test :
+    python3 economie.py --test
+"""
+
+import argparse
+import sys
+from dataclasses import dataclass
+
+
+@dataclass
+class Hypotheses:
+    """Tous les montants sont en euros, tous les taux en pourcentage."""
+
+    prix_ttc: float
+    cout_produit: float
+    livraison: float = 0.0
+    tva: float = 20.0
+    frais_paiement_pct: float = 1.4
+    frais_paiement_fixe: float = 0.25
+    apps_par_commande: float = 0.0
+    sav_par_commande: float = 0.0
+    taux_retour: float = 0.0
+    cout_retour: float = 0.0
+    quantite: int = 1
+
+
+@dataclass
+class Resultat:
+    ca_net: float
+    cout_marchandise: float
+    frais_paiement: float
+    couts_variables: float
+    mc_commande_reussie: float
+    perte_commande_remboursee: float
+    marge_contribution: float
+    marge_contribution_pct: float
+    multiple_cout: float
+    cpa_equilibre: float
+    roas_equilibre: float
+
+
+def calculer(h: Hypotheses) -> Resultat:
+    if h.prix_ttc <= 0:
+        raise ValueError("Le prix TTC doit être strictement positif.")
+    if h.quantite < 1:
+        raise ValueError("La quantité doit valoir au moins 1.")
+    if not 0 <= h.taux_retour <= 100:
+        raise ValueError("Le taux de retour est un pourcentage entre 0 et 100.")
+    if h.tva < 0:
+        raise ValueError("Le taux de TVA ne peut pas être négatif.")
+
+    # La TVA n'appartient pas à l'entreprise : elle est collectée pour l'État.
+    ca_net = h.prix_ttc / (1 + h.tva / 100)
+
+    # Le coût marchandise suit la quantité ; un bundle part dans un seul colis,
+    # donc la livraison ne se multiplie pas.
+    cout_marchandise = h.cout_produit * h.quantite
+
+    # Les frais du prestataire de paiement portent sur le montant TTC encaissé.
+    frais_paiement = h.prix_ttc * h.frais_paiement_pct / 100 + h.frais_paiement_fixe
+
+    couts_variables = (
+        cout_marchandise
+        + h.livraison
+        + frais_paiement
+        + h.apps_par_commande
+        + h.sav_par_commande
+    )
+
+    mc_ok = ca_net - couts_variables
+
+    # Sur une commande remboursée, le chiffre d'affaires repart mais les coûts restent.
+    # En dropshipping le produit n'est en général pas récupéré : il est perdu.
+    perte_remboursee = couts_variables + h.cout_retour
+
+    r = h.taux_retour / 100
+    marge_contribution = (1 - r) * mc_ok - r * perte_remboursee
+
+    base_cout = cout_marchandise + h.livraison
+    multiple = h.prix_ttc / base_cout if base_cout > 0 else float("inf")
+
+    # Le gestionnaire de publicités compte la valeur de conversion au moment de l'achat,
+    # donc avant remboursement : le ROAS d'équilibre se calcule sur le prix TTC brut.
+    roas_eq = h.prix_ttc / marge_contribution if marge_contribution > 0 else float("inf")
+
+    return Resultat(
+        ca_net=ca_net,
+        cout_marchandise=cout_marchandise,
+        frais_paiement=frais_paiement,
+        couts_variables=couts_variables,
+        mc_commande_reussie=mc_ok,
+        perte_commande_remboursee=perte_remboursee,
+        marge_contribution=marge_contribution,
+        marge_contribution_pct=marge_contribution / ca_net * 100 if ca_net else 0.0,
+        multiple_cout=multiple,
+        cpa_equilibre=marge_contribution,
+        roas_equilibre=roas_eq,
+    )
+
+
+def euro(x: float) -> str:
+    return f"{x:,.2f}".replace(",", " ").replace(".", ",") + " €"
+
+
+def afficher(h: Hypotheses, r: Resultat) -> None:
+    q = f" × {h.quantite}" if h.quantite > 1 else ""
+    print()
+    print(f"  PRIX DE VENTE {euro(h.prix_ttc)} TTC{q}")
+    print("  " + "─" * 54)
+    lignes = [
+        ("Chiffre d'affaires net (hors TVA)", r.ca_net),
+        ("Coût marchandise", -r.cout_marchandise),
+        ("Livraison", -h.livraison),
+        ("Frais de paiement", -r.frais_paiement),
+        ("Applications", -h.apps_par_commande),
+        ("SAV", -h.sav_par_commande),
+    ]
+    for libelle, montant in lignes:
+        if montant:
+            print(f"  {libelle:<38}{euro(montant):>16}")
+    if h.taux_retour:
+        cout_r = r.marge_contribution - r.mc_commande_reussie
+        print(f"  {'Provision retours (' + f'{h.taux_retour:g}' + ' %)':<38}{euro(cout_r):>16}")
+    print("  " + "─" * 54)
+    print(f"  {'MARGE DE CONTRIBUTION':<38}{euro(r.marge_contribution):>16}")
+    print(f"  {'soit, du CA net':<38}{r.marge_contribution_pct:>14.1f} %")
+    print()
+    print(f"  Multiple sur coût débarqué      ×{r.multiple_cout:.2f}"
+          f"   {'OK' if r.multiple_cout >= 4 else 'sous le seuil de ×4'}")
+
+    if r.marge_contribution <= 0:
+        print()
+        print("  MARGE DE CONTRIBUTION NÉGATIVE — ce produit perd de l'argent")
+        print("  avant même d'avoir dépensé un euro de publicité. NO-GO.")
+        return
+
+    print(f"  CPA d'équilibre                 {euro(r.cpa_equilibre)}")
+    print(f"  ROAS d'équilibre                {r.roas_equilibre:.2f}")
+    print()
+    print("  Profit par commande selon le CPA réel")
+    print("  " + "─" * 54)
+    for part in (0.4, 0.6, 0.8, 1.0, 1.2):
+        cpa = r.cpa_equilibre * part
+        profit = r.marge_contribution - cpa
+        roas = h.prix_ttc / cpa if cpa else float("inf")
+        etat = "profit" if profit > 0 else ("équilibre" if abs(profit) < 0.005 else "PERTE")
+        print(f"  CPA {euro(cpa):>10}  (ROAS {roas:>5.2f})   "
+              f"{euro(profit):>10}   {etat}")
+    print()
+
+
+def afficher_scenarios(h: Hypotheses, prix_list: list) -> None:
+    print()
+    print(f"  {'Prix TTC':>10} {'Multiple':>9} {'Marge contrib.':>15} "
+          f"{'CPA équil.':>12} {'ROAS équil.':>12}")
+    print("  " + "─" * 62)
+    for p in prix_list:
+        hp = Hypotheses(**{**h.__dict__, "prix_ttc": p})
+        rp = calculer(hp)
+        roas = f"{rp.roas_equilibre:.2f}" if rp.marge_contribution > 0 else "—"
+        print(f"  {euro(p):>10} {'×' + f'{rp.multiple_cout:.2f}':>9} "
+              f"{euro(rp.marge_contribution):>15} {euro(rp.cpa_equilibre):>12} {roas:>12}")
+    print()
+    print("  Un prix plus élevé améliore toujours ces trois colonnes. Il dégrade le taux")
+    print("  de conversion, que ce tableau ne connaît pas. Arbitrer avec un test réel.")
+    print()
+
+
+def auto_test() -> int:
+    echecs = []
+
+    def verifier(nom, obtenu, attendu, tol=0.01):
+        if abs(obtenu - attendu) > tol:
+            echecs.append(f"{nom}: obtenu {obtenu:.4f}, attendu {attendu:.4f}")
+
+    # Cas 1 — sans frais annexes ni retours, la chaîne se vérifie à la main.
+    h = Hypotheses(prix_ttc=120.0, cout_produit=10.0, livraison=5.0, tva=20.0,
+                   frais_paiement_pct=0.0, frais_paiement_fixe=0.0)
+    r = calculer(h)
+    verifier("ca_net", r.ca_net, 100.0)
+    verifier("marge_contribution", r.marge_contribution, 85.0)
+    verifier("cpa_equilibre", r.cpa_equilibre, 85.0)
+    verifier("roas_equilibre", r.roas_equilibre, 120.0 / 85.0)
+    verifier("multiple", r.multiple_cout, 8.0)
+
+    # Cas 2 — les frais de paiement portent sur le TTC, pas sur le CA net.
+    h = Hypotheses(prix_ttc=100.0, cout_produit=0.0, livraison=0.0, tva=0.0,
+                   frais_paiement_pct=2.0, frais_paiement_fixe=0.30)
+    r = calculer(h)
+    verifier("frais_paiement", r.frais_paiement, 2.30)
+    verifier("mc_sans_tva", r.marge_contribution, 97.70)
+
+    # Cas 3 — un taux de retour de 100 % ne laisse que des pertes.
+    h = Hypotheses(prix_ttc=50.0, cout_produit=10.0, livraison=5.0, tva=20.0,
+                   frais_paiement_pct=0.0, frais_paiement_fixe=0.0, taux_retour=100.0)
+    r = calculer(h)
+    verifier("mc_retour_total", r.marge_contribution, -15.0)
+
+    # Cas 4 — 50 % de retours = moyenne exacte des deux issues.
+    h = Hypotheses(prix_ttc=50.0, cout_produit=10.0, livraison=5.0, tva=20.0,
+                   frais_paiement_pct=0.0, frais_paiement_fixe=0.0, taux_retour=50.0)
+    r = calculer(h)
+    attendu = 0.5 * (50 / 1.2 - 15.0) + 0.5 * (-15.0)
+    verifier("mc_retour_moitie", r.marge_contribution, attendu)
+
+    # Cas 5 — la quantité multiplie la marchandise, pas la livraison.
+    h = Hypotheses(prix_ttc=60.0, cout_produit=10.0, livraison=5.0, tva=0.0,
+                   frais_paiement_pct=0.0, frais_paiement_fixe=0.0, quantite=3)
+    r = calculer(h)
+    verifier("cout_marchandise_bundle", r.cout_marchandise, 30.0)
+    verifier("mc_bundle", r.marge_contribution, 25.0)
+
+    # Cas 6 — marge négative : le ROAS d'équilibre n'existe pas.
+    h = Hypotheses(prix_ttc=10.0, cout_produit=20.0, livraison=5.0)
+    r = calculer(h)
+    if r.marge_contribution >= 0:
+        echecs.append("marge_negative: la marge devrait être négative")
+    if r.roas_equilibre != float("inf"):
+        echecs.append("roas_negatif: devrait valoir l'infini")
+
+    # Cas 7 — les entrées aberrantes sont rejetées.
+    for mauvais in (
+        {"prix_ttc": 0.0, "cout_produit": 1.0},
+        {"prix_ttc": 10.0, "cout_produit": 1.0, "quantite": 0},
+        {"prix_ttc": 10.0, "cout_produit": 1.0, "taux_retour": 150.0},
+    ):
+        try:
+            calculer(Hypotheses(**mauvais))
+            echecs.append(f"validation: {mauvais} aurait dû lever une erreur")
+        except ValueError:
+            pass
+
+    if echecs:
+        print("ÉCHECS :")
+        for e in echecs:
+            print("  -", e)
+        return 1
+    print("Auto-test : 7 cas, tous conformes.")
+    return 0
+
+
+def main() -> int:
+    p = argparse.ArgumentParser(
+        description="Économie unitaire d'un produit e-commerce (France).",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    p.add_argument("--prix-ttc", type=float, help="Prix de vente TTC, en euros")
+    p.add_argument("--cout-produit", type=float, help="Coût d'une unité, hors livraison")
+    p.add_argument("--livraison", type=float, default=0.0, help="Livraison vers le client")
+    p.add_argument("--tva", type=float, default=20.0, help="Taux de TVA en %%")
+    p.add_argument("--frais-paiement-pct", type=float, default=1.4,
+                   help="Commission du prestataire de paiement en %% du TTC")
+    p.add_argument("--frais-paiement-fixe", type=float, default=0.25,
+                   help="Part fixe de la commission, par transaction")
+    p.add_argument("--apps-par-commande", type=float, default=0.0,
+                   help="Abonnements d'applications ramenés à la commande")
+    p.add_argument("--sav-par-commande", type=float, default=0.0, help="Coût du SAV")
+    p.add_argument("--taux-retour", type=float, default=0.0,
+                   help="Part des commandes remboursées, en %%")
+    p.add_argument("--cout-retour", type=float, default=0.0,
+                   help="Coût de traitement d'un retour, au-delà des coûts déjà engagés")
+    p.add_argument("--qte", "--quantite", dest="quantite", type=int, default=1,
+                   help="Nombre d'unités dans l'offre (bundle)")
+    p.add_argument("--scenarios", type=str,
+                   help="Prix TTC à comparer, séparés par des virgules")
+    p.add_argument("--test", action="store_true", help="Lancer l'auto-test et sortir")
+    a = p.parse_args()
+
+    if a.test:
+        return auto_test()
+
+    if a.prix_ttc is None or a.cout_produit is None:
+        p.error("--prix-ttc et --cout-produit sont requis (ou utilise --test).")
+
+    h = Hypotheses(
+        prix_ttc=a.prix_ttc, cout_produit=a.cout_produit, livraison=a.livraison,
+        tva=a.tva, frais_paiement_pct=a.frais_paiement_pct,
+        frais_paiement_fixe=a.frais_paiement_fixe,
+        apps_par_commande=a.apps_par_commande, sav_par_commande=a.sav_par_commande,
+        taux_retour=a.taux_retour, cout_retour=a.cout_retour, quantite=a.quantite,
+    )
+
+    try:
+        r = calculer(h)
+    except ValueError as e:
+        print(f"Erreur : {e}", file=sys.stderr)
+        return 2
+
+    afficher(h, r)
+
+    if a.scenarios:
+        try:
+            prix = [float(x.strip().replace(",", ".")) for x in a.scenarios.split(",")]
+        except ValueError:
+            print("Erreur : --scenarios attend des nombres séparés par des virgules.",
+                  file=sys.stderr)
+            return 2
+        afficher_scenarios(h, prix)
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
