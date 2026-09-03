@@ -23,6 +23,7 @@ On revient au produit, ou on change de produit.
 
 | # | Étape | Référence |
 |---|---|---|
+| 0 | **Protocole de vérification** — à lire une fois, à appliquer partout | `references/00-verification.md` |
 | 1 | Trouver une douleur aiguë et récurrente | `references/01-produit.md` |
 | 2 | Identifier une cible identitaire précise | `references/01-produit.md` |
 | 3 | Trouver un produit simple à forte valeur perçue | `references/01-produit.md` |
@@ -124,6 +125,9 @@ Sans étiquette, une estimation devient une donnée en trois relectures. Donc :
 | `ESTIMATION` | Calculé par toi à partir de faits — montre le calcul |
 | `HYPOTHÈSE` | Non vérifié, à tester |
 | `[À CONFIRMER]` | Manquant, et bloquant tant que ça manque |
+
+Le détail du protocole — comment vérifier un rapport d'agent, quoi recalculer, ce qui
+ne compte pas comme une vérification — est dans `references/00-verification.md`.
 
 Ne jamais présenter une `ESTIMATION` comme un `FAIT`. Ne jamais inventer un chiffre de
 trafic, de marge, de délai ou de CPA pour compléter un tableau.
