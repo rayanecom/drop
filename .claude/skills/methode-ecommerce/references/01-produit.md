@@ -205,6 +205,31 @@ profit à plusieurs CPA. `--scenarios` compare trois prix de vente d'un coup.
 mental sur cette chaîne de coûts est faux une fois sur deux, et l'erreur va toujours dans le
 sens optimiste.
 
+## Le test préalable : le verbatim est-il accessible ?
+
+**À faire avant de noter quoi que ce soit. Il coûte dix minutes et il évite des semaines.**
+
+La porte 4 exige 20 verbatims clients réels. Or sur certains produits, ils sont
+**introuvables** — et on ne s'en aperçoit qu'après avoir engagé tout le travail d'analyse.
+
+Vérifier, sur le produit candidat :
+
+| Source | Test | Signal d'alarme |
+|---|---|---|
+| Publicités concurrentes | Le champ `transcript` de `search_ads` est-il rempli ? | Un concurrent majeur avec 17 vidéos actives et **zéro transcription** : rien à extraire |
+| Format des créas | Y a-t-il de l'UGC, de l'interview, des gens qui parlent ? | Uniquement des montages produit sans voix : cul-de-sac |
+| Forums | Une recherche web ramène-t-elle des fils de discussion nourris ? | Deux résultats commerciaux et rien d'autre |
+| Communautés | Existe-t-il des groupes centrés sur ce problème ? | Aucun espace où les gens en parlent entre eux |
+| Avis | Le produit existe-t-il sur des places de marché avec des avis détaillés ? | Aucun avis, ou seulement des avis de trois mots |
+
+**Deux verts au minimum, sinon NO-GO** — quelle que soit la qualité du reste. Un produit dont
+les clients ne parlent nulle part est un produit qu'on ne saura pas vendre : ni écrire la
+publicité, ni traiter les objections, ni construire l'offre.
+
+Corollaire souvent contre-intuitif : **un marché où les gens se plaignent bruyamment vaut
+mieux qu'un marché silencieux**, même si la concurrence y paraît plus rude. Le bruit est de
+la matière première.
+
 ## Grille de score — Porte 1
 
 Note chaque ligne de 0 à 5, multiplie par le poids. **Les poids somment à 20, donc le
