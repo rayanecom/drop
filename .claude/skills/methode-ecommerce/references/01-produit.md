@@ -205,7 +205,45 @@ profit à plusieurs CPA. `--scenarios` compare trois prix de vente d'un coup.
 mental sur cette chaîne de coûts est faux une fois sur deux, et l'erreur va toujours dans le
 sens optimiste.
 
-## Le test préalable : le verbatim est-il accessible ?
+## Les deux tests préalables
+
+**À faire avant de noter quoi que ce soit. Ils coûtent vingt minutes et évitent des semaines.**
+
+Deux candidats ont été menés loin dans la méthode avant qu'un bloqueur tardif ne les tue :
+un brevet d'abord, puis un prix de distribution ensuite. Les deux étaient détectables en
+vingt minutes, au tout début.
+
+## Test 1 : le produit est-il une commodité en distribution ?
+
+Le plus éliminatoire des deux, et le plus vite fait.
+
+**Chercher le produit chez** : Amazon.fr, Cdiscount, Darty, Fnac, Leroy Merlin, Action,
+Lidl, Decathlon, Temu, AliExpress. Relever le **prix le plus bas** trouvé.
+
+| Écart entre ton prix cible et le prix de distribution | Décision |
+|---|---|
+| Le produit est introuvable en distribution FR | **Vert** — continue |
+| Écart inférieur à ×1,5 | Jouable si l'offre et la marque ajoutent de la valeur |
+| **Écart supérieur à ×2** | **NO-GO**, sauf différenciation réelle et démontrable |
+
+Exemple vécu : un nettoyeur à ultrasons visé à 89,99 € se vendait **32,88 € chez Darty**.
+Écart ×2,7. Le client qui compare annule, et celui qui a déjà payé demande un remboursement
+et laisse un avis. **Aucun copywriting ne rattrape ça.**
+
+### Les trois échappatoires légitimes
+
+Un écart supérieur à ×2 ne se rattrape que par une différence que le client peut vérifier :
+
+| Échappatoire | Pourquoi ça marche |
+|---|---|
+| **Personnalisation** | Un produit gravé, brodé, à la mesure ou au prénom **n'a pas d'équivalent comparable**. Le prix n'est plus opposable, et le taux de retour s'effondre. |
+| **Marque et emballage propres** | Suppose un fournisseur qui accepte logo, boîte et insert — c'est l'étape 3 de la méthode, et elle devient obligatoire. |
+| **Offre, pas produit** | Appareil + consommable + garantie + service. On ne compare plus la même chose. |
+
+À défaut de l'une des trois : changer de produit. Être « le même, en plus cher » n'est pas
+une stratégie.
+
+## Test 2 : le verbatim est-il accessible ?
 
 **À faire avant de noter quoi que ce soit. Il coûte dix minutes et il évite des semaines.**
 
@@ -222,7 +260,7 @@ Vérifier, sur le produit candidat :
 | Communautés | Existe-t-il des groupes centrés sur ce problème ? | Aucun espace où les gens en parlent entre eux |
 | Avis | Le produit existe-t-il sur des places de marché avec des avis détaillés ? | Aucun avis, ou seulement des avis de trois mots |
 
-**Deux verts au minimum, sinon NO-GO** — quelle que soit la qualité du reste. Un produit dont
+**Deux sources vertes au minimum, sinon NO-GO** — quelle que soit la qualité du reste. Un produit dont
 les clients ne parlent nulle part est un produit qu'on ne saura pas vendre : ni écrire la
 publicité, ni traiter les objections, ni construire l'offre.
 
