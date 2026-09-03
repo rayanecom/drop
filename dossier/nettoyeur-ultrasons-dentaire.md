@@ -152,6 +152,51 @@ doit entrer dans le calcul avant la décision finale.
 
 ---
 
+## ⚠ Le problème du prix — trouvé avant le scan
+
+`FAIT`, recherche web : **le même appareil est vendu en grande distribution française.**
+
+| Enseigne / marque | Produit | Prix |
+|---|---|---|
+| **Darty** | Détartreur dentaire à ultrasons | **32,88 €** |
+| Leroy Merlin | Nettoyeur 49 kHz, 6 lampes UV, 340 ml | non relevé |
+| Leroy Merlin | Cecotec ToothCare EasyClean | non relevé |
+| Amazon.fr | Dental Pod 50 kHz, 250 ml, 6 UV | non relevé |
+| **Zima Dental** | Dental Pod — marque, cité par le British Dental Journal | **89,99 €** |
+| PurePod | Concurrent français | non relevé |
+
+**Vendre un générique à 89,99 € face à 32,88 € chez Darty, c'est perdre à la première
+comparaison** — et pire, transformer un acheteur en demande de remboursement le jour où il
+tombe sur l'annonce Darty.
+
+### Ce que ça impose
+
+| Prix | Coût fournisseur max pour ×4 | Marge contrib. à 10 € + 4 € de fret | Multiple réel |
+|---|---|---|---|
+| 44,90 € | 9,35 € | 18,55 € | ×2,67 |
+| 49,90 € | 10,40 € | 22,62 € | ×2,97 |
+| 59,90 € | 12,48 € | 30,75 € | ×3,57 |
+| **69,90 €** | **14,56 €** | **38,88 €** | **×4 — OK** |
+| 89,99 € | 18,75 € | 55,21 € | ×4 — OK |
+
+Le ×4 ne tient qu'**à partir de 69,90 €**. Or à ce prix on est à plus du double du produit
+de Darty.
+
+**Conclusion : il n'y a pas de chemin par le prix.** Soit on se différencie réellement, soit
+on est un Darty plus cher. Ce qui rend obligatoire — et non optionnel — ce que la méthode
+demande à l'étape 3 et à l'étape 7 :
+
+1. **Un fournisseur qui accepte le logo, l'emballage et un insert.** Sans marque, le produit
+   est comparable en un clic.
+2. **Une spécification supérieure assumée** — fréquence, capacité, UV, minuterie — et
+   vérifiable.
+3. **Le consommable comme cœur du modèle.** Les comprimés à 12,99 € créent le réachat.
+   L'appareil vend le premier achat, le consommable fait la valeur client.
+4. **Une offre**, pas un produit : appareil + comprimés + garantie + boîte de transport.
+
+C'est plus exigeant que le candidat précédent, mais c'est un chemin qui existe — alors que
+sur les lingettes, le brevet en fermait un.
+
 ## PORTE 2 — Marché
 
 Scan en cours. Premier point à élucider `FAIT, à vérifier` : zimadental.fr affiche
