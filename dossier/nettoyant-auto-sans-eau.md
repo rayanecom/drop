@@ -77,61 +77,97 @@ fournisseur et sans donnée de recherche. Le veto CLP n'est pas levé.
 
 ## PORTE 2 — Marché
 
-### Trafic — `FAIT` (`search_shops`, vérifié directement le 2026-09-03)
+### CORRECTION MAJEURE — ce ne sont pas deux concurrents du même produit
 
-| Concurrent | Domaine | Fév | Mars | Avr | Mai | Juin | **Juil** | FR |
-|---|---|---|---|---|---|---|---|---|
-| Vulcanet | `vulcanet.shop` | 1 591 | 3 773 | 6 485 | 6 609 | 4 400 | **44 597** | 100 % |
-| Cleaners Motors | `cleanersmotors.com` | 0 | 4 836 | 3 840 | 12 241 | 20 725 | **69 347** | 85 % |
+Les deux boutiques avaient été présentées comme montant ensemble sur le même marché. Les
+publicités le contredisent — `FAIT` (`search_ads`, `sort_by=longestRunning`, 2026-09-03) :
 
-> ⚠️ **Les chiffres de juillet sont douteux.** Les deux boutiques bondissent le même mois
-> (×10,1 et ×3,3) sans hausse publicitaire correspondante — Vulcanet passe même de 25 à 21
-> publicités sur la période. Deux boutiques indépendantes qui décollent simultanément, c'est
-> un changement de mesure, pas une croissance. **Ne pas fonder de décision sur ces valeurs.**
-> Les données de trafic s'arrêtent à juillet 2026 dans la base.
+| | Vulcanet | Cleaners Motors |
+|---|---|---|
+| Produit réellement poussé | **Lingettes de nettoyage sans eau** | **Serviette de séchage ultra-absorbante** |
+| Douleur traitée | « Je n'ai pas de point d'eau » | « Après le lavage, ça laisse des traces » |
+| Moment d'usage | **À la place** du lavage | **Après** le lavage |
+| Prix | 47,90 € | 19 / 39 / 99 € |
 
-### Publicités — `FAIT` (26 semaines, du 2026-03-09 au 2026-08-31)
+Ce sont **deux marchés distincts** dans la même catégorie. L'affirmation « deux acteurs
+indépendants montent simultanément sur le même produit » était fausse, et elle était le
+premier argument en faveur de ce candidat.
 
-| Concurrent | Min | Max | Actuel | Continuité | Annonceurs liés |
-|---|---|---|---|---|---|
-| Vulcanet | 21 | 36 | 37 | **26 semaines sans coupure** | 10 |
-| Cleaners Motors | 25 | 139 | 139 | 26 semaines, ×5,6 | 7 |
+### Vulcanet — ancienneté des créas actives `FAIT`
 
-La croissance de Cleaners Motors **n'est pas monotone** — 4 baisses vérifiées (61→46,
-46→45, 65→64, 70→67). Correction d'une affirmation erronée du rapport initial.
-
-**Google Ads** — Vulcanet : 21 annonces actives, portée déclarée 602 000. Cleaners
-Motors : 6 annonces, portée 15 500.
-
-**Ciblage publicitaire de Cleaners Motors** : réparti à parts égales sur **7 pays**
-(BE, DE, ES, FR, IT, LU, PT), alors que son trafic est à 85 % français. Il teste
-l'Europe francophone et au-delà.
-
-### Prix pratiqués — `FAIT`
-
-| Concurrent | Produit | Prix | Plafond ×4 net |
+| Jours | Segment visé | Portée | Dépense estimée |
 |---|---|---|---|
-| Cleaners Motors | Serviette 40×40 | 19,00 € | 3,96 € |
-| Cleaners Motors | Serviette 70×90 | 39,00 € | 8,12 € |
-| Cleaners Motors | **Pack Intérieur & Extérieur** | **99,00 €** | 20,62 € |
-| Vulcanet | Auto/Moto · Vélo · TP/Agri | 47,90 € | 9,98 € |
+| **377** | **Vélo** — « Cyclistes, vous allez adorer entretenir votre vélo » | 203 370 | 1 830 € |
+| **377** | Vélo, autre créa | 82 737 | 745 € |
+| **328** | **Avion / ULM** — « Aéroclubs, pilotes privés, ULM » | 9 272 | 83 € |
+| 325 | TP/Agri — « Agriculteurs, chauffeurs TP, transporteurs » | 453 874 | 4 085 € |
+| 272 | TP/Agri, UGC partenaire | 136 655 | 1 230 € |
+| 161 | TP/Agri | 121 717 | 1 095 € |
+| 144 | Moto Harley, UGC | 6 042 | 54 € |
+| 66 | Multi-segment — **rang 1 de la page** | 352 983 | 3 177 € |
 
-### Ce que la vérification a ajouté
+**Trois lectures qui comptent :**
 
-1. **Cleaners Motors est sur Shopify Plus** (`isShopifyPlus: true`). Ce n'est pas un
-   dropshipper qui démarre : c'est une structure financée. Le combat n'est pas symétrique.
-2. **Il a un canal TikTok que le rapport initial avait manqué** : 19 100 abonnés,
-   116 publications, **15,2 M de vues**, 175 876 likes, 32 publicités TikTok actives.
-   Son acquisition n'est pas seulement payante.
-3. **Son échelle de prix 19 / 39 / 99 €** est déjà la structure de bundle de l'étape 17.
-   Seul le pack à 99 € passe le seuil des 40 €.
-4. Sa croissance de trafic sur 30 jours n'est que de **+2,3 %** — ça plafonne.
+1. **La créa la plus ancienne ne vise pas l'auto — elle vise le vélo.** 377 jours.
+2. **Le segment Avion/ULM tourne depuis 328 jours pour 83 € de dépense et 9 272 de portée.**
+   Une audience minuscule, un budget dérisoire, et un an de diffusion : la preuve qu'un
+   **micro-segment est rentable sur ce produit**. C'est le fait le plus exploitable du dossier.
+3. **Le gros budget est sur TP/Agri**, pas sur l'auto/moto.
 
-**DÉCISION PORTE 2 : en attente.** Le marché est vivant et deux acteurs indépendants y
-investissent depuis 26 semaines. Mais l'ancienneté des créas individuelles n'est pas
-mesurée, et les cinq angles libres ne sont pas identifiés.
+Segments réellement publicités : Vélo, TP/Agri, Avion/ULM, Auto/Moto, Camion.
+Segments revendiqués dans la fiche produit mais **non publicités** : **bateau, drone,
+camping-car**.
 
----
+Page annonceur : 30 pubs actives, portée 30 j 708 074, portée cumulée 7 998 697,
+14 542 mentions J'aime, 9 258 abonnés Instagram, **1 seul pays**.
+
+### Cleaners Motors — ancienneté des créas actives `FAIT`
+
+| Jours | Accroche | Portée | Dépense estimée |
+|---|---|---|---|
+| 244 | UGC — « ma carrosserie est vraiment comme neuve » | 68 418 | 616 € |
+| 235 | « Jusqu'à −30% en ce moment ! » | 1 251 104 | 11 260 € |
+| 234 | « Jusqu'à −30% en ce moment ! » | 701 507 | 6 314 € |
+| 218 | « il n'existe aucune serviette aussi absorbante » | **1 728 752** | **15 559 €** |
+
+**8 pubs = 45 474 € de dépense estimée et 5 052 512 de portée.** Page : 139 pubs actives,
+portée cumulée **37 817 040** — soit **×4,7 la portée de Vulcanet**. 7 pays visés
+(FR, BE, LU, IT, DE, ES, PT).
+
+### Ce qu'il ne faut PAS copier chez eux
+
+| Pratique | Problème |
+|---|---|
+| « Jusqu'à −30% **en ce moment** » diffusé **235 jours d'affilée** | Une remise permanente présentée comme temporaire. Le prix de référence doit être le prix le plus bas des 30 derniers jours — directive Omnibus. |
+| « La serviette **n°1 en France** » | Allégation de supériorité non étayée |
+| « **il n'existe aucune** serviette aussi absorbante » | Superlatif absolu, invérifiable |
+| Vulcanet : « moins de 0,50 € par nettoyage » | `ESTIMATION` : 47,90 € ÷ 80 lingettes = **0,60 €**. Écart de 0,10 €. `[À CONFIRMER]` |
+
+Ces trois marques sont exposées. Une marque honnête peut s'en différencier — c'est un angle
+de confiance réel, pas un slogan.
+
+### Verbatim client extrait d'une transcription `FAIT`
+
+Transcription d'une vidéo UGC de Cleaners Motors, mot pour mot :
+
+> « moi qui ai ce problème là aussi de laver la voiture au karcher et parce que je vais
+> éviter les micro rayures j'aime pas les rouleaux »
+
+Premier verbatim réel du dossier. Il dit que la douleur n'est pas seulement l'absence d'eau :
+c'est **la peur des micro-rayures et le rejet du rouleau**. À creuser en porte 4.
+
+### Risque nouveau — brevet
+
+Une description publicitaire de Vulcanet annonce « la **solution brevetée** pour un nettoyage
+intérieur efficace des cabines d'engins ». `[À CONFIRMER]` par une recherche INPI/EPO. Si le
+système ou la formule est protégé, sourcer une copie expose à une contrefaçon. **À vérifier
+avant tout devis.**
+
+**DÉCISION PORTE 2 : NON FRANCHIE.** Le critère « publicité de plus de 30 jours » est
+largement rempli — 377 jours chez Vulcanet, 244 chez Cleaners Motors. Mais le critère
+« marché attaquable » ne l'est pas : un incumbent français avec un brevet revendiqué d'un
+côté, une structure Shopify Plus à 37,8 M de portée de l'autre. Les cinq angles libres ne
+sont pas encore établis.
 
 ## Ce qui n'a pas pu être vérifié
 
