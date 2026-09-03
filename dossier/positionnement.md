@@ -1,5 +1,26 @@
 # Positionnement — nettoyeur à ultrasons pour appareil dentaire
 
+> ## ⛔ CADUC — invalidé le 2026-09-03, quelques heures après sa rédaction
+>
+> **Les deux prémisses de ce positionnement sont fausses.**
+>
+> **1. « Le bruxisme est un segment vide. »** Faux. Lyra/DentaClean y diffuse une publicité
+> **active depuis 211 jours**, ciblage FR/BE/LU, accroche : « Gouttière de nuit ? Stop aux
+> mauvaises odeurs du matin 🌸 ». Le premier scan ne l'avait pas vue parce qu'il cherchait
+> le mot **« nettoyeur »** dans la copy — or Lyra n'écrit jamais le nom du produit, il écrit
+> **le symptôme**.
+>
+> **2. « Personne ne parle d'abîmer l'appareil. »** Faux. Zima Dental le dit dans une créa
+> active depuis 84 jours dont le ciblage inclut la France : « Dental student here, brushing
+> your retainer like this **can create scratches where bacteria can hide** », et « kills
+> 99.9% of bacteria at a deeper level, **all without damage** ». L'angle existait en
+> anglais ; mes 12 transcriptions étaient françaises.
+>
+> **Cause commune des deux erreurs : conclure d'une recherche partielle.** Document conservé
+> pour la trace du raisonnement et des faits sourcés, qui restent exacts. Le positionnement,
+> lui, ne tient pas.
+
+
 > Arrêté le 2026-09-03 · Étape 11 de la méthode
 > **Dépendance ouverte** : la collecte de verbatims bruxisme tourne encore, et elle vérifie
 > aussi si des publicités bruxisme existent hors de France. Si elles n'existent nulle part,

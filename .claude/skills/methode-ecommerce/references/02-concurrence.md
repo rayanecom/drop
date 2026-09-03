@@ -12,6 +12,34 @@ combat.
 L'analyse sert à **cartographier les positions occupées** pour trouver celle qui ne l'est
 pas. Voir `05-positionnement.md`.
 
+## ⚠ La règle qui prime sur toutes les autres : chercher le symptôme, pas le produit
+
+**Une recherche de concurrence par nom de produit rate les concurrents qui vendent un
+symptôme.** Et ce sont souvent les meilleurs.
+
+Cas vécu : un segment a été déclaré « zéro publicité active » sur la foi d'une recherche
+portant sur le nom du produit. Le concurrent qui l'occupait depuis **211 jours** n'écrivait
+jamais ce nom dans sa copy. Il écrivait : *« Gouttière de nuit ? Stop aux mauvaises odeurs
+du matin. »* Le produit n'apparaît nulle part — seulement la gêne.
+
+C'est logique : **un bon annonceur ne vend pas une catégorie, il vend un moment de la vie du
+client.** Donc il n'emploie pas le vocabulaire du catalogue.
+
+### Le protocole
+
+Pour chaque marché, lancer **deux séries** de recherches publicitaires :
+
+| Série | Requêtes | Ce qu'elle trouve |
+|---|---|---|
+| **Produit** | le nom de la catégorie, ses synonymes | Les annonceurs qui décrivent ce qu'ils vendent |
+| **Symptôme** | les mots de la gêne : « ça sent », « tous les matins », « j'en peux plus », « ça s'abîme », « je n'ose plus » | **Les annonceurs qui décrivent ce que le client vit** |
+
+Et dans **les deux langues** : un concurrent qui vise la France depuis une campagne
+multi-pays écrit souvent en anglais. Une recherche uniquement francophone le rate.
+
+**Un segment n'est déclaré libre qu'après les deux séries, dans les deux langues.** Avant
+ça, « je n'ai rien trouvé » veut dire « je n'ai pas cherché au bon endroit ».
+
 ## Étape 5 — Identifier les concurrents
 
 Cherche trois catégories, elles ne se valent pas :
