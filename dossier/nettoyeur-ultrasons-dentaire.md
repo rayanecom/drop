@@ -105,6 +105,30 @@ pour un nettoyeur à ultrasons de petite capacité. `[À CONFIRMER]` par devis.
 important — cabinets dentaires, cliniques, blogs spécialisés se disputent la requête. **On ne
 se bat pas pour une requête que personne ne tape.** C'est un signal de demande existante.
 
+### Le marché, et l'ancrage de prix qui change tout
+
+`FAIT` — sources sectorielles :
+
+| | |
+|---|---|
+| Marché mondial de l'orthodontie invisible | **7,72 Md$ en 2025 → 13,91 Md$ en 2030** |
+| Croissance annuelle | **+12,5 %** |
+| Part des adultes | 54,4 % en 2024, en croissance de +12,8 %/an |
+| **Coût d'un traitement en France** | **1 500 à 6 000 €** |
+
+La dernière ligne est l'argument le plus fort de tout le dossier.
+
+**Quelqu'un qui vient de payer 1 500 à 6 000 € pour ses gouttières ne discutera pas 89,99 €
+pour les protéger.** Le produit ne coûte que **1,5 % à 6 % de ce que le client a déjà
+dépensé** — et il protège cet investissement. L'ancrage est fait par l'orthodontiste, pas par
+nous.
+
+C'est ce que le candidat précédent n'avait pas : personne n'a payé 3 000 € pour sa voiture
+avant d'acheter des lingettes.
+
+Et la croissance de +12,5 % par an est **structurelle**, pas une tendance passagère : le
+nombre de porteurs augmente mécaniquement chaque année, donc le marché du nettoyage aussi.
+
 ### 7. Valeur perçue — note 4/5 · 8. Logistique — note 3/5
 
 Appareil électronique, léger, compact. Fragile-ish, et il y a une pile ou un port USB à
