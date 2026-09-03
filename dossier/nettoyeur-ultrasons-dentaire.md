@@ -152,58 +152,141 @@ doit entrer dans le calcul avant la décision finale.
 
 ---
 
-## ⚠ Le problème du prix — trouvé avant le scan
+## Le problème du prix — ERREUR CORRIGÉE
 
-`FAIT`, recherche web : **le même appareil est vendu en grande distribution française.**
+**J'avais écarté ce candidat sur une comparaison fausse.** Le produit à 32,88 € chez Darty
+est un **détartreur** — un stylo à ultrasons qu'on passe sur ses propres dents pour gratter
+le tartre. Ce n'est pas un bac de nettoyage pour appareil amovible. `FAIT`, fiche Darty :
+« pointe de nettoyage en acier inoxydable », « 2 millions de vibrations », « arrêt automatique
+après 10 minutes ». Deux produits différents, comparés à tort.
 
-| Enseigne / marque | Produit | Prix |
+**Le vrai test de prix est le marché, et il tranche :**
+
+| Acteur | Prix | Preuve que le prix tient |
 |---|---|---|
-| **Darty** | Détartreur dentaire à ultrasons | **32,88 €** |
-| Leroy Merlin | Nettoyeur 49 kHz, 6 lampes UV, 340 ml | non relevé |
-| Leroy Merlin | Cecotec ToothCare EasyClean | non relevé |
-| Amazon.fr | Dental Pod 50 kHz, 250 ml, 6 UV | non relevé |
-| **Zima Dental** | Dental Pod — marque, cité par le British Dental Journal | **89,99 €** |
-| PurePod | Concurrent français | non relevé |
+| Zima Dental France | **89,99 €** | Créas actives depuis **467 jours** |
+| Lyra / DentaClean | **69,99 €** | Trafic ×15 en 6 mois, 1 260 créas actives |
 
-**Vendre un générique à 89,99 € face à 32,88 € chez Darty, c'est perdre à la première
-comparaison** — et pire, transformer un acheteur en demande de remboursement le jour où il
-tombe sur l'annonce Darty.
-
-### Ce que ça impose
-
-| Prix | Coût fournisseur max pour ×4 | Marge contrib. à 10 € + 4 € de fret | Multiple réel |
-|---|---|---|---|
-| 44,90 € | 9,35 € | 18,55 € | ×2,67 |
-| 49,90 € | 10,40 € | 22,62 € | ×2,97 |
-| 59,90 € | 12,48 € | 30,75 € | ×3,57 |
-| **69,90 €** | **14,56 €** | **38,88 €** | **×4 — OK** |
-| 89,99 € | 18,75 € | 55,21 € | ×4 — OK |
-
-Le ×4 ne tient qu'**à partir de 69,90 €**. Or à ce prix on est à plus du double du produit
-de Darty.
-
-**Conclusion : il n'y a pas de chemin par le prix.** Soit on se différencie réellement, soit
-on est un Darty plus cher. Ce qui rend obligatoire — et non optionnel — ce que la méthode
-demande à l'étape 3 et à l'étape 7 :
-
-1. **Un fournisseur qui accepte le logo, l'emballage et un insert.** Sans marque, le produit
-   est comparable en un clic.
-2. **Une spécification supérieure assumée** — fréquence, capacité, UV, minuterie — et
-   vérifiable.
-3. **Le consommable comme cœur du modèle.** Les comprimés à 12,99 € créent le réachat.
-   L'appareil vend le premier achat, le consommable fait la valeur client.
-4. **Une offre**, pas un produit : appareil + comprimés + garantie + boîte de transport.
-
-C'est plus exigeant que le candidat précédent, mais c'est un chemin qui existe — alors que
-sur les lingettes, le brevet en fermait un.
-
-## PORTE 2 — Marché
-
-Scan en cours. Premier point à élucider `FAIT, à vérifier` : zimadental.fr affiche
-**1 237 publicités actives sur 26 semaines** (entre 900 et 1 248) pour seulement
-**6 895 visites par mois**. L'écart est trop grand pour être ignoré.
+Deux acteurs tiennent 69,99 € et 89,99 € **en ce moment**, dont un qui scale. C'est une
+preuve plus forte qu'une fiche de distribution.
 
 ---
+
+## PORTE 2 — Marché · données vérifiées
+
+### L'anomalie zimadental.fr : résolue, ce n'en était pas une
+
+`FAIT` — `search_ads` `search_in=domain`, avec et sans filtre pays : **102 pubs actives**
+pointent vers `zimadental.fr`, `isTotalApproximate: false`.
+
+Les 1 169 pubs affichées sont le compteur de la **page Facebook mondiale** Zima Dental, qui
+sert tous les marchés du groupe. La part FR de ses pubs est de 7,3 %, cohérente avec
+102 / 1 169 = 8,7 %.
+
+`ESTIMATION` de recoupement : portée FR mensuelle = 11 421 363 × 7,33 % ≈ 837 000. Trafic
+6 895 → **CTR implicite 0,82 %**, valeur banale en e-commerce Meta. Le trafic n'est pas mal
+mesuré ; c'est le compteur de pubs qui agrégeait plusieurs pays.
+
+**Conséquence : Zima n'est pas un dropshipper.** Filiale française d'une marque britannique,
+Shopify Plus, en ligne depuis avril 2023, 113 291 abonnés Instagram, présence Google Search
+et Shopping. On ne la déloge pas au Meta.
+
+### Le vrai concurrent : Lyra / DentaClean
+
+| | |
+|---|---|
+| Domaine | `lyra-officiel.fr` |
+| Créé | **04/07/2025** — 14 mois |
+| Société | **Bulgarie** |
+| Shopify Plus | non |
+| Prix | **69,99 €** (+ crème adhésive 29,99 €) |
+| Trafic fév → juil 2026 | 1 962 · 5 026 · 15 934 · 12 757 · 15 482 · **29 677** — **×15** |
+| Croissance 30 j | **+91,7 %** |
+| Pubs actives pointant vers le domaine | **1 260** (`isTotalApproximate: false`) |
+| Pubs actives, semaine par semaine | 50 → 874 en 23 semaines |
+| Likes Facebook | **142** |
+| TikTok | aucun |
+
+**Lyra fait 4,3× le trafic FR de Zima, à un prix inférieur, avec 142 likes Facebook.** Une
+boutique de 14 mois, sans preuve sociale organique, qui scale à ce rythme : c'est la preuve
+que le modèle fonctionne **maintenant**, en France, sur ce produit.
+
+### La segmentation du marché — et les places vides
+
+`FAIT` — vérifié par `search_ads` sur mots-clés FR/fr, publicités actives :
+
+| Segment | Occupé ? | Par qui |
+|---|---|---|
+| Gouttières d'orthodontie (Invisalign) | **Saturé** | Zima, exclusivement |
+| Prothèses et dentiers | **Saturé** | Lyra, exclusivement — le mot « dentier » est dans chaque accroche |
+| **Contention post-orthodontie** | **Effleuré** | Cité dans une liste, jamais en accroche |
+| **Bruxisme / gouttière de nuit** | **ZÉRO PUB** | Personne |
+| **Parents d'enfants appareillés** | **ZÉRO PUB** | Personne. Ciblage 18-65, `gender: null` partout |
+
+Le marché s'est scindé proprement : **Zima tient le jeune adulte en ortho, Lyra tient le
+senior à dentier. Personne au milieu.**
+
+### Pourquoi le bruxisme est la place à prendre
+
+1. **Le besoin est mécaniquement plus fort.** La gouttière de bruxisme se porte **toutes les
+   nuits**, huit heures, bouche fermée. Elle se salit plus vite qu'une gouttière Invisalign
+   qu'on retire pour manger.
+2. **Aucun rappel d'hygiène.** Le porteur de bruxisme n'a pas de rendez-vous d'orthodontie
+   mensuel où on lui rappelle de nettoyer.
+3. **Zéro pression publicitaire.** Aucune pub active en français sur ce vocabulaire.
+4. **Aucune honte associée.** Ni l'ado en traitement, ni le senior à dentier. Le frein
+   d'image qui plombe le segment dentier n'existe pas ici.
+
+### ⚠ Piège de vocabulaire à ne pas rater
+
+En français, « **contention** » désigne d'abord les **bas et chaussettes de contention
+veineuse**. Une recherche publicitaire sur ce mot remonte Happy Footies, Luveon, Jolly Mama.
+Pour viser l'orthodontie il faut dire **« gouttière de contention »**, **« fil de
+contention »** ou **« après appareil dentaire »** — sinon on enchérit contre des marques de
+compression.
+
+### Ce que les concurrents disent, et qu'on ne peut pas répéter
+
+`FAIT`, relevé mot pour mot dans des créas actives :
+
+| Allégation | Problème |
+|---|---|
+| « éliminent **99,9 %** des bactéries » (Lyra, 1 260 créas) | Revendication bactéricide chiffrée : exige un essai normalisé et fait entrer dans le règlement biocides UE 528/2012. **Un bac à ultrasons décolle mécaniquement, il ne désinfecte pas.** |
+| « pour éviter que **les dents de ce patient ne pourrissent** » (Zima) | Allégation de prévention pathologique |
+| « vos dents sont **lentement dissoutes par l'acide** » (Zima) | Idem |
+| « **je recommande le DentalPod à tous mes patients** » (Zima) | Mise en scène d'un professionnel de santé |
+| « **Recommandé par plus de 7000 dentistes** » (Zima) | Chiffre sans source |
+| « **★★★★★** » sans note ni nombre d'avis (Zima) | Contraire aux règles Meta sur les avis |
+| « Profitez-en **avant la rupture de stock** » diffusé **301 jours** (Lyra) | Fausse rareté |
+
+**Le marché entier est juridiquement exposé.** C'est un angle de différenciation par
+l'honnêteté, exactement comme sur le candidat précédent — mais cette fois sans brevet en face.
+
+### Le modèle de créa qui gagne
+
+`FAIT` : la créa la plus performante du marché — **1 353 848 de portée, 467 jours de
+diffusion** — tient en quatre phrases et **ne contient aucune allégation chiffrée** :
+
+> « Cette gouttière Invisalign est dégoûtante. / Voyons si le DentalPod peut la nettoyer pour
+> éviter que les dents de ce patient ne pourrissent. / C'est incroyable, le DentalPod utilise
+> des ondes ultrasoniques pour éliminer les bactéries et la plaque dentaire. / Je me demande
+> s'ils ont [une] de la couleur de ma salle de bain. »
+
+Dégoût + démonstration visuelle + chute légère. 17 secondes. **C'est le modèle à reprendre**,
+en retirant la deuxième phrase qui est une allégation de santé.
+
+### Structure commune aux 12 transcriptions relevées
+
+Sans exception : **(1) ce que tu fais est inefficace → (2) danger invisible nommé →
+(3) conséquence corporelle → (4) autorité du dentiste → (5) trois minutes, un bouton →
+(6) garantie 30 ou 60 jours.**
+
+Personne n'a essayé un autre chemin. Ni le coût du remplacement d'une gouttière perdue, ni
+l'esthétique, ni la routine, ni l'objection prix.
+
+**DÉCISION PORTE 2 : FRANCHIE.** Deux acteurs indépendants investissent depuis 467 et
+323 jours ; l'un d'eux scale ×15 en six mois sur le marché français ; deux segments sont
+vides ; et les cinq angles libres sont identifiés ci-dessus.
 
 ## Ce qui n'a pas pu être vérifié
 
