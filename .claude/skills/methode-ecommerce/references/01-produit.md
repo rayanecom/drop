@@ -213,7 +213,49 @@ Deux candidats ont été menés loin dans la méthode avant qu'un bloqueur tardi
 un brevet d'abord, puis un prix de distribution ensuite. Les deux étaient détectables en
 vingt minutes, au tout début.
 
-## Test 1 : le produit est-il une commodité en distribution ?
+## Test 1 : cet acheteur-là va-t-il comparer ?
+
+**Correction d'une erreur qui a coûté une journée.** La première version de ce test
+demandait : « le produit existe-t-il en distribution à bas prix ? » et éliminait tout écart
+supérieur à ×2.
+
+**Ce test aurait éliminé le meilleur performeur observé.** Une boutique vend un nettoyeur à
+ultrasons disponible chez Leroy Merlin, possède sa propre boutique Amazon, et le vend quand
+même **69,99 €** — avec un trafic multiplié par 15 en six mois et 1 260 créas actives.
+
+Pourquoi ça tient : **le retraité qui clique sur une publicité Facebook ne va pas comparer sur
+Amazon.** Il achète sur la page où il a atterri.
+
+Le test mesurait donc la mauvaise chose. Ce n'est pas une propriété du produit, c'est une
+**propriété de l'acheteur**.
+
+### La bonne question
+
+| Cet acheteur compare | Cet acheteur ne compare pas |
+|---|---|
+| Jeune, à l'aise en ligne, sensible au prix | **Senior** |
+| Achat réfléchi, panier construit | Achat sous **émotion** — deuil, enfant, animal |
+| Il cherche activement sur Google avant | Achat sous **douleur aiguë** |
+| Produit assumé comme une commodité | **Cadeau sous contrainte de temps** |
+| — | Sujet **honteux** : on n'en parle à personne, donc on ne compare pas |
+
+**Sur un segment qui ne compare pas, une commodité peut se vendre plusieurs fois son prix de
+rayon.** Ce n'est ni une arnaque ni une anomalie : le client paie la découverte, la
+sélection, la livraison et la réassurance — services que le rayon ne lui rend pas, puisqu'il
+n'y serait jamais allé.
+
+### Le protocole
+
+| Cas | Décision |
+|---|---|
+| Le segment **ne compare pas**, et un concurrent vend déjà une commodité à **3× ou plus** son prix de rayon, avec des pubs de plus de 90 jours | **Vert** — la preuve est empirique, pas théorique |
+| Le segment ne compare pas, mais aucun concurrent ne le démontre sur ce marché | Orange — hypothèse à tester petit |
+| Le segment **compare** (produit tech, acheteur jeune, recherche active), et le produit est en rayon à moins de la moitié du prix cible | **NO-GO** |
+
+**La preuve exigée est toujours la même : un concurrent qui le fait déjà, sur ce segment, et
+depuis assez longtemps pour que ce soit rentable.** Pas un raisonnement.
+
+## Test 1 bis : le produit est-il une commodité en distribution ?
 
 Le plus éliminatoire des deux, et le plus vite fait.
 
