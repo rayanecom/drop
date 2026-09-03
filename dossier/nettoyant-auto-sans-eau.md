@@ -210,17 +210,51 @@ Verbatim client, transcription d'une vidéo UGC, mot pour mot :
 > « Vulcanet est un bon produit de nettoyage si la voiture est normalement sale, mais si
 > elle est bien crade, il faut un lavage classique »
 
-L'angle ne tient donc que s'il est associé à l'angle 5. Le promettre seul, c'est se faire
-démonter en commentaires.
+Et la contradiction est plus précise que ça — `FAIT`, forums auto :
 
-#### Angle 4 — Le coût réel par lavage `à chiffrer honnêtement`
+| Verbatim | Ce qu'il dit |
+|---|---|
+| « catastrophique sur les vernis noirs, plein de micro-rayures » | **Le risque se concentre sur les peintures foncées** |
+| « le sable présent en surface peut rayer, un bon rinçage à l'eau est recommandé avant » | Il faut que la voiture soit **déjà peu sale** |
+| « j'ai testé pour en faire une activité, j'ai abandonné : produit cher et risque de rayures sur carrosserie foncée » | Un professionnel a renoncé |
+| « ça reste un complément au lavage à l'eau, le lavage à sec consomme beaucoup de lingettes » | **Complément, pas remplacement** |
 
-Un passage au rouleau coûte de l'ordre de 8 €. À deux lavages par mois, cela fait environ
-**192 € par an** `ESTIMATION` — à confirmer par un relevé de prix réel.
+À l'inverse, un test comparatif conclut que le lavage sans eau **limite** les micro-rayures
+par rapport au rouleau, sans laisser de traces. **Le marché est réellement divisé.**
 
-Vulcanet occupe déjà partiellement cet angle avec « moins de 0,50 € par nettoyage », mais le
-chiffre ne retombe pas : 47,90 € ÷ 80 lingettes = **0,60 €**. **Reprendre l'angle avec un
-calcul exact est un différenciateur en soi.**
+L'angle ne tient donc que s'il est associé à l'angle 5, et qu'il précise la couleur de la
+carrosserie et le degré de saleté. Le promettre seul, c'est se faire démonter en
+commentaires.
+
+#### Angle 4 — Le coût réel par lavage `chiffré`
+
+**L'allégation du concurrent est fausse d'un facteur 5,5.**
+
+Vulcanet annonce « moins de 0,50 € par nettoyage ». Or un lavage complet ne consomme pas une
+lingette : il en consomme **3 à 6** selon le véhicule — `FAIT`, fiches revendeurs, qui
+annoncent 15 à 20 lavages par boîte de 80 pour une berline.
+
+| Véhicule | Lingettes par lavage | Lavages par boîte | Coût réel du lavage |
+|---|---|---|---|
+| Voiture compacte | 3 à 4 | 15 à 20 | **2,40 à 3,19 €** |
+| SUV / 4×4 | 5 à 6 | 13 à 16 | 2,99 à 3,59 € |
+| Moto | 2 à 3 | 27 à 40 | 1,20 à 1,80 € |
+
+> Les deux sources divergent légèrement : « 3 à 4 lingettes » impliquerait 20 à 27 lavages,
+> alors que les fiches annoncent 15 à 20. Fourchette prudente retenue. `[À CONFIRMER]` par un
+> test réel sur une boîte.
+
+**Ce qu'on peut dire, nous, et qui est vrai** `ESTIMATION, calcul montré` :
+
+```
+Rouleau de station      8,00 € × 2 lavages/mois × 12 = 192 € / an   [À CONFIRMER : relever 3 stations]
+Lavage sans eau         2,74 € × 2 lavages/mois × 12 =  66 € / an
+                                              Économie : 126 € / an, soit 66 %
+```
+
+66 % d'économie annoncée honnêtement bat « moins de 0,50 € » annoncé faussement — parce que
+le second se démonte en trois commentaires sous la publicité, et emporte le reste de la page
+avec lui.
 
 #### Angle 5 — L'honnêteté sur les limites `personne ne l'occupe`
 
