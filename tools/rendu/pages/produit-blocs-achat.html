@@ -1,0 +1,566 @@
+<!doctype html><html lang=fr><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@400;500;700;800&display=swap">
+<style>
+ *{box-sizing:border-box}
+ body{margin:0;background:#FBF9F5;color:#1A1A18;font-family:"DM Sans",system-ui,sans-serif}
+ .page-width{width:min(1200px,100%);margin-inline:auto}
+ .col{width:min(620px,100%);margin-inline:auto;padding:0 16px}
+ .rp-tag{font-size:10px!important;position:sticky;top:0;z-index:99;background:#1F3D2B;color:#FBF9F5;font:700 10px/1 "DM Sans",sans-serif;
+         letter-spacing:.14em;text-transform:uppercase;padding:6px 10px}
+</style>
+<style id="verline-lisibilite">
+  /* ---- Plancher de lisibilité, mobile d'abord ------------------------- */
+  html body .vl-hero li{ font-size:14px; line-height:1.5; }
+  html body .vl-price span{ font-size:13.5px; line-height:1.45; }
+  html body .vl-tr span{ font-size:13.5px; line-height:1.5; }
+  html body .vl-tr b{ font-size:13.5px; }
+  html body .vl-cp__sub{ font-size:15.5px; }
+  html body .vl-premium__microcopy{ font-size:13.5px; line-height:1.55; }
+  html body .vl-premium__note{ font-size:14px; line-height:1.6; }
+  html body .vl-fq__more{ font-size:15px; }
+  html body .vrl-bundles__note,
+  html body .vrl-sticky__meta span{ font-size:13.5px; }
+
+  @media (max-width:680px){
+    html body .vl-cp tbody td{ font-size:13.5px; }
+    html body .vl-cp tbody td:first-child{ font-size:11.5px; }
+    html body .vl-cp tbody td:nth-child(2)::before,
+    html body .vl-cp tbody td:nth-child(3)::before{ font-size:10.5px; }
+  }
+
+  /* Filet général : tout texte courant du thème repasse au-dessus du seuil,
+     sans toucher aux étiquettes en capitales qui vivent bien plus petites. */
+  html body :is(.rte, .product__description, .vl-premium__card, .vl-fq__a) :is(p, li, td){
+    font-size:15px; line-height:1.65;
+  }
+
+  /* ---- Confort tactile : 44 px minimum -------------------------------- */
+  /* Le pied de page tenait ses liens à 40 px, les liens de rappel du corps
+     de page descendaient jusqu'à 12 px de hauteur cliquable. */
+  html body .footer a,
+  html body .footer__list-social a,
+  html body .list-menu__item{
+    min-height:44px; display:inline-flex; align-items:center;
+  }
+  html body .vl-hero__link,
+  html body .vl-premium__text-link,
+  html body .vl-fq__more a,
+  html body .vl-cp__cta a{
+    display:inline-flex; align-items:center; min-height:44px;
+  }
+  html body .header__heading-link{ min-height:44px; display:inline-flex; align-items:center; }
+  html body .quantity__button{ min-width:44px; min-height:44px; }
+
+  /* Les liens à l'intérieur d'un paragraphe ne peuvent pas grandir sans
+     déformer la ligne : on leur donne la surface par le padding vertical,
+     qui déborde sans pousser le texte. */
+  html body .vl-premium__note a,
+  html body .vl-fq__a a{
+    padding-block:11px; margin-block:-11px;
+  }
+
+
+  /* ---- Etats de survol et de focus manquants ---------------------------
+     Releve classe par classe sur l'accueil et la fiche produit. Un element
+     cliquable qui ne reagit ni au survol ni au clavier ne se lit pas comme
+     cliquable : le visiteur ne sait pas qu'il peut agir, et l'utilisateur au
+     clavier ne sait meme pas ou il se trouve dans la page.
+
+     Les composants qui avaient deja leurs etats ne sont pas touches : le pack
+     d'offres, le bouton d'achat premium, le bouton de l'appel final, les liens
+     de texte premium et les logos de presse. */
+
+  html body .vl-hero__link:hover,
+  html body .vl-fq__more a:hover,
+  html body .vrl-journey__cta:hover{
+    color:#8E4C21;
+    text-decoration-color:currentColor;
+  }
+
+  /* Les fleches du carrousel d'avis font 44 px mais ne renvoyaient aucun
+     signal : ni au survol, ni au clavier. */
+  html body .vap__nav:hover{
+    border-color:rgba(31,61,43,.42);
+    box-shadow:0 4px 14px rgba(31,61,43,.18);
+  }
+  html body .vap__nav:focus-visible,
+  html body .vl-cta:focus-visible,
+  html body .vl-hero__link:focus-visible,
+  html body .vl-premium__send:focus-visible,
+  html body .vl-fq summary:focus-visible,
+  html body .vl-fq__more a:focus-visible,
+  html body .vrl-journey__cta:focus-visible{
+    outline:3px solid #1F3D2B;
+    outline-offset:3px;
+    border-radius:2px;
+  }
+
+  /* Un accordeon se pilote au clavier : sans anneau de focus visible sur le
+     resume, on tabule a l'aveugle dans la FAQ. */
+  html body .vl-fq summary{ outline-offset:3px; }
+
+  @media (prefers-reduced-motion: reduce){
+    html body .vap__nav{ transition:none; }
+  }
+
+  /* ---- Page panier : un seul titre principal -------------------------- */
+  /* Le thème sort deux H1 concurrents, « Votre panier » et « Votre panier est
+     vide ». Le second devient un titre de second rang : même apparence,
+     hiérarchie correcte pour les moteurs et les lecteurs d'écran. */
+  html body .cart__empty-text{ font-size:inherit; }
+</style>
+
+<style id="verline-visuels">
+  :root { --vrl-visuel-fond: #EFEAE1; }
+
+  /* Les visuels produit sont carrés (1254 × 1254) et le conteneur est en 1/1 :
+     « contain » ne rogne donc rien aujourd'hui, et protège un futur visuel non
+     carré d'un recadrage sauvage. C'est aussi la règle qui gagne face à celle
+     de layout/theme.liquid, plus faible en spécificité — les deux disent
+     désormais la même chose au lieu de se contredire en silence. */
+  html body .product__media-list .product-media-container,
+  html body .product__media-list .product__media {
+    background: var(--vrl-visuel-fond) !important;
+  }
+  html body .product__media-list .product__media img,
+  html body .product__media-list .product-media-container img {
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+
+  html body .thumbnail-list__item .thumbnail {
+    background: var(--vrl-visuel-fond) !important;
+  }
+  html body .thumbnail-list__item .thumbnail img {
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+
+
+  /* ---- Normalisation de la section « Avis clients en photo » -------------
+     sections/verline-avis-photos.liquid definit huit teintes qui lui sont
+     propres : #173F32 (un 2e vert), #F7F4EC (un 4e blanc casse), #FFFEFA (un
+     5e), #29342E, #7A837E, #D9DEDA, #DDE4DF, plus #EDF3EF et #D9E4DC sur sa
+     pastille. Cote a cote avec le reste de la page, ces blancs a 1 % d'ecart
+     ne se lisent pas comme un choix : ils se lisent comme de la salissure.
+
+     On redefinit les variables sur .vap plutot que de reecrire la section :
+     .vap est un descendant du conteneur qui porte les variables d'origine,
+     donc sa propre declaration gagne pour tout son sous-arbre, sans lutte de
+     specificite et sans !important.
+
+     Le fond passe en ivoire et les cartes en sable, comme les tuiles de
+     benefices sous l'image produit : deux composants, une seule grammaire.
+     L'or #B5914B des etoiles est conserve — c'est une couleur assumee de la
+     marque, reprise sur les bandeaux d'assurance. */
+  html body .vap{
+    --vap-green:#1F3D2B;
+    --vap-cream:#FBF9F5;
+    --vap-card:#EFEAE1;
+    --vap-text:#1A1A18;
+    --vap-muted:#5C5C55;
+    --vap-empty:rgba(31,61,43,.14);
+    --vap-border:rgba(31,61,43,.16);
+  }
+  html body .vap .vap__badge{
+    background:#FBF9F5;
+    border-color:rgba(31,61,43,.18);
+  }
+  html body .vap .vap__check{ color:#FBF9F5; }
+  html body .vap .vap__card{
+    box-shadow:0 2px 8px rgba(31,61,43,.04), 0 10px 26px rgba(31,61,43,.06);
+  }
+  html body .vap .vap__nav{
+    background:rgba(251,249,245,.94);
+    box-shadow:0 3px 12px rgba(31,61,43,.14);
+  }
+
+  html body .product-media-modal__content img,
+  html body .product-media-modal__content .media img {
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+</style>
+
+<script id="verline-ordre-sections">
+(function () {
+  var observateur = null;
+  var repli = null;
+
+  function ordonner() {
+    var main = document.getElementById('MainContent');
+    if (!main) return false;
+
+    var presse = main.querySelector('.vrl-press-demo');
+    var vert = main.querySelector('#aqt-inspir, .aqt-inspir');
+    if (!presse || !vert) return false;
+
+    // Si le bloc vert se trouve APRÈS le bandeau presse, on le remonte juste avant.
+    if (presse.compareDocumentPosition(vert) & Node.DOCUMENT_POSITION_FOLLOWING) {
+      presse.insertAdjacentElement('beforebegin', vert);
+    }
+    return true;
+  }
+
+  function debrancher() {
+    if (observateur) { observateur.disconnect(); observateur = null; }
+    if (repli) { clearTimeout(repli); repli = null; }
+  }
+
+  function surveiller() {
+    var main = document.getElementById('MainContent');
+    if (!main || observateur) return;
+
+    // On agit à l'instant où la presse est insérée, au lieu de repasser à
+    // l'aveugle pendant quatre secondes.
+    observateur = new MutationObserver(function () {
+      if (ordonner()) debrancher();
+    });
+    observateur.observe(main, { childList: true, subtree: true });
+
+    // Si la presse n'arrive jamais, on ne laisse pas un observateur tourner.
+    repli = setTimeout(debrancher, 3000);
+  }
+
+  function demarrer() {
+    if (!ordonner()) surveiller();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', demarrer, { once: true });
+  } else {
+    demarrer();
+  }
+  document.addEventListener('shopify:section:load', function () {
+    debrancher();
+    demarrer();
+  });
+})();
+</script>
+</head><body><div class="rp-tag">main.kicker</div>
+<div class="col">
+
+
+
+
+
+<div class="vrl-proof" data-vrl-proof>
+  <div class="vrl-proof__rating">
+    <span class="vrl-proof__stars" role="img"
+          aria-label="Note moyenne de  sur 5, basée sur 154 avis">
+      <span class="vrl-proof__stars-empty" aria-hidden="true">★★★★★</span>
+      <span class="vrl-proof__stars-full" style="width: 88%" aria-hidden="true">★★★★★</span>
+    </span>
+    <strong class="vrl-proof__score">/5</strong>
+    <span class="vrl-proof__count">154 avis</span>
+    <span class="vrl-proof__sep" aria-hidden="true"></span>
+    <span class="vrl-proof__source">
+      <span class="vrl-proof__tp" aria-hidden="true">★</span>Trustpilot
+    </span>
+    <span class="vrl-proof__sep vrl-proof__sep--last" aria-hidden="true"></span>
+    <span class="vrl-proof__verified">
+      <span class="vrl-proof__check" aria-hidden="true">✓</span>Vérifié
+    </span>
+  </div>
+
+  <ul class="vrl-proof__benefits">
+    <li><b>3 actifs botaniques</b><span>Tea&nbsp;Tree, menthe poivrée, aloe vera</span></li>
+    <li><b>Fraîcheur immédiate</b><span>Nette dès le rinçage, parfum discret</span></li>
+    <li><b>4 à 6 semaines</b><span>La durée moyenne d'un flacon</span></li>
+    <li><b>Formulé en France</b><span>Non testé sur les animaux</span></li>
+  </ul>
+</div>
+
+<style>
+  /* Deux neutres, un vert, un terracotta. Aucune autre teinte n'entre ici :
+     c'est la multiplication des blancs presque identiques qui salissait la page. */
+  .vrl-proof{
+    --vrl-ivoire:#FBF9F5;
+    --vrl-sable:#EFEAE1;
+    --vrl-vert:#1F3D2B;
+    --vrl-encre:#1A1A18;
+    --vrl-gris:#5C5C55;
+    --vrl-tp:#00B67A;
+    margin:0 0 20px;
+    font-family:"DM Sans",system-ui,-apple-system,sans-serif;
+  }
+
+  /* ---- Ligne de note ---- */
+  .vrl-proof__rating{
+    display:flex; align-items:center; flex-wrap:wrap; gap:8px;
+    padding:11px 14px;
+    border:1px solid rgba(31,61,43,.16); border-radius:4px;
+    background:var(--vrl-ivoire);
+    color:var(--vrl-vert);
+    font-size:13.5px; line-height:1.3;
+  }
+  .vrl-proof__stars{ position:relative; display:inline-block; white-space:nowrap;
+    font-size:15px; letter-spacing:1.5px; line-height:1; }
+  .vrl-proof__stars-empty{ color:rgba(31,61,43,.22); }
+  /* inset:0 fixe left ET right, ce qui annule width. Les cinq etoiles
+     s'affichaient donc pleines pour une note de 4,4 — exactement le defaut
+     de l'ancien badge. On ne fixe que le bord gauche pour que width agisse. */
+  .vrl-proof__stars-full{
+    position:absolute; top:0; left:0; bottom:0; right:auto;
+    overflow:hidden; white-space:nowrap; color:var(--vrl-tp);
+  }
+  .vrl-proof__score{ font-size:15px; font-weight:800; color:var(--vrl-encre); }
+  .vrl-proof__count{ color:var(--vrl-gris); }
+  .vrl-proof__sep{ width:1px; height:15px; background:rgba(31,61,43,.18); }
+  .vrl-proof__source,
+  .vrl-proof__verified{ display:inline-flex; align-items:center; gap:5px; font-weight:700; }
+  .vrl-proof__tp{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:16px; height:16px; border-radius:3px;
+    background:var(--vrl-tp); color:#fff; font-size:10px; line-height:1;
+  }
+  .vrl-proof__check{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:16px; height:16px; border-radius:50%;
+    background:var(--vrl-vert); color:var(--vrl-ivoire); font-size:9px; line-height:1;
+  }
+
+  /* ---- Bénéfices ---- */
+  .vrl-proof__benefits{
+    display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px;
+    margin:8px 0 0; padding:0; list-style:none;
+  }
+  .vrl-proof__benefits li{
+    padding:10px 12px;
+    border:1px solid rgba(31,61,43,.13); border-radius:4px;
+    background:var(--vrl-sable);
+  }
+  .vrl-proof__benefits b{
+    display:block; margin-bottom:3px;
+    color:var(--vrl-vert); font-size:13.5px; font-weight:750; line-height:1.25;
+  }
+  .vrl-proof__benefits span{
+    display:block; color:var(--vrl-gris); font-size:13px; line-height:1.4;
+  }
+
+  /* Sous la galerie sur desktop : le bandeau reprend la largeur de l'image. */
+  .product__media-wrapper .vrl-proof{ margin:16px 0 0; }
+
+  @media (max-width:480px){
+    .vrl-proof__rating{ gap:6px; padding:10px 12px; font-size:13px; }
+    .vrl-proof__sep--last{ display:none; }
+    .vrl-proof__benefits{ gap:7px; }
+    .vrl-proof__benefits li{ padding:9px 10px; }
+  }
+</style>
+
+<script>
+(() => {
+  const bloc = document.querySelector('[data-vrl-proof]');
+  if (!bloc || bloc.dataset.place === 'ok') return;
+
+  const placer = () => {
+    // Sous 750 px la galerie est deja au-dessus du bloc d'achat : rien a faire.
+    if (window.matchMedia('(max-width: 749px)').matches) return;
+
+    // Le theme rend la galerie dans un element <media-gallery>. On se place
+    // JUSTE APRES lui, jamais dedans : .product__media-list est un <ul>, et y
+    // injecter un <div> produirait du HTML invalide et poserait le bandeau a
+    // l'interieur du carrousel, ou il defilerait avec les images.
+    const galerie = document.querySelector('media-gallery')
+      || document.querySelector('.product__media-wrapper');
+    if (!galerie || galerie.nextElementSibling === bloc) return;
+
+    galerie.insertAdjacentElement('afterend', bloc);
+    bloc.dataset.place = 'ok';
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', placer, { once: true });
+  } else {
+    placer();
+  }
+  document.addEventListener('shopify:section:load', placer);
+})();
+</script>
+</div>
+<div class="rp-tag">main.intro</div>
+<div class="col"><style>
+.vrl-decision{margin:0 0 14px;font-family:"DM Sans",system-ui,sans-serif;color:#1A1A18}
+.vrl-decision__lead{margin:0 0 14px;color:#3A3A36;font-size:16px;line-height:1.58}
+.vrl-decision__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.vrl-decision__item{min-height:68px;padding:10px 12px;border:1px solid rgba(31,61,43,.13);border-radius:12px;background:#FBF9F5}
+.vrl-decision__item span{display:block;margin-bottom:3px;color:#5C5C55;font-size:10px;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
+.vrl-decision__item strong{display:block;color:#1F3D2B;font-size:13.5px;line-height:1.38}
+@media(max-width:480px){.vrl-decision__lead{font-size:15px}.vrl-decision__grid{gap:7px}.vrl-decision__item{min-height:64px;padding:9px 10px}}
+</style>
+<div class="vrl-decision" aria-label="L’essentiel sur le gel Verline">
+  <p class="vrl-decision__lead">Ça gratte entre les orteils, la peau pèle, l’odeur s’accroche. Ce gel lavant au Tea Tree cible les champignons responsables des mycoses et rend à vos pieds une fraîcheur nette, en deux minutes sous la douche.</p>
+  <div class="vrl-decision__grid">
+    <div class="vrl-decision__item"><span>Quoi&nbsp;?</span><strong>Gel lavant ciblé pieds &amp; corps</strong></div>
+    <div class="vrl-decision__item"><span>Pour qui&nbsp;?</span><strong>Routine quotidienne, sport et chaussures fermées</strong></div>
+    <div class="vrl-decision__item"><span>Pourquoi&nbsp;?</span><strong>Nettoyer, cibler les odeurs et rafraîchir</strong></div>
+    <div class="vrl-decision__item"><span>Format</span><strong>Flacon 100&nbsp;ml · 29,90&nbsp;€</strong></div>
+    <div class="vrl-decision__item"><span>Livraison</span><strong>Traitement 1–3 j · transport estimé 8–16 j</strong></div>
+    <div class="vrl-decision__item"><span>Retours</span><strong>14 jours selon les conditions d’hygiène</strong></div>
+  </div>
+</div></div>
+<div class="rp-tag">main.bundle_offer</div>
+<div class="col"><style>
+  .vrl-native-quantity--managed { position: absolute !important; width: 1px !important; height: 1px !important; overflow: hidden !important; clip-path: inset(50%) !important; white-space: nowrap !important; }
+  .vrl-bundles { margin: 20px 0 16px; font-family: "DM Sans", system-ui, sans-serif; }
+  .vrl-bundles fieldset { margin: 0; padding: 0; border: 0; }
+  .vrl-bundles legend { margin: 0 0 11px; color: #1A1A18; font-size: 13px; font-weight: 750; letter-spacing: .015em; }
+  .vrl-bundles__list { display: grid; gap: 10px; }
+  .vrl-offer { position: relative; display: block; cursor: pointer; }
+  .vrl-offer > input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+  .vrl-offer__card { position: relative; display: grid; grid-template-columns: 82px minmax(0,1fr) auto; align-items: center; gap: 14px; min-height: 88px; padding: 12px 14px; border: 1px solid rgba(31,61,43,.18); border-radius: 4px; color: #1A1A18; background: #FBF9F5; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+  .vrl-offer:hover .vrl-offer__card { border-color: rgba(31,61,43,.42); transform: translateY(-1px); }
+  .vrl-offer > input:checked + .vrl-offer__card { border: 2px solid #1F3D2B; padding: 11px 13px; background: #EFEAE1; box-shadow: 0 10px 30px rgba(31,61,43,.10); }
+  .vrl-offer > input:focus-visible + .vrl-offer__card { outline: 3px solid #1F3D2B; outline-offset: 3px; }
+  .vrl-offer__visual { position: relative; display: block; width: 78px; height: 62px; }
+  .vrl-offer__visual img { position: absolute; top: 50%; left: 50%; width: 49px; height: 58px; object-fit: contain; border: 1px solid rgba(31,61,43,.12); border-radius: 2px; background: #EFEAE1; box-shadow: 0 5px 12px rgba(26,26,24,.09); transform: translate(-50%,-50%); }
+  .vrl-offer__visual--2 img:first-child { transform: translate(-70%,-50%) rotate(-3deg); }
+  .vrl-offer__visual--2 img:last-child { transform: translate(-30%,-50%) rotate(3deg); }
+  .vrl-offer__visual--3 img:nth-child(1) { transform: translate(-82%,-50%) rotate(-5deg); }
+  .vrl-offer__visual--3 img:nth-child(2) { z-index: 2; transform: translate(-50%,-53%); }
+  .vrl-offer__visual--3 img:nth-child(3) { transform: translate(-18%,-50%) rotate(5deg); }
+  .vrl-offer__copy b, .vrl-offer__copy span, .vrl-offer__price strong, .vrl-offer__price small { display: block; }
+  .vrl-offer__copy b { color: #1F3D2B; font-size: 15px; line-height: 1.25; }
+  .vrl-offer__copy span { margin-top: 5px; color: #5C5C55; font-size: 12px; line-height: 1.35; }
+  .vrl-offer__price { min-width: 82px; text-align: right; }
+  .vrl-offer__price strong { color: #1A1A18; font-family: "Playfair Display", Georgia, serif; font-size: 19px; font-weight: 650; white-space: nowrap; }
+  .vrl-offer__price small { margin-top: 4px; color: #5C5C55; font-size: 10px; white-space: nowrap; }
+  .vrl-offer__price s { display: block; margin-bottom: 2px; color: #5C5C55; font-size: 11px; text-decoration-thickness: 1px; }
+  .vrl-offer__saving { display: block; margin-top: 4px; color: #1F3D2B; font-size: 10px; font-weight: 800; white-space: nowrap; }
+  .vrl-offer__badge { position: absolute; z-index: 3; top: -9px; left: 104px; padding: 4px 9px; border-radius: 999px; color: #FBF9F5; background: #1F3D2B; font-size: 9px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+  .vrl-bundles__note { margin: 9px 2px 0; color: #5C5C55; font-size: 11px; line-height: 1.45; }
+  @media (max-width: 480px) {
+    .vrl-offer__card { grid-template-columns: 68px minmax(0,1fr) auto; gap: 10px; padding-inline: 10px; }
+    .vrl-offer > input:checked + .vrl-offer__card { padding-inline: 9px; }
+    .vrl-offer__visual { width: 64px; }
+    .vrl-offer__visual img { width: 43px; height: 53px; }
+    .vrl-offer__copy b { font-size: 14px; }
+    .vrl-offer__copy span { font-size: 10px; }
+    .vrl-offer__price { min-width: 70px; }
+    .vrl-offer__price strong { font-size: 17px; }
+    .vrl-offer__badge { left: 78px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .vrl-offer__card { transition: none; } }
+</style>
+
+<div class="vrl-bundles" id="vrlBundles-" data-vrl-bundles>
+  <fieldset>
+    <legend>Prolongez le rituel, réduisez le prix par flacon</legend>
+    <div class="vrl-bundles__list">
+      <label class="vrl-offer">
+        <input type="radio" name="vrl-bundle-" value="1" data-total="29,90&nbsp;€">
+        <span class="vrl-offer__card">
+          <span class="vrl-offer__visual" aria-hidden="true">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iI0VGRUFFMSIvPjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNiIgZmlsbD0iIzFGM0QyQiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+dmlzdWVsIHByb2R1aXQ8L3RleHQ+PC9zdmc+" alt="" width="90" height="108" loading="eager">
+          </span>
+          <span class="vrl-offer__copy"><b>1 flacon</b><span>Pour découvrir le rituel Verline</span></span>
+          <span class="vrl-offer__price"><strong>29,90&nbsp;€</strong><small>29,90&nbsp;€ / flacon</small></span>
+        </span>
+      </label>
+
+      <label class="vrl-offer">
+        <input type="radio" name="vrl-bundle-" value="2" data-total="52,90&nbsp;€" checked>
+        <span class="vrl-offer__card">
+          <span class="vrl-offer__badge">Le plus choisi</span>
+          <span class="vrl-offer__visual vrl-offer__visual--2" aria-hidden="true">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iI0VGRUFFMSIvPjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNiIgZmlsbD0iIzFGM0QyQiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+dmlzdWVsIHByb2R1aXQ8L3RleHQ+PC9zdmc+" alt="" width="90" height="108" loading="lazy"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iI0VGRUFFMSIvPjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNiIgZmlsbD0iIzFGM0QyQiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+dmlzdWVsIHByb2R1aXQ8L3RleHQ+PC9zdmc+" alt="" width="90" height="108" loading="lazy">
+          </span>
+          <span class="vrl-offer__copy"><b>2 flacons</b><span>Économisez 6,90 € · 2 routines en une commande</span></span>
+          <span class="vrl-offer__price"><s>29,90&nbsp;€</s><strong>52,90&nbsp;€</strong><small>26,45&nbsp;€ / flacon</small><span class="vrl-offer__saving">Économisez 6,90&nbsp;€</span></span>
+        </span>
+      </label>
+
+      <label class="vrl-offer">
+        <input type="radio" name="vrl-bundle-" value="3" data-total="69,90&nbsp;€">
+        <span class="vrl-offer__card">
+          <span class="vrl-offer__badge">Meilleure valeur</span>
+          <span class="vrl-offer__visual vrl-offer__visual--3" aria-hidden="true">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iI0VGRUFFMSIvPjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNiIgZmlsbD0iIzFGM0QyQiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+dmlzdWVsIHByb2R1aXQ8L3RleHQ+PC9zdmc+" alt="" width="90" height="108" loading="lazy"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iI0VGRUFFMSIvPjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNiIgZmlsbD0iIzFGM0QyQiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+dmlzdWVsIHByb2R1aXQ8L3RleHQ+PC9zdmc+" alt="" width="90" height="108" loading="lazy"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iI0VGRUFFMSIvPjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNiIgZmlsbD0iIzFGM0QyQiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+dmlzdWVsIHByb2R1aXQ8L3RleHQ+PC9zdmc+" alt="" width="90" height="108" loading="lazy">
+          </span>
+          <span class="vrl-offer__copy"><b>3 flacons</b><span>Meilleur prix par flacon · votre routine en réserve</span></span>
+          <span class="vrl-offer__price"><s>29,90&nbsp;€</s><strong>69,90&nbsp;€</strong><small>23,30&nbsp;€ / flacon</small><span class="vrl-offer__saving">Économisez 19,80&nbsp;€</span></span>
+        </span>
+      </label>
+    </div>
+    <p class="vrl-bundles__note">Remise appliquée automatiquement au panier pour le Duo et le Trio · aucun code nécessaire.</p>
+  </fieldset>
+</div>
+
+<script>
+(() => {
+  const root = document.getElementById('vrlBundles-');
+  if (!root || root.dataset.ready === 'true') return;
+  root.dataset.ready = 'true';
+
+  const boot = () => {
+    const quantity = document.querySelector('#Quantity-Form- input[name="quantity"]') || document.querySelector('input[name="quantity"][form^="product-form-"]');
+    const radios = Array.from(root.querySelectorAll('input[type="radio"]'));
+    if (!quantity || !radios.length) return;
+
+    const nativeQuantity = quantity.closest('.product-form__quantity, [id^="Quantity-Form-"]');
+    if (nativeQuantity && !root.contains(nativeQuantity)) {
+      nativeQuantity.classList.add('vrl-native-quantity--managed');
+      nativeQuantity.setAttribute('aria-hidden', 'true');
+      quantity.tabIndex = -1;
+    }
+
+    const render = (radio, dispatch) => {
+      const qty = Math.max(1, parseInt(radio.value, 10) || 1);
+      const total = radio.dataset.total || '';
+      quantity.value = String(qty);
+      if (dispatch) {
+        quantity.dispatchEvent(new Event('input', { bubbles: true }));
+        quantity.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      const updatePurchaseLabels = () => {
+        const atcPrice = document.getElementById('main-atc-price-');
+        if (atcPrice) atcPrice.textContent = total + ' •';
+        const stickyMeta = document.querySelector('[data-vrl-sticky] .vrl-sticky__meta span');
+        if (stickyMeta) stickyMeta.textContent = qty + (qty > 1 ? ' flacons · ' : ' flacon · ') + total;
+      };
+      updatePurchaseLabels();
+      window.setTimeout(updatePurchaseLabels, 80);
+    };
+
+    root.addEventListener('change', (event) => {
+      if (event.target.matches('input[type="radio"]')) render(event.target, true);
+    });
+    quantity.addEventListener('change', () => {
+      const match = radios.find((radio) => radio.value === String(quantity.value));
+      if (match) {
+        match.checked = true;
+        render(match, false);
+      }
+    });
+    render(radios.find((radio) => radio.checked) || radios[0], false);
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true });
+  else boot();
+})();
+</script></div>
+<div class="rp-tag">main.reassurance</div>
+<div class="col"><style>
+.vrl-secure{margin:2px 0 14px;padding:13px;border:1px solid rgba(31,61,43,.14);border-radius:14px;background:#EFEAE1;font-family:"DM Sans",system-ui,sans-serif}
+.vrl-secure__points{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.vrl-secure__point{text-align:center;color:#1F3D2B;font-size:13px;font-weight:750;line-height:1.35}
+.vrl-secure__point b{display:block;margin-bottom:2px;font-size:15px}
+.vrl-secure__label{margin:0 0 8px;text-align:center;color:#5C5C55;font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+.vrl-secure__payments{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px}
+.vrl-secure__payments svg{width:38px;height:24px}
+</style>
+<div class="vrl-secure" aria-label="Commande et paiement sécurisés">
+  <div class="vrl-secure__points">
+    <div class="vrl-secure__point"><b aria-hidden="true">✓</b>Paiement sécurisé</div>
+    <div class="vrl-secure__point"><b aria-hidden="true">↗</b>Suivi transmis</div>
+    <div class="vrl-secure__point"><b aria-hidden="true">↩</b>Retours 14 jours</div>
+  </div>
+  <p class="vrl-secure__label">Moyens de paiement disponibles</p>
+  <div class="vrl-secure__payments">
+    
+      <svg width="38" height="24" viewBox="0 0 38 24"><rect width="38" height="24" rx="3" fill="#EFEAE1" stroke="#1F3D2B" stroke-opacity=".2"/></svg>
+    
+  </div>
+</div></div></body></html>

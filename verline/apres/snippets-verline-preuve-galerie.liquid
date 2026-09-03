@@ -56,8 +56,8 @@
   <ul class="vrl-proof__benefits">
     <li><b>3 actifs botaniques</b><span>Tea&nbsp;Tree, menthe poivrée, aloe vera</span></li>
     <li><b>Fraîcheur immédiate</b><span>Nette dès le rinçage, parfum discret</span></li>
-    <li><b>4 à 6 semaines</b><span>Le flacon de 100&nbsp;ml, en usage quotidien</span></li>
-    <li><b>14 jours pour changer d'avis</b><span>Même le flacon ouvert est repris</span></li>
+    <li><b>4 à 6 semaines</b><span>La durée moyenne d'un flacon</span></li>
+    <li><b>Formulé en France</b><span>Non testé sur les animaux</span></li>
   </ul>
 </div>
 
@@ -87,8 +87,12 @@
   .vrl-proof__stars{ position:relative; display:inline-block; white-space:nowrap;
     font-size:15px; letter-spacing:1.5px; line-height:1; }
   .vrl-proof__stars-empty{ color:rgba(31,61,43,.22); }
+  /* inset:0 fixe left ET right, ce qui annule width. Les cinq etoiles
+     s'affichaient donc pleines pour une note de 4,4 — exactement le defaut
+     de l'ancien badge. On ne fixe que le bord gauche pour que width agisse. */
   .vrl-proof__stars-full{
-    position:absolute; inset:0; overflow:hidden; color:var(--vrl-tp);
+    position:absolute; top:0; left:0; bottom:0; right:auto;
+    overflow:hidden; white-space:nowrap; color:var(--vrl-tp);
   }
   .vrl-proof__score{ font-size:15px; font-weight:800; color:var(--vrl-encre); }
   .vrl-proof__count{ color:var(--vrl-gris); }

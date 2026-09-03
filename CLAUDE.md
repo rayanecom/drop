@@ -123,6 +123,18 @@ la **couleur**. Une couleur définie aux deux endroits finit toujours par diverg
   santé, pas de fausses preuves sociales, pas de prix barré fictif. Détail dans le skill
   `shopify-store-builder`.
 
+## Méthode de travail imposée
+
+`methode/README.md` contient la **méthode e-commerce complète** dictée par le
+propriétaire : recherche produit, analyse concurrentielle 1.1, fournisseur,
+positionnement, avatar client, branding, site, offre, angles publicitaires.
+
+**Elle s'applique à toute recherche produit, tout audit et toute construction de
+boutique dans ce repo.** À lire avant de commencer, et à suivre dans l'ordre.
+Deux règles non négociables qui en découlent : revérifier l'état réel après
+chaque étape plutôt que d'annoncer un résultat, et séparer explicitement ce qui
+est mesuré de ce qui est déduit.
+
 ## Skills installés dans ce repo
 
 **Plugin ui-ux-pro-max** — 7 skills de référence (`ui-ux-pro-max`, `design`,
