@@ -284,6 +284,57 @@ Sans exception : **(1) ce que tu fais est inefficace → (2) danger invisible no
 Personne n'a essayé un autre chemin. Ni le coût du remplacement d'une gouttière perdue, ni
 l'esthétique, ni la routine, ni l'objection prix.
 
+### Le segment bruxisme : voie libre, pas marché vide
+
+La méthode avertit que zéro concurrent signifie le plus souvent zéro demande. J'ai donc
+vérifié la demande **indépendamment de la publicité**. Elle est documentée.
+
+| Fait | Source |
+|---|---|
+| Le bruxisme concerne **10 à 15 % de la population française** | Doctissimo, cité en recherche |
+| Littérature internationale : **8 à 31 %** des adultes, bruxisme du sommeil ~7-8 % strictement diagnostiqué, jusqu'à 21 % selon la définition | publications |
+| **60 à 70 % des Français** en auront des épisodes au cours de leur vie | idem |
+| **La gouttière occlusale est REMBOURSÉE** — acte CCAM **HBLD018**, tarif **172,80 €**, pris en charge à 100 % du tarif par l'Assurance Maladie | nomenclature CCAM |
+| Un dentiste facture en moyenne **un peu plus de 300 €**, jusqu'à **300 à 800 €** | comparateurs santé |
+
+**C'est le fait décisif : le remboursement.** Un acte inscrit à la CCAM et pris en charge
+n'est pas une niche confidentielle — c'est un flux institutionnel de patients diagnostiqués,
+prescrits, équipés. La demande existe **en dehors** de toute publicité, ce qui est exactement
+la condition qui distingue une voie libre d'un marché mort.
+
+Et le porteur de gouttière de bruxisme :
+
+- la porte **toutes les nuits, huit heures, bouche fermée** — pas 22 h par jour en la retirant
+  pour manger comme une gouttière Invisalign, mais dans les conditions les plus favorables à
+  la prolifération ;
+- la garde **des années**, pas 12 à 24 mois ;
+- a payé **300 à 800 €**, ou l'Assurance Maladie pour lui ;
+- **n'a aucun rendez-vous de suivi** où on lui rappelle de la nettoyer.
+
+### Le segment contention : installé à vie
+
+| Fait | Source |
+|---|---|
+| Gouttière de contention amovible : port continu 4 mois, puis **toutes les nuits**, puis 2-3 nuits par semaine **aussi longtemps que possible** | cabinets d'orthodontie |
+| Fil de contention fixe : **conservé indéfiniment** | idem |
+| **« Il est conseillé de la refaire une fois par an »** | idem |
+
+La base installée est **tous ceux qui ont un jour porté un appareil dentaire**. Elle ne se
+vide jamais, elle s'ajoute chaque année.
+
+### Conclusion sur les segments
+
+| Segment | Demande documentée hors pub | Pression publicitaire | Verdict |
+|---|---|---|---|
+| Invisalign | oui | **saturée** — Zima | fermé |
+| Dentiers | oui | **saturée** — Lyra | fermé |
+| **Bruxisme** | **oui — acte remboursé CCAM** | **zéro** | **VOIE LIBRE** |
+| **Contention** | **oui — base installée à vie** | quasi nulle | **VOIE LIBRE** |
+| Enfants appareillés | oui | zéro | secondaire — ciblage Meta difficile |
+
+**L'entrée se fait sur bruxisme + contention.** Deux segments à demande documentée, aucun
+concurrent sur leur vocabulaire, et un même produit pour les deux.
+
 **DÉCISION PORTE 2 : FRANCHIE.** Deux acteurs indépendants investissent depuis 467 et
 323 jours ; l'un d'eux scale ×15 en six mois sur le marché français ; deux segments sont
 vides ; et les cinq angles libres sont identifiés ci-dessus.
