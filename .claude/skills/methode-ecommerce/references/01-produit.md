@@ -327,6 +327,48 @@ maximum est exactement 100.**
 | Logistique et retours | ×1 | 5 | Fragile, lourd, à pointures | Léger, robuste, taille unique |
 | **TOTAL** | **20** | **100** | | |
 
+### Mur réglementaire ou paperasse : ce n'est pas la même décision
+
+Le veto ci-dessous a déjà éliminé un candidat viable dans ce projet. La cause : avoir traité
+« il y a une obligation » comme « on ne peut pas vendre ». Distinction à faire avant de vétoyer.
+
+| Vrai mur — le veto tient | Paperasse — on chiffre, on ne renonce pas |
+|---|---|
+| Complément alimentaire (allégations, notification DGCCRF, formule) | Détergent / nettoyant : **CLP** — FDS et étiquette fournies par le fournisseur, à faire traduire |
+| Dispositif médical (UE 2017/745, marquage, organisme notifié) | Électrique : **CE + DEEE** — déclaration de conformité du fabricant, éco-contribution, notice FR |
+| Biocide / antiparasitaire (UE 528/2012, autorisation par substance) | Contact alimentaire : attestation de conformité fournisseur |
+| Cosmétique (Personne Responsable UE, dossier, notification CPNP) | Jouet : CE + rapport d'essai du fabricant |
+
+Preuve que la seconde colonne n'arrête personne : Vulcanet, Flotty, Bebysh et Noucadeaux
+vendent tous des produits soumis au CLP. Le coût est réel, il entre dans le calcul
+économique — il ne ferme pas la porte.
+
+**Règle** : un veto ne se pose que si l'obligation exige une *autorisation préalable* ou une
+*qualification que nous n'aurons pas*. Une obligation documentaire se chiffre.
+
+## Test 3 : l'arbitrage géographique
+
+Le meilleur candidat n'est pas un produit inconnu partout — c'est un produit **prouvé
+ailleurs et absent ici**. La preuve de marché a déjà été payée par quelqu'un d'autre, dans
+un autre pays, et on récupère l'apprentissage sans le coût.
+
+| Situation | Valeur |
+|---|---|
+| Inconnu partout | Aucune preuve — le plus cher à valider, le plus risqué |
+| Prouvé ailleurs, absent en France | **La cible** — angle, créa, objections déjà écrits par le marché étranger |
+| Prouvé ailleurs, un ou deux entrants récents en France | Acceptable si les entrants sont faibles (peu de créas, peu de jours d'ancienneté) |
+| Trois annonceurs français ou plus avec des créas de plus de 90 jours | Trop tard |
+
+**Le pays source compte.** Un produit qui scale en Allemagne, Espagne, Italie ou Pays-Bas est
+plus sûr qu'un produit américain : même réglementation UE (pas de mur découvert après le
+sourcing), même chaîne logistique, mêmes habitudes de paiement et de retour. Les États-Unis
+servent d'indicateur avancé, pas de preuve transposable.
+
+**Le protocole de vérification de l'absence en France** — les deux séries de recherche du
+fichier `02-concurrence.md` s'appliquent intégralement : chercher le nom du produit **et** le
+symptôme, en français. Un concurrent français qui n'écrit jamais le nom du produit dans ses
+créas reste invisible à une recherche par nom. C'est l'erreur qui a coûté le plus cher ici.
+
 ### Le risque réglementaire n'est pas une note, c'est un veto
 
 On ne met pas « 2 points sur 5 » à une obligation légale : soit on peut vendre, soit on ne
