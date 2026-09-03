@@ -37,6 +37,7 @@ class Hypotheses:
     quantite: int = 1
     droits_douane: float = 0.0
     regime: str = "reel"          # "reel" (TVA déductible) ou "franchise"
+    cotisations_pct: float = 0.0  # micro-entreprise : assises sur le CA, pas le bénéfice
     multiple_cible: float = 4.0
 
 
@@ -49,6 +50,7 @@ class Resultat:
     tva_import: float
     cout_achat_debarque: float
     frais_paiement: float
+    cotisations: float
     couts_variables: float
     mc_commande_reussie: float
     perte_commande_remboursee: float
@@ -79,6 +81,8 @@ def calculer(h: Hypotheses) -> Resultat:
         raise ValueError("Le régime vaut 'reel' ou 'franchise'.")
     if h.multiple_cible <= 0:
         raise ValueError("Le multiple cible doit être strictement positif.")
+    if h.cotisations_pct < 0:
+        raise ValueError("Le taux de cotisations ne peut pas être négatif.")
 
     assujetti = h.regime == "reel"
 
@@ -106,7 +110,13 @@ def calculer(h: Hypotheses) -> Resultat:
 
     # Les frais du prestataire de paiement portent sur le montant TTC encaissé.
     frais_paiement = h.prix_ttc * h.frais_paiement_pct / 100 + h.frais_paiement_fixe
-    autres_frais = frais_paiement + h.apps_par_commande + h.sav_par_commande
+
+    # En micro-entreprise, les cotisations sociales portent sur le chiffre d'affaires
+    # encaissé, que l'affaire soit rentable ou non. Elles ne se déduisent pas des achats.
+    cotisations = h.prix_ttc * h.cotisations_pct / 100
+
+    autres_frais = (frais_paiement + cotisations
+                    + h.apps_par_commande + h.sav_par_commande)
 
     couts_variables = cout_achat_debarque + autres_frais
 
@@ -147,6 +157,7 @@ def calculer(h: Hypotheses) -> Resultat:
         tva_import=tva_import,
         cout_achat_debarque=cout_achat_debarque,
         frais_paiement=frais_paiement,
+        cotisations=cotisations,
         couts_variables=couts_variables,
         mc_commande_reussie=mc_ok,
         perte_commande_remboursee=perte_remboursee,
@@ -204,6 +215,7 @@ def afficher(h: Hypotheses, r: Resultat) -> None:
     for libelle, montant in (
         ("Coût d'achat débarqué", -r.cout_achat_debarque),
         ("Frais de paiement", -r.frais_paiement),
+        (f"Cotisations sociales ({h.cotisations_pct:g} % du CA)", -r.cotisations),
         ("Applications", -h.apps_par_commande),
         ("SAV", -h.sav_par_commande),
     ):
@@ -401,11 +413,28 @@ def auto_test() -> int:
             verifier(f"sourcing_benef_{regime}_{douane:g}",
                      r4.marge_contribution, 4.0 * r4.cout_achat_debarque)
 
-    # Cas 12 — un régime ou un multiple invalide est rejeté.
+    # Cas 12 — cotisations micro : assises sur le CA encaissé, pas sur le bénéfice.
+    h = Hypotheses(prix_ttc=100.0, cout_produit=10.0, livraison=0.0, tva=0.0,
+                   regime="franchise", frais_paiement_pct=0.0, frais_paiement_fixe=0.0,
+                   cotisations_pct=12.3)
+    r = calculer(h)
+    verifier("cotisations", r.cotisations, 12.30)
+    verifier("mc_avec_cotisations", r.marge_contribution, 77.70)
+    # Elles pèsent même quand le produit est vendu à perte sur l'achat.
+    h2 = Hypotheses(**{**h.__dict__, "cout_produit": 100.0})
+    r2 = calculer(h2)
+    verifier("cotisations_meme_a_perte", r2.cotisations, 12.30)
+    # Et elles abaissent le coût d'achat maximum admissible.
+    sans = calculer(Hypotheses(**{**h.__dict__, "cotisations_pct": 0.0}))
+    if not r.achat_max_benefice < sans.achat_max_benefice:
+        echecs.append("cotisations: le plafond d'achat devrait baisser")
+
+    # Cas 13 — un régime ou un multiple invalide est rejeté.
     for mauvais in (
         {"prix_ttc": 10.0, "cout_produit": 1.0, "regime": "micro"},
         {"prix_ttc": 10.0, "cout_produit": 1.0, "multiple_cible": 0.0},
         {"prix_ttc": 10.0, "cout_produit": 1.0, "droits_douane": -5.0},
+        {"prix_ttc": 10.0, "cout_produit": 1.0, "cotisations_pct": -1.0},
     ):
         try:
             calculer(Hypotheses(**mauvais))
@@ -418,7 +447,7 @@ def auto_test() -> int:
         for e in echecs:
             print("  -", e)
         return 1
-    print("Auto-test : 12 cas, tous conformes.")
+    print("Auto-test : 13 cas, tous conformes.")
     return 0
 
 
@@ -451,6 +480,8 @@ def main() -> int:
                         "franchise = pas de TVA sur les ventes, TVA import non déductible")
     p.add_argument("--multiple-cible", type=float, default=4.0,
                    help="Multiple visé sur le coût d'achat débarqué")
+    p.add_argument("--cotisations-pct", type=float, default=0.0,
+                   help="Cotisations sociales en %% du CA encaissé (micro-entreprise)")
     p.add_argument("--scenarios", type=str,
                    help="Prix TTC à comparer, séparés par des virgules")
     p.add_argument("--test", action="store_true", help="Lancer l'auto-test et sortir")
@@ -469,7 +500,7 @@ def main() -> int:
         apps_par_commande=a.apps_par_commande, sav_par_commande=a.sav_par_commande,
         taux_retour=a.taux_retour, cout_retour=a.cout_retour, quantite=a.quantite,
         droits_douane=a.droits_douane, regime=a.regime,
-        multiple_cible=a.multiple_cible,
+        multiple_cible=a.multiple_cible, cotisations_pct=a.cotisations_pct,
     )
 
     try:

@@ -119,6 +119,30 @@ Les deux régimes donnent des marges et des plafonds d'achat différents. Le scr
 `--regime reel` ou `--regime franchise`. **Le choix du régime relève d'un comptable** — la
 méthode se contente d'exiger qu'il soit connu avant de calculer.
 
+### En micro-entreprise, les cotisations portent sur le chiffre d'affaires
+
+C'est le piège le plus coûteux du démarrage, et il ne se voit pas dans un calcul de marge
+classique : les cotisations sociales d'une micro-entreprise sont assises sur le **chiffre
+d'affaires encaissé**, pas sur le bénéfice. Elles tombent même sur une commande vendue à
+perte, et même sur un mois où la publicité a tout mangé.
+
+Sur une vente à 47,90 €, à un taux de 12,3 % pour la vente de marchandises
+`[À CONFIRMER — les taux et les seuils évoluent]`, cela fait **5,89 € par commande**, avant
+toute publicité. Le script prend `--cotisations-pct`.
+
+**À quel moment la micro cesse d'être avantageuse.** Elle fait gagner la TVA non reversée,
+mais elle fait perdre la TVA à l'import non déductible et les cotisations sur le CA. Le
+solde est positif tant que :
+
+```
+prix de vente × (0,167 − taux de cotisations) > 0,20 × coût d'achat HT
+```
+
+Autrement dit : **plus le prix est élevé par rapport au coût, plus la micro est
+intéressante.** Autour d'un ×4 strict, les deux régimes s'équivalent presque. Il faut donc
+refaire le calcul à chaque changement de prix ou de coût, et non le trancher une fois pour
+toutes.
+
 ### Les deux nombres à connaître par cœur
 
 **CPA d'équilibre** = marge de contribution avant publicité.
