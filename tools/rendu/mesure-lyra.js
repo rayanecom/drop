@@ -18,7 +18,7 @@ const path = require('path');
         document.querySelectorAll('p,li,span,summary').forEach(el=>{
           if(!el.textContent.trim()||el.children.length) return;
           const fs=parseFloat(getComputedStyle(el).fontSize);
-          if(fs<16&&!el.matches('.surt,.lg,.apr,.verif,.vide b,.vide small,.pied__bas span,.annonce,.pastille,.fleche,.rcarte small,.etoiles,.pagi span,.scarte p,.vcarte p,.acarte__txt p,.pcarte small,.al p,.dcarte span,.videocard small,.bandeau-g small,.nav a,.icones,.paiements'))
+          if(fs<16&&!el.matches('.surt,.lg,.apr,.verif,.vide b,.vide small,.pied__bas span,.annonce,.pastille,.fleche,.otag,.rcarte small,.etoiles,.pagi span,.scarte p,.vcarte p,.acarte__txt p,.pcarte small,.al p,.dcarte span,.videocard small,.bandeau-g small,.nav a,.icones,.paiements'))
             txt.add(el.tagName+'.'+(el.className||'—')+' '+fs+'px');});
         return {h:Math.round(de.scrollHeight),ox:de.scrollWidth>window.innerWidth,
                 deb:[...new Set(deb)].slice(0,4),pet:[...new Set(pet)].slice(0,4),txt:[...txt].slice(0,4)};

@@ -39,7 +39,13 @@
       <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg><span>Garantie 2 ans, sans enregistrement ni fenêtre de demande</span></li>
     </ul>
 
-    <!-- A — ACTION -->
+    <!-- A — ACTION : bump de commande puis bouton -->
+    <label class="bump">
+      <input type="checkbox">
+      <span><b>Ajoutez le guide « Garder ses dents alignées » — 19,99&nbsp;€</b>
+        <small>Ce qu'un orthodontiste explique en deux minutes et qu'on oublie en six mois : combien de temps
+          porter sa contention, quoi faire si elle serre, quand consulter. <span class="apr">À écrire</span></small></span>
+    </label>
     <a class="btn btn--bloc" href="#">Ajouter au panier</a>
 
     <div class="avis-mis"><div class="vide" style="min-height:110px;padding:12px"><b>Avis mis en avant</b>
@@ -144,15 +150,37 @@
   <div class="rcarte"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><div><b>Paiement sécurisé</b><small>Aucun numéro de carte sur nos serveurs.</small></div></div>
 </div></section>
 
-<!-- A — ACTION : monter le panier -->
-<section class="sec" style="padding-top:0"><div class="wrap">
-  <h2 class="h2">À découvrir aussi</h2>
-  <div class="dec">
-    <div class="dcarte"><div class="vide vide--carre"><div><b>Photo</b><small>Comprimés — 1 an</small></div></div><b>Comprimés nettoyants — 120</b><span>34,99&nbsp;€</span></div>
-    <div class="dcarte"><div class="vide vide--carre"><div><b>Photo</b><small>Étui de voyage</small></div></div><b>Étui de voyage</b><span>19,99&nbsp;€</span></div>
-    <div class="dcarte"><div class="vide vide--carre"><div><b>Photo</b><small>Le duo</small></div></div><b>Le duo — 2 appareils</b><span>159,99&nbsp;€</span></div>
-    <div class="dcarte"><div class="vide vide--carre"><div><b>Photo</b><small>Brosse dédiée</small></div></div><b>Brosse dédiée</b><span>9,99&nbsp;€</span></div>
+<!-- ═══ A — ACTION : la clôture. Dernière section avant le pied. ═══ -->
+<section class="sec" style="background:var(--creme)" id="offres"><div class="wrap centre">
+  <h2 class="h2">Laquelle prendre&nbsp;?</h2>
+  <p class="lg" style="margin-top:12px;max-width:56ch;margin-inline:auto">Le même appareil dans les trois cas.
+    Ce qui change, c'est ce qu'il y a dans la boîte.</p>
+  <div class="offres3">
+    <div class="ocarte">
+      <span class="otag">L'appareil</span>
+      <p class="onom">Dentina</p>
+      <p class="oprix">89,99&nbsp;€</p>
+      <p class="odet">L'appareil, le câble USB-C, 10 comprimés pour commencer, le guide, la garantie 2 ans.</p>
+      <a class="btn btn--bloc btn--ligne" href="#">Choisir</a>
+    </div>
+    <div class="ocarte ocarte--star">
+      <span class="otag">Le plus pris</span>
+      <p class="onom">Dentina + l'année</p>
+      <p class="oprix">119,99&nbsp;€</p>
+      <p class="odet">Tout ce qui précède, plus <b>120 comprimés</b> — douze mois d'avance.
+        Au prix public des autres marques, ces comprimés valent 51,96&nbsp;€.</p>
+      <a class="btn btn--bloc" href="#">Choisir</a>
+    </div>
+    <div class="ocarte">
+      <span class="otag">À deux</span>
+      <p class="onom">Le duo</p>
+      <p class="oprix">159,99&nbsp;€</p>
+      <p class="odet">Deux appareils complets. Pour un couple, ou pour équiper un adolescent en même temps que soi.</p>
+      <a class="btn btn--bloc btn--ligne" href="#">Choisir</a>
+    </div>
   </div>
+  <p class="lg" style="margin-top:20px">Aucun prix barré. L'économie de l'offre d'un an se vérifie au prix
+    public des comprimés vendus par les autres marques.</p>
 </div></section>
 
 <footer class="pied"><div class="wrap">

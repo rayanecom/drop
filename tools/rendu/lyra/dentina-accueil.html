@@ -289,6 +289,25 @@ a{color:inherit}
 .vide--169{aspect-ratio:16/10;min-height:0}
 @media(min-width:900px){.cmgrid{grid-template-columns:1fr 1fr;align-items:start;gap:40px}}
 
+/* clôture d'offre — remplace « À découvrir aussi » sur une boutique monoproduit */
+.offres3{display:grid;gap:14px;margin-top:28px;text-align:left}
+@media(min-width:880px){.offres3{grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}}
+.ocarte{background:var(--fond);border:1px solid var(--filet);border-radius:var(--r);padding:24px;display:flex;flex-direction:column}
+.ocarte--star{border:2px solid var(--marine)}
+.otag{font:700 11px/1.2 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--marine)}
+.onom{font:600 20px/1.25 var(--sans);margin-top:10px}
+.oprix{font:700 30px/1 var(--sans);letter-spacing:-.02em;margin-top:10px}
+.odet{font-size:16px;color:var(--gris);margin-top:10px;flex:1}
+.ocarte .btn{margin-top:18px}
+.btn--ligne{background:transparent;color:var(--encre);border:1px solid var(--encre)}
+
+/* bump de commande */
+.bump{display:flex;gap:12px;align-items:flex-start;border:1px dashed var(--marine);border-radius:10px;
+  padding:16px;margin-top:20px;background:#F3F8F7;cursor:pointer}
+.bump input{width:22px;height:22px;flex:0 0 auto;margin-top:2px;accent-color:var(--marine)}
+.bump b{display:block;font:600 16px/1.4 var(--sans)}
+.bump small{display:block;font-size:15px;line-height:1.5;color:var(--gris);margin-top:6px}
+
 </style>
 </head><body>
 
