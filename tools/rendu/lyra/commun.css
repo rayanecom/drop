@@ -1,0 +1,196 @@
+/* DENTINA — structure calquée sur Lyra, identité et contenus propres */
+@import url("../fonts/figtree.css");
+:root{
+  --marine:#0E4A52; --encre:#14201F; --gris:#5C6664; --fond:#FFFFFF;
+  --creme:#F6F3EE; --sombre:#101A1C; --filet:#E4DFD6;
+  --valide-fond:#E8F1EC; --valide:#1B6B45;
+  --sans:'Figtree',system-ui,-apple-system,sans-serif;
+  --r:14px; --marge:16px; --max:1200px;
+}
+@media(min-width:900px){:root{--marge:32px}}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--fond);color:var(--encre);font:400 17px/1.6 var(--sans);overflow-x:hidden}
+img{max-width:100%;height:auto;display:block}
+h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.02em;line-height:1.15}
+p{margin:0}
+a{color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--marge)}
+.h1{font-size:32px}.h2{font-size:26px}.h3{font-size:19px}
+@media(min-width:900px){.h1{font-size:48px}.h2{font-size:38px}.h3{font-size:20px}}
+.surt{font:600 11px/1.2 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--gris)}
+.lg{font-size:16px;color:var(--gris)}
+.centre{text-align:center}
+.sec{padding-block:48px}
+@media(min-width:900px){.sec{padding-block:72px}}
+
+/* annonce + header */
+.annonce{background:var(--marine);color:#fff;text-align:center;font:500 13px/1.4 var(--sans);padding:9px 16px}
+.tete{border-bottom:1px solid var(--filet);position:sticky;top:0;background:var(--fond);z-index:20}
+.tete__in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.logo{font:700 19px/1 var(--sans);letter-spacing:.14em;color:var(--marine)}
+.nav{display:none;gap:26px;font:500 15px/1 var(--sans)}
+@media(min-width:1000px){.nav{display:flex;align-items:center}}
+.nav a{padding-block:15px}
+.nav a{text-decoration:none}.nav a.on{color:var(--marine);font-weight:600}
+.icones{display:flex;gap:16px;color:var(--gris)}
+
+/* boutons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--marine);color:#fff;border:0;border-radius:999px;
+  font:600 15px/1 var(--sans);padding:16px 26px;min-height:52px;text-decoration:none;cursor:pointer}
+.btn--bloc{width:100%;border-radius:10px}
+.btn--clair{background:#fff;color:var(--encre)}
+.fleche{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.22);
+  display:grid;place-items:center;font-size:12px}
+
+/* pastille avis */
+.pastille{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--filet);
+  border-radius:999px;padding:6px 14px;font:600 12px/1.2 var(--sans);color:var(--encre)}
+.etoiles{color:#C8A24A;letter-spacing:1px;font-size:12px}
+
+/* heros */
+.heros{position:relative;background:var(--creme);overflow:hidden}
+.heros__grid{display:grid;gap:20px;padding-block:36px}
+@media(min-width:900px){.heros__grid{grid-template-columns:1fr 1fr;align-items:center;gap:40px;padding-block:56px;min-height:460px}}
+.heros__img{border-radius:var(--r);aspect-ratio:4/3;object-fit:cover;width:100%}
+.heros h1{margin-top:14px}
+.heros .btn{margin-top:22px}
+.videocard{margin-top:20px;background:#fff;border:1px solid var(--filet);border-radius:12px;padding:10px;
+  display:flex;gap:10px;align-items:center;max-width:320px}
+.videocard img{width:84px;height:56px;object-fit:cover;border-radius:8px;flex:0 0 auto}
+.videocard span{font:600 13px/1.3 var(--sans)}
+
+/* cartes reassurance 4 */
+.r4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(min-width:900px){.r4{grid-template-columns:repeat(4,1fr);gap:16px}}
+.rcarte{border:1px solid var(--filet);border-radius:var(--r);background:var(--fond);padding:20px 16px;text-align:center}
+.rcarte .ico{width:34px;height:34px;margin:0 auto 12px;color:var(--marine)}
+.rcarte b{display:block;font:600 15px/1.3 var(--sans)}
+
+/* section sombre */
+.sombre{background:var(--sombre);color:#fff;padding-block:56px}
+.sombre .surt{color:rgba(255,255,255,.6)}
+.sombre h2{margin:14px 0 22px}
+.s3{display:grid;gap:14px;margin-top:34px}
+@media(min-width:820px){.s3{grid-template-columns:repeat(3,1fr);gap:18px}}
+.scarte{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:22px}
+.scarte b{display:block;font:600 16px/1.3 var(--sans);margin:12px 0 8px}
+.scarte p{font-size:14px;line-height:1.55;color:rgba(255,255,255,.72)}
+
+/* marquee */
+.marquee{border-block:1px solid var(--filet);padding:14px 0;overflow:hidden;white-space:nowrap}
+.marquee span{font:500 16px/1 var(--sans);color:var(--encre);padding-inline:14px}
+
+/* bloc produit / achat */
+.achat{display:grid;gap:24px}
+@media(min-width:900px){.achat{grid-template-columns:1fr 1fr;gap:48px;align-items:start}}
+.gal__grande{border-radius:var(--r);aspect-ratio:1/1;object-fit:cover;width:100%;background:var(--creme)}
+.gal__min{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:8px}
+.gal__min img{border-radius:8px;aspect-ratio:1/1;object-fit:cover;background:var(--creme)}
+.prix{display:flex;align-items:baseline;gap:12px;margin-top:12px}
+.prix b{font:700 30px/1 var(--sans);letter-spacing:-.02em}
+.puces{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:11px}
+.puces li{display:flex;gap:10px;align-items:flex-start;font-size:16px}
+.puces svg{flex:0 0 auto;margin-top:3px;color:var(--marine)}
+.achat .btn--bloc{margin-top:22px}
+.avis-mis{border:1px solid var(--filet);border-radius:var(--r);padding:16px;margin-top:18px;background:var(--fond)}
+.avis-mis p{font-size:16px;margin-top:8px}
+.avis-qui{display:flex;align-items:center;gap:10px;margin-top:12px;font:600 13px/1.2 var(--sans)}
+.avatar{width:30px;height:30px;border-radius:50%;background:var(--creme);border:1px solid var(--filet)}
+.bandeau-g{display:flex;gap:12px;align-items:center;background:var(--valide-fond);border-radius:10px;
+  padding:14px 16px;margin-top:14px;font:600 14px/1.35 var(--sans);color:var(--valide)}
+.bandeau-g small{display:block;font-weight:400;color:var(--gris);margin-top:2px}
+
+/* accordeon */
+.acc{margin-top:18px;border-top:1px solid var(--filet)}
+.acc details{border-bottom:1px solid var(--filet)}
+.acc summary{padding:16px 0;font:500 16px/1.4 var(--sans);cursor:pointer;list-style:none;
+  display:flex;justify-content:space-between;gap:14px;align-items:center;min-height:52px}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::after{content:"+";color:var(--gris);font-size:20px;flex:0 0 auto}
+.acc details[open] summary::after{content:"–"}
+.acc .rep{padding:0 0 18px;font-size:16px;color:var(--gris)}
+
+/* avis clients */
+.avis4{display:grid;gap:14px;margin-top:28px}
+@media(min-width:760px){.avis4{grid-template-columns:repeat(4,1fr);gap:16px}}
+.acarte{border:1px solid var(--filet);border-radius:var(--r);overflow:hidden;background:var(--creme)}
+.acarte img{aspect-ratio:1/1;object-fit:cover;width:100%}
+.acarte__txt{padding:16px}
+.acarte__txt b{display:block;font:600 13px/1.3 var(--sans);margin:8px 0 6px}
+.acarte__txt p{font-size:13px;line-height:1.5;color:var(--gris)}
+.verif{display:inline-flex;align-items:center;gap:5px;font:600 11px/1 var(--sans);color:var(--gris)}
+
+/* reassurance basse 3 */
+.r3{display:grid;gap:12px}
+@media(min-width:820px){.r3{grid-template-columns:repeat(3,1fr);gap:16px}}
+.r3 .rcarte{display:flex;gap:14px;text-align:left;align-items:flex-start;padding:18px}
+.r3 .ico{margin:0;flex:0 0 auto;width:28px;height:28px}
+.r3 small{display:block;color:var(--gris);font-size:13px;line-height:1.5;margin-top:4px}
+
+/* etapes 4 */
+.et4{display:grid;gap:14px;margin-top:30px}
+@media(min-width:760px){.et4{grid-template-columns:1fr 1fr;gap:18px}}
+.etc{background:var(--creme);border-radius:var(--r);padding:24px}
+.etc b{display:block;font:600 17px/1.3 var(--sans);margin-bottom:8px}
+.etc p{font-size:16px;color:var(--gris)}
+
+/* comment ca marche : 3 videos */
+.v3{display:grid;gap:14px;margin-top:28px}
+@media(min-width:820px){.v3{grid-template-columns:repeat(3,1fr);gap:18px}}
+.vcarte img{border-radius:var(--r);aspect-ratio:16/10;object-fit:cover;width:100%;background:var(--sombre)}
+.vcarte b{display:block;font:600 16px/1.3 var(--sans);margin:14px 0 6px}
+.vcarte p{font-size:14px;color:var(--gris);line-height:1.55}
+.valide{display:flex;gap:12px;align-items:flex-start;background:var(--valide-fond);border-radius:10px;
+  padding:16px;margin-top:22px;font-size:14px;line-height:1.5;color:var(--valide)}
+
+/* citations pro */
+.pro3{display:grid;gap:14px;margin-top:28px}
+@media(min-width:820px){.pro3{grid-template-columns:repeat(3,1fr);gap:18px}}
+.pcarte{background:var(--creme);border-radius:var(--r);padding:22px}
+.pcarte p{font-size:16px;line-height:1.6}
+.pcarte b{display:block;margin-top:14px;font:600 14px/1.3 var(--sans)}
+.pcarte small{color:var(--gris);font-size:13px}
+
+/* liste avis longue */
+.avisliste{background:var(--creme);padding-block:52px}
+.al{max-width:760px;margin:26px auto 0;display:grid;gap:0}
+.al article{border-bottom:1px solid var(--filet);padding:22px 0}
+.al b{display:block;font:600 16px/1.35 var(--sans);margin:8px 0 4px}
+.al p{font-size:16px;color:var(--gris)}
+.pagi{display:flex;gap:8px;justify-content:center;margin-top:26px;font:500 14px/1 var(--sans);color:var(--gris)}
+.pagi span{min-width:38px;min-height:38px;display:grid;place-items:center;border:1px solid var(--filet);border-radius:8px;background:var(--fond)}
+.pagi span.on{background:var(--marine);color:#fff;border-color:var(--marine)}
+
+/* a decouvrir */
+.dec{display:grid;gap:16px;margin-top:26px;grid-template-columns:1fr 1fr}
+@media(min-width:820px){.dec{grid-template-columns:repeat(4,1fr)}}
+.dcarte img{border-radius:var(--r);aspect-ratio:1/1;object-fit:cover;width:100%;background:var(--creme)}
+.dcarte b{display:block;font:600 15px/1.35 var(--sans);margin-top:12px}
+.dcarte span{font-size:16px;color:var(--gris)}
+
+/* footer */
+.pied{background:var(--marine);color:#fff;padding-block:44px;text-align:center}
+.pied a{display:block;color:rgba(255,255,255,.86);text-decoration:none;font-size:15px;padding:7px 0;min-height:44px;line-height:30px}
+.pied .surt{color:rgba(255,255,255,.62);margin-bottom:10px}
+.pied__bas{border-top:1px solid rgba(255,255,255,.16);margin-top:24px;padding-top:20px;
+  display:flex;flex-direction:column;gap:14px;align-items:center;font-size:14px;color:rgba(255,255,255,.72)}
+@media(min-width:820px){.pied__bas{flex-direction:row;justify-content:space-between}}
+.paiements{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.paiements i{width:34px;height:22px;border-radius:4px;background:rgba(255,255,255,.9);display:block}
+
+/* marqueur honnete */
+.apr{display:inline-block;background:#FBF0D9;color:#8A5A00;padding:2px 7px;border-radius:4px;
+  font:600 11px/1.5 var(--sans);letter-spacing:.05em;text-transform:uppercase}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* EMPLACEMENTS À REMPLIR — visibles, jamais livrés en l'état */
+.vide{border:2px dashed #C9BFA9;border-radius:var(--r);background:repeating-linear-gradient(45deg,#FBF7F0,#FBF7F0 10px,#F5EFE4 10px,#F5EFE4 20px);
+  display:grid;place-items:center;text-align:center;padding:20px;min-height:120px}
+.vide b{display:block;font:700 12px/1.4 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:#8A5A00}
+.vide small{display:block;font:400 12px/1.5 var(--sans);color:#8A7A5A;margin-top:6px;max-width:34ch}
+.vide--carre{aspect-ratio:1/1;min-height:0}
+.vide--43{aspect-ratio:4/3;min-height:0}
+.vide--169{aspect-ratio:16/10;min-height:0}
+@media(min-width:900px){.cmgrid{grid-template-columns:1fr 1fr;align-items:start;gap:40px}}
