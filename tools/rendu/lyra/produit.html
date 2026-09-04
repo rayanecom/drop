@@ -18,11 +18,11 @@
   <div>
     <div class="vide vide--carre"><div><b>Photo produit 1</b><small>L'appareil ouvert, la gouttière au fond de la cuve. Fond neutre, carré.</small></div></div>
     <div class="gal__min">
-      <div class="vide vide--carre" style="padding:6px"><b style="font-size:9px">2</b></div>
-      <div class="vide vide--carre" style="padding:6px"><b style="font-size:9px">3</b></div>
-      <div class="vide vide--carre" style="padding:6px"><b style="font-size:9px">4</b></div>
-      <div class="vide vide--carre" style="padding:6px"><b style="font-size:9px">5</b></div>
-      <div class="vide vide--carre" style="padding:6px"><b style="font-size:9px">6</b></div>
+      <div class="vide vide--carre" style="padding:6px"><b style="font-size:12px">2</b></div>
+      <div class="vide vide--carre" style="padding:6px"><b style="font-size:12px">3</b></div>
+      <div class="vide vide--carre" style="padding:6px"><b style="font-size:12px">4</b></div>
+      <div class="vide vide--carre" style="padding:6px"><b style="font-size:12px">5</b></div>
+      <div class="vide vide--carre" style="padding:6px"><b style="font-size:12px">6</b></div>
     </div>
   </div>
   <div>
@@ -186,4 +186,31 @@
     <span class="paiements"><i></i><i></i><i></i><i></i><i></i><i></i></span>
   </div>
 </div></footer>
+
+<!-- Barre d'achat collante — mobile uniquement -->
+<div class="barre" id="barre" aria-hidden="true">
+  <span class="barre__prix">89,99&nbsp;€<small>livraison offerte</small></span>
+  <a class="btn" href="#">Ajouter au panier</a>
+</div>
+<script>
+(function(){
+  var principal = document.querySelector('.achat .btn--bloc');
+  var barre = document.getElementById('barre');
+  if (!principal || !barre) return;
+  document.body.classList.add('a-barre');
+  var attente = false;
+  function maj(){
+    attente = false;
+    // la barre apparaît dès que le bouton principal est sorti par le haut
+    var montrer = principal.getBoundingClientRect().bottom < 0;
+    barre.classList.toggle('on', montrer);
+    barre.setAttribute('aria-hidden', montrer ? 'false' : 'true');
+  }
+  function planifier(){ if (!attente) { attente = true; requestAnimationFrame(maj); } }
+  addEventListener('scroll', planifier, {passive:true});
+  addEventListener('resize', planifier);
+  addEventListener('orientationchange', planifier);
+  maj();
+})();
+</script>
 </body></html>
