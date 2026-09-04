@@ -291,7 +291,7 @@ a{color:inherit}
 
 /* clôture d'offre — remplace « À découvrir aussi » sur une boutique monoproduit */
 .offres3{display:grid;gap:14px;margin-top:28px;text-align:left}
-@media(min-width:880px){.offres3{grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}}
+@media(min-width:880px){.offres3{grid-template-columns:repeat(2,1fr);gap:18px;align-items:stretch;max-width:820px;margin-inline:auto}}
 .ocarte{background:var(--fond);border:1px solid var(--filet);border-radius:var(--r);padding:24px;display:flex;flex-direction:column}
 .ocarte--star{border:2px solid var(--marine)}
 .otag{font:700 11px/1.2 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--marine)}
@@ -367,7 +367,7 @@ a{color:inherit}
       <details><summary>Livraison et retours</summary><p class="rep">Expédition depuis la France, délai réel affiché au panier. 30 jours pour changer d'avis, retour pris en charge, remboursement intégral.</p></details>
       <details><summary>Comment ça fonctionne</summary><p class="rep">Un transducteur fait vibrer l'eau à très haute fréquence. Les micro-bulles ainsi formées atteignent les reliefs où les poils d'une brosse n'entrent pas, et décollent les dépôts mécaniquement.</p></details>
       <details><summary>Caractéristiques techniques</summary><p class="rep"><span class="apr">À confirmer par le fournisseur</span> — fréquence, capacité utile de la cuve, dimensions internes exactes, autonomie, matériau de cuve. Publiées ici, chiffre par chiffre.</p></details>
-      <details><summary>Ce qui est inclus</summary><p class="rep">L'appareil, le câble USB-C, 10 comprimés pour commencer, le guide en français, la garantie 2 ans.</p></details>
+      <details><summary>Ce qui est inclus</summary><p class="rep">L'appareil, le câble USB-C, le guide en français et la garantie 2 ans. Rien d'autre à acheter&nbsp;: il fonctionne à l'eau du robinet.</p></details>
     </div>
   </div>
 </div></section>
@@ -427,7 +427,7 @@ a{color:inherit}
     <h2 class="h2">Des questions&nbsp;?<br>Nous avons les réponses.</h2>
     <div class="acc">
       <details><summary>Dois-je continuer à brosser ma gouttière&nbsp;?</summary><p class="rep">Oui. Les recommandations professionnelles conseillent un brossage quotidien avec une brosse dédiée. L'ultrason ne le remplace pas — il atteint ce que la brosse n'atteint pas.</p></details>
-      <details><summary>Ai-je besoin des comprimés&nbsp;?</summary><p class="rep">Non pour l'entretien quotidien, où l'eau suffit. Ils servent au nettoyage en profondeur et sur les dépôts anciens. Dix sont fournis pour commencer.</p></details>
+      <details><summary>Faut-il acheter un produit en plus&nbsp;?</summary><p class="rep">Non. De l'eau du robinet suffit, et il n'y a aucune recharge à racheter. C'est le seul coût du produit&nbsp;: celui de l'appareil.</p></details>
       <details><summary>Est-ce que ça enlève les taches installées&nbsp;?</summary><p class="rep">Cela dépend de leur ancienneté. Plusieurs cycles sont parfois nécessaires, et certaines marques ne partent pas. Nous ne promettons pas un appareil neuf.</p></details>
       <details><summary>Mon dentier complet rentre-t-il dedans&nbsp;?</summary><p class="rep"><span class="apr">Dimensions à publier</span> — nous donnerons les cotes internes exactes plutôt qu'un « compatible avec tous les dentiers » que personne ne peut vérifier.</p></details>
       <details><summary>Est-ce bruyant&nbsp;?</summary><p class="rep"><span class="apr">Niveau à mesurer</span> — un appareil à ultrasons émet un bourdonnement aigu. Annoncer le silence serait faux ; nous publierons le relevé.</p></details>
@@ -460,34 +460,27 @@ a{color:inherit}
 <!-- ═══ A — ACTION : la clôture. Dernière section avant le pied. ═══ -->
 <section class="sec" style="background:var(--creme)" id="offres"><div class="wrap centre">
   <h2 class="h2">Laquelle prendre&nbsp;?</h2>
-  <p class="lg" style="margin-top:12px;max-width:56ch;margin-inline:auto">Le même appareil dans les trois cas.
-    Ce qui change, c'est ce qu'il y a dans la boîte.</p>
+  <p class="lg" style="margin-top:12px;max-width:56ch;margin-inline:auto">Un seul appareil, un seul prix. Ce qui change, c'est le nombre.</p>
   <div class="offres3">
-    <div class="ocarte">
-      <span class="otag">L'appareil</span>
-      <p class="onom">Dentina</p>
-      <p class="oprix">89,99&nbsp;€</p>
-      <p class="odet">L'appareil, le câble USB-C, 10 comprimés pour commencer, le guide, la garantie 2 ans.</p>
-      <a class="btn btn--bloc btn--ligne" href="#">Choisir</a>
-    </div>
     <div class="ocarte ocarte--star">
       <span class="otag">Le plus pris</span>
-      <p class="onom">Dentina + l'année</p>
-      <p class="oprix">119,99&nbsp;€</p>
-      <p class="odet">Tout ce qui précède, plus <b>120 comprimés</b> — douze mois d'avance.
-        Au prix public des autres marques, ces comprimés valent 51,96&nbsp;€.</p>
+      <p class="onom">Dentina</p>
+      <p class="oprix">89,99&nbsp;€</p>
+      <p class="odet">L'appareil, le câble USB-C, le guide en français, la garantie 2 ans.
+        Il fonctionne à l'eau du robinet&nbsp;: <b>rien à racheter ensuite</b>.</p>
       <a class="btn btn--bloc" href="#">Choisir</a>
     </div>
     <div class="ocarte">
       <span class="otag">À deux</span>
       <p class="onom">Le duo</p>
       <p class="oprix">159,99&nbsp;€</p>
-      <p class="odet">Deux appareils complets. Pour un couple, ou pour équiper un adolescent en même temps que soi.</p>
+      <p class="odet">Deux appareils complets, soit <b>19,99&nbsp;€ d'économie</b>. Pour un couple,
+        ou pour équiper un adolescent en même temps que soi.</p>
       <a class="btn btn--bloc btn--ligne" href="#">Choisir</a>
     </div>
   </div>
-  <p class="lg" style="margin-top:20px">Aucun prix barré. L'économie de l'offre d'un an se vérifie au prix
-    public des comprimés vendus par les autres marques.</p>
+  <p class="lg" style="margin-top:20px">Aucun prix barré, aucune fausse promotion. L'économie du duo est simplement
+    la différence entre 159,99&nbsp;€ et deux fois 89,99&nbsp;€.</p>
 </div></section>
 
 <footer class="pied"><div class="wrap">
