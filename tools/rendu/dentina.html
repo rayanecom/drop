@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dentina — soin des appareils dentaires</title>
+<link rel="stylesheet" href="./fonts/polices.css">
+<style>
+:root{
+  --papier:#F6F3EE; --encre:#14201F; --eau:#0E5C55; --gris:#5C6664; --filet:#DCD6CC;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Archivo',system-ui,-apple-system,sans-serif;
+  --marge:20px; --max:1160px; --mesure:34rem;
+}
+@media (min-width:900px){ :root{ --marge:64px } }
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--papier);color:var(--encre);
+  font:400 17px/1.6 var(--sans);overflow-x:hidden}
+@media (min-width:900px){ body{font-size:18px} }
+img{max-width:100%;height:auto;display:block}
+h1,h2,h3{margin:0;font-family:var(--serif);font-weight:400}
+p{margin:0}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--marge)}
+.mesure{max-width:var(--mesure)}
+
+/* rythme : dense 48px, aere 112/160 — jamais deux aerees de suite */
+.sec{padding-block:48px}
+.sec--air{padding-block:112px}
+@media (min-width:900px){ .sec--air{padding-block:160px} }
+.sec--inv{background:var(--eau);color:var(--papier)}
+.sec--inv .surt,.sec--inv .lg{color:rgba(246,243,238,.78)}
+.filet{border:0;border-top:1px solid var(--filet);margin:0}
+
+/* typo */
+.surt{font:600 12px/1.2 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--gris);margin:0 0 20px}
+.dxl{font-size:44px;line-height:1.02;letter-spacing:-.02em}
+.dl{font-size:32px;line-height:1.08;letter-spacing:-.015em}
+.h2{font-size:24px;line-height:1.15;letter-spacing:-.01em}
+@media (min-width:900px){ .dxl{font-size:88px} .dl{font-size:56px} .h2{font-size:36px} }
+.lg{font:400 14px/1.5 var(--sans);color:var(--gris)}
+.plus{margin-top:20px}
+em{font-style:normal;color:var(--eau);box-shadow:inset 0 -2px 0 var(--eau)}
+.sec--inv em{color:inherit;box-shadow:inset 0 -2px 0 currentColor}
+
+/* bouton — rayon 0, blanc sur eau = 7,83:1 */
+.cta{display:inline-block;width:100%;max-width:420px;border:0;border-radius:0;
+  background:var(--eau);color:#fff;font:600 16px/1.2 var(--sans);letter-spacing:.02em;
+  padding:20px 24px;min-height:56px;text-align:center;text-decoration:none;cursor:pointer}
+.cta--ghost{background:transparent;color:var(--encre);border:1px solid var(--encre)}
+.sous-cta{margin-top:12px;font:400 14px/1.5 var(--sans);color:var(--gris)}
+
+/* heros — asymetrique, texte a cote de l'image, jamais dessus */
+.heros{display:grid;gap:32px;align-items:center}
+@media (min-width:900px){ .heros{grid-template-columns:1fr 1fr;gap:64px} }
+.heros__img{aspect-ratio:4/5;width:100%;object-fit:cover}
+@media (min-width:900px){ .heros__img{aspect-ratio:3/2} }
+
+/* demo */
+.demo{display:grid;gap:16px;margin-top:32px}
+@media (min-width:620px){ .demo{grid-template-columns:1fr 1fr;gap:20px} }
+.demo figure{margin:0}
+.demo img{aspect-ratio:4/5;object-fit:cover;width:100%}
+.demo figcaption{margin-top:10px;font:500 12px/1.4 var(--sans);letter-spacing:.08em;
+  text-transform:uppercase;color:var(--gris)}
+
+/* chaine du tiroir */
+.chaine{list-style:none;margin:32px 0 0;padding:0;counter-reset:c}
+.chaine li{counter-increment:c;padding:18px 0 18px 44px;position:relative;
+  border-top:1px solid var(--filet);max-width:var(--mesure)}
+.chaine li:last-child{border-bottom:1px solid var(--filet)}
+.chaine li::before{content:counter(c);position:absolute;left:0;top:18px;
+  font:600 12px/1.6 var(--sans);color:var(--gris);letter-spacing:.08em}
+.chaine b{font-weight:600}
+
+/* etapes */
+.etapes{list-style:none;margin:32px 0 0;padding:0;display:grid;gap:24px}
+@media (min-width:760px){ .etapes{grid-template-columns:repeat(3,1fr);gap:32px} }
+.etapes h3{font-family:var(--serif);font-size:28px;line-height:1.1}
+.etapes p{margin-top:8px;font-size:16px;color:var(--gris)}
+
+/* listes factuelles */
+.faits{list-style:none;margin:24px 0 0;padding:0;max-width:var(--mesure)}
+.faits li{padding:14px 0;border-top:1px solid var(--filet);display:flex;gap:16px;
+  justify-content:space-between;align-items:baseline;font-size:16px}
+.faits li:last-child{border-bottom:1px solid var(--filet)}
+.faits span:last-child{color:var(--gris);text-align:right;flex:0 0 auto;max-width:52%}
+.sec--inv .faits li{border-color:rgba(246,243,238,.28)}
+.sec--inv .faits span:last-child{color:rgba(246,243,238,.78)}
+
+/* offres */
+.offres{list-style:none;margin:32px 0 0;padding:0;display:grid;gap:0}
+.offre{border:1px solid var(--filet);border-bottom:0;padding:24px}
+.offre:last-child{border-bottom:1px solid var(--filet)}
+.offre--star{border:2px solid var(--eau);border-bottom:2px solid var(--eau);position:relative}
+.offre--star + .offre{border-top:0}
+.offre__tag{font:600 11px/1.2 var(--sans);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--eau);display:block;margin-bottom:10px}
+.offre__nom{font-family:var(--serif);font-size:26px;line-height:1.1}
+.offre__prix{font-family:var(--serif);font-size:34px;line-height:1;margin-top:12px}
+.offre__det{margin-top:10px;font-size:16px;color:var(--gris)}
+.offre .cta{margin-top:18px}
+@media (min-width:900px){
+  .offres{grid-template-columns:repeat(3,1fr);gap:0}
+  .offre{border-bottom:1px solid var(--filet);border-right:0}
+  .offre:last-child{border-right:1px solid var(--filet)}
+  .offre--star + .offre{border-top:1px solid var(--filet)}
+}
+
+/* faq */
+.faq{margin-top:24px;max-width:var(--mesure)}
+.faq details{border-top:1px solid var(--filet)}
+.faq details:last-of-type{border-bottom:1px solid var(--filet)}
+.faq summary{padding:18px 0;font:500 17px/1.4 var(--sans);cursor:pointer;list-style:none;
+  display:flex;justify-content:space-between;gap:16px;align-items:baseline}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--gris);font-weight:400;flex:0 0 auto}
+.faq details[open] summary::after{content:"–"}
+.faq p{padding:0 0 18px;font-size:16px;color:var(--gris);max-width:none}
+
+/* marque */
+.marque{font-family:var(--serif);font-size:22px;letter-spacing:.06em;line-height:1}
+.marque small{display:block;font:600 11px/1.4 var(--sans);letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gris);margin-top:6px}
+.tete{padding-block:24px;border-bottom:1px solid var(--filet)}
+.pied{padding-block:40px;border-top:1px solid var(--filet);font-size:16px;color:var(--gris)}
+.apr{background:#EFE9E0;padding:2px 6px;font:600 11px/1.4 var(--sans);
+  letter-spacing:.06em;text-transform:uppercase;color:#8A5A00}
+
+@media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important} }
+</style>
+</head>
+<body>
+
+<header class="tete"><div class="wrap">
+  <p class="marque">DENTINA<small>Soin des appareils dentaires</small></p>
+</div></header>
+
+<!-- 1. HEROS — repond a : qu'est-ce que c'est ? -->
+<section class="sec sec--air"><div class="wrap heros">
+  <div>
+    <p class="surt">Gouttière · contention · bruxisme</p>
+    <h1 class="dxl">Elle est dans un tiroir, votre gouttière&nbsp;?</h1>
+    <p class="plus mesure">On n'arrête pas de la porter parce qu'on l'oublie. On arrête parce
+      qu'on n'a plus envie de la remettre en bouche. Dentina la rend nette en cinq minutes,
+      le soir, pendant que vous vous brossez les dents.</p>
+    <p class="plus"><a class="cta" href="#offres">Voir les offres — à partir de 89,99&nbsp;€</a></p>
+    <p class="sous-cta">Garantie 2 ans · 30 jours pour changer d'avis</p>
+  </div>
+  <img class="heros__img" alt="Une gouttière de contention posée dans la cuve, avant le cycle"
+    src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23e6e0d6'/%3E%3Ctext x='150' y='96' font-family='sans-serif' font-size='11' text-anchor='middle' fill='%235C6664'%3EPHOTO À PRODUIRE%3C/text%3E%3Ctext x='150' y='112' font-family='sans-serif' font-size='9' text-anchor='middle' fill='%235C6664'%3Egouttière dans la cuve — 3:2%3C/text%3E%3C/svg%3E">
+</div></section>
+
+<hr class="filet">
+
+<!-- 2. DEMONSTRATION — repond a : « ma gouttiere est propre, non ? » -->
+<section class="sec"><div class="wrap">
+  <p class="surt">La démonstration</p>
+  <h2 class="dl">Elle vous paraît propre.</h2>
+  <p class="plus mesure">Regardez l'eau après cinq minutes.</p>
+  <div class="demo">
+    <figure>
+      <img alt="Eau claire versée dans la cuve avant le cycle"
+        src="data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 200 250%27%3E%3Crect width=%27200%27 height=%27250%27 fill=%27%23dfe6e4%27/%3E%3Ctext x=%27100%27 y=%27122%27 font-family=%27sans-serif%27 font-size=%279%27 text-anchor=%27middle%27 fill=%27%235C6664%27%3EPHOTO À PRODUIRE%3C/text%3E%3Ctext x=%27100%27 y=%27136%27 font-family=%27sans-serif%27 font-size=%278%27 text-anchor=%27middle%27 fill=%27%235C6664%27%3Eeau claire — 4:5%3C/text%3E%3C/svg%3E">
+      <figcaption>Avant · eau du robinet</figcaption>
+    </figure>
+    <figure>
+      <img alt="La même eau, trouble, après le cycle de cinq minutes"
+        src="data:image/svg+xml;utf8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 200 250%27%3E%3Crect width=%27200%27 height=%27250%27 fill=%27%23c8c3b8%27/%3E%3Ctext x=%27100%27 y=%27122%27 font-family=%27sans-serif%27 font-size=%279%27 text-anchor=%27middle%27 fill=%27%23333%27%3EPHOTO À PRODUIRE%3C/text%3E%3Ctext x=%27100%27 y=%27136%27 font-family=%27sans-serif%27 font-size=%278%27 text-anchor=%27middle%27 fill=%27%23333%27%3Eeau trouble — 4:5%3C/text%3E%3C/svg%3E">
+      <figcaption>Après · cinq minutes</figcaption>
+    </figure>
+  </div>
+  <p class="lg plus mesure">Gouttière de contention portée chaque nuit, brossée tous les jours.
+    <span class="apr">Preuve à produire</span> — plan-séquence sans coupure, sur notre propre appareil.</p>
+</div></section>
+
+<hr class="filet">
+
+<!-- 3. LE TIROIR — repond a : pourquoi ca me concerne ? -->
+<section class="sec sec--air"><div class="wrap">
+  <p class="surt">Ce qui se passe vraiment</p>
+  <h2 class="dl mesure">Ce n'est pas de la négligence.</h2>
+  <p class="plus mesure">Personne ne remet volontairement dans sa bouche un objet qui sent.
+    L'abandon ne commence pas par un oubli — il commence par un dégoût.</p>
+  <ol class="chaine">
+    <li>La gouttière se voile, puis elle prend une odeur.</li>
+    <li>Le matin, <b>vous n'avez plus envie de la remettre</b>.</li>
+    <li>Un soir, vous la laissez sur le lavabo. Puis dans un tiroir.</li>
+    <li><b>Les dents recommencent à bouger.</b></li>
+  </ol>
+  <p class="plus mesure">C'est pour ça que l'entretien n'est pas une question d'hygiène.
+    <em>C'est ce qui décide si vous la portez encore dans six mois.</em></p>
+</div></section>
+
+<!-- 4. L'ENJEU — repond a : pourquoi maintenant ? -->
+<section class="sec sec--inv"><div class="wrap">
+  <p class="surt">L'enjeu</p>
+  <h2 class="dl mesure">L'orthodontie adulte n'est pas remboursée.</h2>
+  <ul class="faits">
+    <li><span>Après 16 ans, la Sécurité sociale n'intervient pas</span><span>Reste à charge : plusieurs milliers d'euros</span></li>
+    <li><span>Alignement conservé à dix ans</span><span>30 à 50 % des patients</span></li>
+    <li><span>Alignement conservé à vingt ans</span><span>environ 10 %</span></li>
+  </ul>
+  <p class="plus mesure">Dentina coûte <em>moins de 3 %</em> d'un traitement à 3 000 €.
+    Ce n'est pas un appareil de plus sur le lavabo : c'est ce qui fait que celui que vous
+    avez payé reste portable.</p>
+</div></section>
+
+<!-- 5. TROIS ETAPES — repond a : c'est complique ? -->
+<section class="sec"><div class="wrap">
+  <p class="surt">La routine</p>
+  <h2 class="dl">Cinq minutes, sans y penser.</h2>
+  <ol class="etapes">
+    <li><h3>Remplissez.</h3><p>De l'eau du robinet, jusqu'au trait.</p></li>
+    <li><h3>Posez.</h3><p>La gouttière au fond de la cuve.</p></li>
+    <li><h3>Appuyez.</h3><p>Le cycle s'arrête tout seul.</p></li>
+  </ol>
+</div></section>
+
+<hr class="filet">
+
+<!-- 6. PENSE POUR — repond a : ca va l'abimer ? mon appareil rentre ? -->
+<section class="sec"><div class="wrap">
+  <p class="surt">Ce qu'il nettoie</p>
+  <h2 class="dl mesure">Un seul objet. Pas dix.</h2>
+  <ul class="faits">
+    <li><span>Gouttière de contention</span><span>testé</span></li>
+    <li><span>Aligneurs transparents</span><span>testé</span></li>
+    <li><span>Gouttière de bruxisme</span><span>testé</span></li>
+    <li><span>Protège-dents de sport</span><span>testé</span></li>
+    <li><span>Dimensions internes de la cuve</span><span class="apr">à mesurer</span></li>
+  </ul>
+  <p class="plus mesure">Ni bijoux, ni lunettes, ni montres. Un appareil qui nettoie tout ne
+    nettoie rien de particulier — et c'est ce qui distingue un bac générique d'un produit
+    conçu pour un usage.</p>
+  <p class="plus mesure"><b>Vous continuez à brosser.</b> Les recommandations
+    professionnelles conseillent un brossage quotidien avec une brosse dédiée, et nous ne
+    dirons pas le contraire. L'ultrason va simplement <em>là où la brosse ne va pas</em> :
+    dans les reliefs.</p>
+</div></section>
+
+<hr class="filet">
+
+<!-- 7. GARANTIE — repond a : et si ca casse ? (peur n°1) -->
+<section class="sec sec--air"><div class="wrap">
+  <p class="surt">Si ça casse</p>
+  <h2 class="dl mesure">Garantie 2 ans. Sans conditions cachées.</h2>
+  <p class="plus mesure">Une garantie n'a de valeur que si elle est simple. La nôtre tient en
+    trois lignes, et il n'y en a pas de quatrième.</p>
+  <ul class="faits">
+    <li><span>Durée</span><span>2 ans sur l'appareil</span></li>
+    <li><span>Enregistrement du produit</span><span>aucun</span></li>
+    <li><span>Fenêtre pour faire la demande</span><span>aucune</span></li>
+    <li><span>Changer d'avis</span><span>30 jours, retour pris en charge</span></li>
+    <li><span>Support</span><span>en français</span></li>
+  </ul>
+</div></section>
+
+<!-- 8. L'OBJECTION AMAZON — la section que personne ne fait -->
+<section class="sec sec--inv"><div class="wrap">
+  <p class="surt">L'objection</p>
+  <h2 class="dl mesure">« J'en trouve à 30 € sur Amazon. »</h2>
+  <p class="plus mesure">C'est vrai. Nous n'allons pas prétendre le contraire, ni vous
+    expliquer que notre fréquence est meilleure — elle est la même que chez tout le monde,
+    y compris chez Invisalign.</p>
+  <p class="plus mesure">Avant d'en commander un, faites une chose : <em>allez lire les avis
+    une étoile</em> de ces modèles. Ils disent tous la même chose, et ce n'est jamais que
+    l'appareil nettoie mal. C'est qu'il s'arrête de fonctionner au bout de quelques semaines.</p>
+  <p class="plus mesure">Mais la vraie question n'est pas 30 € contre 89,99 €.
+    <b>C'est : combien avez-vous payé pour ces dents&nbsp;?</b></p>
+</div></section>
+
+<!-- 9. PREUVE -->
+<section class="sec"><div class="wrap">
+  <p class="surt">Ce qu'en disent les clients</p>
+  <h2 class="dl mesure">Nous n'avons pas encore d'avis.</h2>
+  <p class="plus mesure">Nous lançons. Plutôt que d'afficher « 4,8 sur 10 000 avis vérifiés »
+    en n'en ayant que soixante-douze, nous préférons le dire : cette section est vide, et elle
+    se remplira avec de vrais clients.</p>
+  <p class="lg plus mesure"><span class="apr">Preuve à produire</span> — trois avis
+    authentiques avec photos clients, dès les premières commandes. Aucun avis acheté, aucun
+    visage de banque d'images.</p>
+</div></section>
+
+<hr class="filet">
+
+<!-- 10. LES OFFRES -->
+<section class="sec sec--air" id="offres"><div class="wrap">
+  <p class="surt">Les offres</p>
+  <h2 class="dl">Laquelle prendre.</h2>
+  <ul class="offres">
+    <li class="offre">
+      <span class="offre__tag">L'appareil</span>
+      <p class="offre__nom">Dentina</p>
+      <p class="offre__prix">89,99&nbsp;€</p>
+      <p class="offre__det">L'appareil, le câble USB-C, 10 comprimés pour commencer,
+        le guide, la garantie 2 ans.</p>
+      <a class="cta cta--ghost" href="#">Choisir</a>
+    </li>
+    <li class="offre offre--star">
+      <span class="offre__tag">Le plus pris</span>
+      <p class="offre__nom">Dentina + l'année</p>
+      <p class="offre__prix">119,99&nbsp;€</p>
+      <p class="offre__det">Tout ce qui précède, plus <b>120 comprimés</b> — douze mois.
+        Au prix du marché, ces comprimés valent 51,96 €. Vous les payez 30 €.</p>
+      <a class="cta" href="#">Choisir</a>
+    </li>
+    <li class="offre">
+      <span class="offre__tag">À deux</span>
+      <p class="offre__nom">Le duo</p>
+      <p class="offre__prix">159,99&nbsp;€</p>
+      <p class="offre__det">Deux appareils complets. Pour un couple, ou pour équiper
+        un adolescent en même temps que soi.</p>
+      <a class="cta cta--ghost" href="#">Choisir</a>
+    </li>
+  </ul>
+  <p class="sous-cta">Aucun prix barré fictif. L'économie affichée sur l'année se vérifie
+    au prix public des comprimés vendus par les autres marques.</p>
+</div></section>
+
+<!-- 11. FAQ -->
+<section class="sec"><div class="wrap">
+  <p class="surt">Questions</p>
+  <h2 class="dl">Ce qu'on nous demande.</h2>
+  <div class="faq">
+    <details><summary>Est-ce que ça peut abîmer ma gouttière&nbsp;?</summary>
+      <p>Le cycle fonctionne à l'eau du robinet, sans chauffage actif. <span class="apr">Preuve à produire</span> — température relevée après trois cycles consécutifs, publiée ici.</p></details>
+    <details><summary>Dois-je continuer à la brosser&nbsp;?</summary>
+      <p>Oui. Les recommandations professionnelles conseillent un brossage quotidien avec une brosse dédiée. L'ultrason ne le remplace pas, il atteint ce que la brosse n'atteint pas.</p></details>
+    <details><summary>Ai-je besoin des comprimés&nbsp;?</summary>
+      <p>Non pour l'entretien quotidien, où l'eau suffit. Ils servent au nettoyage en profondeur et sur les dépôts anciens.</p></details>
+    <details><summary>Est-ce que ça enlève les taches installées&nbsp;?</summary>
+      <p>Cela dépend de leur ancienneté. Plusieurs cycles successifs sont parfois nécessaires, et certaines marques ne partent pas. Nous ne promettons pas un appareil neuf.</p></details>
+    <details><summary>Mon dentier rentre-t-il dedans&nbsp;?</summary>
+      <p><span class="apr">À confirmer</span> — nous publierons les dimensions internes exactes plutôt qu'une réponse vague. Une prothèse complète ne rentre pas dans tous les modèles du marché.</p></details>
+    <details><summary>Est-ce bruyant&nbsp;?</summary>
+      <p><span class="apr">À mesurer</span> — nous publierons le niveau relevé. Un appareil à ultrasons émet un bourdonnement aigu ; annoncer le silence serait faux.</p></details>
+    <details><summary>Est-ce que ça désinfecte&nbsp;?</summary>
+      <p>Non, et personne ne devrait vous l'affirmer sans essai normalisé sur l'appareil vendu. Dentina décolle mécaniquement les dépôts. C'est déjà ce que le brossage ne fait pas.</p></details>
+    <details><summary>Comment nettoie-t-on l'appareil lui-même&nbsp;?</summary>
+      <p>On vide la cuve après chaque cycle et on l'essuie. Une cuve laissée humide finit par sentir — c'est la panne d'usage la plus fréquente sur cette catégorie de produit.</p></details>
+  </div>
+</div></section>
+
+<footer class="pied"><div class="wrap">
+  <p class="marque">DENTINA<small>Soin des appareils dentaires</small></p>
+  <p class="plus">Dentina n'est pas un dispositif médical. L'appareil nettoie&nbsp;; il ne
+    traite, ne prévient et ne soigne rien.</p>
+</div></footer>
+
+</body></html>

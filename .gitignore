@@ -1,2 +1,10 @@
 __pycache__/
 *.pyc
+
+# Captures pleine page du banc de rendu (lourdes, régénérables)
+tools/rendu/dentina-*.png
+tools/rendu/m3*.png
+tools/rendu/m4*.png
+tools/rendu/d1280.png
+tools/rendu/fold-*.png
+node_modules/
