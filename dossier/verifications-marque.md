@@ -184,3 +184,91 @@ servent la même Big Idea.
 | Confirmation WHOIS de `veille.fr` | Port 43 fermé, RDAP bloqué | un clic chez un registrar |
 | 20 verbatims de porteurs de contention | Porte 4 de la méthode, toujours pas franchie | à faire |
 | Devis fournisseur ≤ 18,26 € rendu + déclaration CE | Alibaba / 1688 / CJ bloqués | tes deux agents en Chine |
+
+---
+
+## 6. Correction — le nom doit porter le signal dentaire
+
+> Ajouté après objection de l'utilisateur : « Veille, ça ne fait pas du tout dentaire. »
+> **L'objection est juste. Je m'étais interdit la racine « Denta- » pour ne pas marcher sur
+> Lyra, et j'ai sur-corrigé jusqu'à supprimer tout signal de catégorie.**
+
+### Pourquoi j'avais tort
+
+1. **Les trois acteurs du marché portent la catégorie dans leur nom** — Zima **Dental**,
+   **Denta**Clean, Sonic **Dental**. Trois sur trois. Ce n'est pas un hasard.
+2. **L'argument « Nike ne dit pas chaussure » ne s'applique pas ici.** Nike, Respire, Typology
+   vendent dans des catégories que l'acheteur connaît déjà. La nôtre, **il ne sait pas qu'elle
+   existe** : il ignore qu'un nettoyeur à ultrasons pour gouttières est un objet. Un nom
+   abstrait lui fait payer la découverte deux fois.
+3. **Le défaut que je n'avais pas vu du tout : « veille » est inrecherchable.** Veille
+   technologique, veille juridique, veille sanitaire, mise en veille. Quelqu'un qui voit une
+   pub et cherche la marque trois jours plus tard ne la retrouve pas. C'est un coût
+   d'acquisition permanent, et aucun design ne le corrige.
+
+### Le critère réel, qui remplace celui que j'avais posé
+
+Le nom doit être **assez unique pour tenir la première page de Google sur sa seule mention**,
+et porter — seul ou dans son verrou de marque — le territoire dentaire. Ce critère élimine
+Veille, mais aussi Nacre, Perle et Évident : tous des mots courants noyés dans les résultats.
+
+### Ce que j'ai testé après l'objection
+
+Quatre familles, 32 noms, disponibilité `.fr` vérifiée par DNS.
+
+**Écartés bien que libres, et pourquoi :**
+
+| Nom | Motif d'écartement |
+|---|---|
+| `strident.fr` | « Strident » = son perçant. Sur un produit dont **le bruit est une critique documentée** (avis Sonic Dental, TikTok Shop), c'est un désastre |
+| `perla.fr` | Conflit frontal avec **La Perla**, marque de grande notoriété |
+| `smilea.fr` · `dentae.fr` | Anglicisme + suffixe en -a : exactement les codes dropshipping que la stratégie interdit |
+| `ecrindent.fr` | Mot-valise bancal, imprononçable proprement |
+| `nacrine.fr` · `sourine.fr` | Suffixe -ine : registre pharmaceutique, éloigne du positionnement premium |
+| `buccia.fr` | « Buccia » = pelure en italien |
+| `veilledentaire.fr` et consorts | Domaines descriptifs : ça lit référencement, pas marque |
+
+**Pris, donc indisponibles :** nacre · dentine · émaille · alvéo · oralis · évident · ardent ·
+dentelle · perle.
+
+### Le nouveau nom recommandé : DENTINA
+
+`dentina.fr` — **libre**, vérifié par DNS.
+
+| Critère | Dentina | Veille |
+|---|---|---|
+| Signal dentaire | **« dent » en première syllabe** | aucun |
+| Recherchable | **oui — nom unique** | non, noyé |
+| Déposable | **inventé → distinctif.** La dentine est un tissu dentaire, pas une caractéristique d'un appareil de nettoyage : usage arbitraire | risque de descriptivité en classe 11 (mise en veille) + forte densité d'antériorités |
+| `.fr` | **libre** | libre |
+| Registre | légèrement pharmaceutique | premium |
+
+`FAIT`, WebSearch : **aucune marque « Dentina » identifiable** en dentaire. La recherche
+remonte Dentyne, Dentyl, Mentadent, Zendium — famille dense de marques en racine « dent- »,
+mais ce sont des dentifrices et des chewing-gums, **classes 3, 5 et 30 — pas la classe 11.**
+Signal faible, pas une clearance.
+
+**Le seul défaut réel : le registre est un peu pharmaceutique.** Il est corrigeable par le
+design — Zima Dental et Sonic Dental n'ont pas non plus des noms premium, et leur premium
+vient de la direction artistique. Le défaut de Veille, lui, n'était corrigeable par rien.
+
+### Verrou de marque, à ne jamais casser
+
+> **DENTINA** — soin des appareils dentaires
+
+Le nom ne paraît jamais seul sur un support d'acquisition. C'est exactement le mécanisme de
+Zima : « Zima » seul ne veut rien dire, « Zima Dental » dit tout.
+
+### Le repli : NACRIA
+
+`nacria.fr` — **libre**. Inventé à partir de **nacre** : la blancheur de la dent **et** ce
+qu'on garde dans un écrin. Registre nettement plus premium que Dentina, signal dentaire plus
+faible — compensé par le verrou « Nacria — soin des appareils dentaires ».
+
+À prendre si la recherche d'antériorité bloque Dentina, ou si le test de nom sur la cible
+fait ressortir le registre pharmaceutique comme un frein.
+
+### Statut de Veille
+
+**Rétrogradé.** `veille.fr` reste libre et coûte 10 € : à réserver quand même comme actif
+défensif si tu veux, mais **ce n'est plus le nom de la marque.**
