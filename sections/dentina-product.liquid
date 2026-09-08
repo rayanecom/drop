@@ -30,7 +30,7 @@
 {{ 'dentina-polish-v9.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'dentina-site.js' | asset_url }}" defer></script>
 
-<div class="dt-site dt-product" data-variant-id="{{ dentina_variant_id }}" data-product-url="{% if dentina_product != blank %}{{ dentina_product.url }}{% else %}{{ routes.all_products_collection_url }}{% endif %}" data-fallback-image="{{ 'dentina-review-approved-6.jpg' | asset_url }}">
+<div class="dt-site dt-product" data-variant-id="{{ dentina_variant_id }}" data-product-url="{% if dentina_product != blank %}{{ dentina_product.url }}{% else %}{{ routes.all_products_collection_url }}{% endif %}" data-fallback-image="{{ 'dentina-photo-unboxing-v3-mobile-v9.webp' | asset_url }}">
   <div class="dt-announcement"><span>Livraison offerte en France métropolitaine</span><i aria-hidden="true"></i><span>Garantie 2 ans</span></div>
 
   <header class="dt-header">
@@ -166,15 +166,12 @@
           <div class="dt-cycle-viewport">
             <article class="dt-cycle-slide is-active" id="dentina-cycle-panel-1-{{ section.id }}" role="tabpanel" aria-labelledby="dentina-cycle-tab-1-{{ section.id }}" data-dt-cycle-slide data-index="0" aria-hidden="false">
               <video muted playsinline preload="none" poster="{{ 'dentina-cycle-step-1-poster-v7.webp' | asset_url }}" data-dt-cycle-video aria-label="Étape 1 : la gouttière est immergée dans l’eau"><source src="{{ 'dentina-cycle-step-1-v7.mp4' | asset_url }}" type="video/mp4"></video>
-              <div class="dt-cycle-slide__caption"><span>01</span><div><strong>Immerger</strong><small>L’appareil est placé dans l’eau.</small></div></div>
             </article>
             <article class="dt-cycle-slide" id="dentina-cycle-panel-2-{{ section.id }}" role="tabpanel" aria-labelledby="dentina-cycle-tab-2-{{ section.id }}" data-dt-cycle-slide data-index="1" aria-hidden="true">
               <video muted playsinline preload="none" poster="{{ 'dentina-cycle-step-2-poster-v7.webp' | asset_url }}" data-dt-cycle-video aria-label="Étape 2 : les dépôts se détachent dans l’eau"><source src="{{ 'dentina-cycle-step-2-v7.mp4' | asset_url }}" type="video/mp4"></video>
-              <div class="dt-cycle-slide__caption"><span>02</span><div><strong>Décoller</strong><small>L’action atteint les reliefs immergés.</small></div></div>
             </article>
             <article class="dt-cycle-slide" id="dentina-cycle-panel-3-{{ section.id }}" role="tabpanel" aria-labelledby="dentina-cycle-tab-3-{{ section.id }}" data-dt-cycle-slide data-index="2" aria-hidden="true">
               <video muted playsinline preload="none" poster="{{ 'dentina-cycle-step-3-poster-v7.webp' | asset_url }}" data-dt-cycle-video aria-label="Étape 3 : gros plan sur l’action, retrait de la gouttière et comparaison finale"><source src="{{ 'dentina-cycle-step-3-v7.mp4' | asset_url }}" type="video/mp4"></video>
-              <div class="dt-cycle-slide__caption"><span>03</span><div><strong>Révéler</strong><small>Gros plan, retrait, puis comparaison.</small></div></div>
             </article>
             <button class="dt-cycle-arrow dt-cycle-arrow--prev" type="button" data-dt-cycle-prev aria-label="Voir l’étape précédente">‹</button>
             <button class="dt-cycle-arrow dt-cycle-arrow--next" type="button" data-dt-cycle-next aria-label="Voir l’étape suivante">›</button>
