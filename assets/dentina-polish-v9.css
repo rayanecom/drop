@@ -56,8 +56,15 @@
 .dt-product .dt-pdp-info h1 { font-size: clamp(28px, 2.5vw, 38px); line-height: 1.2; letter-spacing: -.035em; white-space: nowrap; overflow: visible; text-overflow: clip; }
 .dt-product .dt-pdp-info > p { color: var(--dt-muted); font-size: 16px; line-height: 1.6; }
 .dt-site .dt-check-list li { font-size: 15px; line-height: 1.55; }
-.dt-site .dt-bundle-badge { font-size: 12px; line-height: 1.4; padding: 7px 10px; border-radius: 6px; }
-.dt-site .dt-pdp-price-row { align-items: center; flex-wrap: wrap; gap: 10px 14px; }
+/* Le coupon de remise reste sur la ligne du prix, cale en haut a droite.
+   flex-wrap: nowrap l'empeche de retomber a la ligne ; sa taille reduite lui
+   donne la marge necessaire pour tenir a 320 px avec la police reelle. */
+.dt-site .dt-bundle-badge { font-size: 10px; line-height: 1; padding: 5px 9px; border-radius: 6px; }
+.dt-site .dt-pdp-price-row { align-items: flex-start; flex-wrap: nowrap; gap: 10px; }
+.dt-site .dt-pdp-price-row .dt-pdp-price { flex: 0 1 auto; min-width: 0; }
+/* margin-top cale le coupon sur la hauteur de capitale des chiffres : a 0 il
+   flotterait au-dessus, le haut de la boite du prix etant du blanc de ligne. */
+.dt-site .dt-pdp-price-row .dt-bundle-badge { flex: 0 0 auto; align-self: flex-start; margin-top: 4px; }
 .dt-site .dt-color-picker__head { font-size: 14px; }
 .dt-site .dt-color-picker__head strong { font-size: 14px; }
 .dt-site .dt-color-option { font-size: 13px; line-height: 1.4; min-width: 62px; }
@@ -166,7 +173,7 @@
   .dt-product .dt-pdp-info h1 { font-size: clamp(27px, 7.1vw, 32px); }
   .dt-site .dt-pdp-mini-review-track { min-height: 164px; }
   .dt-site .dt-professional-proof__grid article { padding: 20px; }
-  .dt-site .dt-bundle-badge { font-size: 12px; }
+  .dt-site .dt-bundle-badge { font-size: 10px; padding: 5px 8px; }
   .dt-site .dt-pdp-quicktrust { font-size: 12px; }
   .dt-site .dt-footer a { font-size: 14px; }
 }
@@ -174,4 +181,8 @@
   .dt-site .dt-announcement { font-size: 10px; }
   .dt-product .dt-pdp-info h1 { font-size: 27px; }
   .dt-site .dt-pdp-mini-review-track { min-height: 184px; }
+  /* Largeur la plus contrainte : le coupon se resserre pour rester sur la
+     ligne du prix sans jamais pousser la page en debordement lateral. */
+  .dt-site .dt-bundle-badge { font-size: 9px; padding: 5px 7px; }
+  .dt-site .dt-pdp-price-row { gap: 8px; }
 }

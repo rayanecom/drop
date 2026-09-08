@@ -93,7 +93,7 @@
           {% if dentina_rating != blank %}
             <a class="dt-rating-chip" href="#avis"><span class="dt-stars">★★★★★</span><span>{{ dentina_rating.rating | round: 1 }}/5{% if dentina_rating_count != blank %} · {{ dentina_rating_count }} avis vérifiés{% endif %}</span></a>
           {% elsif request.design_mode %}
-            <a class="dt-rating-chip" href="#avis"><span class="dt-stars">★★★★★</span><span>4,8/5 · +1 000 avis vérifiés</span></a>
+            <a class="dt-rating-chip dt-rating-chip--mockup" href="#avis" aria-label="Preuve sociale"><span class="dt-stars">★★★★★</span><span>4,8/5 · +1 000 avis vérifiés</span></a>
           {% endif %}
           <h1>DentinaClean · 5 min</h1>
           <div class="dt-pdp-price-row">
@@ -219,8 +219,9 @@
     {% if section.settings.professional_quote_2 != blank and section.settings.professional_name_2 != blank %}{% assign dentina_has_professional = true %}{% endif %}
     {% if section.settings.professional_quote_3 != blank and section.settings.professional_name_3 != blank %}{% assign dentina_has_professional = true %}{% endif %}
     {% if dentina_has_professional or request.design_mode %}
-      <section class="dt-professional-proof" aria-label="Avis professionnels">
+      <section class="dt-professional-proof{% unless dentina_has_professional %} dt-professional-proof--mockup{% endunless %}" aria-label="{% if dentina_has_professional %}Avis professionnels vérifiés{% else %}Bloc d’avis professionnels{% endif %}">
         <div class="dt-shell">
+          {% unless dentina_has_professional %}{% endunless %}
           <div class="dt-section-heading"><span class="dt-kicker">REGARD PROFESSIONNEL</span><h2>L’avis des professionnels.</h2></div>
           <div class="dt-professional-proof__grid">
             {% if dentina_has_professional %}
