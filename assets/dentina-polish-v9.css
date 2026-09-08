@@ -167,7 +167,14 @@
     line-height: 1.2;
     white-space: nowrap;
   }
-  .dt-site .dt-review-track { grid-auto-columns: minmax(0, 82%); gap: 14px; }
+  /* Pourcentage fixe, pas minmax(0, 82%) : le minimum a 0 laissait la grille
+     ecraser les 4 cartes pour les faire tenir dans la largeur, au lieu de les
+     faire defiler. C'est ce qui reduisait chaque avis a une colonne de 64 px.
+     Tous les autres carrousels du theme utilisent deja un pourcentage simple.
+     Le plafond a 360 px evite l'exces inverse : cette tranche va du telephone
+     a la tablette, et 82% d'un ecran de 820 px donnait une carte de 553 px
+     dont la photo remplissait l'ecran avant le premier mot du temoignage. */
+  .dt-site .dt-review-track { grid-auto-columns: min(82%, 360px); gap: 14px; }
   .dt-site .dt-demo-review-body { padding: 17px; }
   .dt-site .dt-pdp-thumb { flex-basis: 58px; width: 58px; height: 58px; }
   .dt-product .dt-pdp-info h1 { font-size: clamp(27px, 7.1vw, 32px); }
