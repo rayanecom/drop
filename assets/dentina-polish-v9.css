@@ -193,3 +193,38 @@
   .dt-site .dt-bundle-badge { font-size: 9px; padding: 5px 7px; }
   .dt-site .dt-pdp-price-row { gap: 8px; }
 }
+
+/* ==========================================================================
+   Fonds continus — supprime les ruptures de couleur entre sections
+   --------------------------------------------------------------------------
+   Avant : les sections alternaient #ffffff et #f4f7fa, ce qui dessinait une
+   ligne nette a chaque changement de section (8 ruptures sur la fiche produit).
+   Le fond n'est plus porte par les sections mais par la page entiere, en un
+   seul degrade vertical. Les sections claires deviennent transparentes : sans
+   fond propre, elles ne peuvent plus creer de bord.
+   ========================================================================== */
+
+.dt-site {
+  background: linear-gradient(180deg,
+    #ffffff 0%,
+    #eef4fa 34%,
+    #ffffff 66%,
+    #eef4fa 100%);
+}
+
+/* background-color seul, pour ne pas effacer une eventuelle image de fond. */
+.dt-site .dt-home-hero,
+.dt-site .dt-home-benefits,
+.dt-site .dt-home-tech,
+.dt-site .dt-featured-product,
+.dt-site .dt-pdp-top,
+.dt-site .dt-pdp-feature-row,
+.dt-site .dt-how,
+.dt-site .dt-compatibility-showcase,
+.dt-site .dt-routine-story,
+.dt-site .dt-professional-proof,
+.dt-site .dt-faq-section,
+.dt-site .dt-verified-reviews,
+.dt-site .dt-services {
+  background-color: transparent;
+}
