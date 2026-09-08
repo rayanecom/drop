@@ -1,0 +1,135 @@
+{% assign dentina_product = section.settings.product %}
+{% if dentina_product == blank %}{% assign dentina_product = collections.all.products.first %}{% endif %}
+{% if dentina_product != blank %}
+  {% assign dentina_product_url = dentina_product.url %}
+  {% assign dentina_variant = dentina_product.selected_or_first_available_variant %}
+  {% assign dentina_variant_id = dentina_variant.id %}
+  {% assign dentina_display_price = dentina_variant.price | money %}
+  {% assign dentina_rating = dentina_product.metafields.reviews.rating.value %}
+  {% assign dentina_rating_count = dentina_product.metafields.reviews.rating_count.value %}
+{% else %}
+  {% assign dentina_product_url = routes.all_products_collection_url %}
+  {% assign dentina_variant_id = '' %}
+  {% assign dentina_display_price = '69,99 €' %}
+{% endif %}
+{{ 'dentina-site.css' | asset_url | stylesheet_tag }}
+{{ 'dentina-polish-v9.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'dentina-site.js' | asset_url }}" defer></script>
+
+<div class="dt-site dt-home" data-variant-id="{{ dentina_variant_id }}" data-product-url="{{ dentina_product_url }}" data-fallback-image="{{ 'dentina-review-approved-6.jpg' | asset_url }}">
+  <div class="dt-announcement"><span>Livraison offerte en France métropolitaine</span><i aria-hidden="true"></i><span>Garantie 2 ans</span></div>
+
+  <header class="dt-header">
+    <div class="dt-shell dt-header__row">
+      <button class="dt-menu-btn" type="button" aria-label="Ouvrir le menu" aria-expanded="false" data-dt-menu-open><span></span><span></span><span></span></button>
+      <a class="dt-logo" href="{{ routes.root_url }}" aria-label="Dentina — accueil">DENTINA</a>
+      <nav class="dt-nav" aria-label="Navigation principale"><a class="is-active" href="{{ routes.root_url }}">Accueil</a><a href="{{ dentina_product_url }}">DentinaClean</a><a href="{{ dentina_product_url }}#fonctionnement">Comment ça marche</a><a href="/pages/track-order">Suivre votre commande</a><a href="/pages/contact">Contactez-nous</a></nav>
+      <div class="dt-header__actions"><a class="dt-icon-btn dt-only-desktop" href="{{ routes.account_url }}" aria-label="Compte"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7.5" r="3.8"/><path d="M4.5 21c.6-4 3.1-6.1 7.5-6.1s6.9 2.1 7.5 6.1"/></svg></a><button class="dt-cart-button" type="button" aria-label="Ouvrir le panier" data-dt-open-cart><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-.9 11H6.9L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="dt-cart-count" data-dt-cart-count>0</span></button></div>
+    </div>
+  </header>
+
+  <div class="dt-mobile-menu" data-dt-mobile-menu aria-hidden="true"><div class="dt-mobile-menu__overlay" data-dt-menu-close></div><aside class="dt-mobile-menu__panel" aria-label="Menu mobile"><div class="dt-mobile-menu__head"><span class="dt-logo">DENTINA</span><button type="button" data-dt-menu-close aria-label="Fermer le menu">×</button></div><nav><a href="{{ routes.root_url }}">Accueil</a><a href="{{ dentina_product_url }}">DentinaClean</a><a href="{{ dentina_product_url }}#fonctionnement">Comment ça marche</a><a href="/pages/track-order">Suivre votre commande</a><a href="/pages/contact">Contactez-nous</a></nav></aside></div>
+
+  <main id="MainContent" tabindex="-1">
+    <section class="dt-home-hero">
+      <div class="dt-shell">
+        <div class="dt-home-hero__card">
+          <div class="dt-home-hero__copy">
+            {% if dentina_rating != blank %}
+              <a class="dt-rating-chip" href="#avis"><span class="dt-stars">★★★★★</span><span>{{ dentina_rating.rating | round: 1 }}/5{% if dentina_rating_count != blank %} · {{ dentina_rating_count }} avis vérifiés{% endif %}</span></a>
+            {% elsif request.design_mode %}
+              <span class="dt-rating-chip"><span class="dt-stars">★★★★★</span><span>4,8/5 · +1 000 avis vérifiés</span></span>
+            {% endif %}
+            <h1>Les ultrasons délogent les dépôts en 5 minutes.</h1>
+            <p>Un nettoyage ciblé dans l’eau, jusque dans les reliefs difficiles d’accès de votre dentier.</p>
+            <a class="dt-primary-btn" href="{{ dentina_product_url }}">Découvrir DentinaClean <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="dt-home-hero__visual" aria-label="DentinaClean ouvert avec un appareil dentaire">
+            <img width="1200" height="900" decoding="async" srcset="{{ 'dentina-photo-hero-v3-mobile-v9.webp' | asset_url }} 720w, {{ 'dentina-photo-hero-v3-display-v9.webp' | asset_url }} 1200w" sizes="(max-width: 820px) 100vw, 50vw" class="dt-home-hero__photo" src="{{ 'dentina-photo-hero-v3-display-v9.webp' | asset_url }}" alt="Une main retire un dentier de DentinaClean" fetchpriority="high">
+            <div class="dt-home-hero__motion-card" role="img" aria-label="Démonstration visuelle : des résidus se détachent d’un dentier dans l’eau">
+              <video muted autoplay loop playsinline preload="auto" poster="{{ 'dentina-residues-square-poster-v7.webp' | asset_url }}" data-dt-inview-video aria-hidden="true">
+                <source src="{{ 'dentina-residues-square-v7.mp4' | asset_url }}" type="video/mp4">
+              </video>
+              <span><strong>Sans frotter.</strong><small>Voyez l’action.</small></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dt-home-benefits" aria-label="Les engagements Dentina"><div class="dt-shell dt-four-cards">
+      <article><span aria-hidden="true">≈</span><h3>Technologie ultrasonique</h3></article>
+      <article><span aria-hidden="true">✓</span><h3>Garantie produit 2 ans</h3></article>
+      <article><span aria-hidden="true">1</span><h3>Utilisation simplifiée</h3></article>
+      <article><span aria-hidden="true">FR</span><h3>Support client français</h3></article>
+    </div></section>
+
+    <section class="dt-home-tech" id="routine">
+      <div class="dt-shell"><div class="dt-tech-panel">
+        <img width="160" height="160" decoding="async" class="dt-tech-panel__image" src="{{ 'dentina-photo-water-v3-thumb-v9.webp' | asset_url }}" alt="" loading="lazy" aria-hidden="true">
+        <div class="dt-tech-panel__head"><p class="dt-eyebrow">TECHNOLOGIE ULTRASONIQUE</p><h2>Un nettoyage ciblé,<br>chez vous.</h2><a class="dt-secondary-btn" href="{{ dentina_product_url }}">Découvrir DentinaClean <span aria-hidden="true">→</span></a></div>
+        <div class="dt-tech-cards">
+          <article><span aria-hidden="true">◉</span><h3>Ondes ultrasoniques</h3><p>Les vibrations se diffusent dans l’eau jusque dans les reliefs difficiles d’accès.</p></article>
+          <article><span aria-hidden="true">○</span><h3>Action dans la cuve</h3><p>L’eau transmet l’action mécanique autour de l’appareil immergé.</p></article>
+          <article><span aria-hidden="true">✦</span><h3>Un seul bouton</h3><p>Remplissez, placez votre appareil, lancez le cycle puis rincez.</p></article>
+        </div>
+      </div></div>
+    </section>
+
+    <div class="dt-marquee" role="region" aria-label="Les engagements Dentina">
+      <div class="dt-marquee__viewport">
+        <div class="dt-marquee__track">
+          <div class="dt-marquee__set"><strong>Livraison offerte</strong><i>✦</i><span>Suivi inclus</span><i>✦</i><span>Garantie 2 ans</span><i>✦</i><span>60 jours satisfait ou remboursé</span><i>✦</i><span>Paiement sécurisé</span></div>
+          <div class="dt-marquee__set" aria-hidden="true"><strong>Livraison offerte</strong><i>✦</i><span>Suivi inclus</span><i>✦</i><span>Garantie 2 ans</span><i>✦</i><span>60 jours satisfait ou remboursé</span><i>✦</i><span>Paiement sécurisé</span></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="dt-featured-product">
+      <div class="dt-shell dt-featured-product__grid">
+        <div class="dt-featured-product__media">
+          <img width="1200" height="1200" decoding="async" srcset="{{ 'dentina-photo-unboxing-v3-mobile-v9.webp' | asset_url }} 720w, {{ 'dentina-photo-unboxing-v3-display-v9.webp' | asset_url }} 1200w" sizes="(max-width: 820px) 100vw, 50vw" src="{{ 'dentina-photo-unboxing-v3-display-v9.webp' | asset_url }}" alt="DentinaClean dans son coffret avec ses accessoires" loading="lazy">
+        </div>
+        <div class="dt-featured-product__copy">
+          <h2>DentinaClean — Nettoyeur ultrasonique pour dentiers et gouttières</h2>
+          <p>Une routine simple pour entretenir plus facilement vos appareils dentaires amovibles.</p>
+          <ul class="dt-check-list"><li>Action ultrasonique dans l’eau</li><li>Un seul bouton et arrêt automatique</li><li>Dentiers, gouttières, contentions et aligneurs compatibles</li></ul>
+          <div class="dt-featured-price">{{ dentina_display_price }}</div>
+          <button class="dt-primary-btn" type="button" data-dt-add-to-cart data-variant-id="{{ dentina_variant_id }}" data-dt-buy-trigger{% if dentina_product == blank or dentina_variant.available == false %} disabled aria-disabled="true"{% endif %}>{% if dentina_product != blank and dentina_variant.available %}Ajouter au panier{% else %}Indisponible{% endif %}</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="dt-verified-reviews" id="avis">
+      <div class="dt-shell">
+        <div class="dt-section-heading"><span class="dt-kicker">AVIS CLIENTS</span><h2>Ce que nos clients en pensent.</h2></div>
+        {% if section.blocks.size > 0 %}
+          <div class="dt-review-app">{% for block in section.blocks %}<div {{ block.shopify_attributes }}>{% render block %}</div>{% endfor %}</div>
+        {% elsif request.design_mode %}
+          <div class="dt-review-carousel">
+            <button class="dt-carousel-arrow dt-prev" type="button" data-dt-scroll-reviews data-direction="-1" aria-label="Avis précédent">‹</button>
+            <div class="dt-review-track" data-dt-review-strip>
+              <article class="dt-demo-review-card"><img class="dt-demo-review-media" src="{{ ‘dentina-ugc-bathroom-white-v6.webp’ | asset_url }}" alt="DentinaClean blanc ouvert sur un meuble de salle de bain" loading="lazy"><div class="dt-demo-review-body"><div class="dt-demo-review-meta"><span class="dt-demo-stars" aria-label="Cinq étoiles sur cinq">★★★★★</span><span class="dt-demo-verified">✓ Achat vérifié</span></div><h3>Jeanne M.</h3><p>« Je remplis la cuve, je pose mon dentier et j’appuie. Le cycle se fait pendant que je termine de me préparer, puis je rince. »</p></div></article>
+              <article class="dt-demo-review-card"><img class="dt-demo-review-media" src="{{ 'dentina-ugc-vanity-black-v6.webp' | asset_url }}" alt="DentinaClean noir dans une salle de bain familiale" loading="lazy"><div class="dt-demo-review-body"><div class="dt-demo-review-meta"><span class="dt-demo-stars" aria-label="Cinq étoiles sur cinq">★★★★★</span><span class="dt-demo-verified">✓ Achat vérifié</span></div><h3>André B.</h3><p>« Le modèle noir reste sur mon meuble sans prendre toute la place. Un bouton, cinq minutes : c’est exactement la routine simple que je cherchais. »</p></div></article>
+              <article class="dt-demo-review-card"><img class="dt-demo-review-media" src="{{ 'dentina-ugc-hands-white-v6.webp' | asset_url }}" alt="Mise en place d’un dentier dans DentinaClean" loading="lazy"><div class="dt-demo-review-body"><div class="dt-demo-review-meta"><span class="dt-demo-stars" aria-label="Cinq étoiles sur cinq">★★★★★</span><span class="dt-demo-verified">✓ Achat vérifié</span></div><h3>Claire V.</h3><p>« Les gestes sont faciles à retenir. Je mets mon dentier dans l’eau, je lance le cycle et l’appareil s’arrête tout seul. »</p></div></article>
+              <article class="dt-demo-review-card"><img class="dt-demo-review-media" src="{{ 'dentina-ugc-retainer-white-v6.webp' | asset_url }}" alt="DentinaClean blanc avec une gouttière transparente" loading="lazy"><div class="dt-demo-review-body"><div class="dt-demo-review-meta"><span class="dt-demo-stars" aria-label="Quatre étoiles sur cinq">★★★★☆</span><span class="dt-demo-verified">✓ Achat vérifié</span></div><h3>Françoise L.</h3><p>« Je l’utilise pour ma gouttière du soir. Le format est compact, le câble se range facilement et je n’ai pas de réglages compliqués. »</p></div></article>
+            </div>
+            <button class="dt-carousel-arrow dt-next" type="button" data-dt-scroll-reviews data-direction="1" aria-label="Avis suivant">›</button>
+          </div>
+        {% else %}
+          <div class="dt-review-empty"><span aria-hidden="true">☆</span><div><strong>Aucun avis pour le moment.</strong></div></div>
+        {% endif %}
+      </div>
+    </section>
+
+    <section class="dt-services"><div class="dt-shell dt-service-grid"><article><span aria-hidden="true">🚚</span><div><h3>Livraison offerte</h3><p>France métropolitaine, suivi inclus.</p></div></article><article><span aria-hidden="true">↺</span><div><h3>Satisfait ou remboursé</h3><p>60 jours pour changer d’avis.</p></div></article><article><span aria-hidden="true">🔒</span><div><h3>Paiement sécurisé</h3><p>Vos données de paiement sont chiffrées.</p></div></article></div></section>
+  </main>
+
+  <footer class="dt-footer"><div class="dt-shell dt-footer__grid"><div><div class="dt-footer__brand">DENTINA</div><p>Le soin quotidien pensé pour vos appareils dentaires amovibles.</p></div><div><h4>Liens rapides</h4><a href="{{ routes.root_url }}">Accueil</a><a href="{{ dentina_product_url }}">DentinaClean</a><a href="{{ dentina_product_url }}#fonctionnement">Comment ça marche</a></div><div><h4>Service client</h4><a href="/pages/contact">Nous contacter</a><a href="/pages/track-order">Suivre ma commande</a><a href="/policies/shipping-policy">Livraison</a><a href="/policies/refund-policy">Retours</a></div><div><h4>Informations</h4><a href="/policies/privacy-policy">Confidentialité</a><a href="/policies/terms-of-service">Conditions générales</a></div></div><div class="dt-shell dt-footer__bottom"><span>© {{ 'now' | date: '%Y' }} Dentina</span><div class="dt-payments" aria-label="Paiements acceptés">{% for type in shop.enabled_payment_types %}{{ type | payment_type_svg_tag }}{% endfor %}</div></div></footer>
+
+  {% render 'dentina-cart-drawer-custom' %}
+</div>
+
+{% schema %}
+{"name":"Dentina — Accueil","settings":[{"type":"product","id":"product","label":"Produit DentinaClean"}],"blocks":[{"type":"@app"}],"presets":[{"name":"Dentina — Accueil"}]}
+{% endschema %}

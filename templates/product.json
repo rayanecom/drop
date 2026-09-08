@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "dentina_product": {
+      "type": "dentina-product",
+      "settings": {}
+    }
+  },
+  "order": [
+    "dentina_product"
+  ]
+}
