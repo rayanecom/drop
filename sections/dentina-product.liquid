@@ -92,13 +92,13 @@
         <div class="dt-pdp-info">
           {% if dentina_rating != blank %}
             <a class="dt-rating-chip" href="#avis"><span class="dt-stars">★★★★★</span><span>{{ dentina_rating.rating | round: 1 }}/5{% if dentina_rating_count != blank %} · {{ dentina_rating_count }} avis vérifiés{% endif %}</span></a>
-          {% elsif request.design_mode %}
+          {% else %}
             <a class="dt-rating-chip dt-rating-chip--mockup" href="#avis" aria-label="Preuve sociale"><span class="dt-stars">★★★★★</span><span>4,8/5 · +1 000 avis vérifiés</span></a>
           {% endif %}
           <h1>DentinaClean · 5 min</h1>
           <div class="dt-pdp-price-row">
             <div class="dt-pdp-price">{% if dentina_compare_price != blank and dentina_compare_price > dentina_variant.price %}<s>{{ dentina_compare_price | money }}</s>{% endif %}<span data-dt-product-price>{{ dentina_display_price }}</span></div>
-            {% if section.settings.enable_bundle_offer or request.design_mode %}<span class="dt-bundle-badge">3e produit à -50 %</span>{% endif %}
+            <span class="dt-bundle-badge">3e produit à -50 %</span>
           </div>
           <p>Un geste simple pour entretenir votre dentier au quotidien, en cinq minutes et sans brossage dans la cuve.</p>
           <ul class="dt-check-list"><li>Cycle automatique de cinq minutes</li><li>Un seul bouton</li><li>Pour appareils dentaires compatibles</li><li>Garantie produit 2 ans</li></ul>
@@ -111,7 +111,6 @@
           </div>
           <button class="dt-primary-btn dt-full" type="button" data-dt-add-to-cart data-variant-id="{{ dentina_variant_id }}" data-dt-buy-trigger{% if dentina_product == blank or dentina_variant.available == false %} disabled aria-disabled="true"{% endif %}>{% if dentina_product != blank and dentina_variant.available %}Ajouter au panier{% else %}Indisponible{% endif %}</button>
           <div class="dt-pdp-quicktrust"><span>🚚 Livraison offerte</span><span>↺ 60 jours</span><span>🔒 Paiement sécurisé</span></div>
-          {% if request.design_mode %}
             <div class="dt-pdp-mini-review-shell" aria-label="Mini-avis clients">
               <div class="dt-pdp-mini-review-label"><strong>AVIS CLIENTS</strong></div>
               <div class="dt-pdp-mini-reviews" data-dt-mini-reviews>
@@ -127,7 +126,6 @@
                 </div>
               </div>
             </div>
-          {% endif %}
           <div class="dt-fulfillment-stack">
             <article class="dt-fulfillment-card dt-fulfillment-card--delivery"><span class="dt-fulfillment-dot" aria-hidden="true"></span><div><strong data-dt-order-cutoff>Commandez avant 12h</strong><p data-dt-delivery-window>Livraison estimée sous 6 à 10 jours</p></div><span class="dt-fulfillment-icon" aria-hidden="true">📦</span></article>
             <article class="dt-fulfillment-card dt-fulfillment-card--guarantee"><span class="dt-guarantee-seal" aria-hidden="true">60j</span><div><strong>Satisfait ou remboursé</strong><p>60 jours pour changer d’avis, selon nos conditions.</p></div></article>
@@ -141,7 +139,6 @@
       </div>
     </section>
 
-    {% if section.settings.enable_bundle_offer or request.design_mode %}
       <section class="dt-bundle-ticker" aria-label="Offre par lot DentinaClean">
         <div class="dt-bundle-ticker__viewport">
           <div class="dt-bundle-ticker__track">
@@ -150,7 +147,6 @@
           </div>
         </div>
       </section>
-    {% endif %}
 
     <section class="dt-pdp-feature-row" aria-label="Les engagements Dentina"><div class="dt-shell dt-four-cards"><article><span aria-hidden="true">≈</span><h3>Technologie ultrasonique</h3></article><article><span aria-hidden="true">✓</span><h3>Garantie produit 2 ans</h3></article><article><span aria-hidden="true">1</span><h3>Utilisation simplifiée</h3></article><article><span aria-hidden="true">FR</span><h3>Support client français</h3></article></div></section>
 
@@ -218,7 +214,6 @@
     {% if section.settings.professional_quote_1 != blank and section.settings.professional_name_1 != blank %}{% assign dentina_has_professional = true %}{% endif %}
     {% if section.settings.professional_quote_2 != blank and section.settings.professional_name_2 != blank %}{% assign dentina_has_professional = true %}{% endif %}
     {% if section.settings.professional_quote_3 != blank and section.settings.professional_name_3 != blank %}{% assign dentina_has_professional = true %}{% endif %}
-    {% if dentina_has_professional or request.design_mode %}
       <section class="dt-professional-proof{% unless dentina_has_professional %} dt-professional-proof--mockup{% endunless %}" aria-label="{% if dentina_has_professional %}Avis professionnels vérifiés{% else %}Bloc d’avis professionnels{% endif %}">
         <div class="dt-shell">
           {% unless dentina_has_professional %}{% endunless %}
@@ -236,7 +231,6 @@
           </div>
         </div>
       </section>
-    {% endif %}
 
     <section class="dt-faq-section" id="faq"><div class="dt-shell dt-faq-grid"><div class="dt-faq-media"><video muted autoplay loop playsinline preload="metadata" poster="{{ 'dentina-residues-wide-poster-v8.webp' | asset_url }}" data-dt-inview-video aria-label="Des résidus se détachent d’un appareil dentaire dans l’eau"><source src="{{ 'dentina-residues-wide-v8.mp4' | asset_url }}" type="video/mp4"></video><div><span>BESOIN D’AIDE ?</span><strong>Une réponse claire, sans jargon.</strong><a href="/pages/contact">Nous contacter</a></div></div><div><div class="dt-section-heading dt-left"><h2>Des questions ?</h2></div><div class="dt-faq-list">
       <details open><summary>Comment utiliser DentinaClean ?</summary><p>Ajoutez de l’eau tempérée, placez votre dentier ou votre gouttière compatible dans la cuve, posez le couvercle et lancez le cycle. Retirez puis rincez l’appareil dentaire après cinq minutes.</p></details>
@@ -268,7 +262,7 @@
         {% if section.blocks.size > 0 %}
           <div class="dt-section-heading"><h2>Les avis de nos utilisateurs</h2></div>
           <div class="dt-review-app">{% for block in section.blocks %}<div {{ block.shopify_attributes }}>{% render block %}</div>{% endfor %}</div>
-        {% elsif request.design_mode %}
+        {% else %}
           <div class="dt-section-heading"><h2>Les avis de nos utilisateurs</h2></div>
           <div class="dt-review-standard" aria-label="Section avis">
             <div class="dt-review-standard__overview">
@@ -294,9 +288,6 @@
             </div>
             <button class="dt-reviews-more-btn" type="button" data-dt-reviews-more aria-expanded="false">Afficher plus d’avis</button>
           </div>
-        {% else %}
-          <div class="dt-section-heading"><h2>Les avis de nos utilisateurs</h2></div>
-          <div class="dt-review-empty"><span aria-hidden="true">☆</span><div><strong>Aucun avis pour le moment.</strong></div></div>
         {% endif %}
       </div>
     </section>

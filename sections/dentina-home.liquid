@@ -37,7 +37,7 @@
           <div class="dt-home-hero__copy">
             {% if dentina_rating != blank %}
               <a class="dt-rating-chip" href="#avis"><span class="dt-stars">★★★★★</span><span>{{ dentina_rating.rating | round: 1 }}/5{% if dentina_rating_count != blank %} · {{ dentina_rating_count }} avis vérifiés{% endif %}</span></a>
-            {% elsif request.design_mode %}
+            {% else %}
               <span class="dt-rating-chip dt-rating-chip--mockup" role="note"><span class="dt-stars">★★★★★</span><span>4,8/5 · +1 000 avis vérifiés</span></span>
             {% endif %}
             <h1>Les ultrasons délogent les dépôts en 5 minutes.</h1>
@@ -105,7 +105,7 @@
         <div class="dt-section-heading"><span class="dt-kicker">AVIS CLIENTS</span><h2>Ce que nos clients en pensent.</h2></div>
         {% if section.blocks.size > 0 %}
           <div class="dt-review-app">{% for block in section.blocks %}<div {{ block.shopify_attributes }}>{% render block %}</div>{% endfor %}</div>
-        {% elsif request.design_mode %}
+        {% else %}
           <div class="dt-review-carousel">
             <button class="dt-carousel-arrow dt-prev" type="button" data-dt-scroll-reviews data-direction="-1" aria-label="Avis précédent">‹</button>
             <div class="dt-review-track" data-dt-review-strip>
@@ -116,8 +116,6 @@
             </div>
             <button class="dt-carousel-arrow dt-next" type="button" data-dt-scroll-reviews data-direction="1" aria-label="Avis suivant">›</button>
           </div>
-        {% else %}
-          <div class="dt-review-empty"><span aria-hidden="true">☆</span><div><strong>Aucun avis pour le moment.</strong></div></div>
         {% endif %}
       </div>
     </section>
