@@ -533,3 +533,117 @@ conseil en PI.
 
 **Si le brevet bloque :** on bascule sur la housse de canapé à panneau sisal, même
 douleur, même angle, mêmes créas, sourcing plus simple, aucun brevet en vue.
+
+---
+
+## 13. VÉRIFICATIONS COMPLÉMENTAIRES — les trois points que j'avais laissés ouverts
+
+### 13.1 CORRECTION — Animimi vend déjà une housse à sisal intégré en France
+
+Je t'avais dit que personne en France ne vendait l'hybride « housse + surface à
+griffer ». **C'est faux, et la correction est importante.**
+
+[Animimi.fr](https://animimi.fr/protection-canape-chat/) vend une **housse
+d'accoudoir de canapé en sisal**, sur mesure, 4 coloris et 5 tailles. Et leur
+argumentaire est mot pour mot celui que j'avais identifié comme notre angle :
+
+> « redirige le comportement du chat plutôt que de le combattre […] le sisal est une
+> fibre naturelle que les chats adorent griffer — le même matériau que la plupart des
+> griffoirs, ce qui donne au chat une surface qu'il préfère naturellement. »
+
+**Ce que ça change :**
+- Le concept est **déjà validé sur le marché français**. Ce n'est plus une hypothèse.
+- L'angle marketing n'est **plus vierge** : un acteur français l'utilise déjà.
+- **La housse de chaise reste libre**, mais le fossé se réduit à l'application, pas
+  au concept.
+- Et ça confirme ma mise en garde : Animimi peut étendre son sisal du canapé à la
+  chaise quand il veut. La barrière est une couture.
+
+Ce que ça ne change pas : **personne, Animimi compris, ne vend la housse de chaise
+de salle à manger à panneau sisal.** Et le lot de 4 reste un format que personne
+n'a.
+
+### 13.2 Oreilune n'est pas un concurrent — je le retire
+
+Vérifié via la fiche TrendTrack de la boutique :
+
+| oreilune.com | |
+|---|---|
+| Pays d'origine | **CN** |
+| Catégorie | **Apparel** (vêtements) |
+| Trafic | 18 284 visites/mois |
+| Pubs actives | **5** |
+| Top produits | sangle d'escalade 17,99 € · projecteur de mandalas solaire 19,99 € · jean droit femme 36,99 € · pantalon gainant 29,99 € · combinaison 26,99 € · t-shirt oversize 24,99 € · robe léopard 36,99 € · capri cargo 39,99 € |
+
+C'est un **bazar de dropshipping chinois généraliste**, pas une boutique pour chats.
+Il a passé une publicité sur une housse de canapé, c'est tout. Sept de ses dix
+meilleurs produits portent « 50 % DE RÉDUCTION » **dans le titre du produit** — une
+remise permanente affichée comme temporaire, exactement ce que la directive Omnibus
+interdit.
+
+Conséquence : **il n'y a aucun annonceur français sérieux sur la housse anti-griffes
+pour chat.** Le terrain publicitaire est encore plus vide que je ne l'avais dit.
+
+### 13.3 Etsy et Amazon.fr — contournement du blocage
+
+Les deux domaines sont bloqués en accès direct par le proxy sortant. J'ai contourné
+par trois voies :
+
+**a) La bibliothèque publicitaire Meta.** Recherche sur « housse de chaise », « protège
+chaise », « housse anti-griffes », « griffoir chaise » en français : **113 publicités
+recensées. Aucune ne vend une housse avec surface à griffer.** Le mot « griffes »
+n'apparaît qu'en bénéfice secondaire d'un tissu résistant.
+
+| Annonceur | Pubs actives | Reach 30 j | Produit |
+|---|---|---|---|
+| IKEA | 249 | 52 779 472 | housse de chaise enfant GREJSIMOJS, fausse fourrure |
+| **Copensunny** | **851** | **4 594 059** | lot de housses de chaise de salle à manger |
+| **Savemorer.net** | 205 | 2 652 970 | housse de chaise anti-tâche imperméable |
+| Solite-dweller.fr | 27 | 704 828 | housse jacquard imperméable |
+| Comfy-vibes.fr, Infiniff, Enverano | éteintes | — | même créa recyclée |
+| DaMaxx Events, Dj Enzo | 2-3 | — | location pour mariages (hors sujet) |
+
+**b) Les boutiques similaires à Felivio.** 1 339 boutiques remontées par similarité,
+les 20 plus proches examinées. Le plus proche conceptuellement est **Sofa-Scratcher**
+(cattrees.com, US) — griffoir d'angle pour canapé, pas une housse. Une seule
+boutique française apparaît, **MiaouDéco** (74 visites/mois, 0 pub) : c'est de la
+décoration sur le thème du chat — lampes, mugs, statues, paniers. Pas un concurrent.
+
+**c) Les pages catégories Etsy France.** « housse de chaise à haut dossier »,
+« housse dossier chaise », « griffoir chat » existent comme catégories **séparées**.
+Aucune page ne fait apparaître l'hybride.
+
+### 13.4 Ce que la vérification révèle en plus — le marché de la housse de chaise est chaud
+
+C'est un bénéfice inattendu de cette passe. **Copensunny fait 851 publicités actives
+et 4,59 M de reach mensuel** sur un simple lot de housses de chaise de salle à manger.
+Savemorer, 205 pubs et 2,65 M. Ce sont des dropshippers chinois, et leurs pratiques
+sont exactement celles qu'on s'est interdites :
+
+> Copensunny : « Taches de vin, **traces de griffes**, sièges décolorés […] *Ma
+> belle-fille a cru que j'avais acheté de nouvelles chaises !* — Sylvie, 58 ans […]
+> 🚨 OFFRE EXCEPTIONNELLE : **-50 % aujourd'hui** ! »
+
+Un témoignage invérifiable avec prénom, âge et lien de parenté ; une remise
+« aujourd'hui » qui tourne depuis des mois. **Deux pratiques attaquables.**
+
+**Trois conclusions :**
+1. L'audience « housse de chaise » est **déjà travaillée en France**, donc le CPM
+   sera plus cher que je ne l'espérais.
+2. Ces annonceurs mentionnent déjà les griffes du chat comme bénéfice — la demande
+   existe et elle est nommée.
+3. **Ils sont battables sur la confiance, pas sur le prix.** Un vrai stock, un délai
+   tenu, aucun faux témoignage, aucune fausse promo : c'est notre différenciation
+   concrète, pas un slogan.
+
+### 13.5 Bilan honnête de la concurrence française
+
+| Question | Réponse |
+|---|---|
+| Housse de **chaise** avec panneau sisal | **Personne. Vérifié par 5 angles distincts.** |
+| Housse **d'accoudoir de canapé** en sisal | **Animimi.fr — existe, avec notre angle** |
+| Housse de canapé anti-griffes sans sisal | ~7 vendeurs, 19,90 à 73,90 € |
+| Housse de chaise anti-griffes sans sisal | ~6 vendeurs, dont Amazon et Cdiscount |
+| Tapis griffoir sisal séparé | ~6 vendeurs |
+| Annonceur français faisant du volume sur le sujet | **Aucun** |
+| Annonceurs sur la housse de chaise générique | **Copensunny 851 pubs, Savemorer 205 pubs — dropshippers CN** |
