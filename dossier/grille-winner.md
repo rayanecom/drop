@@ -93,3 +93,117 @@ question, et cette question est à trancher avec l'utilisateur, pas à sa place.
 - R9 Motor Parts (ES) : douleur très aiguë (panne AdBlue, facture garage), 421 jours
   en ligne. **À écarter d'emblée si c'est un émulateur** — contourner un système
   antipollution est illégal.
+
+---
+
+# SECONDE PASSE — le résultat qui tranche
+
+## Le chiffre le plus important de toute la recherche
+
+Requête : **boutiques créées en France depuis septembre 2024, catalogue de moins de
+15 produits, 8 000 à 120 000 visites/mois, publicités en croissance de plus de 50 %
+sur 30 jours.** C'est le profil exact du dropshipper français qui vient de trouver
+quelque chose.
+
+**Résultat : 8 boutiques. Huit, dans toute la base.**
+
+| Boutique | Pubs | Trafic/mois | Produit phare | Prix | Verdict |
+|---|---|---|---|---|---|
+| **Pixi Bear** | 218 | 8 500 | Ours géant à assembler | 69,90 € | Cadeau saisonnier. Trafic passé de 16 135 à 571 puis 8 500 — instable |
+| **Coin Féminin** | 197 | 9 764 | Bikini sculptant ventre plat | 55,99 € | Vêtement : tailles, retours |
+| **Lyveli** | 164 | 54 947 | Complément anti-odeur / gel buccal | 29,99-34,99 € | **Complément → mur.** 37 % du trafic vient d'Algérie |
+| **ZENOVA** | 130 | 10 564 | Pressothérapie | **169 à 589 €** | Hors fourchette, appareil électrique |
+| **Papills** | 96 | 18 229 | Gommes sommeil / anti-stress | 24,90 € | **Complément → mur** |
+| **Revixx** | 46 | 20 762 | Genouillère bambou, compression | 60-75 CAD | **93,6 % du trafic au Canada** |
+| **NEREÏS OCEAN** | 25 | 15 165 | DeepFoil, aile sous-marine | 95-245 € | Niche sport microscopique, saisonnière |
+| **Le Garde-Temps** | 25 | 14 175 | T-shirts, rouleaux à montres | 35-150 € | Mode |
+
+**Aucune ne passe les 14 critères.** Deux vendent des compléments, deux du vêtement,
+une un appareil hors fourchette, une vise le Canada, une est un cadeau saisonnier,
+une est une niche de sport confidentielle.
+
+## Autres éliminations de cette passe
+
+| Produit | Signal | Critère qui casse |
+|---|---|---|
+| **Voyaro SnoozeLoop** (DE) | 127 pubs, 943 k reach/mois, 227 j | **Déjà revendu par 3 boutiques et présent sur Amazon.de** sous le même nom. Commodité, pas arbitrage (#13) |
+| **Zentrum für Fußgesundheit / STEPZ** (DE) | 118 pubs, **9,9 M reach/mois** | Semelles fasciite : **Santéllia et Physeli tiennent déjà la France** (#13) |
+| **Ecolino** (PL) | 14 pubs → 4,45 M reach/mois | Lot de 5 chiffres microfibre à **59,99 PLN ≈ 14 €** (#4) |
+| **Styleholz** (DE) | 48 pubs, 550 k, **423 j** | Rouleaux de massage bois : commodité disponible partout en France (#13) |
+| **Cellsius, Lefaya, Azouna, ErgoKissen** (DE) | 0,2 à 7,5 M | Oreillers cervicaux : Soya Paris tient la France à 20,3 M (#13) |
+| **Gesunder-Schlaf / Levora** (DE) | 30 pubs, 610 k | Gouttière anti-ronflement « klinisch bewiesen » → **dispositif médical** (#11) |
+| **Nurosym** (DE) | 287 pubs, **11,9 M reach/mois**, 474 j | Dispositif médical + prix hors fourchette (#11, #4) |
+| **Mylky** (NL/FR) | 1 369 pubs, 9,2 M, **868 j** | Machine à lait végétal : **déjà en France** (mylky.fr), appareil hors fourchette |
+| **Enjuvie** (ES) | 180 pubs, 848 k, **819 j** | Cils magnétiques : commodité mondiale (#13) |
+| **Shakeplus, OxyBio, Canter Equestrian, Elaria** | 0,15 à 3,4 M | Compléments et cosmétiques (#11) |
+| **Toverdoeken** (NL) | 24 pubs, 926 j | Microfibre, petit volume, prix sous 30 € (#4, #10) |
+
+## LA CONCLUSION — et elle est structurelle, pas conjoncturelle
+
+Corpus total balayé : **~6 900 publicités et ~1 400 boutiques**, France et sept
+marchés européens, sur toutes les niches, avec cinq angles de tri différents
+(reach, croissance de reach, ancienneté, mots-clés douleur en quatre langues,
+filtres boutique).
+
+**Aucun produit ne passe les 14 critères. Et ce n'est pas un accident.**
+
+Les critères 3, 6, 10, 11 et 13 se contredisent structurellement sur un marché mature :
+
+> Un produit qui a **une douleur aiguë**, **un gros marché**, **aucune contrainte
+> réglementaire** et qui est **achetable sur catalogue** est, par construction, un
+> produit que quelqu'un vend déjà à grande échelle. S'il était libre, il ne serait
+> pas libre longtemps.
+
+C'est exactement ce que montrent les données :
+
+| Ce qui reste libre en France | Pourquoi c'est libre |
+|---|---|
+| Housse de chaise à panneau sisal | MOQ 300-500, brevet revendiqué, plafond à 12 k visites/mois |
+| Aile sous-marine, tour d'observation | Marché microscopique ou fret prohibitif |
+| Carnet à gratter, ours à assembler, microscope | Aucune douleur → CPA saisonnier |
+| Peluche veilleuse confessionnelle | Niche identitaire étroite |
+
+Et ce qui fait du volume est soit **du complément et du cosmétique** (mur
+réglementaire), soit **déjà tenu par un opérateur français à 200-600 publicités
+actives** (Soya Paris 20,3 M, DustGo 16,6 M, MIRO 11,5 M, Activ'Pet 1,7 M,
+Santéllia 2,5 M).
+
+## Les trois seules sorties possibles — décision à prendre
+
+### Option A — Franchir le mur réglementaire au lieu de le contourner
+
+Les plus gros volumes français sont des compléments et des cosmétiques. Ce n'est
+pas illégal, c'est **de la paperasse chiffrable** : pour un cosmétique, une Personne
+Responsable établie dans l'UE, un dossier d'information produit, une notification
+au CPNP. **ESTIMATION : 2 000 à 5 000 €** et quelques semaines, à confirmer par devis.
+
+- **Pour** : c'est le plus gros marché, et la barrière devient **ton avantage** —
+  elle écarte précisément les concurrents qui ne veulent pas payer. Le dossier
+  Verline était déjà sur ce terrain.
+- **Contre** : coût d'entrée, responsabilité juridique réelle, et aucune allégation
+  de santé possible.
+
+### Option B — Attaquer frontalement et gagner sur l'exécution
+
+Prendre une niche prouvée dont le leader est mal noté, et le battre sur le service :
+stock réel, délai tenu, aucun faux témoignage, aucune fausse promo. Petiscope est à
+**2,7/5 sur 424 avis**. Copensunny et Savemorer utilisent des témoignages fabriqués
+et des « -50 % aujourd'hui » permanents.
+
+- **Pour** : demande déjà prouvée, aucun arbitrage à trouver, testable tout de suite.
+- **Contre** : pas de douleur aiguë sur ces produits, donc CPA saisonnier, et une
+  marge comprimée par la concurrence.
+
+### Option C — Renoncer au catalogue et faire du produit propriétaire
+
+C'est ce que font tous ceux qui tiennent dans la durée : Felivio, Stimulicat,
+ZeroMOUSE, Toadly, Stapelstein. Ils ne cherchent pas un produit, ils en font un.
+
+- **Pour** : c'est la seule option qui construit une marque défendable.
+- **Contre** : MOQ, délais, capital immobilisé — exactement ce qu'on vient de
+  refuser sur la housse.
+
+**Ce que je ne recommande pas : continuer à chercher.** J'ai balayé le marché avec
+cinq méthodes de tri différentes. Une sixième passe ne changera pas le résultat,
+elle consommera des crédits et du temps. Le blocage n'est pas dans la recherche, il
+est dans la définition du produit cible.
