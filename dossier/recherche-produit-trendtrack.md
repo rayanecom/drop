@@ -384,3 +384,152 @@ Trois issues :
 identifié une douleur quotidienne, une cible identitaire, un marché français qui
 dépense déjà, et un angle que personne n'utilise en France — « ne dresse pas ton
 chat, habille ton meuble ».
+
+---
+
+# APPROFONDISSEMENT — 10 septembre 2026, seconde passe
+
+Chasse au **niveau des publicités** cette fois, pas des boutiques. C'est là que
+vivent les produits copiables. 344 pubs animaux et 217 pubs enfants actives sur la
+France, 942 pubs animaux et 193 pubs enfants sur DE/NL/ES/IT, toutes filtrées sur
+des boutiques de moins de 30-40 produits.
+
+## 9. CE QUE L'APPROFONDISSEMENT CHANGE SUR MES FINALISTES
+
+### 9.1 Housse de chaise à panneau sisal — le sourcing est plus lourd que prévu
+
+Vérification faite sur Alibaba et 1688 : **les composants existent en masse, le
+produit fini n'existe pas.**
+
+| Ce qui est au catalogue | Ce qui ne l'est pas |
+|---|---|
+| Tissu sisal pour griffoirs, 0,29 à 6,50 $ | **La housse de chaise avec panneau sisal cousu** |
+| Tapis griffoirs sisal (104 000 réf. sur 1688) | |
+| Housses de chaise extensibles génériques | |
+| Usines OEM (Anhui KIDD, Xuzhou Miao Gongjiang, Shuimusheng Hengshui) | |
+
+**Conséquence directe, et elle est sérieuse :** ce n'est pas un produit qu'on
+commande à 20 exemplaires pour tester. C'est une **fabrication sur mesure** — MOQ
+typique 300 à 500 pièces, 30 à 45 jours de délai, **2 000 à 4 000 € engagés avant
+la première vente.** Ça explique aussi pourquoi Felivio produit en Autriche et
+pourquoi personne ne l'a copié en trois ans : ce n'est pas seulement le brevet,
+c'est la barrière à l'entrée industrielle.
+
+Ça ne tue pas le produit. Ça change son profil : **c'est un pari, pas un test.**
+
+### 9.2 Peluche lestée — je la sors définitivement
+
+Deux faits nouveaux, décisifs :
+
+| Acteur | Marché | Pubs actives | Reach 30 j | Reach cumulé |
+|---|---|---|---|---|
+| **Brease** (breaseworld.com) | DE | **306** | **2 033 519** | 22 400 330 |
+| **Ulgago España** (es.ulgago.com) | ES | 28 | 294 694 | 793 033 |
+
+La catégorie n'est pas une opportunité, c'est **une course européenne déjà lancée**,
+avec des acteurs qui dépensent lourd. Et la France compte déjà cinq vendeurs locaux
+à 34,90-74,90 €. On arriverait huitième.
+
+Deux enseignements à garder quand même :
+- **Ulgago a pivoté vers l'adulte.** Leur meilleure pub espagnole dit « la
+  sur-stimulation ne demande pas l'âge » et raconte que les parents finissent par
+  commander la leur. Le marché adulte anti-stress est plus grand que le marché enfant.
+- **Brease écrit « recommandé par des psychologues danois ».** En France, ce type de
+  formulation frôle l'allégation de santé. On ne le copierait pas.
+
+### 9.3 Souvenir / mémorial animal — mort aussi
+
+J'avais classé le carnet à gratter n°6. Même métier que le kit d'empreinte de patte,
+qui scale en Italie (Whiskerly, 97 pubs, 170 jours en ligne, 5,6 M de reach cumulé)
+et en Allemagne (Vilenu, pendentif à compartiment à poils, **638 184 de reach en
+30 jours avec seulement 6 publicités**).
+
+**La France est déjà pleine :** KitCatDog.fr, Truffe Délice, Patte-Animal, Esthima,
+MemoMori, Mieux Que Des Fleurs, plus Rakuten et Cdiscount. Prix établis : 10-25 €
+en encre, 20-45 € en argile avec cadre. Aucun arbitrage.
+
+## 10. LE CONSTAT STRUCTUREL SUR LE MARCHÉ FRANÇAIS
+
+### 10.1 Animaux — le marché français est un marché de compléments
+
+Les six plus gros annonceurs actifs sur la France :
+
+| Annonceur | Pubs actives | Reach 30 j | Produit |
+|---|---|---|---|
+| **Tipaw** (store-tipaw.com) | 326 | **9 296 481** | complément (« yeast overgrowth ») |
+| **Feliway** (Ceva) | 167 | 6 695 740 | diffuseur — laboratoire pharma |
+| **Vitamii** (vitamii.fr) | 161 | 6 230 963 | friandise immunité, poudre dentaire |
+| **Réglo** (reglo.fr) | 166 | 3 353 252 | complément santé intestinale |
+| **Activ'Pet** | 459 | 1 711 586 | **lime à griffes — produit physique** |
+| **Le Coin des Matous** | 79 | 756 818 | fontaine à eau inox, nid griffoir |
+
+**Quatre des six vendent du consommable ingéré.** C'est le mur réglementaire que
+j'ai documenté, et il est infranchissable sans un dossier complément alimentaire.
+
+Mais lis-le à l'envers : **le terrain du produit physique non consommable est
+comparativement dégagé.** Activ'Pet est quasiment seul à ce volume. C'est une bonne
+nouvelle pour la housse — et ça vaut d'être dit.
+
+### 10.2 Enfants — très actif, tenu par des dropshippers français
+
+| Annonceur | Pubs | Reach 30 j | Produit | Prix |
+|---|---|---|---|---|
+| **Mon Petit Curieux** | **738** | 3 092 821 | feutres acrylique | — |
+| **Petiscope** | 47 | **2 121 853** | **microscope enfant 60-120×** | **29,99 à 63,99 €** |
+| **Restaura / NeuroKids** | 261 | 2 048 577 | activités imprimables (numérique) | 12,99 $/mois |
+| **Petit Hafiz** | 41 | 1 268 740 | univers coranique enfant | — |
+| **Mon Loulou** (Grenoble) | 29 | 992 604 | livre d'activité Montessori | 39,99 € (barré 79,99 €) |
+| **My Little Deen** | 121 | 655 569 | peluche veilleuse coranique | — |
+| **PixiBear** | 218 | 554 172 | ours géant 43 cm à assembler, 5 000-7 000 pièces | — |
+
+## 11. LES NOUVEAUX CANDIDATS
+
+| Produit | Preuve de marché | Avantages | Inconvénients |
+|---|---|---|---|
+| **Microscope enfant 60-120×** (Petiscope) | 47 pubs → **2,12 M de reach/mois en France**, 424 avis Trustpilot | Demande énorme **déjà prouvée sur ton marché** · 29,99-63,99 €, pile dans ta fourchette · sourçable au catalogue, testable à 20 unités · ×4 facile · **le leader est détesté : 2,7/5, 51 % de 1 étoile** — logistique, délais et promos jugés trompeurs | **Aucune douleur aiguë** — c'est un achat cadeau/éducatif · jouet → EN 71 + CE + GPSR · saisonnier (Noël) · concurrent bien financé |
+| **Ours géant à assembler** (PixiBear) | 218 pubs, 554 k reach/mois, FR | Effet waouh fort · tiroir secret · sourçable (briques compatibles) · cadeau à forte valeur perçue | Zéro douleur · très saisonnier · place FR déjà prise · 5 000 pièces = risque de pièces manquantes et de SAV |
+| **Peluche veilleuse coranique** (My Little Deen, Petit Hafiz) | 162 pubs cumulées, 1,92 M reach/mois | **Cible identitaire parmi les plus fortes qui existent** · marché structurellement mal servi · faible concurrence · réachat et bouche-à-oreille communautaire | Niche confessionnelle : à traiter avec respect et sérieux, pas comme un créneau · calendrier religieux · jouet → EN 71 + CE |
+| **Tour d'observation Montessori** (Toadly) | **19 pubs → 1,3 M de reach/mois**, 8,1 M cumulé, 89,95 € | Le meilleur ratio pub/portée de toute la recherche · prix parfait · mono-produit avec drops de couleur en édition limitée · vendu aussi sur bol.com | Bois massif = **fret prohibitif** depuis la Chine · France déjà servie · pas de douleur aiguë · risque produit (un enfant en hauteur) |
+| **Sweat à poche bouillotte** (HuggHer) | 36 pubs, 292 k reach/mois, marque neuve qui décolle | **Douleur aiguë et récurrente authentique** (règles douloureuses, tous les mois) · identité très forte · sourçable (confection standard) · dans la fourchette de prix | **Hors des niches que tu as demandées** · au moins deux acteurs déjà au UK (huggercomfort, huggablehoodie) · textile = tailles, retours, stock multiplié |
+| **Housse de canapé à panneau sisal** (dérivé) | Oreilune : 9 pubs, 218 902 reach/mois en FR — **sans sisal** | Même douleur et même angle que le n°1 · **aucun brevet en vue** · marché FR prouvé · sourcing plus simple qu'une housse de chaise | Marché FR déjà occupé · différenciation reposant sur le seul panneau sisal · moins « lot », donc panier moyen plus faible |
+
+### Le cas Petiscope mérite d'être lu attentivement
+
+Un microscope enfant coûte 3 à 8 € en Chine. Il se vend 29,99 à 63,99 € en France.
+Le leader fait **2,12 M de reach par mois** — la demande n'est pas à prouver, elle
+est démontrée. Et ce leader est noté **2,7/5 sur 424 avis, avec 51 % de 1 étoile** :
+problèmes logistiques, délais annoncés non tenus, promotions jugées trompeuses,
+note affichée sur son propre site qui ne correspond pas à la réalité.
+
+**C'est la définition d'un concurrent battable — non pas par un meilleur produit,
+mais par une meilleure exécution.** Stock réel en France, délai annoncé tenu, aucun
+faux compteur, service client qui répond. C'est exactement la politique d'honnêteté
+commerciale qu'on s'est fixée, transformée en avantage concurrentiel.
+
+Ce qui l'empêche d'être mon n°1 : **il ne résout aucune douleur.** C'est un cadeau.
+Le CPA d'un cadeau explose en dehors de novembre-décembre.
+
+## 12. ARBITRAGE FINAL — deux stratégies, pas deux produits
+
+| | **Housse à panneau sisal** | **Produit de type Petiscope** |
+|---|---|---|
+| Nature du pari | Pari **produit** : un produit que personne n'a | Pari **exécution** : un produit banal, mieux servi |
+| Douleur | Quotidienne, aiguë | Aucune |
+| Test possible | ❌ MOQ 300-500, 2-4 k€, 30-45 j | ✅ 20 unités, ~200 €, 2 semaines |
+| Risque juridique | **Brevet revendiqué, non levé** | Aucun (hors EN 71 / CE) |
+| Concurrence FR | **Zéro** | Forte mais mal exécutée |
+| Saisonnalité | Aucune | Forte (Noël) |
+| Plafond | Élevé — marque défendable | Moyen — copiable en 3 semaines |
+
+**Ma position ne change pas : la housse.** Une entreprise se construit sur une
+douleur, pas sur un cadeau. Un cadeau te fait un décembre, une douleur te fait une
+marque.
+
+Mais je change une chose dans le plan : **la recherche d'antériorité passe avant
+tout, parce que le montant en jeu a doublé.** Ce n'était qu'un risque juridique la
+semaine dernière ; avec un MOQ de 300 à 500 pièces, c'est 2 000 à 4 000 € qu'on
+engage sur un produit peut-être breveté. On ne signe rien avant la réponse du
+conseil en PI.
+
+**Si le brevet bloque :** on bascule sur la housse de canapé à panneau sisal, même
+douleur, même angle, mêmes créas, sourcing plus simple, aucun brevet en vue.
