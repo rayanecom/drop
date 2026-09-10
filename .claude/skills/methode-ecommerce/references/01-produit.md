@@ -396,3 +396,65 @@ DEEE, notice en français), contact alimentaire, jouet, puériculture porteuse d
 
 Un score n'est pas une décision automatique. Mais un produit sous 55 qu'on lance quand même
 doit avoir une raison écrite, datée, et une condition de sortie fixée à l'avance.
+
+---
+
+## Chasser sur un outil de veille : les filtres qui trompent
+
+*Leçon tirée de la recherche TrendTrack du 10 septembre 2026 (animaux + enfants).*
+
+### Le trafic est un mauvais filtre de chasse
+
+Filtrer les boutiques sur **20 000 à 100 000 visites par mois** paraît intuitif : c'est
+la fourchette du « ça marche mais ce n'est pas encore Amazon ». En pratique, cette bande
+sélectionne des **marques installées qui ont développé leur produit** — produits
+propriétaires, box par abonnement, marques de créateur — pas des vendeurs dont on peut
+reprendre le produit.
+
+Sur 27 boutiques animaux et 23 boutiques enfants remontées dans cette bande, aucune ne
+vendait un produit à la fois sourçable, simple et porteur d'une douleur aiguë. Les seuls
+produits vraiment forts étaient inreproductibles.
+
+### Le filtre le plus discriminant est le nombre de produits au catalogue
+
+`max_products_count` sépare le **vendeur d'un produit** du **revendeur de mille**. C'est
+lui qui fait remonter la boutique qu'on peut étudier utilement. Il n'est presque jamais
+proposé spontanément, et c'est le plus utile de tous.
+
+### Jeu de filtres recommandé
+
+| Filtre | Valeur | Pourquoi |
+|---|---|---|
+| Catalogue | **< 25 produits** | Isole le mono-produit |
+| Croissance des pubs | **> +100 % sur 30 jours** | Prouve qu'on dépense et que ça tient |
+| Création de la boutique | **il y a 6 à 24 mois** | Assez vieille pour avoir un historique, assez jeune pour être copiable |
+| Trafic | **10 000 à 40 000 / mois** | La bande du produit qui décolle, pas de la marque installée |
+
+### Trois filtres peuvent s'annuler entre eux
+
+« Créée il y a moins de 6 mois » + « croissance des pubs sur 90 jours » renvoie
+structurellement **zéro** : une boutique de moins de six mois n'a pas d'historique
+publicitaire sur 90 jours, donc la croissance n'est pas calculable, donc elle est
+éliminée. Toujours tester les filtres **un par un** avant de les combiner, et rapporter
+le conflit plutôt que de rendre une liste vide.
+
+### La colonne qui décide et qu'on ne demande jamais : sourçable ou propriétaire
+
+Avant toute analyse économique, trancher : **est-ce un produit ou un concurrent ?**
+Un produit vendu sous sa propre marque sur Amazon, issu d'une R&D interne ou couvert par
+un brevet, n'est pas un produit à sourcer. Il s'étudie, il ne se copie pas.
+
+Signaux de produit propriétaire : marque déposée visible sur le produit, présence
+Amazon sous la marque du vendeur, électronique avec firmware, mention « patenté »
+dans les publicités, fabrication déclarée en Europe.
+
+### « Patenté » dans une publicité : vérifier, ne pas croire, ne pas paniquer
+
+Une revendication « patenté » peut recouvrir un brevet délivré, une simple demande
+déposée, un modèle d'utilité délivré sans examen de fond, ou un dessin et modèle qui
+ne protège que l'apparence. Trois règles :
+
+1. **Un brevet est territorial.** Un brevet autrichien ne bloque pas la France.
+2. **Déposer ≠ obtenir.**
+3. **La vérification coûte 300 à 600 € chez un conseil en propriété industrielle.**
+   Un procès en contrefaçon coûte beaucoup plus. On vérifie avant d'engager du stock.
