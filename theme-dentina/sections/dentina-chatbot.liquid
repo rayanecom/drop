@@ -1,0 +1,1036 @@
+{% comment %}
+  Dentina — Assistant de boutique
+  ---------------------------------------------------------------------------
+  Widget de reponse aux questions clients, autonome : aucune dependance
+  externe, aucune cle d'API dans le navigateur, aucune donnee qui sort du
+  poste du visiteur.
+
+  Le moteur ne fait pas de correspondance mot a mot. Il normalise la question
+  (accents, ponctuation, casse), la reduit a des racines, la traduit en
+  concepts via une table de synonymes, tolere les fautes de frappe par
+  distance de Levenshtein, puis note chaque intention. Une question peut donc
+  etre posee de nombreuses facons differentes et trouver la meme reponse.
+
+  Toutes les reponses proviennent du contenu reel du site (FAQ, engagements,
+  fiche produit). Ce qui n'y figure pas est renvoye vers le service client
+  plutot qu'invente.
+{% endcomment %}
+
+{%- assign dtc_product = section.settings.product -%}
+{%- if dtc_product == blank -%}{%- assign dtc_product = collections.all.products.first -%}{%- endif -%}
+{%- if dtc_product != blank -%}
+  {%- assign dtc_price = dtc_product.selected_or_first_available_variant.price | money -%}
+  {%- assign dtc_url = dtc_product.url -%}
+{%- else -%}
+  {%- assign dtc_price = '' -%}
+  {%- assign dtc_url = routes.all_products_collection_url -%}
+{%- endif -%}
+
+<div class="dtc" data-dtc hidden>
+  <button class="dtc__launcher" type="button" data-dtc-open
+          aria-expanded="false" aria-controls="dtc-panel-{{ section.id }}"
+          aria-label="Ouvrir l’assistant Dentina">
+    <span class="dtc__launcher-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 11.6c0 4-3.9 7.2-8.7 7.2-1 0-2-.14-2.9-.4L4 20l1.4-3.7C4.2 15 3.5 13.4 3.5 11.6c0-4 3.9-7.2 8.8-7.2s8.7 3.2 8.7 7.2Z"/>
+      </svg>
+    </span>
+    <span class="dtc__launcher-close" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"
+           stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </span>
+  </button>
+
+  <div class="dtc__panel" id="dtc-panel-{{ section.id }}" data-dtc-panel
+       role="dialog" aria-modal="false" aria-label="Assistant Dentina" hidden>
+
+    <header class="dtc__head">
+      <div class="dtc__head-id">
+        <span class="dtc__avatar" aria-hidden="true">D</span>
+        <div>
+          <strong>{{ section.settings.title | default: 'Assistant Dentina' }}</strong>
+          <span class="dtc__status">{{ section.settings.subtitle | default: 'Réponse immédiate' }}</span>
+        </div>
+      </div>
+      <button class="dtc__head-close" type="button" data-dtc-close aria-label="Fermer l’assistant">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </header>
+
+    <div class="dtc__log" data-dtc-log role="log" aria-live="polite" aria-atomic="false"></div>
+
+    <div class="dtc__chips" data-dtc-chips></div>
+
+    <form class="dtc__form" data-dtc-form novalidate>
+      <label class="dtc__sr" for="dtc-input-{{ section.id }}">Votre question</label>
+      <input class="dtc__input" id="dtc-input-{{ section.id }}" data-dtc-input type="text"
+             autocomplete="off" enterkeyhint="send" maxlength="300"
+             placeholder="{{ section.settings.placeholder | default: 'Posez votre question…' }}">
+      <button class="dtc__send" type="submit" aria-label="Envoyer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4.5 12h13M12.5 6.5 18.5 12l-6 5.5"/>
+        </svg>
+      </button>
+    </form>
+  </div>
+</div>
+
+{% comment %} Donnees passees au moteur, echappees par Shopify. {% endcomment %}
+<script type="application/json" data-dtc-data>
+{
+  "prix": {{ dtc_price | json }},
+  "urlProduit": {{ dtc_url | json }},
+  "urlSuivi": "/pages/track-order",
+  "urlContact": "/pages/contact",
+  "urlLivraison": "/policies/shipping-policy",
+  "urlRetours": "/policies/refund-policy",
+  "urlCGV": "/policies/terms-of-service",
+  "urlConfidentialite": "/policies/privacy-policy",
+  "accueil": {{ section.settings.welcome | default: "Bonjour ! Je réponds à vos questions sur DentinaClean : livraison, retours, utilisation, compatibilité. Que puis-je faire pour vous ?" | json }},
+  "paiements": {{ shop.enabled_payment_types | join: ', ' | json }}
+}
+</script>
+
+<style>
+  .dtc {
+    --dtc-blue: #1d5fd0;
+    --dtc-blue-deep: #12408f;
+    --dtc-navy: #0d2549;
+    --dtc-ink: #102b4e;
+    --dtc-muted: #526477;
+    --dtc-line: #dce4ec;
+    --dtc-bot: #f2f6fb;
+
+    position: fixed;
+    z-index: 2147483000;
+    right: clamp(14px, 3vw, 26px);
+    bottom: clamp(14px, 3vw, 26px);
+    font-family: Inter, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .dtc[hidden] { display: none; }
+  .dtc__sr {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+  }
+
+  /* ---------- Bouton ---------- */
+  .dtc__launcher {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    color: #fff;
+    background: linear-gradient(145deg, #2a72e4 0%, var(--dtc-blue) 46%, var(--dtc-blue-deep) 100%);
+    box-shadow:
+      0 2px 6px rgba(13, 37, 73, .18),
+      0 12px 28px rgba(29, 95, 208, .34),
+      inset 0 1px 0 rgba(255, 255, 255, .26);
+    cursor: pointer;
+    transition: transform .22s cubic-bezier(.34, 1.4, .64, 1), box-shadow .22s ease;
+  }
+
+  .dtc__launcher:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 3px 8px rgba(13, 37, 73, .2),
+      0 18px 38px rgba(29, 95, 208, .42),
+      inset 0 1px 0 rgba(255, 255, 255, .3);
+  }
+
+  .dtc__launcher:active { transform: translateY(0) scale(.97); }
+  .dtc__launcher:focus-visible { outline: 3px solid #8fb6f5; outline-offset: 3px; }
+
+  .dtc__launcher svg { width: 27px; height: 27px; }
+
+  .dtc__launcher-icon,
+  .dtc__launcher-close {
+    display: grid;
+    place-items: center;
+    grid-area: 1 / 1;
+    transition: opacity .18s ease, transform .24s ease;
+  }
+
+  .dtc__launcher-close { opacity: 0; transform: rotate(-45deg) scale(.7); }
+  .dtc.is-open .dtc__launcher-icon { opacity: 0; transform: rotate(45deg) scale(.7); }
+  .dtc.is-open .dtc__launcher-close { opacity: 1; transform: none; }
+
+  /* Halo d'appel : une seule fois, et jamais si l'utilisateur limite les
+     animations. Une pulsation permanente est une nuisance, pas un signal. */
+  .dtc__launcher::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(29, 95, 208, .42);
+    animation: dtc-halo 2.6s ease-out 1.2s 3;
+    pointer-events: none;
+  }
+
+  .dtc.is-open .dtc__launcher::after,
+  .dtc.is-seen .dtc__launcher::after { animation: none; }
+
+  @keyframes dtc-halo {
+    0%   { box-shadow: 0 0 0 0 rgba(29, 95, 208, .42); }
+    70%  { box-shadow: 0 0 0 16px rgba(29, 95, 208, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(29, 95, 208, 0); }
+  }
+
+  /* ---------- Panneau ---------- */
+  .dtc__panel {
+    position: absolute;
+    right: 0;
+    bottom: 74px;
+    display: flex;
+    width: min(374px, calc(100vw - 28px));
+    max-height: min(608px, calc(100vh - 118px));
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--dtc-line);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 28px 70px rgba(13, 37, 73, .22), 0 4px 14px rgba(13, 37, 73, .08);
+    opacity: 0;
+    transform: translateY(12px) scale(.97);
+    transform-origin: 100% 100%;
+    transition: opacity .2s ease, transform .24s cubic-bezier(.2, .9, .3, 1);
+  }
+
+  .dtc__panel[hidden] { display: none; }
+  .dtc.is-open .dtc__panel { opacity: 1; transform: none; }
+
+  .dtc__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 13px 12px 13px 15px;
+    color: #fff;
+    background: linear-gradient(135deg, var(--dtc-blue) 0%, var(--dtc-blue-deep) 62%, var(--dtc-navy) 100%);
+  }
+
+  .dtc__head-id { display: flex; align-items: center; gap: 11px; min-width: 0; }
+
+  .dtc__avatar {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .17);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .3);
+    font: 700 15px/1 Georgia, "Times New Roman", serif;
+    letter-spacing: .04em;
+  }
+
+  .dtc__head-id strong { display: block; font-size: 14.5px; line-height: 1.3; }
+
+  .dtc__status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 2px;
+    font-size: 11.5px;
+    line-height: 1.4;
+    opacity: .86;
+  }
+
+  .dtc__status::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #46d39a;
+    box-shadow: 0 0 0 2px rgba(70, 211, 154, .28);
+  }
+
+  .dtc__head-close {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 auto;
+    padding: 0;
+    border: 0;
+    border-radius: 9px;
+    color: #fff;
+    background: rgba(255, 255, 255, .12);
+    cursor: pointer;
+    transition: background .16s ease;
+  }
+
+  .dtc__head-close:hover { background: rgba(255, 255, 255, .22); }
+  .dtc__head-close:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+  .dtc__head-close svg { width: 17px; height: 17px; }
+
+  .dtc__log {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    overflow-y: auto;
+    padding: 15px 14px 6px;
+    background: #fff;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+
+  .dtc__msg {
+    max-width: 88%;
+    padding: 10px 13px;
+    border-radius: 14px;
+    font-size: 14.5px;
+    line-height: 1.58;
+    animation: dtc-in .22s ease both;
+  }
+
+  @keyframes dtc-in { from { opacity: 0; transform: translateY(5px); } }
+
+  .dtc__msg--bot {
+    align-self: flex-start;
+    border-bottom-left-radius: 5px;
+    color: var(--dtc-ink);
+    background: var(--dtc-bot);
+  }
+
+  .dtc__msg--user {
+    align-self: flex-end;
+    border-bottom-right-radius: 5px;
+    color: #fff;
+    background: linear-gradient(140deg, var(--dtc-blue) 0%, var(--dtc-blue-deep) 100%);
+  }
+
+  .dtc__msg p { margin: 0 0 7px; }
+  .dtc__msg p:last-child { margin-bottom: 0; }
+  .dtc__msg strong { font-weight: 650; }
+
+  .dtc__msg ul { margin: 6px 0 0; padding-left: 17px; }
+  .dtc__msg li { margin-bottom: 3px; }
+
+  .dtc__msg--bot a {
+    color: #1a56c0;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .dtc__typing { display: inline-flex; gap: 4px; padding: 3px 0; }
+
+  .dtc__typing i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #94a6bd;
+    animation: dtc-dot 1.1s infinite ease-in-out;
+  }
+
+  .dtc__typing i:nth-child(2) { animation-delay: .16s; }
+  .dtc__typing i:nth-child(3) { animation-delay: .32s; }
+
+  @keyframes dtc-dot {
+    0%, 60%, 100% { opacity: .3; transform: translateY(0); }
+    30%           { opacity: 1;  transform: translateY(-3px); }
+  }
+
+  .dtc__chips {
+    display: flex;
+    gap: 7px;
+    padding: 9px 14px 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .dtc__chips::-webkit-scrollbar { display: none; }
+  .dtc__chips:empty { display: none; }
+
+  .dtc__chip {
+    flex: 0 0 auto;
+    min-height: 34px;
+    padding: 7px 13px;
+    border: 1px solid #cfdcee;
+    border-radius: 999px;
+    color: #1a4694;
+    background: #f6f9fe;
+    font: 600 12.5px/1.3 inherit;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background .16s ease, border-color .16s ease;
+  }
+
+  .dtc__chip:hover { border-color: #9fbdea; background: #eaf1fd; }
+  .dtc__chip:focus-visible { outline: 2px solid var(--dtc-blue); outline-offset: 2px; }
+
+  .dtc__form {
+    display: flex;
+    gap: 8px;
+    padding: 11px 12px 12px;
+    border-top: 1px solid var(--dtc-line);
+    background: #fff;
+  }
+
+  .dtc__input {
+    flex: 1;
+    min-width: 0;
+    height: 44px;
+    padding: 0 14px;
+    border: 1px solid var(--dtc-line);
+    border-radius: 11px;
+    color: var(--dtc-ink);
+    background: #f8fafc;
+    /* 16px : sous ce seuil, iOS zoome sur le champ a la mise au point. */
+    font: 400 16px/1 inherit;
+    transition: border-color .16s ease, background .16s ease;
+  }
+
+  .dtc__input::placeholder { color: #93a3b8; }
+  .dtc__input:focus {
+    border-color: var(--dtc-blue);
+    background: #fff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(29, 95, 208, .13);
+  }
+
+  .dtc__send {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 auto;
+    padding: 0;
+    border: 0;
+    border-radius: 11px;
+    color: #fff;
+    background: linear-gradient(140deg, var(--dtc-blue) 0%, var(--dtc-blue-deep) 100%);
+    cursor: pointer;
+    transition: filter .16s ease, transform .16s ease;
+  }
+
+  .dtc__send:hover { filter: brightness(1.08); }
+  .dtc__send:active { transform: scale(.94); }
+  .dtc__send:focus-visible { outline: 2px solid var(--dtc-blue); outline-offset: 2px; }
+  .dtc__send svg { width: 19px; height: 19px; }
+
+  /* ---------- Mobile : feuille pleine largeur ---------- */
+  @media (max-width: 560px) {
+    .dtc { right: 14px; bottom: 14px; }
+    .dtc__launcher { width: 56px; height: 56px; }
+    .dtc__launcher svg { width: 25px; height: 25px; }
+
+    .dtc__panel {
+      position: fixed;
+      right: 10px;
+      bottom: 80px;
+      left: 10px;
+      width: auto;
+      max-height: min(76vh, calc(100vh - 120px));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dtc__launcher,
+    .dtc__panel,
+    .dtc__msg,
+    .dtc__launcher-icon,
+    .dtc__launcher-close { transition: none; animation: none; }
+    .dtc__launcher::after { animation: none; }
+    .dtc__typing i { animation: none; opacity: .6; }
+  }
+</style>
+
+<script>
+(function () {
+  'use strict';
+
+  var root = document.querySelector('[data-dtc]');
+  if (!root || root.dataset.dtcReady === '1') return;
+  root.dataset.dtcReady = '1';
+
+  var dataEl = document.querySelector('[data-dtc-data]');
+  var D = {};
+  try { D = JSON.parse(dataEl.textContent); } catch (e) { D = {}; }
+
+  var panel = root.querySelector('[data-dtc-panel]');
+  var log   = root.querySelector('[data-dtc-log]');
+  var chips = root.querySelector('[data-dtc-chips]');
+  var form  = root.querySelector('[data-dtc-form]');
+  var input = root.querySelector('[data-dtc-input]');
+  var openBtn = root.querySelector('[data-dtc-open]');
+
+  /* =====================================================================
+     1. Normalisation
+     Minuscules, accents retires, apostrophes et ponctuation neutralisees.
+     « Qu'est-ce que ça coûte ? » et « quest ce que ca coute » deviennent
+     la meme chaine.
+     ===================================================================== */
+  function norm(s) {
+    return String(s || '')
+      .toLowerCase()
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/[’'`]/g, ' ')
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  /* Racinisation legere du francais. Une seule regle s'applique, la plus
+     longue d'abord, et jamais si le resultat devient trop court. */
+  var STEM_RULES = [
+    [/(issements|issement)$/, 'iss'],
+    [/(ations|ation)$/, 'at'],
+    [/(ements|ement)$/, ''],
+    [/(eraient|erions|erais|erait|erons|erez|eront)$/, 'er'],
+    [/(aient|ait|ais|ant|ons|ez|ent)$/, ''],
+    [/(euses|euse|eurs|eur)$/, 'eu'],
+    [/(aux|ales|ale)$/, 'al'],
+    [/(ees|ee)$/, 'e'],
+    [/(es|s|x)$/, '']
+  ];
+
+  function stem(w) {
+    if (w.length < 5) return w;
+    for (var i = 0; i < STEM_RULES.length; i++) {
+      if (STEM_RULES[i][0].test(w)) {
+        var o = w.replace(STEM_RULES[i][0], STEM_RULES[i][1]);
+        return o.length >= 3 ? o : w;
+      }
+    }
+    return w;
+  }
+
+  /* Le radical seul ne suffit pas : « livrez » donnait « livr » et
+     « livrer » restait « livrer », donc les deux ne se rencontraient jamais.
+     La cle de rapprochement rabat conjugaisons, pluriels et formes en -e sur
+     une meme chaine. Chaque mot est indexe sous les deux formes. */
+  var LOOSE_RE = /(issements|issement|ations|ation|ements|ement|eraient|erions|erais|erait|erons|eront|erez|aient|ait|ais|ant|ent|ons|ez|es|er|ir|s|e)$/;
+
+  function loose(w) {
+    if (w.length < 5) return w;
+    var o = w.replace(LOOSE_RE, '');
+    return o.length >= 3 ? o : w;
+  }
+
+  var STOP = ' le la les un une des de du au aux et ou est sont ete je tu il elle on nous vous ils ce cet cette ces que qui quoi dont pour par en dans sur avec sans mon ma mes ton ta tes son sa ses notre nos votre vos leur se ne pas plus me te lui y si tout tous toute a as ai ont avez avoir etre fait faire suis sera serait puis alors donc car mais ou bien tres trop peu chez vers apres avant depuis pendant entre '
+    .trim().split(' ');
+  var STOPSET = {};
+  for (var s = 0; s < STOP.length; s++) STOPSET[STOP[s]] = 1;
+
+  function tokens(q) {
+    var raw = norm(q).split(' ');
+    var out = [];
+    for (var i = 0; i < raw.length; i++) {
+      var w = raw[i];
+      if (!w || STOPSET[w]) continue;
+      out.push(w);
+    }
+    return out;
+  }
+
+  /* =====================================================================
+     2. Concepts
+     Chaque concept regroupe toutes les facons courantes de le dire. Le
+     moteur raisonne sur les concepts, pas sur les mots : c'est ce qui
+     absorbe les reformulations.
+     ===================================================================== */
+  var CONCEPTS = {
+    livraison:  ['livraison', 'livrer', 'livre', 'expedition', 'expedier', 'envoi', 'envoyer', 'colis', 'recevoir', 'recois', 'reception', 'acheminement', 'transporteur', 'poste', 'commande arrive', 'arriver', 'arrive', 'port', 'frais de port', 'shipping', 'shippe', 'shipper'],
+    delai:      ['delai', 'temps', 'quand', 'combien de temps', 'duree', 'rapidite', 'vite', 'rapide', 'jour', 'semaine', 'attendre', 'attente', 'long', 'longtemps'],
+    prixmot:    ['prix', 'couter', 'coute', 'cout', 'tarif', 'vaut', 'valeur', 'montant', 'cher', 'budget', 'payer', 'euro'],
+    gratuit:    ['gratuit', 'offert', 'offre', 'frais', 'supplement', 'inclus', 'gratuite'],
+    zone:       ['france', 'zone', 'pays', 'etranger', 'international', 'belgique', 'suisse', 'luxembourg', 'monaco', 'europe', 'canada', 'quebec', 'allemagne', 'espagne', 'italie', 'corse', 'dom', 'tom', 'outre mer', 'metropolitaine', 'ou'],
+    suivi:      ['suivi', 'suivre', 'tracking', 'trace', 'tracer', 'nouvelle', 'ou en est', 'numero de suivi', 'numero de commande', 'ou est', 'statut', 'localiser', 'expedie'],
+    retour:     ['retour', 'retourner', 'rembours', 'remboursement', 'rembourser', 'renvoyer', 'renvoi', 'annuler', 'annulation', 'satisfait', 'pas satisfait', 'pas content', 'plait pas', 'plaisent pas', 'convient pas', 'aime pas', 'decu', 'deception', 'reprise', 'reprendre', 'restitution', 'le rendre', 'les rendre', 'changer avis', 'change avis', 'changer davis', 'change davis', 'retracter', 'retractation'],
+    garantie:   ['garantie', 'garanti', 'panne', 'casse', 'defaut', 'defectueux', 'sav', 'reparation', 'reparer', 'marche plus', 'fonctionne plus'],
+    utiliser:   ['utiliser', 'utilisation', 'usage', 'servir', 'marche', 'fonctionne', 'fonctionnement', 'emploi', 'mode emploi', 'notice', 'demarrer', 'lancer', 'allumer', 'bouton', 'etape'],
+    duree:      ['cycle', 'minute', 'duree', 'dure', 'programme', 'session', 'arret', 'arrete', 'automatique', 'tout seul'],
+    compatible: ['compatible', 'compatibilite', 'convient', 'adapte', 'dentier', 'prothese', 'gouttiere', 'contention', 'aligneur', 'invisalign', 'bridge', 'couronne', 'nuit', 'orthodontique'],
+    securite:   ['abimer', 'abime', 'rayer', 'raye', 'rayure', 'danger', 'dangereux', 'risque', 'securite', 'endommager', 'agressif', 'abrasif', 'resine'],
+    entretien:  ['entretien', 'entretenir', 'cuve', 'reservoir', 'nettoyer cuve', 'laver', 'vider', 'rincer', 'chiffon', 'detartrer', 'detartrage', 'maintenance'],
+    eau:        ['eau', 'liquide', 'chaude', 'chaud', 'froide', 'froid', 'tiede', 'temperee', 'temperature', 'bouillante', 'pastille', 'savon', 'vinaigre', 'remplir', 'niveau'],
+    couleur:    ['couleur', 'coloris', 'blanc', 'noir', 'teinte', 'modele', 'version'],
+    contenu:    ['contenu', 'contient', 'boite', 'livre avec', 'inclus', 'cable', 'chargeur', 'adaptateur', 'accessoire', 'fourni', 'colis contient', 'emballage'],
+    paiement:   ['paiement', 'payer', 'carte', 'cb', 'visa', 'mastercard', 'paypal', 'apple pay', 'google pay', 'securise', 'securite paiement', 'moyen', 'reglement', 'facture'],
+    contact:    ['contact', 'contacter', 'joindre', 'parler', 'humain', 'conseiller', 'service client', 'aide', 'assistance', 'telephone', 'mail', 'email', 'ecrire', 'sav'],
+    produit:    ['produit', 'dentinaclean', 'dentina', 'machine', 'nettoyeur', 'ultrason', 'ultrasonique', 'cest quoi', 'presentation', 'sert'],
+    brossage:   ['brosse', 'brosser', 'brossage', 'frotter', 'frottement'],
+    specs:      ['poids', 'peser', 'pese', 'dimension', 'taille', 'mesure', 'hauteur', 'largeur', 'profondeur', 'capacite', 'contenance', 'litre', 'materiau', 'plastique', 'bruit', 'bruyant', 'silencieux', 'decibel', 'consommation', 'watt', 'voltage', 'electricite', 'fabrique', 'fabrication', 'origine', 'made in', 'pays de fabrication'],
+    salut:      ['bonjour', 'bonsoir', 'salut', 'hello', 'coucou', 'hey'],
+    merci:      ['merci', 'super', 'parfait', 'nickel', 'top', 'genial'],
+    cgv:        ['cgv', 'condition', 'mention', 'legale', 'confidentialite', 'donnees personnelles', 'personnelle', 'rgpd', 'cookie', 'politique'],
+    achat:      ['acheter', 'commander', 'commande', 'panier', 'passer commande', 'ajouter']
+  };
+
+  /* Index inverse : racine -> liste de concepts. */
+  var WORD2C = {};
+  var VOCAB = [];
+  (function buildIndex() {
+    for (var c in CONCEPTS) {
+      var list = CONCEPTS[c];
+      for (var i = 0; i < list.length; i++) {
+        /* Seules les entrees d'un seul mot alimentent l'index. Indexer les
+           mots d'une expression la ferait declencher a tort : « marche plus »
+           aurait fait repondre « garantie » a « comment ca marche ». */
+        var e = norm(list[i]);
+        if (!e || e.indexOf(' ') > -1) continue;
+        var keys = [stem(e), loose(e)];
+        for (var q = 0; q < keys.length; q++) {
+          var k = keys[q];
+          if (!k || STOPSET[k]) continue;
+          if (!WORD2C[k]) { WORD2C[k] = []; VOCAB.push(k); }
+          if (WORD2C[k].indexOf(c) === -1) WORD2C[k].push(c);
+        }
+      }
+    }
+  })();
+
+  /* Distance de Levenshtein bornee : sort des qu'on depasse le seuil, ce qui
+     evite de parcourir toute la matrice pour des mots sans rapport. */
+  function lev(a, b, max) {
+    if (a === b) return 0;
+    if (Math.abs(a.length - b.length) > max) return max + 1;
+    var prev = [], cur = [], i, j;
+    for (j = 0; j <= b.length; j++) prev[j] = j;
+    for (i = 1; i <= a.length; i++) {
+      cur[0] = i;
+      var best = cur[0];
+      for (j = 1; j <= b.length; j++) {
+        cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+        if (cur[j] < best) best = cur[j];
+      }
+      if (best > max) return max + 1;
+      for (j = 0; j <= b.length; j++) prev[j] = cur[j];
+    }
+    return prev[b.length];
+  }
+
+  /* Question -> ensemble de concepts, avec rattrapage des fautes de frappe. */
+  function conceptsOf(q) {
+    var toks = tokens(q);
+    var found = {};
+    var nq = ' ' + norm(q) + ' ';
+
+    /* Expressions en plusieurs mots, testees sur la chaine complete. */
+    for (var c in CONCEPTS) {
+      var list = CONCEPTS[c];
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].indexOf(' ') > -1 && nq.indexOf(' ' + norm(list[i]) + ' ') > -1) found[c] = 1;
+      }
+    }
+
+    for (var t = 0; t < toks.length; t++) {
+      /* Trois cles, de la plus fidele a la plus permissive. */
+      var w = toks[t], hit = WORD2C[w] || WORD2C[stem(w)] || WORD2C[loose(w)];
+      if (!hit) {
+        /* Le vocabulaire est indexe sous forme reduite : comparer le mot brut
+           echouait sur l'ecart de longueur (« remborsement » 12 lettres contre
+           « rembours » 8). On teste donc aussi les formes reduites du mot.
+           Tolerance calibree : trop large, « porte » devenait « port ». */
+        var probes = [w, stem(w), loose(w)];
+        for (var pi = 0; pi < probes.length && !hit; pi++) {
+          var pw = probes[pi];
+          if (pi && probes.indexOf(pw) < pi) continue;
+          var max = pw.length >= 8 ? 2 : (pw.length >= 6 ? 1 : 0);
+          if (!max) continue;
+          var bestW = null, bestD = max + 1;
+          for (var v = 0; v < VOCAB.length; v++) {
+            var d = lev(pw, VOCAB[v], max);
+            if (d < bestD) { bestD = d; bestW = VOCAB[v]; if (d === 0) break; }
+          }
+          if (bestW) hit = WORD2C[bestW];
+        }
+      }
+      if (hit) for (var h = 0; h < hit.length; h++) found[hit[h]] = 1;
+    }
+    return found;
+  }
+
+  /* =====================================================================
+     3. Base de connaissances
+     Chaque intention declare les concepts qui la declenchent :
+       all  — au moins un concept de chaque groupe doit etre present
+       any  — concepts qui renforcent le score
+     Les reponses reprennent le contenu reel du site. Rien n'est invente :
+     ce qui n'est pas connu part vers le service client.
+     ===================================================================== */
+  var A = function (h) { return h; };
+  var KB = [
+    {
+      id: 'livraison_delai',
+      all: [['livraison'], ['delai']],
+      any: ['zone', 'gratuit', 'achat'],
+      a: A('<p><strong>Livraison offerte</strong> en France métropolitaine, suivi inclus.</p>' +
+           '<p>Délai estimé : <strong>6 à 10 jours</strong>. Les commandes passées avant 12 h partent le jour même.</p>'),
+      links: [['Détail de la livraison', 'urlLivraison']]
+    },
+    {
+      id: 'livraison_prix',
+      all: [['livraison'], ['gratuit', 'prixmot']],
+      any: [],
+      a: A('<p>La livraison est <strong>offerte</strong> en France métropolitaine, suivi inclus. Aucun frais de port ne s’ajoute au panier.</p>'),
+      links: [['Détail de la livraison', 'urlLivraison']]
+    },
+    {
+      id: 'livraison_zone',
+      all: [['livraison'], ['zone']],
+      any: [],
+      a: A('<p>Nous livrons en <strong>France métropolitaine</strong>, livraison offerte et suivi inclus.</p>' +
+           '<p>Pour une autre destination, écrivez-nous avant de commander : nous vous confirmerons ce qui est possible.</p>'),
+      links: [['Nous contacter', 'urlContact']]
+    },
+    {
+      id: 'suivi',
+      all: [['suivi']],
+      any: ['livraison', 'achat'],
+      a: A('<p>Suivez votre commande depuis la page de suivi, avec le numéro reçu par e-mail après l’expédition.</p>'),
+      links: [['Suivre ma commande', 'urlSuivi'], ['Nous contacter', 'urlContact']]
+    },
+    {
+      id: 'retour',
+      all: [['retour']],
+      any: ['delai', 'prixmot'],
+      a: A('<p><strong>60 jours</strong> pour changer d’avis : satisfait ou remboursé, selon nos conditions.</p>' +
+           '<p>Écrivez-nous pour lancer un retour, nous vous indiquons la marche à suivre.</p>'),
+      links: [['Politique de retour', 'urlRetours'], ['Nous contacter', 'urlContact']]
+    },
+    {
+      id: 'garantie',
+      all: [['garantie']],
+      any: ['delai', 'produit'],
+      a: A('<p>DentinaClean est couvert par une <strong>garantie de 2 ans</strong>, selon nos conditions.</p>' +
+           '<p>En cas de panne, contactez-nous avec votre numéro de commande : nous prenons le relais.</p>'),
+      links: [['Nous contacter', 'urlContact']]
+    },
+    {
+      id: 'utilisation',
+      all: [['utiliser']],
+      any: ['duree', 'eau', 'produit'],
+      a: A('<p>En quatre gestes :</p><ul>' +
+           '<li>Remplissez la cuve d’<strong>eau tempérée</strong> jusqu’au repère.</li>' +
+           '<li>Placez votre appareil dentaire dans la cuve.</li>' +
+           '<li>Fermez le couvercle et lancez le cycle.</li>' +
+           '<li>Après cinq minutes, retirez puis rincez l’appareil.</li></ul>'),
+      links: []
+    },
+    {
+      id: 'duree_cycle',
+      all: [['duree']],
+      any: ['utiliser'],
+      a: A('<p>Le cycle dure <strong>cinq minutes</strong> et s’arrête automatiquement. Il n’y a rien à surveiller.</p>'),
+      links: []
+    },
+    {
+      id: 'compatibilite',
+      all: [['compatible']],
+      any: ['produit', 'utiliser'],
+      a: A('<p>DentinaClean convient aux <strong>dentiers, gouttières, contentions et aligneurs</strong> qui tiennent dans la cuve et peuvent être totalement immergés.</p>' +
+           '<p>Vérifiez toujours les recommandations d’entretien du fabricant de votre appareil.</p>'),
+      links: []
+    },
+    {
+      id: 'securite',
+      all: [['securite']],
+      any: ['compatible', 'brossage', 'produit'],
+      a: A('<p>Aucune brosse ne frotte dans la cuve : l’action se fait dans l’eau, autour de l’appareil immergé.</p>' +
+           '<p>Utilisez de l’eau tempérée, évitez tout produit abrasif et suivez les consignes du fabricant de votre appareil.</p>'),
+      links: []
+    },
+    {
+      id: 'brossage',
+      all: [['brossage']],
+      any: ['produit', 'utiliser'],
+      a: A('<p>Non, il n’y a <strong>pas de brossage dans la cuve</strong>. Vous placez l’appareil dans l’eau et lancez le cycle : aucune brosse ne vient frotter.</p>'),
+      links: []
+    },
+    {
+      id: 'eau',
+      all: [['eau']],
+      any: ['utiliser', 'entretien'],
+      a: A('<p>Utilisez de l’<strong>eau tempérée</strong>, jusqu’au repère de la cuve. Évitez l’eau bouillante et tout produit abrasif.</p>'),
+      links: []
+    },
+    {
+      id: 'entretien',
+      all: [['entretien']],
+      any: ['eau', 'produit', 'utiliser'],
+      a: A('<p>Videz et rincez la cuve après chaque utilisation, puis essuyez-la avec un chiffon doux.</p>' +
+           '<p><strong>Ne plongez jamais la base électrique dans l’eau.</strong></p>'),
+      links: []
+    },
+    {
+      id: 'prix',
+      all: [['prixmot']],
+      any: ['produit', 'achat'],
+      a: null, /* rempli dynamiquement */
+      links: [['Voir le produit', 'urlProduit']]
+    },
+    {
+      id: 'couleur',
+      all: [['couleur']],
+      any: ['produit', 'achat'],
+      a: A('<p>DentinaClean existe en <strong>blanc</strong> et en <strong>noir</strong>. Les deux modèles sont identiques, seule la finition change.</p>'),
+      links: [['Voir le produit', 'urlProduit']]
+    },
+    {
+      id: 'paiement',
+      all: [['paiement']],
+      any: ['achat', 'prixmot'],
+      a: null, /* rempli dynamiquement */
+      links: []
+    },
+    {
+      /* Caracteristiques que le site ne publie pas. Mieux vaut le dire et
+         orienter que repondre a cote ou, pire, inventer un chiffre. */
+      id: 'specs_inconnues',
+      all: [['specs']],
+      any: ['produit'],
+      a: A('<p>Cette caractéristique n’est pas indiquée sur la fiche produit, et je ne veux pas vous donner un chiffre approximatif.</p>' +
+           '<p>Notre service client vous répondra précisément.</p>'),
+      links: [['Nous contacter', 'urlContact'], ['Voir le produit', 'urlProduit']]
+    },
+    {
+      id: 'produit',
+      all: [['produit']],
+      any: ['utiliser'],
+      a: A('<p><strong>DentinaClean</strong> nettoie votre appareil dentaire par ultrasons : les vibrations se diffusent dans l’eau et atteignent les reliefs difficiles d’accès.</p>' +
+           '<p>Un seul bouton, un cycle de cinq minutes, sans brossage dans la cuve.</p>'),
+      links: [['Voir le produit', 'urlProduit']]
+    },
+    {
+      id: 'contact',
+      all: [['contact']],
+      any: [],
+      a: A('<p>Notre service client français vous répond depuis la page de contact.</p>' +
+           '<p>Pensez à indiquer votre numéro de commande si vous en avez un : c’est plus rapide.</p>'),
+      links: [['Nous contacter', 'urlContact'], ['Suivre ma commande', 'urlSuivi']]
+    },
+    {
+      id: 'cgv',
+      all: [['cgv']],
+      any: [],
+      a: A('<p>Voici les documents officiels de la boutique.</p>'),
+      links: [['Conditions générales', 'urlCGV'], ['Confidentialité', 'urlConfidentialite'], ['Retours', 'urlRetours']]
+    },
+    {
+      id: 'achat',
+      all: [['achat']],
+      any: ['produit'],
+      a: A('<p>Choisissez votre coloris sur la fiche produit, puis ajoutez au panier. La livraison est offerte en France métropolitaine.</p>'),
+      links: [['Voir le produit', 'urlProduit']]
+    },
+    {
+      id: 'salut',
+      all: [['salut']],
+      any: [],
+      a: A('<p>Bonjour ! Livraison, retours, utilisation, compatibilité : posez votre question, je vous réponds.</p>'),
+      links: []
+    },
+    {
+      id: 'merci',
+      all: [['merci']],
+      any: [],
+      a: A('<p>Avec plaisir. Une autre question ?</p>'),
+      links: []
+    }
+  ];
+
+  /* Reponses dependantes des donnees de la boutique. */
+  (function fillDynamic() {
+    for (var i = 0; i < KB.length; i++) {
+      if (KB[i].id === 'prix') {
+        KB[i].a = D.prix
+          ? '<p>DentinaClean est à <strong>' + D.prix + '</strong>, livraison offerte en France métropolitaine.</p>' +
+            '<p>Le prix affiché sur la fiche produit fait foi.</p>'
+          : '<p>Le prix est affiché sur la fiche produit, livraison offerte en France métropolitaine.</p>';
+      }
+      if (KB[i].id === 'paiement') {
+        KB[i].a = '<p>Le paiement est <strong>sécurisé</strong> : vos données bancaires sont chiffrées et ne transitent jamais par notre site.</p>' +
+          (D.paiements ? '<p>Moyens acceptés : ' + D.paiements + '.</p>' : '');
+      }
+    }
+  })();
+
+  /* =====================================================================
+     4. Notation
+     Une intention est candidate si chacun de ses groupes « all » trouve au
+     moins un concept dans la question. Le score departage ensuite : plus
+     l'intention est specifique, plus elle pese.
+     ===================================================================== */
+  function score(found, item) {
+    var i, g, ok, hitAll = 0;
+    for (i = 0; i < item.all.length; i++) {
+      g = item.all[i]; ok = 0;
+      for (var j = 0; j < g.length; j++) if (found[g[j]]) { ok = 1; break; }
+      if (!ok) return -1;
+      hitAll++;
+    }
+    var bonus = 0;
+    for (i = 0; i < item.any.length; i++) if (found[item.any[i]]) bonus++;
+    /* Un « all » a deux groupes prime sur un « all » a un seul groupe. */
+    return hitAll * 10 + item.all.length * 4 + bonus;
+  }
+
+  function answer(q) {
+    var found = conceptsOf(q);
+    var best = null, bestScore = 0;
+    for (var i = 0; i < KB.length; i++) {
+      var sc = score(found, KB[i]);
+      if (sc > bestScore) { bestScore = sc; best = KB[i]; }
+    }
+    if (!best) return null;
+    return { item: best, score: bestScore };
+  }
+
+  /* =====================================================================
+     5. Interface
+     ===================================================================== */
+  var SUGGEST = [
+    ['Livraison', 'Quels sont les délais de livraison ?'],
+    ['Retours', 'Puis-je être remboursé ?'],
+    ['Utilisation', 'Comment ça marche ?'],
+    ['Compatibilité', 'Est-ce compatible avec ma gouttière ?'],
+    ['Garantie', 'Quelle est la garantie ?'],
+    ['Prix', 'Combien ça coûte ?']
+  ];
+
+  function el(tag, cls, html) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (html != null) n.innerHTML = html;
+    return n;
+  }
+
+  function scrollDown() { log.scrollTop = log.scrollHeight; }
+
+  function say(html, who) {
+    var m = el('div', 'dtc__msg dtc__msg--' + who, html);
+    log.appendChild(m);
+    scrollDown();
+    return m;
+  }
+
+  function linksHtml(links) {
+    if (!links || !links.length) return '';
+    var out = '<p>';
+    for (var i = 0; i < links.length; i++) {
+      var href = D[links[i][1]];
+      if (!href) continue;
+      out += (i ? ' · ' : '') + '<a href="' + href + '">' + links[i][0] + '</a>';
+    }
+    return out + '</p>';
+  }
+
+  function renderChips(list) {
+    chips.textContent = '';
+    for (var i = 0; i < list.length; i++) {
+      var b = el('button', 'dtc__chip', list[i][0]);
+      b.type = 'button';
+      b.dataset.q = list[i][1];
+      chips.appendChild(b);
+    }
+  }
+
+  var FALLBACK =
+    '<p>Je n’ai pas de réponse sûre à cette question, et je préfère ne pas inventer.</p>' +
+    '<p>Notre service client vous répondra précisément — ou reformulez, je réessaie volontiers.</p>';
+
+  function reply(q) {
+    var typing = say('<span class="dtc__typing"><i></i><i></i><i></i></span>', 'bot');
+    var res = answer(q);
+    /* Latence courte : le temps de lire que la reponse arrive, sans attente. */
+    setTimeout(function () {
+      var html, links;
+      if (res && res.score >= 14) {
+        html = res.item.a;
+        links = res.item.links;
+      } else {
+        html = FALLBACK;
+        links = [['Nous contacter', 'urlContact']];
+      }
+      typing.innerHTML = html + linksHtml(links);
+      scrollDown();
+      renderChips(SUGGEST);
+    }, 260);
+  }
+
+  function send(q) {
+    q = String(q || '').trim();
+    if (!q) return;
+    say(q.replace(/[<>&]/g, function (c) {
+      return { '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c];
+    }), 'user');
+    input.value = '';
+    chips.textContent = '';
+    reply(q);
+  }
+
+  var started = false;
+  function open() {
+    root.classList.add('is-open', 'is-seen');
+    panel.hidden = false;
+    openBtn.setAttribute('aria-expanded', 'true');
+    openBtn.setAttribute('aria-label', 'Fermer l’assistant Dentina');
+    if (!started) {
+      started = true;
+      say('<p>' + (D.accueil || 'Bonjour !') + '</p>', 'bot');
+      renderChips(SUGGEST);
+    }
+    /* La mise au point automatique ferait remonter le clavier sur mobile et
+       masquerait la conversation : on ne la force que sur grand ecran. */
+    if (window.matchMedia('(min-width: 561px)').matches) {
+      setTimeout(function () { input.focus(); }, 120);
+    }
+  }
+
+  function close() {
+    root.classList.remove('is-open');
+    openBtn.setAttribute('aria-expanded', 'false');
+    openBtn.setAttribute('aria-label', 'Ouvrir l’assistant Dentina');
+    setTimeout(function () { if (!root.classList.contains('is-open')) panel.hidden = true; }, 220);
+    openBtn.focus();
+  }
+
+  openBtn.addEventListener('click', function () {
+    root.classList.contains('is-open') ? close() : open();
+  });
+
+  root.querySelector('[data-dtc-close]').addEventListener('click', close);
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    send(input.value);
+  });
+
+  chips.addEventListener('click', function (e) {
+    var b = e.target.closest('.dtc__chip');
+    if (b) send(b.dataset.q);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && root.classList.contains('is-open')) close();
+  });
+
+  root.hidden = false;
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Dentina — Assistant",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Produit référencé",
+      "info": "Sert à afficher le prix réel dans les réponses." },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Assistant Dentina" },
+    { "type": "text", "id": "subtitle", "label": "Sous-titre", "default": "Réponse immédiate" },
+    { "type": "text", "id": "placeholder", "label": "Texte du champ", "default": "Posez votre question…" },
+    { "type": "textarea", "id": "welcome", "label": "Message d’accueil",
+      "default": "Bonjour ! Je réponds à vos questions sur DentinaClean : livraison, retours, utilisation, compatibilité. Que puis-je faire pour vous ?" }
+  ],
+  "presets": [{ "name": "Dentina — Assistant" }]
+}
+{% endschema %}

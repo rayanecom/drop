@@ -1,0 +1,243 @@
+/* V9: shared finishing layer. Content and social-proof visibility stay intact. */
+.dt-site {
+  --dt-ink: #102b4e;
+  --dt-muted: #526477;
+  --dt-border: #dce4ec;
+  --dt-accent: #173b70;
+  --dt-link: #245fcb;
+}
+.dt-site :is(button, a):focus-visible {
+  outline: 2px solid var(--dt-link);
+  outline-offset: 4px;
+}
+.dt-site .dt-primary-btn { box-shadow: none; min-height: 52px; }
+.dt-site .dt-primary-btn:hover { box-shadow: 0 4px 12px rgb(16 43 78 / 12%); }
+.dt-site .dt-announcement { min-height: 32px; font-size: 12px; letter-spacing: 0; line-height: 1.4; }
+.dt-site .dt-rating-chip { flex-wrap: wrap; gap: 6px 9px; font-size: 12px; line-height: 1.5; }
+.dt-site .dt-rating-chip strong { font-size: 10px; letter-spacing: .04em; }
+.dt-site .dt-stars { font-size: 15px; letter-spacing: 1px; }
+.dt-site .dt-mockup-disclosure { font-size: 12px; line-height: 1.6; border-radius: 8px; }
+.dt-site .dt-mockup-disclosure strong { font-size: 11px; }
+.dt-site .dt-section-heading p { font-size: 16px; line-height: 1.65; max-width: 620px; }
+.dt-site .dt-home-hero__motion-card { width: 156px; top: 14px; left: 14px; border-radius: 14px; }
+.dt-site .dt-home-hero__motion-card strong { font-size: 12px; line-height: 1.4; }
+.dt-site .dt-home-hero__motion-card small { font-size: 11px; line-height: 1.4; }
+.dt-site .dt-home-hero__motion-card > span { padding: 8px; }
+.dt-site .dt-tech-cards p { font-size: 15px; line-height: 1.6; }
+.dt-site .dt-tech-cards h3 { font-size: 18px; line-height: 1.3; }
+.dt-site .dt-marquee { margin-block: 0; background: #0c233c; box-shadow: none; }
+.dt-site .dt-featured-product { background: #fff; }
+.dt-site .dt-marquee__set { font-size: 14px; }
+.dt-site .dt-demo-review-card,
+.dt-site .dt-professional-proof__grid article,
+.dt-site .dt-pdp-mini-reviews {
+  background: #fff; border: 1px solid var(--dt-border); border-radius: 16px; box-shadow: none;
+}
+.dt-site .dt-demo-review-body { padding: 18px; }
+.dt-site .dt-demo-review-body h3 { font-size: 16px; line-height: 1.4; }
+.dt-site .dt-demo-review-body p { font-size: 15px; line-height: 1.65; }
+.dt-site .dt-demo-review-body :is(small, time),
+.dt-site .dt-demo-verified { font-size: 12px; line-height: 1.5; }
+.dt-site .dt-demo-stars { font-size: 16px; letter-spacing: 1.5px; }
+.dt-site .dt-review-track { gap: 20px; grid-auto-columns: calc((100% - 60px) / 4); }
+.dt-site .dt-demo-review-meta { flex-wrap: wrap; gap: 6px 12px; }
+.dt-site .dt-home-hero__copy > p { font-size: 15px; line-height: 1.65; }
+.dt-site .dt-home-hero__copy h1 { width: 100%; max-width: none; font-size: clamp(34px, 3.4vw, 52px); line-height: 1.1; letter-spacing: -.04em; overflow-wrap: normal; text-wrap: balance; }
+.dt-site .dt-eyebrow { font-size: 11px; }
+.dt-site .dt-pdp-thumbs {
+  display: flex; gap: 9px; overflow-x: auto; overflow-y: hidden;
+  padding: 4px 2px 10px; margin-top: 12px; scroll-snap-type: x proximity;
+  scrollbar-width: thin; scrollbar-color: #b8c6d5 transparent;
+}
+.dt-site .dt-pdp-thumbs::-webkit-scrollbar { display: block; height: 3px; }
+.dt-site .dt-pdp-thumbs::-webkit-scrollbar-thumb { background: #b8c6d5; border-radius: 4px; }
+.dt-site .dt-pdp-thumb { flex: 0 0 62px; width: 62px; height: 62px; border-radius: 8px; scroll-snap-align: center; }
+.dt-site .dt-pdp-thumb.is-active { border-color: var(--dt-accent); box-shadow: 0 0 0 1px var(--dt-accent); }
+.dt-product .dt-pdp-info h1 { font-size: clamp(28px, 2.5vw, 38px); line-height: 1.2; letter-spacing: -.035em; white-space: nowrap; overflow: visible; text-overflow: clip; }
+.dt-product .dt-pdp-info > p { color: var(--dt-muted); font-size: 16px; line-height: 1.6; }
+.dt-site .dt-check-list li { font-size: 15px; line-height: 1.55; }
+/* Le coupon de remise reste sur la ligne du prix, cale en haut a droite.
+   flex-wrap: nowrap l'empeche de retomber a la ligne ; sa taille reduite lui
+   donne la marge necessaire pour tenir a 320 px avec la police reelle. */
+.dt-site .dt-bundle-badge { font-size: 10px; line-height: 1; padding: 5px 9px; border-radius: 6px; }
+.dt-site .dt-pdp-price-row { align-items: flex-start; flex-wrap: nowrap; gap: 10px; }
+.dt-site .dt-pdp-price-row .dt-pdp-price { flex: 0 1 auto; min-width: 0; }
+/* margin-top cale le coupon sur la hauteur de capitale des chiffres : a 0 il
+   flotterait au-dessus, le haut de la boite du prix etant du blanc de ligne. */
+.dt-site .dt-pdp-price-row .dt-bundle-badge { flex: 0 0 auto; align-self: flex-start; margin-top: 4px; }
+.dt-site .dt-color-picker__head { font-size: 14px; }
+.dt-site .dt-color-picker__head strong { font-size: 14px; }
+.dt-site .dt-color-option { font-size: 13px; line-height: 1.4; min-width: 62px; }
+.dt-site .dt-pdp-quicktrust { flex-wrap: wrap; font-size: 12px; line-height: 1.5; gap: 8px 12px; }
+.dt-site .dt-pdp-quicktrust span { font-size: 12px; line-height: 1.5; white-space: normal; }
+.dt-site .dt-pdp-mini-review-label { font-size: 12px; }
+.dt-site .dt-pdp-mini-review-label span { font-size: 11px; }
+.dt-site .dt-pdp-mini-review-track { min-height: 132px; }
+.dt-site .dt-pdp-mini-review-track article { padding: 16px 18px 8px; }
+.dt-site .dt-pdp-mini-review-track p { font-size: 16px; line-height: 1.55; }
+.dt-site .dt-pdp-mini-review-track footer { color: var(--dt-muted); font-size: 12px; line-height: 1.5; }
+.dt-site .dt-pdp-mini-review-nav { grid-template-columns: 44px 1fr 44px; min-height: 48px; padding: 0 10px 4px; }
+.dt-site .dt-pdp-mini-review-nav > button { width: 44px; height: 44px; font-size: 23px; }
+.dt-site .dt-pdp-mini-review-nav > div { gap: 0; }
+.dt-site .dt-pdp-mini-review-nav [data-dt-mini-review-dot] {
+  display: grid; place-items: center; width: 44px; height: 44px; padding: 0; background: transparent;
+}
+.dt-site [data-dt-mini-review-dot]::after { content: ''; width: 6px; height: 6px; border-radius: 8px; background: #b8c6d5; }
+.dt-site [data-dt-mini-review-dot].is-active::after { width: 18px; background: var(--dt-accent); }
+.dt-site .dt-fulfillment-card { background: var(--dt-surface-soft); border-color: var(--dt-border); box-shadow: none; padding: 14px 16px; border-radius: 12px; }
+.dt-site .dt-fulfillment-card strong { font-size: 15px; line-height: 1.4; }
+.dt-site .dt-fulfillment-card p { color: var(--dt-muted); font-size: 13px; line-height: 1.55; margin-top: 4px; }
+.dt-site .dt-pdp-accordion summary, .dt-site .dt-faq-list summary { min-height: 56px; font-size: 16px; line-height: 1.45; }
+.dt-site .dt-pdp-accordion p, .dt-site .dt-faq-list p { color: var(--dt-muted); font-size: 15px; line-height: 1.7; }
+.dt-site .dt-cycle-full-link {
+  color: var(--dt-link); display: inline-flex; align-items: center; gap: 9px;
+  min-height: 44px; padding: 0; border: 0; background: none; box-shadow: none;
+  font-size: 14px; line-height: 1.5; text-underline-offset: 4px;
+}
+.dt-site .dt-cycle-full-link:hover { color: #1747a1; text-decoration: underline; background: none; }
+.dt-site .dt-cycle-chapters strong { font-size: 14px; }
+.dt-site .dt-cycle-chapters span { font-size: 12px; }
+.dt-site .dt-cycle-slide__caption strong { font-size: 15px; }
+.dt-site .dt-cycle-slide__caption small { font-size: 12px; line-height: 1.5; }
+.dt-site .dt-cycle-modal__close, .dt-site .dt-gallery-arrow { width: 44px; height: 44px; }
+.dt-site .dt-faq-media > video { box-shadow: none; border: 0; border-radius: 16px; }
+.dt-site .dt-faq-media > div { padding: 18px 0 0; }
+.dt-site .dt-faq-media a { display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; }
+.dt-site .dt-professional-proof__grid article { padding: 24px; }
+.dt-site .dt-professional-proof__grid blockquote { font-size: 17px; line-height: 1.6; }
+.dt-site .dt-professional-proof__grid footer span { font-size: 12px; line-height: 1.5; }
+.dt-site .dt-review-standard__copy p { font-size: 15px; line-height: 1.7; }
+.dt-site .dt-review-standard__copy h3 { font-size: 16px; line-height: 1.45; }
+.dt-site .dt-review-standard__author strong { font-size: 14px; }
+.dt-site .dt-review-standard__author :is(span, small, time) { font-size: 12px; line-height: 1.55; }
+.dt-site .dt-review-standard__verified { font-size: 12px; }
+.dt-site .dt-review-standard__score span:last-child, .dt-site .dt-review-standard__bar { font-size: 12px; }
+.dt-site .dt-review-standard__author .dt-demo-stars { font-size: 16px; }
+.dt-site .dt-service-grid p { color: var(--dt-muted); font-size: 14px; line-height: 1.6; }
+.dt-site .dt-footer a { display: flex; align-items: center; min-height: 44px; font-size: 14px; }
+.dt-site .dt-footer { color: #e6edf6; }
+.dt-site .dt-qty { height: 44px; }
+.dt-site .dt-qty-btn { width: 44px; height: 44px; }
+.dt-site .dt-cart-item__remove { width: auto; min-width: 44px; min-height: 44px; font-size: 13px; }
+.dt-site .dt-cart-item__variant { font-size: 13px; }
+.dt-site .dt-cart-item__img { align-self: start; height: auto; aspect-ratio: 1; overflow: hidden; }
+.dt-site .dt-cart-item__img img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.dt-site .dt-drawer__timer { background: var(--dt-surface-soft); }
+.dt-site .dt-drawer__timer small { font-size: 12px; }
+.dt-site .dt-drawer__microtrust { font-size: 12px; line-height: 1.5; }
+.dt-site .dt-cart-empty { background: var(--dt-surface-soft); }
+.dt-site .dt-cart-empty [data-dt-cart-retry] { margin-top: 20px; }
+.dt-site [data-dt-cart-body][aria-busy="true"] :is(.dt-qty, .dt-cart-item__remove) { opacity: .5; }
+@media (max-width: 1100px) {
+  .dt-site .dt-header__row { grid-template-columns: 44px minmax(0, 1fr) 44px; min-height: 64px; gap: 8px; }
+  .dt-site .dt-menu-btn { display: flex; }
+  .dt-site .dt-nav, .dt-site .dt-only-desktop { display: none; }
+  .dt-site .dt-logo { justify-self: center; }
+  .dt-site .dt-header__actions { justify-content: flex-end; }
+  .dt-site .dt-review-track { grid-auto-columns: calc((100% - 40px) / 3); }
+}
+@media (max-width: 820px) {
+  .dt-site .dt-announcement { font-size: 11px; padding: 7px 10px; gap: 8px; }
+  .dt-site .dt-home-hero__copy h1 { font-size: clamp(30px, 8.3vw, 38px); }
+
+  /* V9.1 - Carte video hero : vignette compacte calee dans l'angle (mobile). */
+  .dt-site .dt-home-hero__motion-card {
+    top: 10px;
+    left: 10px;
+    width: clamp(98px, 27vw, 116px);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgb(7 25 50 / 18%), 0 0 0 1px rgb(13 45 88 / 5%);
+  }
+  .dt-site .dt-home-hero__motion-card::after { inset: 46% 0 0; }
+  .dt-site .dt-home-hero__motion-card > span {
+    right: 8px;
+    bottom: 7px;
+    left: 8px;
+    gap: 1px;
+    padding: 0;
+  }
+  .dt-site .dt-home-hero__motion-card strong {
+    font-size: clamp(7.8px, 2.25vw, 9.2px);
+    letter-spacing: .02em;
+    line-height: 1.15;
+    white-space: nowrap;
+  }
+  .dt-site .dt-home-hero__motion-card small {
+    font-size: clamp(6.9px, 2vw, 8.1px);
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  /* Pourcentage fixe, pas minmax(0, 82%) : le minimum a 0 laissait la grille
+     ecraser les 4 cartes pour les faire tenir dans la largeur, au lieu de les
+     faire defiler. C'est ce qui reduisait chaque avis a une colonne de 64 px.
+     Tous les autres carrousels du theme utilisent deja un pourcentage simple.
+     Le plafond a 360 px evite l'exces inverse : cette tranche va du telephone
+     a la tablette, et 82% d'un ecran de 820 px donnait une carte de 553 px
+     dont la photo remplissait l'ecran avant le premier mot du temoignage. */
+  .dt-site .dt-review-track { grid-auto-columns: min(82%, 360px); gap: 14px; }
+  .dt-site .dt-demo-review-body { padding: 17px; }
+  .dt-site .dt-pdp-thumb { flex-basis: 58px; width: 58px; height: 58px; }
+  .dt-product .dt-pdp-info h1 { font-size: clamp(27px, 7.1vw, 32px); }
+  .dt-site .dt-pdp-mini-review-track { min-height: 164px; }
+  .dt-site .dt-professional-proof__grid article { padding: 20px; }
+  .dt-site .dt-bundle-badge { font-size: 10px; padding: 5px 8px; }
+  .dt-site .dt-pdp-quicktrust { font-size: 12px; }
+  .dt-site .dt-footer a { font-size: 14px; }
+}
+@media (max-width: 360px) {
+  .dt-site .dt-announcement { font-size: 10px; }
+  .dt-product .dt-pdp-info h1 { font-size: 27px; }
+  .dt-site .dt-pdp-mini-review-track { min-height: 184px; }
+  /* Largeur la plus contrainte : le coupon se resserre pour rester sur la
+     ligne du prix sans jamais pousser la page en debordement lateral. */
+  .dt-site .dt-bundle-badge { font-size: 9px; padding: 5px 7px; }
+  .dt-site .dt-pdp-price-row { gap: 8px; }
+}
+
+/* ==========================================================================
+   Fonds continus — supprime les ruptures de couleur entre sections
+   --------------------------------------------------------------------------
+   Avant : les sections alternaient #ffffff et #f4f7fa, ce qui dessinait une
+   ligne nette a chaque changement de section (8 ruptures sur la fiche produit).
+   Le fond n'est plus porte par les sections mais par la page entiere, en un
+   seul degrade vertical. Les sections claires deviennent transparentes : sans
+   fond propre, elles ne peuvent plus creer de bord.
+   ========================================================================== */
+
+.dt-site {
+  background: linear-gradient(180deg,
+    #ffffff 0%,
+    #eef4fa 34%,
+    #ffffff 66%,
+    #eef4fa 100%);
+}
+
+/* background-color seul, pour ne pas effacer une eventuelle image de fond. */
+.dt-site .dt-home-hero,
+.dt-site .dt-home-benefits,
+.dt-site .dt-home-tech,
+.dt-site .dt-featured-product,
+.dt-site .dt-pdp-top,
+.dt-site .dt-pdp-feature-row,
+.dt-site .dt-how,
+.dt-site .dt-compatibility-showcase,
+.dt-site .dt-routine-story,
+.dt-site .dt-professional-proof,
+.dt-site .dt-faq-section,
+.dt-site .dt-verified-reviews,
+.dt-site .dt-services {
+  background-color: transparent;
+}
+
+/* Prix barré sur le bloc produit de l'accueil — aligné sur .dt-pdp-price s */
+.dt-featured-price s {
+  display: inline-block;
+  margin-right: 12px;
+  color: #8a8f98;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+@media (max-width: 820px) {
+  .dt-featured-price s { font-size: 16px; margin-right: 10px; }
+}

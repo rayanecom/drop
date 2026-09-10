@@ -1,0 +1,63 @@
+/* Shared Dentina finish for Shopify's native cart, contact and service pages. */
+.dentina-standard-page {
+  --font-body-family: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-heading-family: Georgia, "Times New Roman", serif;
+  --font-heading-weight: 400;
+  --color-base-text: 16, 27, 45;
+  --color-base-accent-1: 23, 59, 112;
+  --color-base-accent-2: 13, 37, 73;
+  --color-base-background-2: 244, 247, 250;
+  background: #fff;
+  color: #101b2d;
+  font-family: var(--font-body-family);
+  letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+}
+.dentina-standard-page .header-wrapper { border-color: #e3e9ef; }
+.dentina-standard-page .header__heading-link { font-family: Georgia, "Times New Roman", serif; letter-spacing: .16em; color: #101b2d; }
+.dentina-standard-page .header__heading-link .h2 { font-family: inherit; font-size: 2.6rem; font-weight: 700; letter-spacing: inherit; }
+.dentina-standard-page .header__inline-menu { font-size: 1.4rem; }
+.dentina-standard-page .header__menu-item { font-family: var(--font-body-family); letter-spacing: 0; }
+.dentina-standard-page :is(.main-page-title, .title--primary, .customer h1) { color: #0d2549; font-family: Georgia, "Times New Roman", serif; letter-spacing: -.035em; line-height: 1.12; }
+.dentina-standard-page .button { border-radius: 999px; font-family: var(--font-body-family); font-weight: 650; letter-spacing: 0; }
+.dentina-standard-page .button::after { border-radius: inherit; }
+.dentina-standard-page :is(.field__input, .select__select, .customer input) { border-radius: 10px; background-color: #f4f7fa; }
+.dentina-standard-page :is(.field, .select)::after { border-radius: 10px; }
+.dentina-standard-page :is(a, button, input, select, textarea):focus-visible { outline: 2px solid #245fcb; outline-offset: 4px; }
+.dentina-standard-page :is(.footer, .footer.gradient) { background: #0d2549; }
+.dentina-standard-page .footer__content-top { padding-top: 2rem; }
+.dentina-standard-page .footer-block__heading { font-family: var(--font-body-family); font-size: 1.6rem; font-weight: 650; letter-spacing: 0; }
+.dentina-standard-page .footer .field__input { background: rgba(255,255,255,.06); }
+.dentina-template-cart #MainContent { padding-block: clamp(28px, 5vw, 64px); background: #f4f7fa; }
+.dentina-template-cart :is(cart-items.page-width, #main-cart-footer.page-width) { max-width: 1240px; }
+.dentina-template-cart .title-wrapper-with-link { align-items: center; gap: 20px; margin: 0 0 32px; }
+.dentina-template-cart .title--primary { margin: 0; font-size: clamp(3rem, 4vw, 4.8rem); }
+.dentina-template-cart .underlined-link { color: #173b70; font-size: 1.4rem; text-underline-offset: .3em; }
+.dentina-template-cart .cart__items { padding: clamp(18px, 3vw, 36px); border: 1px solid #dce4ec; border-radius: 18px; background: #fff; box-shadow: 0 10px 30px rgba(13,37,73,.035); }
+.dentina-template-cart .cart-items th { color: #667085; font-size: 1.2rem; letter-spacing: .07em; border-color: #e3e9ef; }
+.dentina-template-cart .cart-item__image-container { border: 1px solid #e3e9ef; border-radius: 12px; background: #f4f7fa; overflow: hidden; }
+.dentina-template-cart .cart-item__name { font-family: var(--font-body-family); font-size: 1.6rem; font-weight: 650; line-height: 1.4; letter-spacing: 0; }
+.dentina-template-cart :is(.cart-item__price-wrapper, .totals__subtotal-value) { color: #0d2549; font-variant-numeric: tabular-nums; }
+.dentina-template-cart :is(.price--end, .totals__subtotal-value) { white-space: nowrap; }
+.dentina-template-cart .cart__footer { border: 0; padding-top: 24px; }
+.dentina-template-cart .cart__blocks { padding: 28px; border: 1px solid #dce4ec; border-radius: 18px; background: #fff; }
+.dentina-template-cart .totals { align-items: center; justify-content: space-between; }
+.dentina-template-cart .totals__subtotal { font-family: var(--font-body-family); font-size: 1.8rem; font-weight: 600; }
+.dentina-template-cart .totals__subtotal-value { font-size: 2.4rem; font-weight: 700; }
+.dentina-template-cart .cart__ctas { margin-top: 22px; }
+.dentina-template-cart .cart__checkout-button { min-height: 54px; width: 100%; }
+.dentina-template-cart .dt-native-cart-trust { margin: 20px 0 0; color: #667085; font-size: 1.3rem; line-height: 1.7; text-align: center; }
+.dentina-template-cart .dt-native-cart-payments { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px; padding: 0; margin: 16px 0 0; list-style: none; }
+.dentina-template-cart .dt-native-cart-payments svg { display: block; width: 42px; height: 28px; }
+.dentina-template-cart .cart__warnings { margin: 0 auto; padding: clamp(40px, 8vw, 80px) 24px; max-width: 720px; border: 1px solid #dce4ec; border-radius: 20px; background: #fff; }
+.dentina-template-cart .cart__empty-text { font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.8rem, 5vw, 4rem); color: #0d2549; letter-spacing: -.03em; }
+.dentina-standard-page :is(.drawer__inner, .drawer__header, .drawer__footer) { border-color: #dce4ec; }
+.dentina-standard-page .drawer__heading { font-family: Georgia, "Times New Roman", serif; color: #0d2549; letter-spacing: -.025em; }
+@media (max-width: 749px) {
+  .dentina-template-cart #MainContent { padding-block: 28px 40px; }
+  .dentina-template-cart .title-wrapper-with-link { gap: 14px; margin-bottom: 24px; flex-wrap: wrap; }
+  .dentina-template-cart .cart__items { padding: 16px; border-radius: 14px; }
+  .dentina-template-cart .cart__blocks { padding: 22px 18px; border-radius: 14px; }
+  .dentina-template-cart .cart-item__name { font-size: 1.5rem; }
+  .dentina-template-cart .quantity { min-height: 44px; }
+}

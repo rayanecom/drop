@@ -1,0 +1,56 @@
+<div class="dt-drawer is-empty" data-dt-cart-drawer role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="dt-cart-title">
+  <div class="dt-drawer__overlay" data-dt-cart-overlay></div>
+  <aside class="dt-drawer__panel">
+    <header class="dt-drawer__header">
+      <h2 class="dt-drawer__title" id="dt-cart-title">Votre panier <span class="dt-cart-count" data-dt-cart-count>0</span></h2>
+      <button class="dt-drawer__close" type="button" data-dt-close-cart aria-label="Fermer le panier">×</button>
+    </header>
+
+    <p class="dt-drawer__status" data-dt-cart-status role="status" aria-live="polite">Votre panier est prêt à accueillir DentinaClean.</p>
+
+    <div class="dt-drawer__progress" aria-label="Livraison offerte en France métropolitaine">
+      <div class="dt-progress-top">
+        <span aria-hidden="true">🚚</span>
+        <span><strong>Livraison offerte</strong><small>En France métropolitaine</small></span>
+      </div>
+      <div class="dt-progress-bar" aria-hidden="true"><span></span></div>
+    </div>
+
+    <div class="dt-drawer__timer" data-dt-cart-timer-wrap>
+      <span><strong>Votre sélection est prête</strong><small data-dt-cart-timer-copy>Compteur indicatif · le panier reste accessible</small></span>
+      <time datetime="PT10M" data-dt-cart-timer aria-label="Dix minutes restantes">10:00</time>
+    </div>
+
+    <div class="dt-drawer__body" data-dt-cart-body aria-live="polite">
+      <div class="dt-cart-empty">
+        <span class="dt-cart-empty__icon" aria-hidden="true">D</span>
+        <strong>Votre panier est vide.</strong>
+        <span>Ajoutez DentinaClean pour commencer votre routine.</span>
+        <a class="dt-secondary-btn" href="{{ routes.all_products_collection_url }}">Découvrir DentinaClean</a>
+      </div>
+    </div>
+
+    <footer class="dt-drawer__footer">
+      <div class="dt-total-row">
+        <div><span class="label">Total</span><span class="small" data-dt-total-savings>Aucun article</span></div>
+        <strong class="current" data-dt-total-current>0,00 €</strong>
+      </div>
+
+      <a class="dt-primary-btn dt-drawer__checkout" href="/checkout" data-dt-checkout aria-disabled="true" tabindex="-1">Procéder au paiement</a>
+
+      {% if shop.enabled_payment_types.size > 0 %}
+        <div class="dt-drawer__pay" aria-label="Moyens de paiement acceptés">
+          {% for type in shop.enabled_payment_types %}
+            <span class="dt-payment-icon">{{ type | payment_type_svg_tag }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="dt-drawer__microtrust">
+        <span>✓ Garantie produit 2 ans</span>
+        <span>✓ Satisfait ou remboursé sous 60 jours</span>
+        <span>✓ Paiement sécurisé</span>
+      </div>
+    </footer>
+  </aside>
+</div>

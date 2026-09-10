@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "dentina_home": {
+      "type": "dentina-home",
+      "settings": {}
+    }
+  },
+  "order": [
+    "dentina_home"
+  ]
+}
